@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const config = require("./config.json");
 const chalk = require('chalk');
+const hook = new Discord.WebhookClient(`${config.webhookid}`, `${config.webhooktoken}`);
 
 //Boot message
 let l = chalk.red(`----------------------------------------------------------------------------------------------------`);
@@ -117,7 +118,7 @@ bot.on('message', message => {
   if (command === "lsay") {
     if (message.author.id !== (config.owner)) return;
     message.channel.sendMessage(args.join(" "));
-    message.delete()
+    message.delete();
   }
   if (command === "setgame") {
     if (message.author.id !== (config.owner)) return;
@@ -143,6 +144,14 @@ bot.on('message', message => {
   }
   if (command === "getid") {
     message.channel.sendMessage(`Your ID is: \\${message.author}`);
+  }
+  if (command === "getavatar") {
+    message.reply(message.author.avatarURL);
+  }
+  if (command === "hook") {
+    if (message.author.id !== (config.owner)) return;
+    hook.sendMessage(args.join(" "));
+    message.delete();
   }
   if (command === "help") {
     message.channel.sendMessage(`\`\`\`This has been removed and will be readded soon.\`\`\``);

@@ -1,8 +1,10 @@
 {
   "prefix": "%",
-  "owner": "196443959558406144",
-  "token": "TOKEN",
+  "owner": "",
+  "token": "",
   "news": "As the bot becomes bigger and bigger, I will be taking a break from updating it for now until I can do more research for bigger and better things!",
   "version": "1.14.0 Alpha Unstable Branch",
-  "change": "Added more logging colors, added `%serverlist`, shortened the code"
+  "change": "Added more logging colors, added `%serverlist`, shortened the code",
+  "webhookid": "",
+  "webhooktoken": ""
 }
