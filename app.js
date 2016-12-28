@@ -103,9 +103,9 @@ bot.on('message', message => {
     let version = (config.version);
     let owner = (config.owner);
     //Prefix Slice
-  
+
     command = command.slice(config.prefix.length);
-  
+
     //Commands
     if (command === "test") {
         message.channel.sendMessage(`Response with \`${Date.now() - message.createdTimestamp}ms\``);
@@ -139,7 +139,7 @@ bot.on('message', message => {
         //Adding the rest of the users words as a variable.
         let msg = "";
         for (let i = 2; i < text.length; i++) {
-            msg += text[i];
+            msg += text[i]+" ";
         }
         //looks through channels to find one that matches, if it is true it sends the message.
         for (const channel of message.guild.channels.values()) {
