@@ -6,18 +6,24 @@ const chalk = require('chalk');
 const hook = new Discord.WebhookClient(`${config.webhookid}`, `${config.webhooktoken}`);
 
 //Boot message and dividers
-let l = chalk.red(`----------------------------------------------------------------------------------------------------`);
-console.log(l);
+let line = chalk.red(`----------------------------------------------------------------------------------------------------`);
+console.log(line);
 console.log(chalk.bgRed.black(`BOOT`));
 
 //Bot Ready And Information
 bot.on('ready', () => {
-    console.log(chalk.bgGreen.black(`[${new Date()}] Logged in as "${bot.user.username} (${bot.user.id})"`));
+    //Logging in
+    console.log(chalk.green(`[${new Date()}] Logged in as "${bot.user.username} (${bot.user.id})"`));
     console.log(chalk.green(`[${new Date()}] Bot is now online!`));
-    console.log(`Guilds Avaliable: ${bot.guilds.size}`);
-    console.log(bot.guilds.map(g => g.name).join("\n"));
+    //Line
+    console.log(line);
+    //Guilds Avaliable
+    console.log(chalk.gray(`Guilds Avaliable: ${bot.guilds.size}`));
+    console.log(chalk.magenta(bot.guilds.map(g => g.name).join("\n")));
+    //Set game
     bot.user.setGame(config.prefix + `help | ${bot.guilds.size} servers`);
-    console.log(l);
+    //Line
+    console.log(line);
 });
 
 //Debug Messages
@@ -197,4 +203,4 @@ bot.on('message', message => {
 });
 //Bot Login
 bot.login(config.token);
-console.log(chalk.bgGreen.black(`[${new Date()}] Bot Logged In!`));
+console.log(chalk.green(`[${new Date()}] Bot Logged In!`));
