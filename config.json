@@ -1,11 +1,11 @@
 {
   "prefix": "%",
   "owner": "196443959558406144",
-  "token": "TOKEN",
-  "news": "As the bot becomes bigger and bigger, I will be taking a break from updating it for now until I can do more research for bigger and better things!",
-  "version": "1.17.0 Alpha Unstable Branch",
-  "change": "Now with `csay`!",
-  "webhookid": "WEBHOOKID",
-  "webhooktoken": "WEBHOOKTOKEN",
+  "token": "MjUzMjU0NTg3MzQxOTk2MDMy.C1HBhA.wDh77wyWBTkCL3EcEOH_SCOg6VU",
+  "news": "No news for now.",
+  "version": "1.20.0 Alpha Unstable Branch",
+  "change": "Bot is now Modular! Fixed a few bugs.",
+  "webhookid": "NONE",
+  "webhooktoken": "NONE",
   "discord": "https://discord.gg/Th2pPzn"
 }
