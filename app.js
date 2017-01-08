@@ -89,14 +89,16 @@ bot.on('guildBanRemove', (guild, user) => {
 
 //Bot Join / Leave Alerts
 bot.on("guildCreate", guild => {
+  let game = (`${config.prefix}help | ${bot.guilds.size} servers`)
     guild.defaultChannel.sendMessage(`Hello @everyone! I am an official bot developed by Aceheliflyer!\nJoin our server if you need any help! ${config.discord}`);
     console.log(`I have joined ${guild.name} at ${new Date()}.`);
-    bot.user.setGame(`on ${bot.guilds.size} servers`);
+    bot.user.setGame(game);
 });
 
 bot.on("guildDelete", guild => {
+  let game = (`${config.prefix}help | ${bot.guilds.size} servers`)
     console.log(`I have left ${guild.name} at ${new Date()}.`);
-    bot.user.setGame(config.prefix + `help | ${bot.guilds.size} servers`);
+    bot.user.setGame(game);
 });
 
 
