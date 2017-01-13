@@ -3,7 +3,7 @@
 ## About
 Ace Bot is a Discord bot designed for server moderation built using [discord.js].
 
-## Requrements
+## Requirements
 * [Chalk]
 * [discord.js]
 * [Node.js]
