@@ -1,11 +1,9 @@
 {
-  "prefix": "%",
-  "owner": "OWNER_ID",
-  "token": "TOKEN",
-  "news": "No news for now.",
-  "version": "1.20.0 Alpha Unstable Branch",
   "change": "Bot is now Modular! Fixed a few bugs.",
-  "webhookid": "WEBHOOKID",
-  "webhooktoken": "WEBHOOKTOKEN",
-  "discord": "https://discord.gg/thT86QN"
+  "discord": "http://discord.gg/Y6Vgfyd",
+  "news": "No news for now.",
+  "owner": "OWNER_ID",
+  "prefix": "%",
+  "token": "TOKEN",
+  "version": "1.21.0"
 }

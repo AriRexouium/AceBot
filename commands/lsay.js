@@ -1,3 +1,4 @@
+const bot = cmd.bot
 const cmd = require('./commands.js')
 const Command = cmd.Command
 const config = require('../config.json')
