@@ -1,4 +1,5 @@
-const bot = cmd.bot
+const Discord = require('discord.js')
+const bot = new Discord.Client()
 const cmd = require('./commands.js')
 const Command = cmd.Command
 const config = require('../config.json')

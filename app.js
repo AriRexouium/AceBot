@@ -5,7 +5,7 @@ const config = require('./config.json')
 const chalk = require('chalk')
 
 // Boot message and dividers
-let line = chalk.red(`------------------------------------------------------------------------------------------------------------------------------------------------------`)
+let line = chalk.red(`====================`)
 console.log(line)
 console.log(chalk.bgRed.black(`BOOT`))
 // Bot Ready And Information
@@ -77,7 +77,7 @@ bot.on('guildBanRemove', (guild, user) => {
 // Bot Join / Leave Alerts
 bot.on('guildCreate', guild => {
   let game = (`${config.prefix}help | ${bot.guilds.size} servers`)
-  guild.defaultChannel.sendMessage(`Hello @everyone! I am an official bot developed by Aceheliflyer!\nJoin our server if you need any help! ${config.discord}`)
+  guild.defaultChannel.sendMessage(`Hello everyone! I am an official bot developed by **Aceheliflyer#0950**!\nJoin our server if you need any help! <${config.discord}>`)
   console.log(`I have joined ${guild.name} at ${new Date()}.`)
   bot.user.setGame(game)
 })
@@ -90,7 +90,7 @@ bot.on('guildDelete', guild => {
 
 // Server Pins Update
 bot.on('channelPinsUpdate', (channel, time) => {
-  channel.guild.defaultChannel.sendMessage(`@everyone The pins for ${channel} have been updated at ${time}!`)
+  channel.guild.defaultChannel.sendMessage(`The pins for ${channel} have been updated at ${time}!`)
 })
 
 // Server Role Create / Delete Messages
