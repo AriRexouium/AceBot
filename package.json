@@ -4,6 +4,7 @@
   "description": "First ever Discord bot. Crappy, but works.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "standard"
   },
   "repository": {
@@ -20,6 +21,7 @@
     "node"
   ],
   "author": "Aceheliflyer <aceheliflyer@gmail.com>",
+  "contributors": "null",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Aceheliflyer/Ace-Bot/issues"
@@ -29,5 +31,10 @@
     "chalk": "^2.1.0",
     "discord.js": "^11.1.0",
     "standard": "^10.0.3"
+  },
+  "peerDependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=8.0.0"
   }
 }
