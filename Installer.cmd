@@ -20,7 +20,7 @@ echo ^<nul set /p "=Bot closed or crashed. Press any key to restart.">> Start.cm
 echo pause ^>nul>> Start.cmd
 echo goto Start>> Start.cmd
 :: Finished
-<nul set /p "=Finished! Press any key to exit. (When you want to launch the bot, use `Run.bat`.)"
+<nul set /p "=Finished! Press any key to exit. (When you want to launch the bot, use `Start.cmd`.)"
 pause >nul
 del "%~f0"
 exit
