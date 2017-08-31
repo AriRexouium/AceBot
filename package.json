@@ -10,7 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/Aceheliflyer/Ace-Bot.git"
   },
-  "author": "Aceheliflyer",
+  "keywords": [
+    "acebot",
+    "aceheliflyer",
+    "bot",
+    "discord",
+    "discordapp",
+    "discordjs",
+    "node"
+  ],
+  "author": "Aceheliflyer <aceheliflyer@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Aceheliflyer/Ace-Bot/issues"

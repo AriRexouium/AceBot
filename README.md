@@ -6,6 +6,7 @@ AceBot is a Discord bot designed for server moderation built using [discord.js].
 [![Discord Server](http://discordapp.com/api/guilds/247815199539593216/embed.png)](http://discord.gg/Y6Vgfyd)
 [![Build Status](http://travis-ci.org/Aceheliflyer/AceBot.svg?branch=master)](http://travis-ci.org/Aceheliflyer/AceBot)
 [![Dependencies Status](http://david-dm.org/aceheliflyer/acebot/status.svg)](http://david-dm.org/aceheliflyer/acebot)
+[![Standard JS](http://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com)
 
 ## Requirements
 * [Chalk]
