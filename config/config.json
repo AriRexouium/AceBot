@@ -1,0 +1,12 @@
+{
+  "startSettings": {
+    "selfbot": false,
+    "commandPrefix": "a@",
+    "commandEditableDuration": "30",
+    "nonCommandEditable": false,
+    "unknownCommandResponse": false,
+    "owner": ["196443959558406144"],
+    "invite": "http://discord.gg/UwvMSAa",
+    "token": "token"
+  }
+}
