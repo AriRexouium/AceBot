@@ -3,9 +3,10 @@
   AceBot is a Discord bot designed for providing information on demand.
   <p align="center">
     <a href="http://discord.gg/Y6Vgfyd"><img src="http://discordapp.com/api/guilds/247815199539593216/embed.png"></a>
-    <a href="http://david-dm.org/aceheliflyer/acebot"><img src="http://david-dm.org/aceheliflyer/acebot/status.svg"></a>
+    <a href="http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE"><img src="http://img.shields.io/github/license/Aceheliflyer/AceBot.svg"></a>
+    <a href="http://standardjs.com"><img src="http://img.shields.io/badge/code_style-standard-brightgreen.svg"></a><br />
+    <a href="http://david-dm.org/Aceheliflyer/AceBot"><img src="http://david-dm.org/Aceheliflyer/AceBot/status.svg"></a>
     <a href="http://david-dm.org/aceheliflyer/acebot?type=dev"><img src="http://david-dm.org/aceheliflyer/acebot/dev-status.svg"></a>
-    <a href="http://standardjs.com"><img src="http://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>
   </p>
 </div>
 
@@ -18,3 +19,10 @@ We are open for suggestions. Please feel free to open a new [issue](http://githu
 
 ## Help
 If you need any help please feel free to stop by our [server](http://discord.gg/Y6Vgfyd).
+
+#### For the sake of convenience, here's some statistics for you:
+[![](http://img.shields.io/github/issues-raw/Aceheliflyer/AceBot.svg)](http://github.com/Aceheliflyer/AceBot/issues?q=is%3Aopen+is%3Aissue)
+[![](http://img.shields.io/github/issues-closed-raw/Aceheliflyer/AceBot.svg)](http://github.com/Aceheliflyer/AceBot/issues?q=is%3Aissue+is%3Aclosed)
+
+[![](http://img.shields.io/github/issues-pr-raw/Aceheliflyer/AceBot.svg)](http://github.com/Aceheliflyer/AceBot/pulls?q=is%3Aopen+is%3Apr)
+[![](http://img.shields.io/github/issues-pr-closed-raw/Aceheliflyer/AceBot.svg)](http://github.com/Aceheliflyer/AceBot/pulls?q=is%3Apr+is%3Aclosed)
