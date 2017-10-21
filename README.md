@@ -14,12 +14,6 @@
 *   [node.js](http://nodejs.org)
 *   [npm](http://npmjs.com) *(Comes with Node.js)*
 
-## Contributions
-We are open for suggestions. Please feel free to open a new [issue](http://github.com/Aceheliflyer/AceBot/issues) to post your ideas.
-
-## Help
-If you need any help please feel free to stop by our [server](http://discord.gg/Y6Vgfyd).
-
 #### For the sake of convenience, here's some statistics for you:
 <div align="left">
   <p align="left">
