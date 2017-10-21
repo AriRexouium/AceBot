@@ -1,7 +1,7 @@
 @echo off
-echo title AceBot by Aceheliflyer (Installer)
-:Start
+title AceBot-v2 by Aceheliflyer
 cls
+:Start
 echo.
 :: Install Required Packages
 echo Installing Required Packages...
