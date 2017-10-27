@@ -2,8 +2,9 @@
   <h1 align="center"><strong>AceBot</strong></h1>
   AceBot is a Discord bot designed for providing information on demand.
   <p align="center">
+    <a href="http://bithound.io/github/Aceheliflyer/AceBot"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/score.svg"></a>
+    <a href="#"><img src="http://img.shields.io/github/package-json/v/Aceheliflyer/AceBot.svg"></a>
     <a href="http://discord.gg/Y6Vgfyd"><img src="http://discordapp.com/api/guilds/247815199539593216/embed.png"></a>
-    <a href="http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE"><img src="http://img.shields.io/github/license/Aceheliflyer/AceBot.svg"></a>
     <a href="http://standardjs.com"><img src="http://img.shields.io/badge/code_style-standard-brightgreen.svg"></a><br />
     <a href="http://david-dm.org/Aceheliflyer/AceBot"><img src="http://david-dm.org/Aceheliflyer/AceBot/status.svg"></a>
     <a href="http://david-dm.org/aceheliflyer/acebot?type=dev"><img src="http://david-dm.org/Aceheliflyer/Acebot/dev-status.svg"></a>
@@ -12,7 +13,7 @@
 
 ## Requirements
 *   [node.js](http://nodejs.org)
-*   [npm](http://npmjs.com) *(Comes with Node.js)*
+*   [npm](http://npmjs.com) *(Comes with Node.js by default)*
 
 #### For the sake of convenience, here's some statistics for you:
 <div align="left">
@@ -23,3 +24,6 @@
     <a href="http://github.com/Aceheliflyer/AceBot/pulls?q=is%3Apr+is%3Aclosed"><img src="http://img.shields.io/github/issues-pr-closed-raw/Aceheliflyer/AceBot.svg"></a>
   </p>
 </div>
+
+## License
+[![License](http://img.shields.io/github/license/Aceheliflyer/AceBot.svg)](http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE)

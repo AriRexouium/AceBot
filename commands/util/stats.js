@@ -27,7 +27,7 @@ module.exports = class StatsCommand extends Command {
       fields: [
         {
           'name': '🕑 Uptime',
-          'value': moment.duration(this.client.uptime).format('y [yr,] M [mth,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+          'value': moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
           'inline': false
         },
         { 'name': '📤 Messages Sent', 'value': this.client.botStats.messagesSent, 'inline': true },
