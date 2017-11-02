@@ -4,18 +4,24 @@
   <p align="center">
     <a href="http://bithound.io/github/Aceheliflyer/AceBot"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/score.svg"></a>
     <a href="#"><img src="http://img.shields.io/github/package-json/v/Aceheliflyer/AceBot.svg"></a>
-    <a href="http://discord.gg/Y6Vgfyd"><img src="http://discordapp.com/api/guilds/247815199539593216/embed.png"></a>
+    <a href="http://discord.gg/UwvMSAa"><img src="http://discordapp.com/api/guilds/278946297736724501/embed.png"></a>
     <a href="http://standardjs.com"><img src="http://img.shields.io/badge/code_style-standard-brightgreen.svg"></a><br />
-    <a href="http://david-dm.org/Aceheliflyer/AceBot"><img src="http://david-dm.org/Aceheliflyer/AceBot/status.svg"></a>
-    <a href="http://david-dm.org/aceheliflyer/acebot?type=dev"><img src="http://david-dm.org/Aceheliflyer/Acebot/dev-status.svg"></a>
+    <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/dependencies.svg"></a>
+    <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/devDependencies.svg"></a>
   </p>
 </div>
 
 ## Requirements
-*   [node.js](http://nodejs.org)
-*   [npm](http://npmjs.com) *(Comes with Node.js by default)*
+
+-   [node.js](http://nodejs.org)
+-   [npm](http://npmjs.com) _(Comes with Node.js by default)_
+
+## Contributing
+
+For contributing to the repository, please read [CONTRIBUTING.md](http://github.com/Aceheliflyer/AceBot/blob/master/CONTRIBUTING.md)
 
 #### For the sake of convenience, here's some statistics for you:
+
 <div align="left">
   <p align="left">
     <a href="http://github.com/Aceheliflyer/AceBot/issues?q=is%3Aopen+is%3Aissue"><img src="http://img.shields.io/github/issues-raw/Aceheliflyer/AceBot.svg"></a>
@@ -26,4 +32,5 @@
 </div>
 
 ## License
+
 [![License](http://img.shields.io/github/license/Aceheliflyer/AceBot.svg)](http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE)

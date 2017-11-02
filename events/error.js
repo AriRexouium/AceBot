@@ -1,3 +1,3 @@
 module.exports = (client, error) => {
-  client.log.error(`\n${error}`)
+  client.log.error(`\n${error.stack}`)
 }

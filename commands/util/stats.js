@@ -19,11 +19,11 @@ module.exports = class StatsCommand extends Command {
 
   run (message) {
     return message.embed({
-      author: { name: this.client.user.tag, icon_url: this.client.user.avatarURL() },
-      title: `Client Stats.`,
-      footer: { text: message.author.tag, icon_url: message.author.avatarURL() },
-      thumbnail: { url: this.client.user.avatarURL() },
+      author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+      footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
+      title: `Client Stats.`,
+      thumbnail: { url: this.client.user.avatarURL() },
       fields: [
         {
           'name': '🕑 Uptime',

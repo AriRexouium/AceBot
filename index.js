@@ -12,35 +12,60 @@ const client = new CommandoClient({
   owner: config.startSettings.owner,
   invite: config.startSettings.invite
 })
-client.log = require('./modules/logger.js')
 client.config = config
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
 client.botStats = botStats
 
 client.registry
-.registerDefaultTypes()
-.registerDefaultGroups()
-.registerCommandsIn(path.join(__dirname, 'commands'))
-.registerDefaultCommands({
-  ping: false
-})
-.registerGroups([
-  ['bot-staff', 'Bot Staff']
-])
-
-fs.readdir('./events/', (error, files) => {
-  if (error) client.log.error(error, 'Event Loader')
-  client.log.info(`Loading ${files.length} events.`, 'Event Loader')
-  files.forEach(file => {
-    const eventName = file.split('.')[0]
-    const event = require(`./events/${file}`)
-    client.on(eventName, event.bind(null, client))
-    delete require.cache[require.resolve(`./events/${file}`)]
+  .registerDefaultTypes()
+  .registerDefaultGroups()
+  .registerCommandsIn(path.join(__dirname, 'commands'))
+  .registerDefaultCommands({
+    eval_: false,
+    ping: false
   })
-})
+  .registerGroups([
+    ['bot-staff', 'Bot Staff']
+  ])
+
+/**
+ * @param {string} source
+ * @return {boolean}
+ */
+const isFile = source => fs.lstatSync(source).isFile()
+
+/**
+ * gets all files in a directory
+ * @param {string} source
+ * @return {string[]}
+ */
+let getFiles = source => {
+  let files = fs.readdirSync(__dirname + source).map(name => path.join(__dirname + source, name)).filter(isFile) // eslint-disable-line no-path-concat
+  for (let file in files) {
+    files[file] = files[file].slice(__dirname.length)
+  }
+  return files
+}
+
+for (let file of getFiles('/modules')) {
+  const moduleName = file.split('.')[0].substring(9)
+  const moduleFile = require(`./${file}`)
+  client[moduleName] = moduleFile
+  delete require.cache[require.resolve(`./${file}`)]
+}
+client.log.info(`Successfully loaded ${getFiles('/modules').length} modules.`, 'Module Loader')
+
+for (let file of getFiles('/events')) {
+  const eventName = file.split('.')[0].substring(8)
+  const event = require(`./${file}`)
+  client.on(eventName, event.bind(null, client))
+  delete require.cache[require.resolve(`./${file}`)]
+}
+client.log.info(`Successfully loaded ${getFiles('/events').length} events.`, 'Event Loader')
 
 sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
 })
+client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader')
 
 client.login(client.config.startSettings.token)

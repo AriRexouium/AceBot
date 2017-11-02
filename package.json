@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.1.8",
+  "version": "2.3.8",
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
@@ -16,10 +16,12 @@
   ],
   "main": "index.js",
   "scripts": {
+    "install:dev": "npm i --only=dev",
     "start": "node index.js",
-    "test": "standard --fix",
-    "lint": "standard",
-    "lint:fix": "standard --fix"
+    "test": "standard --fix | snazzy",
+    "lint": "standard | snazzy",
+    "lint:fix": "standard --fix | snazzy",
+    "lint:md": "remark"
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,8 @@
     "sqlite": "^2.8.0"
   },
   "devDependencies": {
+    "remark-lint": "^6.0.1",
+    "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },
   "peerDependencies": {},

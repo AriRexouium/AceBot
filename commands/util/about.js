@@ -19,13 +19,14 @@ module.exports = class AboutCommand extends Command {
     message.say({
       content: '',
       embed: {
-        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL },
+        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+        timestamp: new Date(),
         description: (stripIndents`
         __**AceBot**__
         This is a WIP bot currently being developed by **Aceheliflyer#0950**.
         This makes use of the [discord.js-commando framework](http://github.com/Gawdl3y/discord.js-commando).
         `),
-        timestamp: new Date(),
         color: 0x7289DA
       }
     })
