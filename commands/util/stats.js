@@ -22,7 +22,7 @@ module.exports = class StatsCommand extends Command {
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
-      title: `Client Stats.`,
+      title: `Client Stats`,
       thumbnail: { url: this.client.user.avatarURL() },
       fields: [
         {
@@ -39,8 +39,9 @@ module.exports = class StatsCommand extends Command {
         { 'name': '💻 Users', 'value': this.client.users.size, 'inline': true },
         { 'name': '💾 Memory Used', 'value': (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', 'inline': true },
         {
-          'name': '📊 Version',
+          'name': '📊 Versions',
           'value': stripIndents`
+          **AceBot:** ${require('../../package.json').version}
           **Node:** ${process.version}
           **Discord.js:** ${require('discord.js/package.json').version}
           **Discord.js-Commando:** ${require('discord.js-commando/package.json').version}`,
