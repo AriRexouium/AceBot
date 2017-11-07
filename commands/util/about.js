@@ -1,5 +1,6 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
+
 module.exports = class AboutCommand extends Command {
   constructor (client) {
     super(client, {
@@ -16,19 +17,22 @@ module.exports = class AboutCommand extends Command {
   }
 
   run (message) {
-    message.say({
-      content: '',
-      embed: {
-        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
-        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-        timestamp: new Date(),
-        description: (stripIndents`
-        __**AceBot**__
-        This is a WIP bot currently being developed by **Aceheliflyer#0950**.
-        This makes use of the [discord.js-commando framework](http://github.com/Gawdl3y/discord.js-commando).
-        `),
-        color: 0x7289DA
-      }
+    this.client.generateInvite().then(invite => {
+      message.say({
+        content: '',
+        embed: {
+          author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+          footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+          timestamp: new Date(),
+          description: (stripIndents`
+          __**AceBot**__
+          This is a WIP bot currently being developed by **Aceheliflyer#0950**.
+          This makes use of the [discord.js-commando framework](http://github.com/Gawdl3y/discord.js-commando).
+          [Click me to invite me to you server!](${invite})
+          `),
+          color: 0x7289DA
+        }
+      })
     })
   }
 }

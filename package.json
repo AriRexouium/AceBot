@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
@@ -18,9 +18,9 @@
   "scripts": {
     "install:dev": "npm i --only=dev",
     "start": "node index.js",
-    "test": "standard --fix | snazzy",
-    "lint": "standard | snazzy",
-    "lint:fix": "standard --fix | snazzy",
+    "test": "standard --verbose | snazzy",
+    "lint": "standard --verbose | snazzy",
+    "lint:fix": "standard --verbose --fix | snazzy",
     "lint:md": "remark"
   },
   "repository": {

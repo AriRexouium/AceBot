@@ -2,6 +2,7 @@ const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
 const moment = require('moment')
 require('moment-duration-format')
+
 module.exports = class StatsCommand extends Command {
   constructor (client) {
     super(client, {
@@ -27,7 +28,10 @@ module.exports = class StatsCommand extends Command {
       fields: [
         {
           'name': '🕑 Uptime',
-          'value': moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+          'value': stripIndents`
+          ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
+          *(since ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]})*
+          `,
           'inline': false
         },
         { 'name': '📤 Messages Sent', 'value': this.client.botStats.messagesSent, 'inline': true },

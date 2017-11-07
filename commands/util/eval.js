@@ -31,26 +31,32 @@ module.exports = class EvalCommand extends Command {
   run (message, args) {
     /* eslint-disable no-unused-vars */
     const client = message.client
-    const stats = client.botStats
+    const channel = message.channel
     const guild = message.guild
     const objects = client.registry.evalObjects
     const lastResult = this.lastResult
     /* eslint-enable no-unused-vars */
 
-    var code = args.code
-    var evaledLatency
+    var code = args.code; var evaledLatency
     try {
       var hrStart = process.hrtime(this.hrStart)
-      var evaled = eval(code) // eslint-disable-line no-eval
+      var result = eval(code) // eslint-disable-line no-eval
       evaledLatency = process.hrtime(hrStart)
       var type = typeof evaled
-      var inspect = util.inspect(evaled, { depth: 0 })
-      this.lastResult = evaled
+      var inspect = util.inspect(result, { depth: 0 })
+      this.lastResult = result
+      /* Fixing Stuff... Not sure what to call it really. */
+      code = fix(code)
+      result = fix(result)
 
       var sortName; var sortValue
-      if (evaled instanceof Object) {
+      if (result instanceof Object) {
         sortName = 'Inspect'
-        sortValue = '```js\n' + inspect.toString() + '\n```'
+
+        inspect = inspect.toString()
+        if (inspect.length > 2000) { sortValue = 'Error: Cannot exceed 2000 characters.' }
+
+        sortValue = ('```js\n' + inspect.toString() + '\n```').replace(client.token, '[TOKEN]')
       } else {
         sortName = 'Type'
         sortValue = '```js\n' + type + '\n```'
@@ -66,12 +72,12 @@ module.exports = class EvalCommand extends Command {
         fields: [
           {
             'name': 'Code',
-            'value': '```js\n' + clean(code) + '\n```',
+            'value': '```js\n' + code + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': '```js\n' + clean(evaled.toString()) + '\n```',
+            'value': ('```js\n' + result.toString() + '\n```').replace(client.token, '[TOKEN]'),
             'inline': false
           },
           {
@@ -95,12 +101,12 @@ module.exports = class EvalCommand extends Command {
           fields: [
             {
               'name': 'Code',
-              'value': '```js\n' + clean(code) + '\n```',
+              'value': '```js\n' + code + '\n```',
               'inline': false
             },
             {
               'name': 'Error',
-              'value': '```LDIF\n' + clean(error.message) + '\n```\n' + `[Stack Error](${link})`,
+              'value': '[```LDIF\n' + error.message + '\n```](' + link + ')',
               'inline': false
             }
           ],
@@ -110,7 +116,7 @@ module.exports = class EvalCommand extends Command {
     }
   }
 }
-var clean = (text) => {
+var fix = (text) => {
   if (typeof (text) === 'string') {
     return text
     .replace(/`/g, '`' + String.fromCharCode(8203))

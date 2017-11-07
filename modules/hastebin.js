@@ -1,7 +1,7 @@
 const snekfetch = require('snekfetch')
 
 module.exports = async function (text, syntax = '', client) {
-  if (text !== null) {
+  if (text !== undefined) {
     let haste = await snekfetch
     .post('https://hastebin.com/documents')
     .send(text)
@@ -11,6 +11,6 @@ module.exports = async function (text, syntax = '', client) {
     let url = `https://hastebin.com/${haste.body.key}${syntax ? `.${syntax}` : ``}`
     return url
   } else {
-    return false
+    throw new Error('HastebinError: text cannot be undefined.')
   }
 }

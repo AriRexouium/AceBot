@@ -13,12 +13,35 @@ function Logger (background, title, text, time = true) {
 
 module.exports = {
   info (text, title = 'Info', background = 'bgCyan', time = true) {
-    Logger(background, title, text, time)
+    if (text !== undefined) {
+      Logger(background, title, text, time)
+      return true
+    } else {
+      throw new Error('LoggerError: text cannot be undefined.')
+    }
   },
-  warn (warn, title = 'Client') {
-    Logger('bgYellow', `${title} Warning`, warn)
+  debug (text, title = 'Debug', time = true) {
+    if (text !== undefined) {
+      Logger('bgMagenta', title, text, time)
+      return true
+    } else {
+      throw new Error('LoggerError: text cannot be undefined.')
+    }
   },
-  error (error, title = 'Client') {
-    Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`)
+  warn (warn, title = 'Warning') {
+    if (warn !== undefined) {
+      Logger('bgYellow', `${title} Warning`, warn)
+      return true
+    } else {
+      throw new Error('LoggerError: warn cannot be undefined.')
+    }
+  },
+  error (error, title = 'Error') {
+    if (error !== undefined) {
+      Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`)
+      return true
+    } else {
+      throw new Error('LoggerError: error cannot be undefined.')
+    }
   }
 }
