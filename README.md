@@ -9,7 +9,7 @@
     <a href="http://bithound.io/github/Aceheliflyer/AceBot"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/score.svg"></a>
     <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/dependencies.svg"></a>
     <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/devDependencies.svg"></a><br /><br />
-    <a href="http://discord.gg/YxASWHg"><img src="http://discordapp.com/api/guilds/278946297736724501/embed.png?style=banner2"></a>
+    <a href="http://discord.gg/UwvMSAa"><img src="http://discordapp.com/api/guilds/278946297736724501/embed.png?style=banner2"></a>
   </p>
 </div>
 
