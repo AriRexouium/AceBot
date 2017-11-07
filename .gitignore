@@ -1,5 +1,6 @@
 *.log
 *.sqlite3
 .env
+.vscode/
 node_modules/
 Start.bat
