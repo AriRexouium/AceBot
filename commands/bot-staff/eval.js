@@ -14,6 +14,7 @@ module.exports = class EvalCommand extends Command {
       description: 'Executes JavaScript code.',
       aliases: ['evaluate'],
       details: 'Only the bot owner(s) may use this command.',
+      clientPermissions: ['EMBED_LINKS'],
       args: [
         {
           key: 'code',

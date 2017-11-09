@@ -20,8 +20,7 @@ client.registry
   .registerDefaultTypes()
   .registerDefaultGroups()
   .registerGroups([
-    ['bot-staff', 'Bot Staff'],
-    ['statistics', 'Statistics']
+    ['bot-staff', 'Bot Staff']
   ])
   .registerDefaultCommands({
     eval_: false,
