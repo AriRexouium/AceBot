@@ -1,3 +1,10 @@
 "critics": {
-  "lint": {"engine": "standard"}
+  "lint": {
+    "engine": "standard"
+  }
+}
+"dependencies": {
+  "mute": [
+    "standard",
+  ]
 }
