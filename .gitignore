@@ -1,6 +1,17 @@
-*.log
-*.sqlite3
-.env
+# Cache
+.npm/
 .vscode/
+
+# Configuration
+config/
+
+# Dependencies
 node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Start Files
+Installer.bat
 Start.bat

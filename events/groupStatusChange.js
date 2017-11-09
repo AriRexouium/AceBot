@@ -5,5 +5,6 @@ module.exports = (client, message, group, enabled) => {
     Group ${group.id}
     ${enabled ? 'enabled' : 'disabled'}
     ${message.guild ? `in guild ${message.guild.name} (${message.guild.id})` : 'globally'}.
+    ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}    
   `)
 }

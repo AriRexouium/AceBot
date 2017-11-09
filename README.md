@@ -5,22 +5,39 @@
     <a href="http://standardjs.com"><img src="http://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>
     <a href="http://github.com/Aceheliflyer/AceBot/blob/master/package.json"><img src="http://img.shields.io/github/package-json/v/Aceheliflyer/AceBot.svg"></a>
     <a href="http://github.com/Aceheliflyer/AceBot/releases"><img src="http://img.shields.io/github/release/Aceheliflyer/AceBot.svg"></a>
-    <a href=""><img src="http://img.shields.io/github/languages/code-size/Aceheliflyer/AceBot.svg"></a><br />
+    <a href="#"><img src="http://img.shields.io/github/languages/code-size/Aceheliflyer/AceBot.svg"></a>
+    <br />
     <a href="http://bithound.io/github/Aceheliflyer/AceBot"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/score.svg"></a>
     <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/dependencies.svg"></a>
-    <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/devDependencies.svg"></a><br /><br />
+    <a href="http://bithound.io/github/Aceheliflyer/AceBot/master/dependencies/npm"><img src="http://bithound.io/github/Aceheliflyer/AceBot/badges/devDependencies.svg"></a>
+    <br /><br />
     <a href="http://discord.gg/UwvMSAa"><img src="http://discordapp.com/api/guilds/278946297736724501/embed.png?style=banner2"></a>
   </p>
 </div>
 
-## Requirements
+## Installation
 
--   [Node.js](http://nodejs.org)
--   [npm](http://npmjs.com) _(Comes with Node.js by default)_
+_(If you can manage to actually follow these instrutions then you'll be just fine. // This is assuming you already have a bot account and such. I will not be doing a tutorial on this as you can easily search up on almighty google how to make a bot account.)_
+
+### Make Sure You Have These Programs:
+
+[GIT SCM _(or just Git)_](http://git-scm.com/download)
+
+[Node.js](http://nodejs.org/en/download/current)
+
+### Actual Installation Part:
+
+1.  If and when you have Git installed, right click on the location you want to put your bot root folder _(IE: your documents)_ and click `Git Bash Here`.
+2.  Run `git clone http://github.com/Aceheliflyer/AceBot` from the command line. You should now have a folder called AceBot.
+3.  Be sure to edit your confiuration files in the [config](http://github.com/Aceheliflyer/AceBot/tree/master/config) folder to your desired settings.
 
 ## Contributing
 
 For contributing to the repository, please read [CONTRIBUTING.md](http://github.com/Aceheliflyer/AceBot/blob/master/CONTRIBUTING.md)
+
+## Todo List
+
+You can view the Todo List [here](http://github.com/Aceheliflyer/AceBot/projects/1).
 
 ## License
 

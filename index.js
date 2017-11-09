@@ -19,14 +19,15 @@ client.botStats = botStats
 client.registry
   .registerDefaultTypes()
   .registerDefaultGroups()
-  .registerCommandsIn(path.join(__dirname, 'commands'))
+  .registerGroups([
+    ['bot-staff', 'Bot Staff'],
+    ['statistics', 'Statistics']
+  ])
   .registerDefaultCommands({
     eval_: false,
     ping: false
   })
-  .registerGroups([
-    ['bot-staff', 'Bot Staff']
-  ])
+  .registerCommandsIn(path.join(__dirname, 'commands'))
 
 /**
  * @param {string} source
@@ -65,7 +66,6 @@ client.log.info(`Successfully loaded ${getFiles('/events').length} events.`, 'Ev
 
 sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
-})
-client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader')
+}).then(client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader'))
 
 client.login(client.config.startSettings.token)
