@@ -19,7 +19,7 @@ module.exports = class UpdateCommand extends Command {
     return this.client.isOwner(message.author)
   }
   async run (message) {
-    message.say('**Restart requested, please wait.**').then(function (e) {
+    message.say('**Update requested, please wait.**').then(function (e) {
       var result = childProcess.execSync('git pull').toString()
       message.say('```\n' + result + '\n```')
       if (result.indexOf('Already up-to-date.') > -1) {
