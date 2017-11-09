@@ -8,6 +8,7 @@ module.exports = class PingCommand extends Command {
       group: 'util',
       memberName: 'ping',
       description: 'Checks the bot\'s latency to the server.',
+      aliases: ['pong'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {
         usages: 2,

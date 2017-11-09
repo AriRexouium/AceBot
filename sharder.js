@@ -2,8 +2,8 @@ const log = require('./modules/log.js')
 const config = require('./config/config.json')
 const { ShardingManager } = require('discord.js')
 const Manager = new ShardingManager('./index.js', {
-  totalShards: 3,
-  respawn: true,
+  totalShards: config.shardSettings.totalShards,
+  respawn: config.shardSettings.respawn,
   token: config.startSettings.token
 })
 

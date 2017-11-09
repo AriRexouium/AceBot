@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.5.0",
+  "version": "2.6.0-dev",
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
@@ -11,13 +11,14 @@
     {
       "name": "mcao",
       "email": "",
-      "web": "https://github.com/mcao"
+      "web": "https://mcao.github.io"
     }
   ],
   "main": "index.js",
   "scripts": {
     "install:dev": "npm i --only=dev",
     "start": "node index.js",
+    "start:shard": "node sharder.js",
     "test": "standard --verbose | snazzy",
     "lint": "standard --verbose | snazzy",
     "lint:fix": "standard --verbose --fix | snazzy",
@@ -45,6 +46,7 @@
     "discord.js-commando": "github:gawdl3y/discord.js-commando",
     "moment": "^2.19.1",
     "moment-duration-format": "^1.3.0",
+    "pluralize": "^7.0.0",
     "sqlite": "^2.8.0"
   },
   "devDependencies": {
@@ -54,13 +56,12 @@
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },
-  "peerDependencies": {},
-  "bundledDependencies": {},
-  "optionalDependencies": {},
   "engines": {
     "node": "8.x"
   },
   "remarkConfig": {
-    "plugins": ["remark-preset-lint-recommended"]
+    "plugins": [
+      "remark-preset-lint-recommended"
+    ]
   }
 }

@@ -4,7 +4,7 @@ const path = require('path')
 const config = require('./config/config.json')
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
-  selfbot: config.startSettings.selfbot,
+  selfbot: false,
   commandPrefix: config.startSettings.commandPrefix,
   commandEditableDuration: config.startSettings.commandEditableDuration,
   nonCommandEditable: config.startSettings.nonCommandEditable,

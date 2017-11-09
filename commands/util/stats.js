@@ -10,6 +10,7 @@ module.exports = class StatsCommand extends Command {
       group: 'util',
       memberName: 'stats',
       description: 'Displays live satistics about the bot.',
+      aliases: ['statistics'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {
         usages: 2,
@@ -23,7 +24,7 @@ module.exports = class StatsCommand extends Command {
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
-      title: `Client Stats${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`,
+      title: `Client Stats${this.client.shard ? ` | Shard ID: ${this.client.shard.id}/${this.client.shard.count}` : ''}`,
       thumbnail: { url: this.client.user.avatarURL() },
       fields: [
         {
