@@ -3,8 +3,3 @@
     "engine": "standard"
   }
 }
-"dependencies": {
-  "mute": [
-    "standard",
-  ]
-}
