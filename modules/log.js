@@ -17,7 +17,7 @@ module.exports = {
       Logger(background, title, text, time)
       return true
     } else {
-      throw new Error('LoggerError: text cannot be undefined.')
+      process.emitWarning('text cannot be undefined', 'LoggerError')
     }
   },
   debug (text, title = 'Debug', time = true) {
@@ -25,7 +25,7 @@ module.exports = {
       Logger('bgMagenta', title, text, time)
       return true
     } else {
-      throw new Error('LoggerError: text cannot be undefined.')
+      process.emitWarning('text cannot be undefined', 'LoggerError')
     }
   },
   warn (warn, title = 'Warning') {
@@ -33,7 +33,7 @@ module.exports = {
       Logger('bgYellow', `${title} Warning`, warn)
       return true
     } else {
-      throw new Error('LoggerError: warn cannot be undefined.')
+      process.emitWarning('warn cannot be undefined', 'LoggerError')
     }
   },
   error (error, title = 'Error') {
@@ -41,7 +41,7 @@ module.exports = {
       Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`)
       return true
     } else {
-      throw new Error('LoggerError: error cannot be undefined.')
+      process.emitWarning('error cannot be undefined', 'LoggerError')
     }
   }
 }

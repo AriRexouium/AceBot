@@ -31,7 +31,7 @@ module.exports = class EvalCommand extends Command {
     return this.client.isOwner(message.author)
   }
 
-  run (message, args) {
+  async run (message, args) {
     /* eslint-disable no-unused-vars */
     const client = message.client
     const channel = message.channel
@@ -43,7 +43,7 @@ module.exports = class EvalCommand extends Command {
     var code = args.code; var evaledLatency
     try {
       var hrStart = process.hrtime(this.hrStart)
-      var result = eval(code) // eslint-disable-line no-eval
+      var result = await eval(code) // eslint-disable-line no-eval
       evaledLatency = process.hrtime(hrStart)
       var type = typeof evaled
       var inspect = util.inspect(result, { depth: 0 })

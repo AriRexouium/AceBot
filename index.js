@@ -1,5 +1,6 @@
 const fs = require('fs')
 const sqlite = require('sqlite')
+const { stripIndents } = require('common-tags')
 const path = require('path')
 const config = require('./config/config.json')
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
@@ -67,4 +68,22 @@ sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => 
   client.setProvider(new SQLiteProvider(db))
 }).then(client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader'))
 
+process
+.on('unhandledRejection', (error) => {
+  client.log.error(stripIndents`\n
+  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}  
+  ${error.stack}
+`, 'unhandledRejection')
+})
+.on('uncaughtException', (error) => {
+  client.log.error(stripIndents`\n
+  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}  
+  ${error.stack}
+`, 'uncaughtException')
+})
+
 client.login(client.config.startSettings.token)
+.catch(error => client.log.error(stripIndents`\n
+  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}  
+  ${error.stack}
+`, 'Login'))
