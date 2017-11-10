@@ -47,8 +47,8 @@ module.exports = class StatsCommand extends Command {
           {
             'name': '💾 System Stats',
             'value': stripIndents`
-              Average CPU Usage (%): ${usage.toFixed(2)}
-              Memory Used: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
+              **Average CPU Usage (%):** ${usage.toFixed(2)}
+              **Memory Used:** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
             `,
             'inline': true
           },
