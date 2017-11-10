@@ -26,7 +26,7 @@ module.exports = class StatsCommand extends Command {
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
-        title: `Client Stats${this.client.shard ? ` | Shard ID: ${this.client.shard.id}/${this.client.shard.count}` : ''}`,
+        title: `Client Stats${this.client.shard ? ` | Shard ID: ${this.client.shard.id}/${this.client.shard.count - 1}` : ''}`,
         thumbnail: { url: this.client.user.avatarURL() },
         fields: [
           {
