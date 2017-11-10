@@ -17,7 +17,7 @@
 
 ## Installation
 
-_(If you can manage to actually follow these instrutions then you'll be just fine. // This is assuming you already have a bot account and such. I will not be doing a tutorial on this as you can easily search up on almighty google how to make a bot account.)_
+_(If you can manage to actually follow these instrutions then you'll be just fine. // This is assuming you've already have a bot account and such. I will not be doing a tutorial on this as you can easily search up on the almighty Google how to make a bot account account.)_
 
 ### Make Sure You Have These Programs:
 

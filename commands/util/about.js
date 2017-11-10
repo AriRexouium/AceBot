@@ -30,6 +30,7 @@ module.exports = class AboutCommand extends Command {
             __**[AceBot](https://github.com/Aceheliflyer/AceBot)**__
             This is a WIP bot currently being developed by **[Aceheliflyer#0950](http://github.com/Aceheliflyer)**.
             Designed to provide information on demand, AceBot will provide as much information about something as much as possible.
+            AceBot is released under the [MIT license](http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE).
             \n*Click [here](${invite}) to invite me to your server!*
           `),
           color: 0x7289DA

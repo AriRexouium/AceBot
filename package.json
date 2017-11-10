@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.9.0-dev",
+  "version": "2.9.1-dev",
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
