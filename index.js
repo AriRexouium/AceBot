@@ -71,19 +71,19 @@ sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => 
 process
 .on('unhandledRejection', (error) => {
   client.log.error(stripIndents`\n
-  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}  
+  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
 `, 'unhandledRejection')
 })
 .on('uncaughtException', (error) => {
   client.log.error(stripIndents`\n
-  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}  
+  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
 `, 'uncaughtException')
 })
 
 client.login(client.config.startSettings.token)
 .catch(error => client.log.error(stripIndents`\n
-  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}  
+  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
 `, 'Login'))
