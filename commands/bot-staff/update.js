@@ -25,7 +25,7 @@ module.exports = class UpdateCommand extends Command {
       if (result.indexOf('Already up-to-date.') > -1) {
         message.say('There was nothing to update!')
       } else {
-        message.say(`New code successfully pulled!\nPlease restart ${this.client.shard ? `all shards.` : 'the bot.'}`)
+        message.say(`New code successfully pulled!\nAwaiting next restart.`)
       }
     })
   }
