@@ -30,6 +30,8 @@ module.exports = class UpdateCommand extends Command {
       var hrStart = await process.hrtime(this.hrStart)
       var result = await childProcess.execSync(code)
       execLatency = await process.hrtime(hrStart)
+      /* Fixing Stuff... Not sure what to call it really. */
+      code = fix(code); result = fix(result)
 
       // Evaluation Success
       message.embed({
@@ -54,6 +56,7 @@ module.exports = class UpdateCommand extends Command {
       })
     } catch (error) {
       execLatency = await process.hrtime(hrStart)
+      code = fix(code)
       // Evaluation Error
       this.client.hastebin(error.stack).then(link => {
         message.embed({
@@ -70,7 +73,7 @@ module.exports = class UpdateCommand extends Command {
             },
             {
               'name': 'Error',
-              'value': '[```LDIF\n' + error.message + '\n```](' + link + ')',
+              'value': '[```LDIF\n' + fix(error.message) + '\n```](' + link + ')',
               'inline': false
             }
           ],
@@ -78,5 +81,15 @@ module.exports = class UpdateCommand extends Command {
         })
       })
     }
+  }
+}
+var fix = (text) => {
+  if (typeof (text) === 'string') {
+    return text
+    .replace(/`/g, '`' + String.fromCharCode(8203))
+    .replace(/@/g, '@' + String.fromCharCode(8203))
+    .replace(/#/g, '#' + String.fromCharCode(8203))
+  } else {
+    return text
   }
 }

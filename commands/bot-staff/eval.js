@@ -49,8 +49,7 @@ module.exports = class EvalCommand extends Command {
       var inspect = util.inspect(result, { depth: 0 })
       this.lastResult = result
       /* Fixing Stuff... Not sure what to call it really. */
-      code = fix(code)
-      result = fix(result)
+      code = fix(code); result = fix(result)
 
       var sortName; var sortValue
       if (result instanceof Object) {
@@ -93,6 +92,7 @@ module.exports = class EvalCommand extends Command {
       })
     } catch (error) {
       evaledLatency = await process.hrtime(hrStart)
+      code = fix(code)
       // Evaluation Error
       client.hastebin(error.stack, 'js').then(link => {
         message.embed({
@@ -109,7 +109,7 @@ module.exports = class EvalCommand extends Command {
             },
             {
               'name': 'Error',
-              'value': '[```LDIF\n' + error.message + '\n```](' + link + ')',
+              'value': '[```LDIF\n' + fix(error.message) + '\n```](' + link + ')',
               'inline': false
             }
           ],
