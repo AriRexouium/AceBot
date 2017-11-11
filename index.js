@@ -86,7 +86,7 @@ process
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${warning.stack}
 `, 'warning')
-}
+})
 
 client.login(client.config.startSettings.token)
 .catch(error => client.log.error(stripIndents`\n
