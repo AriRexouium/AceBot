@@ -4,7 +4,7 @@ module.exports = (client, message) => {
   } else {
     client.botStats.messagesRecieved = client.botStats.messagesRecieved + 1
   }
-  if (message.author.id !== client.user.id && ~message.content.indexOf(client.user.id)) {
+  if (message.author.id !== client.user.id && ~message.content.indexOf(`<@${client.user.id}>`)) {
     client.botStats.clientMentions = client.botStats.clientMentions + 1
   }
 }
