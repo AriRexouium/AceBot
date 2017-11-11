@@ -42,9 +42,9 @@ module.exports = class EvalCommand extends Command {
 
     var code = args.code; var evaledLatency
     try {
-      var hrStart = process.hrtime(this.hrStart)
+      var hrStart = await process.hrtime(this.hrStart)
       var result = await eval(code) // eslint-disable-line no-eval
-      evaledLatency = process.hrtime(hrStart)
+      evaledLatency = await process.hrtime(hrStart)
       var type = typeof evaled
       var inspect = util.inspect(result, { depth: 0 })
       this.lastResult = result
@@ -71,7 +71,7 @@ module.exports = class EvalCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         title: 'Javascript Evaluation Complete!',
-        description: `***Executed in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms.***`,
+        description: `***Evaluated in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms.***`,
         fields: [
           {
             'name': 'Code',
@@ -92,7 +92,7 @@ module.exports = class EvalCommand extends Command {
         color: 0x00AA00
       })
     } catch (error) {
-      evaledLatency = process.hrtime(hrStart)
+      evaledLatency = await process.hrtime(hrStart)
       // Evaluation Error
       client.hastebin(error.stack, 'js').then(link => {
         message.embed({
@@ -100,7 +100,7 @@ module.exports = class EvalCommand extends Command {
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
           title: 'Error in Javascript Evaluation!',
-          description: `***Executed in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms***`,
+          description: `***Evaluated in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms***`,
           fields: [
             {
               'name': 'Code',
