@@ -1,5 +1,6 @@
 const { Command } = require('discord.js-commando')
 const childProcess = require('child_process')
+const os = require('os')
 
 module.exports = class UpdateCommand extends Command {
   constructor (client) {
@@ -33,6 +34,10 @@ module.exports = class UpdateCommand extends Command {
       /* Fixing Stuff... Not sure what to call it really. */
       code = fix(code); result = fix(result)
 
+      var platform = os.platform(); var syntax
+      if (platform === 'linux') { syntax = 'bash' } else
+      if (platform === 'win32') { syntax = 'bat' } else { syntax = 'ldif' }
+
       // Evaluation Success
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
@@ -43,12 +48,12 @@ module.exports = class UpdateCommand extends Command {
         fields: [
           {
             'name': 'Code',
-            'value': '```js\n' + code + '\n```',
+            'value': '```' + syntax + '\n' + code + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```js\n' + result.toString() + '\n```'),
+            'value': ('```' + syntax + '\n' + result.toString() + '\n```'),
             'inline': false
           }
         ],
@@ -68,12 +73,12 @@ module.exports = class UpdateCommand extends Command {
           fields: [
             {
               'name': 'Code',
-              'value': '```js\n' + code + '\n```',
+              'value': '```' + syntax + '\n' + code + '\n```',
               'inline': false
             },
             {
               'name': 'Error',
-              'value': '[```LDIF\n' + fix(error.message) + '\n```](' + link + ')',
+              'value': '[```' + syntax + '\n' + fix(error.message) + '\n```](' + link + ')',
               'inline': false
             }
           ],
