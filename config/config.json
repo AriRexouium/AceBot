@@ -14,7 +14,7 @@
     "token": "token",
     "defaultStatus": "online"
   },
-  "shardSettings": {
+  "shardConfig": {
     "totalShards": 3,
     "respawn": true
   }
