@@ -26,10 +26,10 @@ module.exports = class AboutCommand extends Command {
           author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
+          title: 'AceBot',
           description: (stripIndents`
-            __**[AceBot](https://github.com/Aceheliflyer/AceBot)**__
             This is a WIP bot currently being developed by **[Aceheliflyer#0950](http://github.com/Aceheliflyer)**.
-            Designed to provide information on demand, AceBot will provide as much information about something as much as possible.
+            Designed to provide information on demand, AceBot will provide as much information about a subject as much as possible.
             AceBot is released under the [MIT license](http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE).
             \n*Click [here](${invite}) to invite me to your server!*
           `),

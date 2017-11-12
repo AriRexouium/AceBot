@@ -25,7 +25,7 @@ module.exports = class RestartCommand extends Command {
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
-        title: this.client.shard ? `Restart requested, please wait. | Shard ID: ${this.client.shard.id}/${this.client.shard.count - 1}` : 'Restart requested, please wait.',
+        title: this.client.shard ? `Restart requested, please wait. | Shard ID: ${this.client.shard.id}` : 'Restart requested, please wait.',
         description: (stripIndents`
           **Uptime:** ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
           **Since**: ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}
