@@ -28,8 +28,12 @@ module.exports = class SetstatusCommand extends Command {
     if (args.status === 'idle') { status = 'idle' } else
     if (args.status === 'dnd') { status = 'dnd' } else
     if (args.status === 'invisible') { status = 'invisible' } else { return message.say(`\`${args.status}\` is not a valid status.`) }
-    this.client.user.setStatus(status).then(
-      this.client.user.setActivity(`${this.client.config.startSettings.commandPrefix}help | ${pluralize('Guild', this.client.guilds.size, true)} | ${pluralize('User', this.client.users.size, true)}${this.client.shard ? ` | Shard ID: ${this.client.shard.id}/${this.client.shard.count - 1}` : ''}`)
+    this.client.user.setStatus(status)
+    .then(
+      this.client.user.setActivity(`${this.client.config.startConfig.commandPrefix}help | ${pluralize('Guild', this.client.guilds.size, true)} | ${pluralize('User', this.client.users.size, true)}${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`)
+      .then(
+        this.client.lastSetStatus = status
+      )
     )
     message.say(`Succesfully set status to \`${status}\``)
   }

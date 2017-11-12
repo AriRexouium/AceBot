@@ -1,12 +1,18 @@
 {
-  "startSettings": {
+  "startConfig": {
     "commandPrefix": "a@",
     "commandEditableDuration": "30",
     "nonCommandEditable": false,
     "unknownCommandResponse": false,
-    "owner": ["196443959558406144"],
-    "invite": "http://discord.gg/UwvMSAa",
-    "token": "token"
+    "owner": [
+      "196443959558406144",
+      "253291447137075211"
+    ],
+    "invite": "http://discord.gg/UwvMSAa"
+  },
+  "loginConfig": {
+    "token": "token",
+    "defaultStatus": "online"
   },
   "shardSettings": {
     "totalShards": 3,

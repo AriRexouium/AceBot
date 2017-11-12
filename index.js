@@ -6,16 +6,17 @@ const config = require('./config/config.json')
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
   selfbot: false,
-  commandPrefix: config.startSettings.commandPrefix,
-  commandEditableDuration: config.startSettings.commandEditableDuration,
-  nonCommandEditable: config.startSettings.nonCommandEditable,
-  unknownCommandResponse: config.startSettings.unknownCommandResponse,
-  owner: config.startSettings.owner,
-  invite: config.startSettings.invite
+  commandPrefix: config.startConfig.commandPrefix,
+  commandEditableDuration: config.startConfig.commandEditableDuration,
+  nonCommandEditable: config.startConfig.nonCommandEditable,
+  unknownCommandResponse: config.startConfig.unknownCommandResponse,
+  owner: config.startConfig.owner,
+  invite: config.startConfig.invite
 })
-client.config = config
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
 client.botStats = botStats
+client.config = config
+client.lastSetStatus = config.loginConfig.defaultStatus
 
 client.registry
   .registerDefaultTypes()
@@ -56,39 +57,27 @@ for (let file of getFiles('/modules')) {
 }
 client.log.info(`Successfully loaded ${getFiles('/modules').length} modules.`, 'Module Loader')
 
-for (let file of getFiles('/events')) {
-  const eventName = file.split('.')[0].substring(8)
-  const event = require(`./${file}`)
-  client.on(eventName, event.bind(null, client))
+for (let file of getFiles('/clientEvents')) {
+  const clientEventName = file.split('.')[0].substring(14)
+  const clientEvent = require(`./${file}`)
+  client.on(clientEventName, clientEvent.bind(null, client))
   delete require.cache[require.resolve(`./${file}`)]
 }
-client.log.info(`Successfully loaded ${getFiles('/events').length} events.`, 'Event Loader')
+client.log.info(`Successfully loaded ${getFiles('/clientEvents').length} client events.`, 'clientEvent Loader')
+
+for (let file of getFiles('/processEvents')) {
+  const processEventName = file.split('.')[0].substring(15)
+  const processEvent = require(`./${file}`)
+  process.on(processEventName, processEvent.bind(null, client))
+  delete require.cache[require.resolve(`./${file}`)]
+}
+client.log.info(`Successfully loaded ${getFiles('/processEvents').length} process events.`, 'processEvent Loader')
 
 sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
 }).then(client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader'))
 
-process
-.on('unhandledRejection', (error) => {
-  client.log.error(stripIndents`\n
-  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
-  ${error.stack}
-`, 'unhandledRejection')
-})
-.on('uncaughtException', (error) => {
-  client.log.error(stripIndents`\n
-  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
-  ${error.stack}
-`, 'uncaughtException')
-})
-.on('warning', (warning) => {
-  client.log.error(stripIndents`\n
-  ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
-  ${warning.stack}
-`, 'warning')
-})
-
-client.login(client.config.startSettings.token)
+client.login(client.config.loginConfig.token)
 .catch(error => client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}

@@ -4,7 +4,7 @@ const { ShardingManager } = require('discord.js')
 const Manager = new ShardingManager('./index.js', {
   totalShards: config.shardSettings.totalShards,
   respawn: config.shardSettings.respawn,
-  token: config.startSettings.token
+  token: config.loginConfig.token
 })
 
 Manager.spawn().then(log.debug('Spawning shard 0...', 'SHARD MANAGER'))
