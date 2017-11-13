@@ -17,7 +17,8 @@ module.exports = (client) => {
           author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'disconnect' },
           timestamp: new Date(),
-          title: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} disconnected!`,
+          title: `disconnect${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          description: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} disconnected!`,
           color: 0xAAAA00
         }]
       })

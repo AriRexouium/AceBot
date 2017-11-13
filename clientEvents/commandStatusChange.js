@@ -21,9 +21,9 @@ module.exports = (client, message, group, enabled) => {
           timestamp: new Date(),
           title: `commandStatusChange${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: oneLine`
-            Command ${message.command.memberName} (${message.command.groupID})
+            Command ${message.command.memberName} \`(${message.command.groupID})\`
             ${enabled ? 'enabled' : 'disabled'}
-            ${message.guild ? `in guild ${message.guild.name} (${message.guild.id})` : 'globally'}.
+            ${message.guild ? `in guild ${message.guild.name} \`(${message.guild.id})\`` : 'globally'}.
             ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
           `,
           color: 0x00AAAA

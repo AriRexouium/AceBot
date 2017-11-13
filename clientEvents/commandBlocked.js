@@ -22,11 +22,10 @@ module.exports = (client, message, reason) => {
           timestamp: new Date(),
           title: `commandBLocked${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: stripIndents`
-            ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
-            User: ${message.author.tag} (${message.author.id})
-            Guild: ${message.guild ? `${message.guild.name} (${message.guild.id})` : 'DMs'}
-            Reason: ${reason}
-            ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
+            ${message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : ''}
+            **User:** ${message.author.tag} \`(${message.author.id})\`
+            **Guild:** ${message.guild ? `${message.guild.name} \`(${message.guild.id})\`` : 'DMs'}
+            **Reason:** ${reason}
           `,
           color: 0xAA0000
         }]

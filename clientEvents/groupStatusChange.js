@@ -23,8 +23,7 @@ module.exports = (client, message, group, enabled) => {
           description: oneLine`
             Group ${group.id}
             ${enabled ? 'enabled' : 'disabled'}
-            ${message.guild ? `in guild ${message.guild.name} (${message.guild.id})` : 'globally'}.
-            ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
+            ${message.guild ? `in guild ${message.guild.name} \`(${message.guild.id})\`` : 'globally'}.
           `,
           color: 0x00AAAA
         }]

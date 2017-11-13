@@ -19,8 +19,7 @@ module.exports = (client, command, registry) => {
           timestamp: new Date(),
           title: `commandRegister${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: stripIndents`
-            ${command.memberName} (${command.groupID})
-            ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
+            **Command Registered:** ${command.memberName} (${command.groupID})
           `,
           color: 0x00AAAA
         }]

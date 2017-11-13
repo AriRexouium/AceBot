@@ -42,7 +42,7 @@
     "processEvents": {
       "uncaughtException": true,
       "unhandledRejection": true,
-      "warning": true
+      "warning": false
     }
   }
 }

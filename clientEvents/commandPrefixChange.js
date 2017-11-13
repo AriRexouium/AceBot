@@ -21,8 +21,7 @@ module.exports = (client, guild, prefix) => {
           title: `commandPrefixChange${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: oneLine`
             Prefix ${prefix === '' ? 'removed' : `changed to ${prefix || 'the default'}`}
-            ${guild ? `in guild ${guild.name} (${guild.id})` : 'globally'}.
-            ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
+            ${guild ? `in guild ${guild.name} \`(${guild.id})\`` : 'globally'}.
           `,
           color: 0x00AAAA
         }]

@@ -22,10 +22,9 @@ module.exports = (client, command, promise, message) => {
           timestamp: new Date(),
           title: `commandRun${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: stripIndents`
-            ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
-            User: ${message.author.tag} (${message.author.id})
-            Guild: ${message.guild ? `${message.guild.name} (${message.guild.id})` : 'DMs'}
-            ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
+            ${message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : ''}
+            **User:** ${message.author.tag} \`(${message.author.id})\`
+            **Guild:** ${message.guild ? `${message.guild.name} \`(${message.guild.id})\`` : 'DMs'}
           `,
           color: 0x00AAAA
         }]

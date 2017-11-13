@@ -20,9 +20,8 @@ module.exports = (client, guild) => {
           timestamp: new Date(),
           title: `guildDelete${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: stripIndents`
-            Guild: ${guild.name} (${guild.id})
-            Owner: ${guild.owner.user.tag} (${guild.owner.user.id})
-            ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
+            **Guild:** ${guild.name} \`(${guild.id})\`
+            **Owner:** ${guild.owner.user.tag} \`(${guild.owner.user.id})\`
           `,
           color: 0x4D4DFF
         }]
