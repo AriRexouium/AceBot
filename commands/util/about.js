@@ -19,6 +19,13 @@ module.exports = class AboutCommand extends Command {
   }
 
   async run (message) {
+    /* Start Contributors */
+    var dev; var contrib1; var contrib2; var contrib3
+    try { dev = this.client.users.find('id', '196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
+    try { contrib1 = this.client.users.find('id', '217797734982352896').tag } catch (e) { contrib1 = 'cat16#0725' }
+    try { contrib2 = this.client.users.find('id', '171319044715053057').tag } catch (e) { contrib2 = 'Michael | ASIANBOI#9310' }
+    try { contrib3 = this.client.users.find('id', '325828052422492162').tag } catch (e) { contrib3 = 'Ariathe#4163 ' }
+    /* End Contributors */
     var clientInvite = await this.client.generateInvite()
     var totalGuilds; var totalChannels; var totalUsers; var isSharded
     if (!this.client.shard) {
@@ -42,7 +49,7 @@ module.exports = class AboutCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         fields: [
-          { 'name': 'Developer', 'value': 'Aceheliflyer#0950', 'inline': true },
+          { 'name': 'Developer', 'value': `**${dev}**`, 'inline': true },
           { 'name': 'Version', 'value': require('../../package.json').version, 'inline': true },
           { 'name': 'Library', 'value': `discord.js v${require('discord.js/package.json').version}`, 'inline': true },
           { 'name': 'Guilds', 'value': totalGuilds, 'inline': true },
@@ -55,9 +62,9 @@ module.exports = class AboutCommand extends Command {
           {
             'name': 'Contributors',
             'value': stripIndents`
-              **⟨[33,97,29,7,6]|[3,1,4,7,9]⟩#0725 -** Helped a lot with issues I had.
-              **Michael | ASIANBOI#9310 -** Gave me the code to work on the update command.
-              **Ariathe#4163 -** Gave me the avatar for AceBot.
+              **${contrib1} -** Helped a lot with issues I had.
+              **${contrib2} -** Gave me the code to work on the update command.
+              **${contrib3} -** Gave me the avatar for AceBot.
             `,
             'inline': false
           }

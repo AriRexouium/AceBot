@@ -17,5 +17,32 @@
   "shardConfig": {
     "totalShards": 3,
     "respawn": true
+  },
+  "webhookConfig": {
+    "webhookID": "id",
+    "webhookToken": "token",
+    "enabled": false,
+    "clientEvents": {
+      "commandBLocked": true,
+      "commandError": true,
+      "commandPrefixChange": false,
+      "commandStatusChange": false,
+      "commandRegister": false,
+      "commandRun": false,
+      "disconnect": true,
+      "error": true,
+      "groupStatusChange": false,
+      "guildCreate": true,
+      "guildDelete": true,
+      "rateLimit": false,
+      "ready": true,
+      "reconnecting": true,
+      "warn": true
+    },
+    "processEvents": {
+      "uncaughtException": true,
+      "unhandledRejection": true,
+      "warning": true
+    }
   }
 }

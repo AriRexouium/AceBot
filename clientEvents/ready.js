@@ -10,4 +10,23 @@ module.exports = async (client) => {
     )
   }, 600000)
   await client.log.info(client.shard ? `Shard ${client.shard.id} ready!` : 'Client ready!', 'Client', 'bgGreen')
+
+  // Webhook
+  if (client.config.webhookConfig.enabled) {
+    if (client.config.webhookConfig.clientEvents.ready) {
+      client.webhook({
+        content: '',
+        username: client.user.username,
+        avatarURL: client.user.displayAvatarURL(),
+        embeds: [{
+          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
+          footer: { text: 'ready' },
+          timestamp: new Date(),
+          title: `ready${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          description: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} is ready!`,
+          color: 0x00AA00
+        }]
+      })
+    }
+  }
 }

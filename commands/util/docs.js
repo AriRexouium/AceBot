@@ -301,11 +301,6 @@ module.exports = class DocsCommand extends Command {
       name: version === 'commando' ? 'Commando Docs' : `Discord.js Docs (${version})`,
       icon_url: icon // eslint-disable-line camelcase
     }
-    embed.footer = {
-      text: msg.author.tag,
-      icon_url: msg.author.displayAvatarURL()
-    }
-    embed.timestamp = new Date()
     embed.color = 0x2C2F33
 
     return msg.embed(embed)
