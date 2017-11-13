@@ -24,12 +24,12 @@ module.exports = class DocsCommand extends Command {
       args: [
         {
           key: 'query',
-          prompt: 'what would you like to find in the docs?',
+          prompt: 'What would you like to find in the docs?',
           type: 'string'
         },
         {
           key: 'version',
-          prompt: 'which version of docs would you like (stable, master, commando)?',
+          prompt: 'Which version of docs would you like (stable, master, commando)?',
           type: 'string',
           parse: value => value.toLowerCase(),
           validate: value => ['master', 'stable', 'commando'].includes(value),
@@ -301,6 +301,11 @@ module.exports = class DocsCommand extends Command {
       name: version === 'commando' ? 'Commando Docs' : `Discord.js Docs (${version})`,
       icon_url: icon // eslint-disable-line camelcase
     }
+    embed.footer = {
+      text: msg.author.tag,
+      icon_url: msg.author.displayAvatarURL()
+    }
+    embed.timestamp = new Date()
     embed.color = 0x2C2F33
 
     return msg.embed(embed)

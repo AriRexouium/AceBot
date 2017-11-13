@@ -1,7 +1,5 @@
 const { Command } = require('discord.js-commando')
 
-require('moment-duration-format')
-
 module.exports = class SayCommand extends Command {
   constructor (client) {
     super(client, {
