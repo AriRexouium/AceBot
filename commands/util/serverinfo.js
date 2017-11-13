@@ -1,6 +1,5 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
-const os = require('os-utils')
 const moment = require('moment')
 require('moment-duration-format')
 
