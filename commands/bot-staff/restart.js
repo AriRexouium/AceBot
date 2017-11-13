@@ -12,12 +12,11 @@ module.exports = class RestartCommand extends Command {
       description: 'Restarts the bot.',
       details: 'Only the bot owner(s) may use this command.',
       clientPermissions: ['EMBED_LINKS'],
+      ownerOnly: true,
       guarded: true
     })
   }
-  hasPermission (message) {
-    return this.client.isOwner(message.author)
-  }
+
   async run (message) {
     await message.say({
       content: '',

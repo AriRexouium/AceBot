@@ -12,12 +12,11 @@ module.exports = class UpdateCommand extends Command {
       description: 'Updates the bot.',
       aliases: ['upgrade'],
       details: 'Only the bot owner(s) may use this command.',
+      ownerOnly: true,
       guarded: true
     })
   }
-  hasPermission (message) {
-    return this.client.isOwner(message.author)
-  }
+
   async run (message) {
     message.say('**Update requested, please wait.**').then(function (f) {
       try {

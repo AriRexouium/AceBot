@@ -22,13 +22,10 @@ module.exports = class EvalCommand extends Command {
           type: 'string'
         }
       ],
+      ownerOnly: true,
       guarded: true
     })
     this.lastResult = null
-  }
-
-  hasPermission (message) {
-    return this.client.isOwner(message.author)
   }
 
   async run (message, args) {

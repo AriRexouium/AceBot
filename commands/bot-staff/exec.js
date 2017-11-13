@@ -18,11 +18,9 @@ module.exports = class UpdateCommand extends Command {
           type: 'string'
         }
       ],
+      ownerOnly: true,
       guarded: true
     })
-  }
-  hasPermission (message) {
-    return this.client.isOwner(message.author)
   }
 
   async run (message, args) {

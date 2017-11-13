@@ -15,7 +15,8 @@ module.exports = class StatsCommand extends Command {
       throttling: {
         usages: 2,
         duration: 10
-      }
+      },
+      guildOnly: true
     })
   }
 
