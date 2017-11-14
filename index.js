@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const sqlite = require('sqlite')
 const { stripIndents } = require('common-tags')
+
 // Commando
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
@@ -14,27 +15,41 @@ const client = new CommandoClient({
   owner: config.startConfig.owner,
   invite: config.startConfig.invite
 })
+
+/* Start Assinging to Client */
+// Bot Stats
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
 client.botStats = botStats
+
+// Config
 client.config = config
 
+// Status Setup
 client.lastSetStatus = config.loginConfig.defaultStatus
+
+// Discord Bans
 if (config.discordBansListToken !== false) {
   const Blacklist = require('discordblacklist')
   client.banList = new Blacklist(config.discordBansListToken, true, 2 * 60)
 }
 
+// Commands / Groups / Types
 client.registry
   .registerDefaultTypes()
   .registerDefaultGroups()
   .registerGroups([
-    ['bot-staff', 'Bot Staff']
+    ['bot-staff', 'Bot Staff'],
+    ['command-management', 'Command Manangement']
   ])
   .registerDefaultCommands({
+    disable: true,
+    enable: true,
     eval_: false,
+    help: false,
     ping: false
   })
   .registerCommandsIn(path.join(__dirname, 'commands'))
+/* Stop Assigning to Client */
 
 /**
  * @param {string} source
@@ -43,7 +58,7 @@ client.registry
 const isFile = source => fs.lstatSync(source).isFile()
 
 /**
- * gets all files in a directory
+ * Gets all files in directory.
  * @param {string} source
  * @return {string[]}
  */
@@ -55,6 +70,7 @@ let getFiles = source => {
   return files
 }
 
+// Load Modules
 for (let file of getFiles('/modules')) {
   const moduleName = file.split('.')[0].substring(9)
   const moduleFile = require(`./${file}`)
@@ -63,6 +79,7 @@ for (let file of getFiles('/modules')) {
 }
 client.log.info(`Successfully loaded ${getFiles('/modules').length} modules.`, 'Module Loader')
 
+// Load clientEvents
 for (let file of getFiles('/clientEvents')) {
   const clientEventName = file.split('.')[0].substring(14)
   const clientEvent = require(`./${file}`)
@@ -71,6 +88,7 @@ for (let file of getFiles('/clientEvents')) {
 }
 client.log.info(`Successfully loaded ${getFiles('/clientEvents').length} client events.`, 'clientEvent Loader')
 
+// Load processEvents
 for (let file of getFiles('/processEvents')) {
   const processEventName = file.split('.')[0].substring(15)
   const processEvent = require(`./${file}`)
@@ -79,10 +97,12 @@ for (let file of getFiles('/processEvents')) {
 }
 client.log.info(`Successfully loaded ${getFiles('/processEvents').length} process events.`, 'processEvent Loader')
 
+// SQLite
 sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
 }).then(client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader'))
 
+// Add user blacklist
 client.dispatcher.addInhibitor(message => {
   const blacklist = client.provider.get('global', 'userBlacklist', [])
   if (!blacklist.includes(message.author.id)) return false
@@ -90,6 +110,7 @@ client.dispatcher.addInhibitor(message => {
   return 'blacklisted'
 })
 
+// Login
 client.login(client.config.loginConfig.token)
 .catch(error => client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}

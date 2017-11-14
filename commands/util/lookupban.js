@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando')
 
-module.exports = class StatsCommand extends Command {
+module.exports = class LookupbanCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'lookupban',

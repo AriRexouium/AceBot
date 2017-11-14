@@ -3,7 +3,7 @@ const { stripIndents } = require('common-tags')
 const moment = require('moment')
 require('moment-duration-format')
 
-module.exports = class StatsCommand extends Command {
+module.exports = class ServerinfoCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'serverinfo',

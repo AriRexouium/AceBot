@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const childProcess = require('child_process')
 const os = require('os')
 
-module.exports = class UpdateCommand extends Command {
+module.exports = class ExecCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'exec',
