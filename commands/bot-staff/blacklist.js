@@ -4,12 +4,16 @@ module.exports = class BlacklistCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'blacklist',
-      group: 'bot-staff',
       memberName: 'blacklist',
+      group: 'bot-staff',
       description: 'Adds a user to the blacklist.',
-      aliases: ['ban'],
       details: 'Only the bot owner(s) may use this command.',
+      aliases: ['ban'],
       clientPermissions: ['MANAGE_MESSAGES'],
+      examples: [
+        'blacklist add 253254587341996032',
+        'blacklist remove 253254587341996032'
+      ],
       args: [
         {
           key: 'query',

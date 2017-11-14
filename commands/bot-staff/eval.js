@@ -2,25 +2,25 @@
   This command is broken at the moment, if you care to try and fix it feel free.
 */
 
-const util = require('util')
 const { Command } = require('discord.js-commando')
+const util = require('util')
 
 module.exports = class EvalCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'eval',
-      group: 'bot-staff',
       memberName: 'eval',
-      aliases: ['evaluate'],
+      group: 'bot-staff',
       description: 'Evaluates JavaScript.',
       details: 'Only the bot owner(s) may use this command.',
+      aliases: ['evaluate'],
+      clientPermissions: ['EMBED_LINKS'],
       examples: [
         'eval client',
         'eval guild',
         'eval channel',
         'eval new Date()'
       ],
-      clientPermissions: ['EMBED_LINKS'],
       args: [
         {
           key: 'code',

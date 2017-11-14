@@ -4,8 +4,8 @@ module.exports = class SayCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'say',
-      group: 'bot-staff',
       memberName: 'say',
+      group: 'bot-staff',
       description: 'Has the bot repeat what you say.',
       details: 'Only the bot owner(s) may use this command.',
       clientPermissions: ['MANAGE_MESSAGES'],

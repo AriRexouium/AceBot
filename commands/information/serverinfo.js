@@ -7,8 +7,8 @@ module.exports = class ServerinfoCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'serverinfo',
-      group: 'util',
       memberName: 'serverinfo',
+      group: 'information',
       description: 'Displays info about the current guild.',
       aliases: ['guildinfo'],
       clientPermissions: ['EMBED_LINKS'],

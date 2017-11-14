@@ -1,20 +1,27 @@
-const { stripIndents, oneLine } = require('common-tags')
 const { Command } = require('discord.js-commando')
+const { stripIndents, oneLine } = require('common-tags')
 const { disambiguation } = require('discord.js-commando')
 
 module.exports = class HelpCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'help',
-      group: 'util',
       memberName: 'help',
-      aliases: ['commands'],
+      group: 'information',
       description: 'Displays a list of available commands, or detailed information for a specified command.',
       details: oneLine`
-        The command may be part of a command name or a whole command name.
-        If it isn't specified, all available commands will be listed.
+      The command may be part of a command name or a whole command name.
+      If it isn't specified, all available commands will be listed.
       `,
-      examples: ['help', 'help prefix'],
+      aliases: ['commands'],
+      examples: [
+        'help',
+        'help prefix'
+      ],
+      throttling: {
+        usages: 2,
+        duration: 3
+      },
       args: [
         {
           key: 'command',

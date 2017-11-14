@@ -36,18 +36,12 @@ if (config.discordBansListToken !== false) {
 // Commands / Groups / Types
 client.registry
   .registerDefaultTypes()
-  .registerDefaultGroups()
   .registerGroups([
     ['bot-staff', 'Bot Staff'],
-    ['command-management', 'Command Manangement']
+    ['bot-management', 'Bot Manangement'],
+    ['information', 'Information'],
+    ['utility', 'Utility']
   ])
-  .registerDefaultCommands({
-    disable: true,
-    enable: true,
-    eval_: false,
-    help: false,
-    ping: false
-  })
   .registerCommandsIn(path.join(__dirname, 'commands'))
 /* Stop Assigning to Client */
 

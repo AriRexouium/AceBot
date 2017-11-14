@@ -6,11 +6,12 @@ module.exports = class ExecCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'exec',
-      group: 'bot-staff',
       memberName: 'exec',
+      group: 'bot-staff',
       description: 'Executes a new process.',
       details: 'Only the bot owner(s) may use this command.',
       aliases: ['execute'],
+      clientPermissions: ['EMBED_LINKS'],
       args: [
         {
           key: 'code',

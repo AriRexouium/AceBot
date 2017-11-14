@@ -7,8 +7,8 @@ module.exports = class UpdateCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'update',
-      group: 'bot-staff',
       memberName: 'update',
+      group: 'bot-staff',
       description: 'Updates the bot.',
       details: 'Only the bot owner(s) may use this command.',
       aliases: ['upgrade'],

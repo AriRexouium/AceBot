@@ -5,8 +5,8 @@ module.exports = class SetstatusCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'setstatus',
-      group: 'bot-staff',
       memberName: 'setstatus',
+      group: 'bot-staff',
       description: 'Changes the bot\'s/shard\'s status.',
       details: 'Only the bot owner(s) may use this command.',
       examples: [

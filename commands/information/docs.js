@@ -13,10 +13,11 @@ module.exports = class DocsCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'docs',
-      group: 'util',
       memberName: 'docs',
+      group: 'information',
       description: 'Searches discord.js documentation.',
       details: 'Searches the discord.js docs. You can search the stable, master, or commando docs.',
+      clientPermissions: ['EMBED_LINKS'],
       examples: [
         'docs user',
         'docs user master',
@@ -25,7 +26,6 @@ module.exports = class DocsCommand extends Command {
         'docs command commando',
         'docs command#name commando'
       ],
-      clientPermissions: ['EMBED_LINKS'],
       throttling: {
         usages: 2,
         duration: 3
@@ -290,12 +290,12 @@ module.exports = class DocsCommand extends Command {
     return embed
   }
 
-  async run (msg, { query, version }) {
+  async run (message, { query, version }) {
     const docs = await this.fetchDocs(version)
     const [main, member] = this.search(docs, query)
 
     if (!main) {
-      return msg.say('Could not find that item in the docs.')
+      return message.say('Could not find that item in the docs.')
     }
 
     const embed = member ? {
@@ -312,6 +312,6 @@ module.exports = class DocsCommand extends Command {
     }
     embed.color = 0x2C2F33
 
-    return msg.embed(embed)
+    return message.embed(embed)
   }
 }
