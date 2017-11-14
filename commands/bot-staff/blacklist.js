@@ -36,6 +36,25 @@ module.exports = class SayCommand extends Command {
       if (blacklist.includes(args.user.id)) return message.say('That user is already in the blacklist.')
       blacklist.push(args.user.id)
       this.client.provider.set('global', 'userBlacklist', blacklist)
+
+      // Webhook
+      if (this.client.config.webhookConfig.enabled) {
+        if (this.client.config.webhookConfig.blacklistEvents.blacklistAdd) {
+          this.client.webhook({
+            content: '',
+            username: this.client.user.username,
+            avatarURL: this.client.user.displayAvatarURL(),
+            embeds: [{
+              author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+              footer: { text: 'blacklistAdd' },
+              timestamp: new Date(),
+              title: `blacklistAdd${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`,
+              description: `**${args.user.tag}** was added to the blacklist by **${message.author.tag}**.`,
+              color: 0xFFFF00
+            }]
+          })
+        }
+      }
       return message.say(`**${args.user.tag}** has been added to the blacklisted.`)
     } else if (args.query === 'remove') {
       if (!blacklist.includes(args.user.id)) return message.say('That user is not in the blacklist.')
@@ -43,6 +62,25 @@ module.exports = class SayCommand extends Command {
       blacklist.splice(index, 1)
       if (blacklist.length === 0) this.client.provider.remove('global', 'userBlacklist')
       else this.client.provider.set('global', 'userBlacklist', blacklist)
+
+      // Webhook
+      if (this.client.config.webhookConfig.enabled) {
+        if (this.client.config.webhookConfig.blacklistEvents.blacklistRemove) {
+          this.client.webhook({
+            content: '',
+            username: this.client.user.username,
+            avatarURL: this.client.user.displayAvatarURL(),
+            embeds: [{
+              author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+              footer: { text: 'blacklistRemove' },
+              timestamp: new Date(),
+              title: `blacklistRemove${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`,
+              description: `**${args.user.tag}** was removed from the blacklist by **${message.author.tag}**.`,
+              color: 0xFFFF00
+            }]
+          })
+        }
+      }
       return message.say(`**${args.user.tag}** has been removed from the blacklist.`)
     }
   }

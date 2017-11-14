@@ -43,6 +43,10 @@
       "uncaughtException": true,
       "unhandledRejection": true,
       "warning": false
+    },
+    "blacklistEvents": {
+      "blacklistAdd": true,
+      "blacklistRemove": true
     }
   }
 }
