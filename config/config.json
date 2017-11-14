@@ -48,5 +48,6 @@
       "blacklistAdd": true,
       "blacklistRemove": true
     }
-  }
+  },
+  "discordBansListToken": "token"
 }

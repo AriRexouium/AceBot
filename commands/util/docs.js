@@ -16,6 +16,15 @@ module.exports = class DocsCommand extends Command {
       group: 'util',
       memberName: 'docs',
       description: 'Searches discord.js documentation.',
+      details: 'Searches the discord.js docs. You can search the stable, master, or commando docs.',
+      examples: [
+        'docs user',
+        'docs user master',
+        'docs user#bot',
+        'docs user#bot master',
+        'docs command commando',
+        'docs command#name commando'
+      ],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {
         usages: 2,

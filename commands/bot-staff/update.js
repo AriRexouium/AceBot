@@ -10,8 +10,8 @@ module.exports = class UpdateCommand extends Command {
       group: 'bot-staff',
       memberName: 'update',
       description: 'Updates the bot.',
-      aliases: ['upgrade'],
       details: 'Only the bot owner(s) may use this command.',
+      aliases: ['upgrade'],
       ownerOnly: true,
       guarded: true
     })

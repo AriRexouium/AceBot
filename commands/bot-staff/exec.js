@@ -9,8 +9,8 @@ module.exports = class UpdateCommand extends Command {
       group: 'bot-staff',
       memberName: 'exec',
       description: 'Executes a new process.',
-      aliases: ['execute'],
       details: 'Only the bot owner(s) may use this command.',
+      aliases: ['execute'],
       args: [
         {
           key: 'code',

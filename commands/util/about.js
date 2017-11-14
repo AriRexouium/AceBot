@@ -8,6 +8,7 @@ module.exports = class AboutCommand extends Command {
       group: 'util',
       memberName: 'about',
       description: 'Displays information about the bot.',
+      details: 'Displays information and information about this bot.',
       aliases: ['info'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {

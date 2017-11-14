@@ -1,8 +1,9 @@
+const config = require('./config/config.json')
 const fs = require('fs')
+const path = require('path')
 const sqlite = require('sqlite')
 const { stripIndents } = require('common-tags')
-const path = require('path')
-const config = require('./config/config.json')
+// Commando
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
   selfbot: false,
@@ -16,7 +17,12 @@ const client = new CommandoClient({
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
 client.botStats = botStats
 client.config = config
+
 client.lastSetStatus = config.loginConfig.defaultStatus
+if (config.discordBansListToken !== false) {
+  const Blacklist = require('discordblacklist')
+  client.banList = new Blacklist(config.discordBansListToken, true, 2 * 60)
+}
 
 client.registry
   .registerDefaultTypes()

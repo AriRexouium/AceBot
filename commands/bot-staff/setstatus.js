@@ -9,6 +9,12 @@ module.exports = class SetstatusCommand extends Command {
       memberName: 'setstatus',
       description: 'Changes the bot\'s/shard\'s status.',
       details: 'Only the bot owner(s) may use this command.',
+      examples: [
+        'setstatus online',
+        'setstatus idle',
+        'setstatus dnd',
+        'setstatus offline'
+      ],
       args: [
         {
           key: 'status',

@@ -11,9 +11,15 @@ module.exports = class EvalCommand extends Command {
       name: 'eval',
       group: 'bot-staff',
       memberName: 'eval',
-      description: 'Evaluates JavaScript.',
       aliases: ['evaluate'],
+      description: 'Evaluates JavaScript.',
       details: 'Only the bot owner(s) may use this command.',
+      examples: [
+        'eval client',
+        'eval guild',
+        'eval channel',
+        'eval new Date()'
+      ],
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {
