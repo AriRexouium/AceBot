@@ -63,9 +63,9 @@ module.exports = class AboutCommand extends Command {
           {
             'name': 'Contributors',
             'value': stripIndents`
-              **${contrib1} -** Helped a lot with issues I had.
-              **${contrib2} -** Gave me the code to work on the update command.
-              **${contrib3} -** Gave me the avatar for AceBot.
+              **${contrib1} -** Helped with a lot of issues I had.
+              **${contrib2} -** Offered suggestions and feedback.
+              **${contrib3} -** Designed the avatar for Acebot.
             `,
             'inline': false
           }
