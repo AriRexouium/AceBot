@@ -21,7 +21,7 @@ module.exports = (client, command, registry) => {
           description: stripIndents`
             **Command Registered:** ${command.memberName} (${command.groupID})
           `,
-          color: 0x00AAAA
+          color: 0x00FFFF
         }]
       })
     }

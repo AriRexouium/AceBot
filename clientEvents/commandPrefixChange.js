@@ -23,7 +23,7 @@ module.exports = (client, guild, prefix) => {
             Prefix ${prefix === '' ? 'removed' : `changed to ${prefix || 'the default'}`}
             ${guild ? `in guild ${guild.name} \`(${guild.id})\`` : 'globally'}.
           `,
-          color: 0x00AAAA
+          color: 0x00FFFF
         }]
       })
     }

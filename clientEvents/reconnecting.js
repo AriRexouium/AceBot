@@ -19,7 +19,7 @@ module.exports = (client) => {
           timestamp: new Date(),
           title: `reconnecting${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} is reconnecting...`,
-          color: 0xAAAA00
+          color: 0xFFFF00
         }]
       })
     }

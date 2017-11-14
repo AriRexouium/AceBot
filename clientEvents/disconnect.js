@@ -19,7 +19,7 @@ module.exports = (client) => {
           timestamp: new Date(),
           title: `disconnect${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} disconnected!`,
-          color: 0xAAAA00
+          color: 0xFFFF00
         }]
       })
     }

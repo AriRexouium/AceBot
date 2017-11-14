@@ -4,7 +4,7 @@ module.exports = (client, command, error, message) => {
   client.log.error(stripIndents`
     ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
     User: ${message.author.tag} (${message.author.id})
-    Guild: ${message.guild ? `${message.guild.name} (${message.guild.id})` : 'DMs'}
+    ${message.guild ? `Guild: ${message.guild.name} (${message.guild.id})\n` : ''}Channel: ${message.guild ? `${message.channel.name} (${message.channel.id})` : 'DMs'}
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
     ${error.stack}
   `, 'commandError')
@@ -22,9 +22,9 @@ module.exports = (client, command, error, message) => {
           timestamp: new Date(),
           title: `commandError${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: stripIndents`
-            ${message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : ''}
+            ${message.command ? `**Command:** ${message.command.memberName} \`(${message.command.groupID})\`` : ''}
             **User:** ${message.author.tag} \`(${message.author.id})\`
-            **Guild:** ${message.guild ? `${message.guild.name} \`(${message.guild.id})\`` : 'DMs'}
+            ${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
             \`\`\`js\n${error.stack}\n\`\`\`
           `,
           color: 0xAA0000

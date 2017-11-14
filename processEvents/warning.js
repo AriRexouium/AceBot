@@ -19,7 +19,7 @@ module.exports = (client, warning) => {
           timestamp: new Date(),
           title: `processWarning${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: '```js\n' + fix(warning.stack) + '\n```',
-          color: 0xAAAA00
+          color: 0xFFFF00
         }]
       })
     }

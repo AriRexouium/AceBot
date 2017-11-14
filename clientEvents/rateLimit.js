@@ -19,7 +19,7 @@ module.exports = (client) => {
           timestamp: new Date(),
           title: `rateLimit${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: `You are being rate limited!`,
-          color: 0xAAAA00
+          color: 0xFFFF00
         }]
       })
     }

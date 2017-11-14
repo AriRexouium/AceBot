@@ -42,35 +42,20 @@ module.exports = class EvalCommand extends Command {
       var hrStart = await process.hrtime(this.hrStart)
       var result = await eval(code) // eslint-disable-line no-eval
       evaledLatency = await process.hrtime(hrStart)
-      var type = typeof evaled
       var inspect = util.inspect(result, { depth: 0 })
       this.lastResult = result
       /* Fixing Stuff... Not sure what to call it really. */
       code = fix(code); result = fix(result)
-
-      var sortName; var sortValue
-      if (result instanceof Object) {
-        sortName = 'Inspect'
-
-        inspect = inspect.toString()
-        if (inspect.length > 2000) { sortValue = 'Error: Cannot exceed 2000 characters.' }
-
-        sortValue = ('```js\n' + inspect.toString() + '\n```').replace(client.token, '[TOKEN]')
-      } else {
-        sortName = 'Type'
-        sortValue = '```js\n' + type + '\n```'
-      }
 
       // Evaluation Success
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
-        title: 'Javascript Evaluation Complete!',
-        description: `***Evaluated in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms.***`,
+        description: `Evaluated in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms.`,
         fields: [
           {
-            'name': 'Code',
+            'name': 'Evaluated',
             'value': '```js\n' + code + '\n```',
             'inline': false
           },
@@ -80,8 +65,13 @@ module.exports = class EvalCommand extends Command {
             'inline': false
           },
           {
-            'name': sortName,
-            'value': sortValue,
+            'name': 'Inspect',
+            'value': ('```js\n' + inspect.toString() + '\n```').replace(client.token, '[TOKEN]'),
+            'inline': false
+          },
+          {
+            'name': 'Type',
+            'value': '```js\n' + typeof result + '\n```',
             'inline': false
           }
         ],
@@ -96,17 +86,21 @@ module.exports = class EvalCommand extends Command {
           author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
-          title: 'Error in Javascript Evaluation!',
-          description: `***Evaluated in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms***`,
+          description: `Evaluated in ${evaledLatency[0] > 0 ? `${evaledLatency[0]}s ` : ''}${evaledLatency[1] / 1000000}ms`,
           fields: [
             {
-              'name': 'Code',
+              'name': 'Evaluated',
               'value': '```js\n' + code + '\n```',
               'inline': false
             },
             {
-              'name': 'Error',
-              'value': '[```LDIF\n' + fix(error.message) + '\n```](' + link + ')',
+              'name': 'Exception',
+              'value': '[```js\n' + fix(error.message) + '\n```](' + link + ')',
+              'inline': false
+            },
+            {
+              'name': 'Type',
+              'value': '```js\n' + error.name + '\n```',
               'inline': false
             }
           ],

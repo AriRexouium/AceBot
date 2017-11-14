@@ -25,7 +25,7 @@ module.exports = (client, message, group, enabled) => {
             ${enabled ? 'enabled' : 'disabled'}
             ${message.guild ? `in guild ${message.guild.name} \`(${message.guild.id})\`` : 'globally'}.
           `,
-          color: 0x00AAAA
+          color: 0x00FFFF
         }]
       })
     }

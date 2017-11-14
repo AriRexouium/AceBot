@@ -77,6 +77,13 @@ sqlite.open(path.join(__dirname, './config/serverConfig.sqlite3')).then((db) => 
   client.setProvider(new SQLiteProvider(db))
 }).then(client.log.info(`Successfully loaded serverConfig file.`, 'SQLite Loader'))
 
+client.dispatcher.addInhibitor(message => {
+  const blacklist = client.provider.get('global', 'userBlacklist', [])
+  if (!blacklist.includes(message.author.id)) return false
+  message.reply('you are blacklisted.')
+  return 'blacklisted'
+})
+
 client.login(client.config.loginConfig.token)
 .catch(error => client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
