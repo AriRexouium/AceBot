@@ -29,13 +29,14 @@ module.exports = class SayCommand extends Command {
     })
   }
 
-  async run (message, args) {
+  run (message, args) {
     var blacklist = this.client.provider.get('global', 'userBlacklist', [])
     if (args.query === 'add') {
       if (this.client.isOwner(args.user.id)) return message.say('Bot owners cannot be blacklisted.')
       if (blacklist.includes(args.user.id)) return message.say('That user is already in the blacklist.')
       blacklist.push(args.user.id)
       this.client.provider.set('global', 'userBlacklist', blacklist)
+      this.client.log.info(`${args.user.tag} was added to the blacklist by ${message.author.tag}.`, 'blacklistAdd')
 
       // Webhook
       if (this.client.config.webhookConfig.enabled) {
@@ -62,6 +63,7 @@ module.exports = class SayCommand extends Command {
       blacklist.splice(index, 1)
       if (blacklist.length === 0) this.client.provider.remove('global', 'userBlacklist')
       else this.client.provider.set('global', 'userBlacklist', blacklist)
+      this.client.log.info(`${args.user.tag} was removed from the blacklist by ${message.author.tag}.`, 'blacklistRemove')
 
       // Webhook
       if (this.client.config.webhookConfig.enabled) {
