@@ -26,16 +26,17 @@ module.exports = class ExecCommand extends Command {
 
   async run (message, args) {
     var code = args.code; var execLatency
+    var platform = os.platform(); var syntax; var prefix
+    if (platform === 'win32') { syntax = 'bat'; prefix = '>' } else
+    if (platform === 'linux') { syntax = 'bash'; prefix = '~$ ' } else
+    if (platform === 'freebsd') { syntax = 'bash'; prefix = '-$ ' } else { syntax = 'ldif'; prefix = '$ ' }
+
     try {
       var hrStart = await process.hrtime(this.hrStart)
       var result = await childProcess.execSync(code)
       execLatency = await process.hrtime(hrStart)
       /* Fixing Stuff... Not sure what to call it really. */
       code = fix(code); result = fix(result)
-
-      var platform = os.platform(); var syntax
-      if (platform === 'linux') { syntax = 'bash' } else
-      if (platform === 'win32') { syntax = 'bat' } else { syntax = 'ldif' }
 
       // Evaluation Success
       message.embed({
@@ -46,8 +47,8 @@ module.exports = class ExecCommand extends Command {
         description: `***Executed in ${execLatency[0] > 0 ? `${execLatency[0]}s ` : ''}${execLatency[1] / 1000000}ms.***`,
         fields: [
           {
-            'name': 'Code',
-            'value': '```' + syntax + '\n' + code + '\n```',
+            'name': 'Executed',
+            'value': `\`\`\`${syntax}\n${prefix}${code}\n\`\`\``,
             'inline': false
           },
           {
@@ -71,12 +72,12 @@ module.exports = class ExecCommand extends Command {
           description: `***Executed in ${execLatency[0] > 0 ? `${execLatency[0]}s ` : ''}${execLatency[1] / 1000000}ms***`,
           fields: [
             {
-              'name': 'Code',
-              'value': '```' + syntax + '\n' + code + '\n```',
+              'name': 'Executed',
+              'value': `\`\`\`${syntax}\n${prefix}${code}\n\`\`\``,
               'inline': false
             },
             {
-              'name': 'Error',
+              'name': 'Exception',
               'value': '[```' + syntax + '\n' + fix(error.message) + '\n```](' + link + ')',
               'inline': false
             }

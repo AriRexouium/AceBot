@@ -90,10 +90,10 @@ module.exports = class HelpCommand extends Command {
 
           __**${showAll ? 'All commands' : `Available commands in ${message.guild || 'this DM'}`}**__
 
-          ${(showAll ? groups : groups.filter(grp => grp.commands.some(cmd => cmd.isUsable(message))))
-            .map(grp => stripIndents`
-              __${grp.name}__
-              ${(showAll ? grp.commands : grp.commands.filter(cmd => cmd.isUsable(message)))
+          ${(showAll ? groups : groups.filter(group => group.commands.some(cmd => cmd.isUsable(message))))
+            .map(group => stripIndents`
+              __${group.name}__
+              ${(showAll ? group.commands : group.commands.filter(cmd => cmd.isUsable(message)))
                 .map(cmd => `**${cmd.name}:** ${cmd.description}${cmd.nsfw ? ' (NSFW)' : ''}`).join('\n')
               }
             `).join('\n\n')

@@ -1,10 +1,10 @@
 const oneLine = require('common-tags').oneLine
 
-module.exports = (client, message, group, enabled) => {
+module.exports = (client, guild, command, enabled) => {
   client.log.info(oneLine`
-    Command ${message.command.memberName} (${message.command.groupID})
+    Command ${command.memberName} (${command.groupID})
     ${enabled ? 'enabled' : 'disabled'}
-    ${message.guild ? `in guild ${message.guild.name} (${message.guild.id})` : 'globally'}.
+    ${guild ? `in guild ${guild.name} (${guild.id})` : 'globally'}.
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'commandStatusChange')
 
@@ -21,9 +21,9 @@ module.exports = (client, message, group, enabled) => {
           timestamp: new Date(),
           title: `commandStatusChange${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: oneLine`
-            Command ${message.command.memberName} \`(${message.command.groupID})\`
+            Command ${command.memberName} \`(${command.groupID})\`
             ${enabled ? 'enabled' : 'disabled'}
-            ${message.guild ? `in guild ${message.guild.name} \`(${message.guild.id})\`` : 'globally'}.
+            ${guild ? `in guild ${guild.name} \`(${guild.id})\`` : 'globally'}.
             ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
           `,
           color: 0x00FFFF
