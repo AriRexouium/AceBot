@@ -21,7 +21,13 @@ module.exports = class UpdateCommand extends Command {
     message.say('**Update requested, please wait.**').then(function (f) {
       try {
         var result = childProcess.execSync('git pull').toString()
-        message.say('```\n' + result + '\n```')
+        if (result.length > 1950) {
+          this.client.hastebin(result).then(link => {
+            message.say('```\n' + `<${link}>` + '\n```')
+          })
+        } else {
+          message.say('```\n' + result + '\n```')
+        }
         if (result.indexOf('Already up-to-date.') > -1) {
           message.say('**There was nothing to update!**')
         } else {
