@@ -21,12 +21,28 @@ module.exports = (client, command, error, message) => {
           footer: { text: 'commandError' },
           timestamp: new Date(),
           title: `commandError${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: stripIndents`
-            ${message.command ? `**Command:** ${message.command.memberName} \`(${message.command.groupID})\`` : ''}
-            **User:** ${message.author.tag} \`(${message.author.id})\`
-            ${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
-            \`\`\`js\n${error.stack}\n\`\`\`
-          `,
+          fields: [
+            {
+              'name': 'Command',
+              'value': message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : '',
+              'inline': true
+            },
+            {
+              'name': 'User',
+              'value': `${message.author.tag} \`(${message.author.id})\``,
+              'inline': true
+            },
+            {
+              'name': 'Location',
+              'value': `${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}`,
+              'inline': true
+            },
+            {
+              'name': 'Error',
+              'value': `\`\`\`js\n${error.stack}\n\`\`\``,
+              'inline': false
+            }
+          ],
           color: 0xAA0000
         }]
       })

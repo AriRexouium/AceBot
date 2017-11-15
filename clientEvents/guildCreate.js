@@ -19,10 +19,18 @@ module.exports = (client, guild) => {
           footer: { text: 'guildCreate' },
           timestamp: new Date(),
           title: `guildCreate${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: stripIndents`
-            **Guild:** ${guild.name} \`(${guild.id})\`
-            **Owner:** ${guild.owner.user.tag} \`(${guild.owner.user.id})\`
-          `,
+          fields: [
+            {
+              'name': 'Guild',
+              'value': `${guild.name} \`(${guild.id})\``,
+              'inline': true
+            },
+            {
+              'name': 'Owner',
+              'value': `${guild.owner.user.tag} \`(${guild.owner.user.id})\``,
+              'inline': true
+            }
+          ],
           color: 0x4D4DFF
         }]
       })

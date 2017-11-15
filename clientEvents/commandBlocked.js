@@ -21,12 +21,28 @@ module.exports = (client, message, reason) => {
           footer: { text: 'commandBLocked' },
           timestamp: new Date(),
           title: `commandBLocked${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: stripIndents`
-            ${message.command ? `**Command:** ${message.command.memberName} \`(${message.command.groupID})\`` : ''}
-            **User:** ${message.author.tag} \`(${message.author.id})\`
-            ${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
-            **Reason:** ${reason}
-          `,
+          fields: [
+            {
+              'name': 'Command',
+              'value': message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : '',
+              'inline': true
+            },
+            {
+              'name': 'User',
+              'value': `${message.author.tag} \`(${message.author.id})\``,
+              'inline': true
+            },
+            {
+              'name': 'Location',
+              'value': `${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}`,
+              'inline': true
+            },
+            {
+              'name': 'Reason',
+              'value': reason,
+              'inline': true
+            }
+          ],
           color: 0xAA0000
         }]
       })

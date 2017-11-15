@@ -21,11 +21,23 @@ module.exports = (client, command, promise, message) => {
           footer: { text: 'commandRun' },
           timestamp: new Date(),
           title: `commandRun${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: stripIndents`
-            ${message.command ? `**Command:** ${message.command.memberName} \`(${message.command.groupID})\`` : ''}
-            **User:** ${message.author.tag} \`(${message.author.id})\`
-            ${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
-            `,
+          fields: [
+            {
+              'name': 'Command',
+              'value': message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : '',
+              'inline': true
+            },
+            {
+              'name': 'User',
+              'value': `${message.author.tag} \`(${message.author.id})\``,
+              'inline': true
+            },
+            {
+              'name': 'Location',
+              'value': `${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}`,
+              'inline': true
+            }
+          ],
           color: 0x00FFFF
         }]
       })
