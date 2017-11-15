@@ -17,8 +17,7 @@ module.exports = class ListGroupsCommand extends Command {
           parse: value => value.toLowerCase(),
           validate: value => ['commands', 'groups'].includes(value)
         }
-      ],
-      guarded: true
+      ]
     })
   }
 
