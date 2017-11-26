@@ -28,7 +28,7 @@ module.exports = class ExecCommand extends Command {
     var code = args.code; var execLatency
     var platform = os.platform(); var syntax; var prefix
     if (platform === 'win32') { syntax = 'bat'; prefix = `${__dirname}>` } else
-    if (platform === 'linux') { syntax = 'bash'; prefix = `${os.userInfo().username}@${os.hostname()}: ~$ ` } else
+    if (platform === 'linux') { syntax = 'bash'; prefix = `${os.userInfo().username}@${os.hostname()}:~$ ` } else
     if (platform === 'freebsd') { syntax = 'bash'; prefix = `${os.hostname()}:~ ${os.userInfo().username}$ ` } else { syntax = 'ldif'; prefix = '$ ' }
 
     try {
