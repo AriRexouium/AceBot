@@ -8,7 +8,15 @@ module.exports = class ListGroupsCommand extends Command {
       memberName: 'list',
       group: 'bot-management',
       description: 'Lists all commands or groups.',
-      aliases: ['show'],
+      aliases: [
+        'show',
+        'view',
+        'viewall'
+      ],
+      examples: [
+        'list commands',
+        'list groups'
+      ],
       args: [
         {
           key: 'query',

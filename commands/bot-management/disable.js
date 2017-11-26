@@ -12,7 +12,6 @@ module.exports = class DisableCommandCommand extends Command {
       The argument must be the name/ID (partial or whole) of a command or command group.
       Only administrators may use this command.
       `,
-      aliases: ['disable-command', 'cmd-off', 'command-off'],
       examples: [
         'disable util',
         'disable Utility',

@@ -56,8 +56,8 @@ module.exports = class ServerinfoCommand extends Command {
         {
           'name': '🔧 Owner',
           'value': stripIndents`
-            **Name:** ${ownerInfo.tag}
-            **ID:** ${ownerInfo.id}
+            **Name:** ${ownerInfo.user.tag}
+            **ID:** ${ownerInfo.user.id}
             **Status:** ${ownerInfo.user.presence.status}
           `,
           'inline': true

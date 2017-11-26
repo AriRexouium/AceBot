@@ -27,9 +27,9 @@ module.exports = class ExecCommand extends Command {
   async run (message, args) {
     var code = args.code; var execLatency
     var platform = os.platform(); var syntax; var prefix
-    if (platform === 'win32') { syntax = 'bat'; prefix = '>' } else
-    if (platform === 'linux') { syntax = 'bash'; prefix = '~$ ' } else
-    if (platform === 'freebsd') { syntax = 'bash'; prefix = '-$ ' } else { syntax = 'ldif'; prefix = '$ ' }
+    if (platform === 'win32') { syntax = 'bat'; prefix = `${__dirname}>` } else
+    if (platform === 'linux') { syntax = 'bash'; prefix = `${os.userInfo().username}@${os.hostname()}: ~$ ` } else
+    if (platform === 'freebsd') { syntax = 'bash'; prefix = `${os.hostname()}:~ ${os.userInfo().username}$ ` } else { syntax = 'ldif'; prefix = '$ ' }
 
     try {
       var hrStart = await process.hrtime(this.hrStart)
@@ -43,8 +43,7 @@ module.exports = class ExecCommand extends Command {
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
-        title: 'Execution Complete!',
-        description: `***Executed in ${execLatency[0] > 0 ? `${execLatency[0]}s ` : ''}${execLatency[1] / 1000000}ms.***`,
+        description: `*Executed in ${execLatency[0] > 0 ? `${execLatency[0]}s ` : ''}${execLatency[1] / 1000000}ms.*`,
         fields: [
           {
             'name': 'Executed',
@@ -68,8 +67,7 @@ module.exports = class ExecCommand extends Command {
           author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
-          title: 'Error in Evaluation!',
-          description: `***Executed in ${execLatency[0] > 0 ? `${execLatency[0]}s ` : ''}${execLatency[1] / 1000000}ms***`,
+          description: `*Executed in ${execLatency[0] > 0 ? `${execLatency[0]}s ` : ''}${execLatency[1] / 1000000}ms*`,
           fields: [
             {
               'name': 'Executed',

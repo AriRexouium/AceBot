@@ -22,7 +22,7 @@ module.exports = class SayCommand extends Command {
   }
 
   async run (message, args) {
-    await message.delete()
+    await message.delete().catch()
     await message.say(args.text)
   }
 }
