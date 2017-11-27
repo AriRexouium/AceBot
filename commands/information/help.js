@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando')
-const { stripIndents, oneLine } = require('common-tags')
+const { oneLine, stripIndents } = require('common-tags')
 const { disambiguation } = require('discord.js-commando')
 
 module.exports = class HelpCommand extends Command {

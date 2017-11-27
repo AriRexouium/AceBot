@@ -1,4 +1,4 @@
-const oneLine = require('common-tags').oneLine
+const { oneLine } = require('common-tags')
 
 module.exports = (client, message, group, enabled) => {
   client.log.info(oneLine`
@@ -6,7 +6,7 @@ module.exports = (client, message, group, enabled) => {
     ${enabled ? 'enabled' : 'disabled'}
     ${message.guild ? `in guild ${message.guild.name} (${message.guild.id})` : 'globally'}.
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
-  `)
+  `, 'groupStatusChange')
 
   // Webhook
   if (client.config.webhookConfig.enabled) {

@@ -1,4 +1,4 @@
-const oneLine = require('common-tags').oneLine
+const { oneLine } = require('common-tags')
 
 module.exports = (client) => {
   client.log.warn(oneLine`
