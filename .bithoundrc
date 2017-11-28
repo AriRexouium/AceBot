@@ -4,7 +4,7 @@
       "engine": "standard"
     },
     "wc": {
-      "limit": 500
+      "limit": 10000
     }
   }
 }
