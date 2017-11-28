@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando')
 const childProcess = require('child_process')
-
-require('moment-duration-format')
+const { stripIndents } = require('common-tags')
 
 module.exports = class UpdateCommand extends Command {
   constructor (client) {
@@ -18,20 +17,32 @@ module.exports = class UpdateCommand extends Command {
   }
 
   async run (message) {
-    message.say('**Update requested, please wait.**').then(function (f) {
+    message.say('**Update requested, please wait.**').then(function () {
       try {
-        var result = childProcess.execSync('git pull').toString()
-        if (result.length > 1950) {
-          this.client.hastebin(result).then(link => {
+        var codeResult = childProcess.execSync('git pull').toString()
+        if (codeResult.length > 1950) {
+          this.client.hastebin(codeResult).then(link => {
             message.say('```\n' + `<${link}>` + '\n```')
           })
         } else {
-          message.say('```\n' + result + '\n```')
+          message.say('```\n' + codeResult + '\n```')
         }
-        if (result.indexOf('Already up-to-date.') > -1) {
+        if (codeResult.indexOf('Already up-to-date.') > -1 || codeResult.indexOf('Already up to date.') > -1) {
           message.say('**There was nothing to update!**')
         } else {
-          message.say(`**Successfully updated code! Awaiting next restart.**`)
+          message.say(stripIndents`
+            **Successfully updated code! Now updating node modules, this might take a while.**
+            *(The bot will not work while updating the node modules.)*
+          `).then(function () {
+            var npmResult = childProcess.execSync('npm i').toString()
+            if (npmResult.length > 1950) {
+              this.client.hastebin(npmResult).then(link => {
+                message.say('```\n' + `<${link}>` + '\n```').then(message.say(`**Successfully updated everything! Awaiting next restart.**`))
+              })
+            } else {
+              message.say('```\n' + npmResult + '\n```').then(message.say(`**Successfully updated everything! Awaiting next restart.**`))
+            }
+          })
         }
       } catch (error) {
         message.say('```\n' + error.message + '\n```')
