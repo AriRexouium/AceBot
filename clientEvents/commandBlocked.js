@@ -11,16 +11,16 @@ module.exports = (client, message, reason) => {
 
   // Webhook
   if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandBLocked) {
+    if (client.config.webhookConfig.clientEvents.commandBlocked) {
       client.webhook({
         content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
           author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
-          footer: { text: 'commandBLocked' },
+          footer: { text: 'commandBlocked' },
           timestamp: new Date(),
-          title: `commandBLocked${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `commandBlocked${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           fields: [
             {
               'name': 'Command',

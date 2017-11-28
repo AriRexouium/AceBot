@@ -11,8 +11,7 @@
     "invite": "http://discord.gg/UwvMSAa"
   },
   "loginConfig": {
-    "token": "token",
-    "defaultStatus": "online"
+    "token": "token"
   },
   "shardConfig": {
     "totalShards": 3,
@@ -23,20 +22,24 @@
     "webhookToken": "token",
     "enabled": false,
     "clientEvents": {
-      "commandBLocked": true,
+      "commandBlocked": true,
       "commandError": true,
       "commandPrefixChange": false,
-      "commandStatusChange": false,
-      "commandRegister": false,
+      "commandRegister": true,
+      "commandReregister": true,
       "commandRun": false,
+      "commandStatusChange": true,
+      "commandUnregister": true,
       "disconnect": true,
       "error": true,
-      "groupStatusChange": false,
+      "groupRegister": true,
+      "groupStatusChange": true,
       "guildCreate": true,
       "guildDelete": true,
       "rateLimit": false,
       "ready": true,
-      "reconnecting": true,
+      "reconnecting": false,
+      "typeRegister": true,
       "warn": true
     },
     "processEvents": {
