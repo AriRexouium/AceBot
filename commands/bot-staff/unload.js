@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { oneLine } = require('common-tags')
 
-module.exports = class UnloadCommandCommand extends Command {
+module.exports = class UnloadCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'unload',

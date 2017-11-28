@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
 
-module.exports = class ListGroupsCommand extends Command {
+module.exports = class ListCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'list',

@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const { oneLine } = require('common-tags')
 const fs = require('fs')
 
-module.exports = class LoadCommandCommand extends Command {
+module.exports = class LoadCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'load',

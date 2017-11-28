@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const pluralize = require('pluralize')
 
-module.exports = class SetstatusCommand extends Command {
+module.exports = class SetStatusCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'setstatus',

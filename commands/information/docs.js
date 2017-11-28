@@ -4,6 +4,8 @@
 
   All credits go to original creators.
   If you want this removed please let me know and i'll remove it immediately.
+
+  This command is here for convenience purposes.
 */
 const { Command } = require('discord.js-commando')
 const request = require('snekfetch')
