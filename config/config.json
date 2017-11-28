@@ -22,34 +22,34 @@
     "webhookToken": "token",
     "enabled": false,
     "clientEvents": {
-      "commandBlocked": true,
-      "commandError": true,
+      "commandBlocked": false,
+      "commandError": false,
       "commandPrefixChange": false,
-      "commandRegister": true,
-      "commandReregister": true,
+      "commandRegister": false,
+      "commandReregister": false,
       "commandRun": false,
-      "commandStatusChange": true,
-      "commandUnregister": true,
-      "disconnect": true,
-      "error": true,
-      "groupRegister": true,
-      "groupStatusChange": true,
-      "guildCreate": true,
-      "guildDelete": true,
+      "commandStatusChange": false,
+      "commandUnregister": false,
+      "disconnect": false,
+      "error": false,
+      "groupRegister": false,
+      "groupStatusChange": false,
+      "guildCreate": false,
+      "guildDelete": false,
       "rateLimit": false,
-      "ready": true,
+      "ready": false,
       "reconnecting": false,
-      "typeRegister": true,
-      "warn": true
+      "typeRegister": false,
+      "warn": false
     },
     "processEvents": {
-      "uncaughtException": true,
-      "unhandledRejection": true,
+      "uncaughtException": false,
+      "unhandledRejection": false,
       "warning": false
     },
     "blacklistEvents": {
-      "blacklistAdd": true,
-      "blacklistRemove": true
+      "blacklistAdd": false,
+      "blacklistRemove": false
     }
   },
   "discordBansListToken": "token"
