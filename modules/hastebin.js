@@ -14,6 +14,6 @@ module.exports = async function (text, syntax = '', secure = true, client) {
       return `http://hastebin.com/${haste.body.key}${syntax ? `.${syntax}` : ``}`
     }
   } else {
-    throw new Error('HastebinError: text cannot be undefined.')
+    process.emitWarning('text cannot be undefined', 'HastebinError')
   }
 }

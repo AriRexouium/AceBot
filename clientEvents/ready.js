@@ -5,13 +5,13 @@ module.exports = async (client) => {
 
   await setTimeout(function () {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.config.startConfig.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.config.startConfig.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 1000)
 
   await setInterval(function () {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.config.startConfig.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.config.startConfig.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 600000)
   await client.log.info(client.shard ? `Shard ${client.shard.id} ready!` : 'Client ready!', 'Client', 'bgGreen')
