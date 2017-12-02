@@ -39,11 +39,20 @@ module.exports = class EvalCommand extends Command {
     const client = message.client
     const channel = message.channel
     const guild = message.guild
-    const objects = client.registry.evalObjects
     const lastResult = this.lastResult
     /* eslint-enable no-unused-vars */
-
     var code = args.code; var evaledLatency
+    if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
+      try {
+        eval(code.split(' ')[1]) // eslint-disable-line no-eval
+      } catch (error) {
+        message.say({
+          content: `${error.name}: ${error.message}`,
+          code: 'js'
+        })
+      }
+      return
+    }
     try {
       var hrStart = await process.hrtime(this.hrStart)
       var result = await eval(code) // eslint-disable-line no-eval

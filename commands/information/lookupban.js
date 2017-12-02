@@ -21,7 +21,7 @@ module.exports = class LookUpBanCommand extends Command {
       args: [
         {
           key: 'user',
-          prompt: 'What ban would you like to lookup?',
+          prompt: 'What user would you like to lookup?',
           type: 'user'
         }
       ]

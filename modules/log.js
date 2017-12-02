@@ -8,14 +8,14 @@
 const moment = require('moment')
 const chalk = require('chalk')
 
-function Logger (background, title, text, time = true) {
-  console.log(`${time ? `[${chalk.cyan(moment().format('H:mm:ss'))}]` : ''}${chalk[background].bold(` ${title} `)} ${text}`)
+function Logger (background, title, text, time = true, type) {
+  console[type](`${time ? `[${chalk.cyan(moment().format('H:mm:ss'))}]` : ''}${chalk[background].bold(` ${title} `)} ${text}`)
 }
 
 module.exports = {
   info (text, title = 'Info', background = 'bgCyan', time = true) {
     if (text !== undefined) {
-      Logger(background, title, text, time)
+      Logger(background, title, text, time, 'info') // Yes I know, console.info() is just an alias for console.log().
       return true
     } else {
       process.emitWarning('text cannot be undefined', 'LoggerError')
@@ -23,7 +23,7 @@ module.exports = {
   },
   debug (text, title = 'Debug', time = true) {
     if (text !== undefined) {
-      Logger('bgMagenta', title, text, time)
+      Logger('bgMagenta', title, text, time, 'log')
       return true
     } else {
       process.emitWarning('text cannot be undefined', 'LoggerError')
@@ -31,7 +31,7 @@ module.exports = {
   },
   warn (warn, title = 'Warning') {
     if (warn !== undefined) {
-      Logger('bgYellow', `${title} Warning`, warn)
+      Logger('bgYellow', `${title} Warning`, warn, true, 'warn')
       return true
     } else {
       process.emitWarning('warn cannot be undefined', 'LoggerError')
@@ -39,7 +39,7 @@ module.exports = {
   },
   error (error, title = 'Error') {
     if (error !== undefined) {
-      Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`)
+      Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`, true, 'error')
       return true
     } else {
       process.emitWarning('error cannot be undefined', 'LoggerError')

@@ -31,6 +31,18 @@ module.exports = class ExecCommand extends Command {
     if (platform === 'linux') { syntax = 'bash'; prefix = `${os.userInfo().username}@${os.hostname()}:~$ ` } else
     if (platform === 'freebsd') { syntax = 'bash'; prefix = `${os.hostname()}:~ ${os.userInfo().username}$ ` } else { syntax = 'ldif'; prefix = '$ ' }
 
+    if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
+      try {
+        childProcess.execSync(code.split(' ')[1])
+      } catch (error) {
+        message.say({
+          content: `${error.name}: ${error.message}`,
+          code: syntax
+        })
+      }
+      return
+    }
+
     try {
       var hrStart = await process.hrtime(this.hrStart)
       var result = await childProcess.execSync(code)
