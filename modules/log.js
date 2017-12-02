@@ -29,7 +29,7 @@ module.exports = {
       process.emitWarning('text cannot be undefined', 'LoggerError')
     }
   },
-  warn (warn, title = 'Warning') {
+  warn (warn, title) {
     if (warn !== undefined) {
       Logger('bgYellow', `${title} Warning`, warn, true, 'warn')
       return true
@@ -37,7 +37,7 @@ module.exports = {
       process.emitWarning('warn cannot be undefined', 'LoggerError')
     }
   },
-  error (error, title = 'Error') {
+  error (error, title) {
     if (error !== undefined) {
       Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`, true, 'error')
       return true
