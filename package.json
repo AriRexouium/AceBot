@@ -1,19 +1,8 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.23.1",
-  "author": {
-    "name": "Aceheliflyer",
-    "email": "aceheliflyer@gmail.com",
-    "web": "https://aceheliflyer.github.io"
-  },
-  "contributors": [
-    {
-      "name": "mcao",
-      "email": "",
-      "web": "https://mcao.github.io"
-    }
-  ],
+  "version": "2.24.0",
+  "author": "Aceheliflyer <aceheliflyer@gmail.com> (http://aceheliflyer.github.io)",
   "main": "index.js",
   "scripts": {
     "install:dev": "npm i --only=dev",
@@ -36,9 +25,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Aceheliflyer/AceBot/issues"
+    "url": "http://github.com/Aceheliflyer/AceBot/issues"
   },
-  "homepage": "https://github.com/Aceheliflyer/AceBot#readme",
+  "homepage": "http://github.com/Aceheliflyer/AceBot#readme",
   "dependencies": {
     "chalk": "^2.2.0",
     "common-tags": "^1.4.0",

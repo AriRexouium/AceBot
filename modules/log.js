@@ -14,7 +14,7 @@ function Logger (background, title, text, time = true, type) {
 
 module.exports = {
   info (text, title = 'Info', background = 'bgCyan', time = true) {
-    if (text !== undefined) {
+    if (text) {
       Logger(background, title, text, time, 'info') // Yes I know, console.info() is just an alias for console.log().
       return true
     } else {
@@ -22,7 +22,7 @@ module.exports = {
     }
   },
   debug (text, title = 'Debug', time = true) {
-    if (text !== undefined) {
+    if (text) {
       Logger('bgMagenta', title, text, time, 'log')
       return true
     } else {
@@ -30,16 +30,18 @@ module.exports = {
     }
   },
   warn (warn, title) {
-    if (warn !== undefined) {
-      Logger('bgYellow', `${title} Warning`, warn, true, 'warn')
+    if (warn) {
+      if (title) { title = `${title} Warning` } else { title = 'Warning' }
+      Logger('bgYellow', title, warn, true, 'warn')
       return true
     } else {
       process.emitWarning('warn cannot be undefined', 'LoggerError')
     }
   },
   error (error, title) {
-    if (error !== undefined) {
-      Logger('bgRed', `${title} Error`, `${(error && error.stack) || error}`, true, 'error')
+    if (error) {
+      if (title) { title = `${title} Error` } else { title = 'Error' }
+      Logger('bgRed', title, `${(error && error.stack) || error}`, true, 'error')
       return true
     } else {
       process.emitWarning('error cannot be undefined', 'LoggerError')
