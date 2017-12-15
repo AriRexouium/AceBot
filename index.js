@@ -83,7 +83,7 @@ client.log.info(oneLine`
 `, 'clientEvent Initializer')
 
 // SQLite Provider
-sqlite.open(path.join(__dirname, './config/sqLiteConfig.sqlite3')).then((db) => {
+sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
 }).then(client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer'))
 
@@ -96,6 +96,7 @@ client.dispatcher.addInhibitor(message => {
 })
 
 // Lockdown
+// TODO: Add lockdown system.
 client.dispatcher.addInhibitor(message => {
   const lockdown = client.provider.get('global', 'lockdown', false)
   if (!lockdown) return false
@@ -120,7 +121,7 @@ if (config.discordBansListToken !== false) {
 
 // Login
 client.login(client.config.loginConfig.token)
-  .catch(error => client.log.error(stripIndents`\n
+.catch(error => client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
 `, 'Login'))

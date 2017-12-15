@@ -7,5 +7,5 @@ const Manager = new ShardingManager('./index.js', {
   token: config.loginConfig.token
 })
 
-Manager.spawn().then(log.debug('Spawning shard 0...', 'SHARD MANAGER'))
+Manager.spawn().then(log.debug('Spawning shard 0...', 'SHARD MANAGER')).catch(error => log.error(error.stack, 'SHARD MANAGER'))
 Manager.on('launch', shard => log.debug(`Spawning shard ${shard.id}...`, 'SHARD MANAGER'))
