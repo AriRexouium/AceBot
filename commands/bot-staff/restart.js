@@ -18,6 +18,8 @@ module.exports = class RestartCommand extends Command {
   }
 
   async run (message) {
+    // TODO: Add support for restarting all shards.
+    // if (this.client.shard) {} else {
     await message.say({
       content: '',
       embed: {
@@ -35,5 +37,6 @@ module.exports = class RestartCommand extends Command {
     await this.client.log.info(this.client.shard ? `Restarting! | Shard ID: ${this.client.shard.id}` : 'Restarting!', 'Restart')
     await this.client.destroy()
     await process.exit()
+    // }
   }
 }
