@@ -1,6 +1,6 @@
 /*
   A modified import of TheRacingLion's logging system from their discord-selfbot.
-  https://github.com/TheRacingLion/Discord-SelfBot/blob/02e041dda4e67e3a69b79c56c559492bf3c4f43c/src/plugins/Logger.js#L22-L27
+  http://github.com/TheRacingLion/Discord-SelfBot/blob/02e041dda4e67e3a69b79c56c559492bf3c4f43c/src/plugins/Logger.js#L22-L27
 
   All credits go to original creators.
 */

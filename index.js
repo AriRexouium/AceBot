@@ -114,7 +114,7 @@ client.config = config
 
 // Discord Bans
 if (config.discordBansListToken !== false) {
-  const Blacklist = require('discordblacklist')
+  const { Blacklist } = require('discordblacklist')
   client.banList = new Blacklist(config.discordBansListToken, true, 2 * 60)
 }
 /* Stop Assigning to Client */
