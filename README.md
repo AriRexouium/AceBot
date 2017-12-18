@@ -30,7 +30,7 @@ _(If you can manage to actually follow these instrutions then you'll be just fin
 
 ## Contributing
 
-For contributing to the repository, please read [CONTRIBUTING.md](http://github.com/Aceheliflyer/AceBot/blob/master/CONTRIBUTING.md "Contributing").
+For contributing to the repository, please read [CONTRIBUTING.md](http://github.com/Aceheliflyer/AceBot/blob/master/.github/CONTRIBUTING.md "Contributing").
 
 ## Todo List
 
