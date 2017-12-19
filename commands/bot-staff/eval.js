@@ -1,5 +1,5 @@
 /*
-  This command is broken at the moment, if you care to try and fix it feel free.
+  This command doesn't support message limits yet, so it will fail if it exceeds an X amount of characters.
 */
 
 const { Command } = require('discord.js-commando')

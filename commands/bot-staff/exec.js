@@ -1,3 +1,7 @@
+/*
+  This command doesn't support message limits yet, so it will fail if it exceeds an X amount of characters.
+*/
+
 const { Command } = require('discord.js-commando')
 const childProcess = require('child_process')
 const os = require('os')
