@@ -1,3 +1,5 @@
+// NOTE: This command only works if Git is installed on the host system.
+
 const { Command } = require('discord.js-commando')
 const childProcess = require('child_process')
 const { stripIndents } = require('common-tags')

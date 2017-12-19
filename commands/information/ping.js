@@ -33,8 +33,8 @@ module.exports = class PingCommand extends Command {
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
           description: (oneLine`
-          **Guild Latency:** \`${pingMessage.createdTimestamp - message.createdTimestamp}ms\`
-          ${this.client.ping ? `**| API Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
+          **REST Latency:** \`${pingMessage.createdTimestamp - message.createdTimestamp}ms\`
+          ${this.client.ping ? `**| Websocket Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
           `),
           color: 0x7289DA
         }
@@ -54,8 +54,8 @@ module.exports = class PingCommand extends Command {
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
           description: (oneLine`
-          **Guild Latency:** \`${message.editedTimestamp - message.createdTimestamp}ms\`
-          ${this.client.ping ? `**| API Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
+          **REST Latency:** \`${message.editedTimestamp - message.createdTimestamp}ms\`
+          ${this.client.ping ? `**| Websocket Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
           `),
           color: 0x7289DA
         }

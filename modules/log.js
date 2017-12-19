@@ -1,6 +1,6 @@
 /*
-  A modified import of TheRacingLion's logging system from their discord-selfbot.
-  http://github.com/TheRacingLion/Discord-SelfBot/blob/02e041dda4e67e3a69b79c56c559492bf3c4f43c/src/plugins/Logger.js#L22-L27
+  Import from discord-selfbot - http://github.com/TheRacingLion/Discord-SelfBot
+  Original code -> http://github.com/TheRacingLion/Discord-SelfBot/blob/02e041dda4e67e3a69b79c56c559492bf3c4f43c/src/plugins/Logger.js#L22-L27
 
   All credits go to original creators.
 */
@@ -14,7 +14,7 @@ function Logger (background, title, text, time = true, type) {
 module.exports = {
   info (text, title = 'Info', background = 'bgCyan', time = true) {
     if (text) {
-      Logger(background, title, text, time, 'info') // Yes I know, console.info() is just an alias for console.log().
+      Logger(background, title, text, time, 'info') // NOTE: Yes I know, console.info() is just an alias for console.log().
       return true
     } else {
       process.emitWarning('text cannot be undefined', 'LoggerError')
