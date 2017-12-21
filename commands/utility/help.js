@@ -7,7 +7,7 @@ module.exports = class HelpCommand extends Command {
     super(client, {
       name: 'help',
       memberName: 'help',
-      group: 'information',
+      group: 'utility',
       description: 'Displays a list of available commands, or detailed information for a specified command.',
       details: oneLine`
       The command may be part of a command name or a whole command name.

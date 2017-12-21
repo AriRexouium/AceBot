@@ -5,7 +5,7 @@ module.exports = class LookUpBanCommand extends Command {
     super(client, {
       name: 'lookupban',
       memberName: 'lookupban',
-      group: 'information',
+      group: 'utility',
       description: 'Checks to see if a user is banned on <http://bans.discordlist.net>',
       examples: [
         'lookupban 253254587341996032',
