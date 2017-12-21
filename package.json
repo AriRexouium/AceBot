@@ -49,10 +49,5 @@
   },
   "engines": {
     "node": "8.4.0"
-  },
-  "remarkConfig": {
-    "plugins": [
-      "remark-preset-lint-recommended"
-    ]
   }
 }
