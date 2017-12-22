@@ -55,7 +55,7 @@ for (let file of getFiles('/modules')) {
   delete require.cache[require.resolve(`./${file}`)]
 }
 client.log.info(oneLine`
-  Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/clientEvents').length, false)}!
+  Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
 `, 'Module Initializer')
 
 // Load processEvents
