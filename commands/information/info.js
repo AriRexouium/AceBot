@@ -4,12 +4,12 @@ const { stripIndents } = require('common-tags')
 module.exports = class AboutCommand extends Command {
   constructor (client) {
     super(client, {
-      name: 'about',
-      memberName: 'about',
+      name: 'info',
+      memberName: 'info',
       group: 'information',
       description: 'Displays information about the bot.',
       details: 'Displays information and information about this bot.',
-      aliases: ['info'],
+      aliases: ['about'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {
         usages: 2,

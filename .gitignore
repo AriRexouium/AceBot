@@ -1,18 +1,31 @@
-# Cache
+# ==============================
+# Files
+# ==============================
+
+# Install / Start Files
+Installer.bat
+shardStart.bat
+Start.bat
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Configuration
+package-lock.json
+.env
+
+# ==============================
+# Directories
+# ==============================
+
+# Node
 .npm/
+node_modules/
+
+# Microsoft VS Code
 .vscode/
 
 # Configuration
 config/
-package-lock.json
-
-# Dependencies
-node_modules/
-
-# Logs
-*.log
-
-# Start Files
-Installer.bat
-shardStart.bat
-Start.bat
