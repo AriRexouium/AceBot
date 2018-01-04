@@ -28,7 +28,6 @@ module.exports = class ServerInfoCommand extends Command {
 
   run (message, args) {
     let user = args.user.user
-    let guild = message.guild
     var timeZone = new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]
 
     message.embed({
@@ -36,7 +35,7 @@ module.exports = class ServerInfoCommand extends Command {
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
       title: `Information for ${user.tag}${user.bot === true ? ' **[BOT]**' : ''}`,
-      description: `Since ${moment(guild.createdAt).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(guild.createdAt).fromNow()})`,
+      description: user.presence.activity !== null ? `Playing **${user.presence.activity.name}**` : String.fromCharCode(8203),
       thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {
@@ -51,7 +50,7 @@ module.exports = class ServerInfoCommand extends Command {
         },
         {
           'name': '🔗 Nickname',
-          'value': args.user.nickname !== null ? args.user.nickname : 'N/A',
+          'value': args.user.nickname !== undefined ? args.user.nickname : 'N/A',
           'inline': true
         },
         {
