@@ -1,4 +1,4 @@
-// NOTE: This command doesn't support message limits yet, so it will fail if it exceeds an X amount of characters.
+// NOTE: This command doesn't support message limits yet, so it will fail if it exceeds an X amount of characters. (I can't confirm the max amount for embeds.)
 
 const { Command } = require('discord.js-commando')
 const Discord = require('discord.js')
