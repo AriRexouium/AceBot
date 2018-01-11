@@ -51,6 +51,5 @@
       "blacklistAdd": false,
       "blacklistRemove": false
     }
-  },
-  "discordBansListToken": "token"
+  }
 }
