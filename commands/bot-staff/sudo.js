@@ -35,13 +35,14 @@ module.exports = class SudoCommand extends Command {
 
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        return eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
+        eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
       } catch (error) {
-        return message.say({
+        message.say({
           content: `${error.name}: ${error.message}`,
           code: 'js'
         })
       }
+      return
     }
 
     try {

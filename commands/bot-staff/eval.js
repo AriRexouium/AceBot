@@ -44,13 +44,14 @@ module.exports = class EvalCommand extends Command {
     var code = args.code
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        return eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
+        eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
       } catch (error) {
-        return message.say({
+        message.say({
           content: `${error.name}: ${error.message}`,
           code: 'js'
         })
       }
+      return
     }
 
     // Normal Eval
