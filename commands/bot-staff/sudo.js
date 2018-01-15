@@ -35,15 +35,13 @@ module.exports = class SudoCommand extends Command {
 
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        await sudoClient.login(args.token)
-        eval(code.split(' ')[1]) // eslint-disable-line no-eval
+        return eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
       } catch (error) {
-        message.say({
+        return message.say({
           content: `${error.name}: ${error.message}`,
           code: 'js'
         })
       }
-      return
     }
 
     try {

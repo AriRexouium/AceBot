@@ -35,14 +35,13 @@ module.exports = class ExecCommand extends Command {
 
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        childProcess.execSync(code.split(' ')[1])
+        return eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
       } catch (error) {
-        message.say({
+        return message.say({
           content: `${error.name}: ${error.message}`,
-          code: syntax
+          code: 'js'
         })
       }
-      return
     }
 
     try {
