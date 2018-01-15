@@ -95,7 +95,7 @@ module.exports = class EvalCommand extends Command {
       }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
     } catch (error) {
       evaledLatency = await process.hrtime(hrStart)
-      code = clean(code)
+
       // Evaluation Error
       client.hastebin(error.stack, 'js').then(link => {
         message.embed({

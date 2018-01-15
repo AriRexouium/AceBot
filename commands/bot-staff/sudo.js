@@ -48,13 +48,17 @@ module.exports = class SudoCommand extends Command {
 
     try {
       await sudoClient.login(args.token)
+
+      /* Start Eval Block */
       var hrStart = await process.hrtime(this.hrStart)
       var result = await eval(code) // eslint-disable-line no-eval
       evaledLatency = await process.hrtime(hrStart)
-      var inspect = util.inspect(result, { depth: 0 })
+      /* End Eval Block */
+
+      var type = typeof (result) === 'object' ? 'object - ' + result.constructor.name : typeof (result)
+      if (typeof (result) !== 'string') { result = util.inspect(result, { depth: 0 }) }
+
       this.lastResult = result
-      /* Fixing Stuff... Not sure what to call it really. */
-      code = fix(code); result = fix(result)
 
       // Evaluation Success
       message.embed({
@@ -65,31 +69,26 @@ module.exports = class SudoCommand extends Command {
         fields: [
           {
             'name': 'Evaluated',
-            'value': '```js\n' + code + '\n```',
+            'value': '```js\n' + clean(code) + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```js\n' + result.toString() + '\n```'),
-            'inline': false
-          },
-          {
-            'name': 'Inspect',
-            'value': ('```js\n' + inspect.toString() + '\n```'),
+            'value': ('```js\n' + clean(result.toString()) + '\n```'),
             'inline': false
           },
           {
             'name': 'Type',
-            'value': '```js\n' + typeof result + '\n```',
+            'value': '```js\n' + clean(type) + '\n```',
             'inline': false
           }
         ],
         color: 0x00AA00
-      })
+      }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
       await sudoClient.destroy()
     } catch (error) {
       evaledLatency = await process.hrtime(hrStart)
-      code = fix(code)
+
       // Evaluation Error
       this.client.hastebin(error.stack, 'js').then(link => {
         message.embed({
@@ -100,28 +99,23 @@ module.exports = class SudoCommand extends Command {
           fields: [
             {
               'name': 'Evaluated',
-              'value': '```js\n' + code + '\n```',
+              'value': '```js\n' + clean(code) + '\n```',
               'inline': false
             },
             {
               'name': 'Exception',
-              'value': '[```js\n' + fix(error.message) + '\n```](' + link + ')',
-              'inline': false
-            },
-            {
-              'name': 'Type',
-              'value': '```js\n' + error.name + '\n```',
+              'value': `[\`\`\`js\n${clean(error.name)}: ${clean(error.message)}\n\`\`\`](${link})`,
               'inline': false
             }
           ],
           color: 0xAA0000
-        })
+        }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
       })
       await sudoClient.destroy()
     }
   }
 }
-var fix = (text) => {
+var clean = (text) => {
   if (typeof (text) === 'string') {
     return text
     .replace(/`/g, '`' + String.fromCharCode(8203))
