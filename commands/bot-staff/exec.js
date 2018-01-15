@@ -49,8 +49,6 @@ module.exports = class ExecCommand extends Command {
       var hrStart = await process.hrtime(this.hrStart)
       var result = await childProcess.execSync(code)
       execLatency = await process.hrtime(hrStart)
-      /* Fixing Stuff... Not sure what to call it really. */
-      code = fix(code); result = fix(result)
 
       // Evaluation Success
       message.embed({
@@ -61,17 +59,17 @@ module.exports = class ExecCommand extends Command {
         fields: [
           {
             'name': 'Executed',
-            'value': `\`\`\`${syntax}\n${prefix}${code}\n\`\`\``,
+            'value': `\`\`\`${clean(syntax)}\n${clean(prefix)}${clean(code)}\n\`\`\``,
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```' + syntax + '\n' + result.toString() + '\n```'),
+            'value': ('```' + clean(syntax) + '\n' + clean(result.toString()) + '\n```'),
             'inline': false
           }
         ],
         color: 0x00AA00
-      })
+      }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
     } catch (error) {
       execLatency = await process.hrtime(hrStart)
       code = fix(code)
@@ -85,22 +83,22 @@ module.exports = class ExecCommand extends Command {
           fields: [
             {
               'name': 'Executed',
-              'value': `\`\`\`${syntax}\n${prefix}${code}\n\`\`\``,
+              'value': `\`\`\`${clean(syntax)}\n${clean(prefix)}${clean(code)}\n\`\`\``,
               'inline': false
             },
             {
               'name': 'Exception',
-              'value': '[```' + syntax + '\n' + fix(error.message) + '\n```](' + link + ')',
+              'value': '[```' + syntax + '\n' + clean(error.message) + '\n```](' + link + ')',
               'inline': false
             }
           ],
           color: 0xAA0000
-        })
+        }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
       })
     }
   }
 }
-var fix = (text) => {
+var clean = (text) => {
   if (typeof (text) === 'string') {
     return text
     .replace(/`/g, '`' + String.fromCharCode(8203))

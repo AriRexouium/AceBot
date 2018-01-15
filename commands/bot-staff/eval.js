@@ -68,9 +68,6 @@ module.exports = class EvalCommand extends Command {
 
       this.lastResult = result
 
-      // Cleaning code for sensitive data and breaking text.
-      code = clean(code); result = clean(result)
-
       // Evaluation Success
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
@@ -80,22 +77,22 @@ module.exports = class EvalCommand extends Command {
         fields: [
           {
             'name': 'Evaluated',
-            'value': '```js\n' + code + '\n```',
+            'value': '```js\n' + clean(code) + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```js\n' + result.toString() + '\n```').replace(client.token, '[TOKEN]'),
+            'value': ('```js\n' + clean(result.toString()) + '\n```').replace(client.token, '[TOKEN]'),
             'inline': false
           },
           {
             'name': 'Type',
-            'value': '```js\n' + type + '\n```',
+            'value': '```js\n' + clean(type) + '\n```',
             'inline': false
           }
         ],
         color: 0x00AA00
-      })
+      }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
     } catch (error) {
       evaledLatency = await process.hrtime(hrStart)
       code = clean(code)
@@ -109,17 +106,17 @@ module.exports = class EvalCommand extends Command {
           fields: [
             {
               'name': 'Evaluated',
-              'value': '```js\n' + code + '\n```',
+              'value': '```js\n' + clean(code) + '\n```',
               'inline': false
             },
             {
               'name': 'Exception',
-              'value': `[\`\`\`js\n${error.name}: ${clean(error.message)}\n\`\`\`](${link})`,
+              'value': `[\`\`\`js\n${clean(error.name)}: ${clean(error.message)}\n\`\`\`](${link})`,
               'inline': false
             }
           ],
           color: 0xAA0000
-        })
+        }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
       })
     }
   }
