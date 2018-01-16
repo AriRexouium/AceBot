@@ -1,4 +1,4 @@
-// NOTE: This command doesn't support message limits yet, so it will fail if it exceeds an X amount of characters. (I can't confirm the max amount for embeds.)
+// TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
 const childProcess = require('child_process')
