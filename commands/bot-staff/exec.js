@@ -72,7 +72,7 @@ module.exports = class ExecCommand extends Command {
       }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
     } catch (error) {
       execLatency = await process.hrtime(hrStart)
-      code = fix(code)
+
       // Evaluation Error
       this.client.hastebin(error.stack).then(link => {
         message.embed({
