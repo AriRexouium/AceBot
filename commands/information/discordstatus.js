@@ -19,8 +19,10 @@ module.exports = class StatsCommand extends Command {
   }
 
   async run (message) {
-    /* Thanks to Thatguychris#3998 for doing the webscraping. */
     scrapeIt(`http://status.discordapp.com`, {
+      // Overall
+      overall: 'body > div.layout-content.status.status-index.starter > div.container > div.page-status.status-none > span.status.font-large',
+      /* Thanks to Thatguychris#3998 for doing the webscraping for the values below. */
       // API
       api: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(1) > div > span.component-status',
       apiUptime: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(1) > div > div > div > div.legend-item.legend-item-uptime-value',
@@ -42,6 +44,7 @@ module.exports = class StatsCommand extends Command {
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
           title: 'Discord Status',
+          description: `**${webContent.overall}**`,
           fields: [
             {
               'name': 'API',
