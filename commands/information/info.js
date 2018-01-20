@@ -21,11 +21,12 @@ module.exports = class AboutCommand extends Command {
 
   async run (message) {
     /* Start Contributors */
-    var dev; var contrib1; var contrib2; var contrib3
+    var dev; var contrib1; var contrib2; var contrib3; var contrib4
     try { dev = this.client.users.find('id', '196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
     try { contrib1 = this.client.users.find('id', '217797734982352896').tag } catch (e) { contrib1 = 'cat16#0725' }
     try { contrib2 = this.client.users.find('id', '171319044715053057').tag } catch (e) { contrib2 = 'Michael | ASIANBOI#9310' }
     try { contrib3 = this.client.users.find('id', '325828052422492162').tag } catch (e) { contrib3 = 'Ariathe#4163' }
+    try { contrib4 = this.client.users.find('id', '158397118611062785').tag } catch (e) { contrib3 = 'Thatguychris#3998' }
     /* End Contributors */
     var totalGuilds; var totalChannels; var totalUsers; var isSharded
     if (!this.client.shard) {
@@ -74,6 +75,7 @@ module.exports = class AboutCommand extends Command {
               **${contrib1} -** Helped with a lot of issues I had.
               **${contrib2} -** Offered suggestions and feedback.
               **${contrib3} -** Designed the avatar for Acebot.
+              **${contrib4} -** Did the web scraping for \`discordstatus\`.
             `,
             'inline': false
           }
