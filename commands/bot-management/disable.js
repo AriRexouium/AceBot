@@ -37,15 +37,15 @@ module.exports = class DisableCommandCommand extends Command {
   run (message, args) {
     if (!args.cmdOrGrp.isEnabledIn(message.guild)) {
       return message.reply(
-        `The \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'} is already disabled.`
+        `the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'} is already disabled.`
       )
     }
     if (args.cmdOrGrp.guarded) {
       return message.reply(
-        `You cannot disable the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`
+        `you cannot disable the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`
       )
     }
     args.cmdOrGrp.setEnabledIn(message.guild, false)
-    return message.reply(`Disabled the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`)
+    return message.reply(`disabled the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`)
   }
 }

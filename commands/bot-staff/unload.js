@@ -39,12 +39,12 @@ module.exports = class UnloadCommand extends Command {
       } catch (err) {
         this.client.emit('warn', `Error when broadcasting command unload to other shards`)
         this.client.emit('error', err)
-        await message.reply(`Unloaded \`${args.command.name}\` command, but failed to unload on other shards.`)
+        await message.reply(`unloaded \`${args.command.name}\` command, but failed to unload on other shards.`)
         return null
       }
     }
 
-    await message.reply(`Unloaded \`${args.command.name}\` command${this.client.shard ? ' on all shards' : ''}.`)
+    await message.reply(`unloaded \`${args.command.name}\` command${this.client.shard ? ' on all shards' : ''}.`)
     return null
   }
 }

@@ -41,10 +41,10 @@ module.exports = class PrefixCommand extends Command {
     // Check the user's permission before changing anything
     if (message.guild) {
       if (!message.member.hasPermission('ADMINISTRATOR') && !this.client.isOwner(message.author)) {
-        return message.reply('Only administrators may change the command prefix.')
+        return message.reply('only administrators may change the command prefix.')
       }
     } else if (!this.client.isOwner(message.author)) {
-      return message.reply('Only the bot owner(s) may change the global command prefix.')
+      return message.reply('only the bot owner(s) may change the global command prefix.')
     }
 
     // Save the prefix
@@ -60,7 +60,7 @@ module.exports = class PrefixCommand extends Command {
       response = prefix ? `Set the command prefix to \`${args.prefix}\`.` : 'Removed the command prefix entirely.'
     }
 
-    await message.reply(`${response} To run commands, use ${message.anyUsage('command')}.`)
+    await message.reply(`${response} to run commands, use ${message.anyUsage('command')}.`)
     return null
   }
 }

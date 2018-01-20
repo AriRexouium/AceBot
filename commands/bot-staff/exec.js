@@ -69,7 +69,7 @@ module.exports = class ExecCommand extends Command {
           }
         ],
         color: 0x00AA00
-      }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${clean(error)}\``) })
     } catch (error) {
       execLatency = await process.hrtime(hrStart)
 
@@ -93,7 +93,7 @@ module.exports = class ExecCommand extends Command {
             }
           ],
           color: 0xAA0000
-        }).catch(error => { message.reply(`There was an error when sending a message:\n\`${clean(error)}\``) })
+        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${clean(error)}\``) })
       })
     }
   }

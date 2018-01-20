@@ -37,10 +37,10 @@ module.exports = class EnableCommandCommand extends Command {
   run (message, args) {
     if (args.cmdOrGrp.isEnabledIn(message.guild)) {
       return message.reply(
-        `The \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'} is already enabled.`
+        `the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'} is already enabled.`
       )
     }
     args.cmdOrGrp.setEnabledIn(message.guild, true)
-    return message.reply(`Enabled the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`)
+    return message.reply(`enabled the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`)
   }
 }

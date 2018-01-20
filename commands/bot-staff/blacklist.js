@@ -36,7 +36,7 @@ module.exports = class BlacklistCommand extends Command {
   run (message, args) {
     var blacklist = this.client.provider.get('global', 'userBlacklist', [])
     if (args.query === 'add') {
-      if (this.client.isOwner(args.user.id)) return message.say('Bot owners cannot be blacklisted.')
+      if (this.client.isOwner(args.user.id)) return message.say('Bot owner(s) cannot be blacklisted.')
       if (blacklist.includes(args.user.id)) return message.say('That user is already in the blacklist.')
       blacklist.push(args.user.id)
       this.client.provider.set('global', 'userBlacklist', blacklist)
