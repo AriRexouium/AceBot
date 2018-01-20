@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.28.1",
+  "version": "2.29.0",
   "author": "Aceheliflyer <aceheliflyer@gmail.com> (http://aceheliflyer.github.io)",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,8 @@
   "bugs": {
     "url": "http://github.com/Aceheliflyer/AceBot/issues"
   },
-  "homepage": "http://github.com/Aceheliflyer/AceBot#readme",
+  "homepage": "http://aceheliflyer.github.io/AceBot",
+  "homepageGithub": "http://github.com/Aceheliflyer/AceBot#readme",
   "dependencies": {
     "chalk": "^2.3.0",
     "common-tags": "^1.5.1",

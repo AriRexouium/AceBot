@@ -27,7 +27,6 @@ module.exports = class AboutCommand extends Command {
     try { contrib2 = this.client.users.find('id', '171319044715053057').tag } catch (e) { contrib2 = 'Michael | ASIANBOI#9310' }
     try { contrib3 = this.client.users.find('id', '325828052422492162').tag } catch (e) { contrib3 = 'Ariathe#4163' }
     /* End Contributors */
-    var clientInvite = await this.client.generateInvite()
     var totalGuilds; var totalChannels; var totalUsers; var isSharded
     if (!this.client.shard) {
       totalGuilds = await this.client.guilds.size
@@ -50,16 +49,25 @@ module.exports = class AboutCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         fields: [
+          /* eslint-disable object-property-newline */
           { 'name': 'Developer', 'value': `**${dev}**`, 'inline': true },
           { 'name': 'Version', 'value': require('../../package.json').version, 'inline': true },
-          { 'name': 'Library', 'value': `discord.js v${require('discord.js/package.json').version}`, 'inline': true },
+          { 'name': 'Library', 'value': stripIndents`
+            **discord.js-commando** v${require('discord.js-commando/package.json').version}
+            **discord.js** v${require('discord.js/package.json').version}
+          `, 'inline': true },
           { 'name': 'Guilds', 'value': totalGuilds, 'inline': true },
           { 'name': 'Channels', 'value': totalChannels, 'inline': true },
           { 'name': 'Users', 'value': totalUsers, 'inline': true },
           { 'name': 'Shards', 'value': isSharded, 'inline': true },
-          { 'name': 'Bot Invite', 'value': `[Click here!](${clientInvite})`, 'inline': true },
-          { 'name': 'Server Invite', 'value': `[Click here!](${this.client.config.startConfig.invite})`, 'inline': true },
-          { 'name': 'GitHub', 'value': `[Click here!](${require('../../package.json').homepage})`, 'inline': true },
+          { 'name': 'Invites', 'value': stripIndents`
+            [Bot Invite](${await this.client.generateInvite()})
+            [Server Invite](${this.client.config.startConfig.invite})
+          `, 'inline': true },
+          { 'name': 'Websites', 'value': stripIndents`
+            [Homepage](${require('../../package.json').homepage})
+            [Repository](${require('../../package.json').homepageGithub})
+          `, 'inline': true },
           {
             'name': 'Contributors',
             'value': stripIndents`
@@ -69,6 +77,7 @@ module.exports = class AboutCommand extends Command {
             `,
             'inline': false
           }
+          /* eslint-enable object-property-newline */
         ],
         color: 0x7289DA
       }
