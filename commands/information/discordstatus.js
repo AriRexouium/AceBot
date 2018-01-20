@@ -9,7 +9,7 @@ module.exports = class StatsCommand extends Command {
       memberName: 'discordstatus',
       group: 'information',
       description: 'Displays Discord server statistics.',
-      aliases: [],
+      aliases: ['discordstats'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {
         usages: 2,
@@ -33,7 +33,7 @@ module.exports = class StatsCommand extends Command {
       mediaproxy: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(4) > div > span.component-status',
       mediaproxyUptime: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(4) > div > div > div > div.legend-item.legend-item-uptime-value',
       // Voice
-      voice: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(5) > div > span.component-status',
+      voice: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(5) > div > span.component-status'
     }).then(webContent => {
       message.say({
         content: '',
@@ -45,22 +45,22 @@ module.exports = class StatsCommand extends Command {
           fields: [
             {
               'name': 'API',
-              'value': `**${webContent.api}**\n${webContent.apiUptime}`,
+              'value': `**${webContent.api}**\n❯ ${webContent.apiUptime.replace(' ', '')}`,
               'inline': true
             },
             {
               'name': 'Gateway',
-              'value': `**${webContent.gateway}**\n${webContent.gatewayUptime}`,
+              'value': `**${webContent.gateway}**\n❯ ${webContent.gatewayUptime.replace(' ', '')}`,
+              'inline': true
+            },
+            {
+              'name': 'Media Proxy',
+              'value': `**${webContent.mediaproxy}**\n❯ ${webContent.mediaproxyUptime.replace(' ', '')}`,
               'inline': true
             },
             {
               'name': 'CloudFlare',
               'value': `**${webContent.cloudflare}**`,
-              'inline': true
-            },
-            {
-              'name': 'Media Proxy',
-              'value': `**${webContent.mediaproxy}**\n${webContent.mediaproxyUptime}`,
               'inline': true
             },
             {
