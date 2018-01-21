@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 const moment = require('moment')
 require('moment-duration-format')
 
@@ -34,13 +35,13 @@ module.exports = class UserInfoCommand extends Command {
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
-      title: `Information for ${user.tag}${user.bot === true ? ' **[BOT]**' : ''}`,
-      description: user.presence.activity !== null ? `Playing **${user.presence.activity.name}**` : String.fromCharCode(8203),
+      title: `Information for ${escapeMarkdown(user.tag)}${user.bot === true ? ' **[BOT]**' : ''}`,
+      description: user.presence.activity !== null ? `Playing **${escapeMarkdown(user.presence.activity.name)}**` : String.fromCharCode(8203),
       thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {
           'name': '📇 Tag',
-          'value': user.tag,
+          'value': escapeMarkdown(user.tag),
           'inline': true
         },
         {
@@ -50,7 +51,7 @@ module.exports = class UserInfoCommand extends Command {
         },
         {
           'name': '🔗 Nickname',
-          'value': args.user.nickname !== undefined ? args.user.nickname : 'N/A',
+          'value': args.user.nickname !== null ? escapeMarkdown(args.user.nickname) : 'N/A',
           'inline': true
         },
         {

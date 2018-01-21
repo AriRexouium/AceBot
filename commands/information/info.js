@@ -1,5 +1,6 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
+const { escapeMarkdown } = require('discord.js')
 
 module.exports = class InfoCommand extends Command {
   constructor (client) {
@@ -49,7 +50,7 @@ module.exports = class InfoCommand extends Command {
         timestamp: new Date(),
         fields: [
           /* eslint-disable object-property-newline */
-          { 'name': 'Developer', 'value': `**${dev}**`, 'inline': true },
+          { 'name': 'Developer', 'value': `**${escapeMarkdown(dev)}**`, 'inline': true },
           { 'name': 'Version', 'value': require('../../package.json').version, 'inline': true },
           { 'name': 'Library', 'value': stripIndents`
             **discord.js-commando** v${require('discord.js-commando/package.json').version}
@@ -71,10 +72,10 @@ module.exports = class InfoCommand extends Command {
           {
             'name': 'Contributors',
             'value': stripIndents`
-              **${contrib1} -** Helped with a lot of issues I had.
-              **${contrib2} -** Offered suggestions and feedback.
-              **${contrib3} -** Designed the avatar for Acebot.
-              **${contrib4} -** Did the web scraping for \`discordstatus\`.
+              **${escapeMarkdown(contrib1)} -** Helped with a lot of issues I had.
+              **${escapeMarkdown(contrib2)} -** Offered suggestions and feedback.
+              **${escapeMarkdown(contrib3)} -** Designed the avatar for Acebot.
+              **${escapeMarkdown(contrib4)} -** Did the web scraping for \`discordstatus\`.
             `,
             'inline': false
           }

@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 
 module.exports = class ExecCommand extends Command {
   constructor (client) {
@@ -36,7 +37,7 @@ module.exports = class ExecCommand extends Command {
             : `User ID: ${message.author.id} | Server ID: ${message.guild.id}`
           },
           timestamp: new Date(),
-          title: `Sent by ${message.author.tag} ${message.channel.type === 'dm' ? 'through DM' : `from ${message.guild.name}`}`,
+          title: `Sent by ${escapeMarkdown(message.author.tag)} ${message.channel.type === 'dm' ? 'through DM' : `from ${message.guild.name}`}`,
           description: args.text,
           color: 0x7289DA
         }

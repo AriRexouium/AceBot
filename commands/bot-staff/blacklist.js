@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 
 module.exports = class BlacklistCommand extends Command {
   constructor (client) {
@@ -60,7 +61,7 @@ module.exports = class BlacklistCommand extends Command {
           })
         }
       }
-      return message.say(`**${args.user.tag}** has been added to the blacklisted.`)
+      return message.say(`**${escapeMarkdown(args.user.tag)}** has been added to the blacklisted.`)
     } else if (args.query === 'remove') {
       if (!blacklist.includes(args.user.id)) return message.say('That user is not in the blacklist.')
       var index = blacklist.indexOf(args.user.id)
@@ -87,7 +88,7 @@ module.exports = class BlacklistCommand extends Command {
           })
         }
       }
-      return message.say(`**${args.user.tag}** has been removed from the blacklist.`)
+      return message.say(`**${escapeMarkdown(args.user.tag)}** has been removed from the blacklist.`)
     }
   }
 }

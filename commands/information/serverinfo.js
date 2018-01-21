@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 const moment = require('moment')
 require('moment-duration-format')
@@ -38,12 +39,7 @@ module.exports = class ServerInfoCommand extends Command {
     ]
 
     var totalUsers = guild.members.filter(s => s.user.bot !== true)
-    var onlineUsers = totalUsers.filter(s => s.user.presence.status !== 'offline')
-    var offlineUsers = totalUsers.filter(s => s.user.presence.status === 'offline')
-
     var totalBots = guild.members.filter(s => s.user.bot !== false)
-    var onlineBots = totalBots.filter(s => s.user.presence.status !== 'offline')
-    var offlineBots = totalBots.filter(s => s.user.presence.status === 'offline')
 
     message.embed({
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
@@ -56,7 +52,7 @@ module.exports = class ServerInfoCommand extends Command {
         {
           'name': '🔧 Owner',
           'value': stripIndents`
-            **Name:** ${ownerInfo.user.tag}
+            **Name:** ${escapeMarkdown(ownerInfo.user.tag)}
             **ID:** ${ownerInfo.user.id}
             **Status:** ${ownerInfo.user.presence.status}
           `,
@@ -65,9 +61,11 @@ module.exports = class ServerInfoCommand extends Command {
         {
           'name': '📋 Members',
           'value': stripIndents`
-           **Total:** ${guild.members.size}
-           **Online:** ${guild.members.filter(s => s.user.presence.status !== 'offline').size}
-           **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size}
+            **Total:** ${guild.members.size}
+            **Online:** ${guild.members.filter(s => s.user.presence.status === 'online').size}
+            **Idle:** ${guild.members.filter(s => s.user.presence.status === 'idle').size}
+            **DND:** ${guild.members.filter(s => s.user.presence.status === 'dnd').size}
+            **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size}
           `,
           'inline': true
         },
@@ -75,8 +73,10 @@ module.exports = class ServerInfoCommand extends Command {
           'name': '🕵 Users',
           'value': stripIndents`
             **Total:** ${totalUsers.size}
-            **Online:** ${onlineUsers.size}
-            **Offline:** ${offlineUsers.size}
+            **Online:** ${totalUsers.filter(s => s.user.presence.status === 'online').size}
+            **Idle:** ${totalUsers.filter(s => s.user.presence.status === 'idle').size}
+            **DND:** ${totalUsers.filter(s => s.user.presence.status === 'dnd').size}
+            **Offline:** ${totalUsers.filter(s => s.user.presence.status === 'offline').size}
           `,
           'inline': true
         },
@@ -84,8 +84,10 @@ module.exports = class ServerInfoCommand extends Command {
           'name': '🤖 Bots',
           'value': stripIndents`
             **Total:** ${totalBots.size}
-            **Online:** ${onlineBots.size}
-            **Offline:** ${offlineBots.size}
+            **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size}
+            **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size}
+            **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size}
+            **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size}
           `,
           'inline': true
         },

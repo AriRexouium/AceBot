@@ -50,7 +50,7 @@ module.exports = class StatsCommand extends Command {
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
-        title: `Client Stats${this.client.shard ? ` for Shard ${this.client.shard.id}` : ''}`,
+        title: 'Client Stats',
         thumbnail: { url: this.client.user.avatarURL() },
         fields: [
           {
@@ -114,7 +114,7 @@ module.exports = class StatsCommand extends Command {
             'name': '📦 Shards',
             'value': !this.client.shard
               ? '*(No Active Shards)*'
-              : `**Current Shard:** ${this.client.shard.id}\n**All Shards:** ${this.client.shard.count}`,
+              : `**Current Shard ID:** ${this.client.shard.id}\n**All Shards:** ${this.client.shard.count}`,
             'inline': true
           },
           {
