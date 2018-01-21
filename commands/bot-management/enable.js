@@ -17,6 +17,10 @@ module.exports = class EnableCommandCommand extends Command {
         'enable Utility',
         'enable ping'
       ],
+      throttling: {
+        usages: 2,
+        duration: 10
+      },
       args: [
         {
           key: 'cmdOrGrp',

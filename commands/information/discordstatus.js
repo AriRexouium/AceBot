@@ -2,7 +2,7 @@
 const { Command } = require('discord.js-commando')
 const scrapeIt = require('scrape-it')
 
-module.exports = class StatsCommand extends Command {
+module.exports = class DiscordStatsCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'discordstatus',

@@ -16,6 +16,10 @@ module.exports = class PrefixCommand extends Command {
       `,
       format: '[prefix/"default"/"none"]',
       examples: ['prefix', 'prefix -', 'prefix omg!', 'prefix default', 'prefix none'],
+      throttling: {
+        usages: 2,
+        duration: 10
+      },
       args: [
         {
           key: 'prefix',

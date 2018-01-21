@@ -17,6 +17,10 @@ module.exports = class ListCommand extends Command {
         'list commands',
         'list groups'
       ],
+      throttling: {
+        usages: 2,
+        duration: 10
+      },
       args: [
         {
           key: 'query',

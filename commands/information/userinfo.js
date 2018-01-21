@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const moment = require('moment')
 require('moment-duration-format')
 
-module.exports = class ServerInfoCommand extends Command {
+module.exports = class UserInfoCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'userinfo',

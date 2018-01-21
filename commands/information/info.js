@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
 
-module.exports = class AboutCommand extends Command {
+module.exports = class InfoCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'info',
