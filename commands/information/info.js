@@ -28,12 +28,11 @@ module.exports = class InfoCommand extends Command {
     try { contrib3 = this.client.users.find('id', '325828052422492162').tag } catch (e) { contrib3 = 'Ariathe#4163' }
     try { contrib4 = this.client.users.find('id', '158397118611062785').tag } catch (e) { contrib3 = 'Thatguychris#3998' }
     /* End Contributors */
-    var totalGuilds; var totalChannels; var totalUsers; var isSharded
+    var totalGuilds; var totalChannels; var totalUsers
     if (!this.client.shard) {
       totalGuilds = await this.client.guilds.size
       totalChannels = await this.client.channels.size
       totalUsers = await this.client.users.size
-      isSharded = 'Master'
     } else {
       var totalGuildsData = await this.client.shard.fetchClientValues('guilds.size')
       totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
@@ -41,7 +40,6 @@ module.exports = class InfoCommand extends Command {
       totalChannels = await totalChannelsData.reduce((prev, val) => prev + val, 0)
       var totalUsersData = await this.client.shard.fetchClientValues('users.size')
       totalUsers = await totalUsersData.reduce((prev, val) => prev + val, 0)
-      isSharded = this.client.shard.count
     }
     message.say({
       content: '',
@@ -57,17 +55,18 @@ module.exports = class InfoCommand extends Command {
             **discord.js-commando** v${require('discord.js-commando/package.json').version}
             **discord.js** v${require('discord.js/package.json').version}
           `, 'inline': true },
-          { 'name': 'Guilds', 'value': totalGuilds, 'inline': true },
-          { 'name': 'Channels', 'value': totalChannels, 'inline': true },
-          { 'name': 'Users', 'value': totalUsers, 'inline': true },
-          { 'name': 'Shards', 'value': isSharded, 'inline': true },
           { 'name': 'Invites', 'value': stripIndents`
-            [Bot Invite](${await this.client.generateInvite()})
-            [Server Invite](${this.client.config.startConfig.invite})
+          [Bot Invite](${await this.client.generateInvite()})
+          [Server Invite](${this.client.config.startConfig.invite})
           `, 'inline': true },
           { 'name': 'Websites', 'value': stripIndents`
-            [Homepage](${require('../../package.json').homepage})
-            [Repository](${require('../../package.json').homepageGithub})
+          [Homepage](${require('../../package.json').homepage})
+          [Repository](${require('../../package.json').homepageGithub})
+          `, 'inline': true },
+          { 'name': 'Discord Stats', 'value': stripIndents`
+            ${this.client.shard ? `**Shards:** ${this.client.shard.count}\n` : ''}**Guilds:** ${totalGuilds}
+            **Channels:** ${totalChannels}
+            **Users:** ${totalUsers}
           `, 'inline': true },
           {
             'name': 'Contributors',
