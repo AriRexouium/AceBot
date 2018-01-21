@@ -122,7 +122,7 @@ module.exports = class StatsCommand extends Command {
             'value': stripIndents`
               **System OS:** ${os.platform()}
               **CPU Usage (%):** ${cpuUsage.toFixed(2)}
-              **Memory Used:** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB Used **/** ${os.totalmem().toFixed(2)} Total MB
+              **Memory Used (MB):** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} Used **/** ${os.totalmem().toFixed(2)} Avaliable
             `,
             'inline': true
           }
