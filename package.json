@@ -31,18 +31,18 @@
   "homepageGithub": "http://github.com/Aceheliflyer/AceBot#readme",
   "dependencies": {
     "chalk": "^2.3.0",
-    "common-tags": "^1.5.1",
+    "common-tags": "^1.7.2",
     "discord.js": "github:hydrabolt/discord.js",
     "discord.js-commando": "github:gawdl3y/discord.js-commando",
     "moment": "^2.20.1",
-    "moment-duration-format": "^2.0.1",
+    "moment-duration-format": "^2.2.0",
     "os-utils": "0.0.14",
     "pluralize": "^7.0.0",
     "scrape-it": "^4.1.2",
-    "sqlite": "^2.9.0"
+    "sqlite": "^2.9.1"
   },
   "devDependencies": {
-    "remark-cli": "^4.0.0",
+    "remark-cli": "^5.0.0",
     "remark-lint": "^6.0.1",
     "remark-preset-lint-recommended": "^3.0.1",
     "snazzy": "^7.0.0",
