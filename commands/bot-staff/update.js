@@ -29,9 +29,6 @@ module.exports = class UpdateCommand extends Command {
         } else {
           message.say('```\n' + codeResult + '\n```')
         }
-        if (codeResult.indexOf('fatal: Not a git repository (or any of the parent directories): .git')) {
-          return message.reply('it appears that there is no Git repository, the bot is not able to update.')
-        }
         if (codeResult.indexOf('Already up-to-date.') > -1 || codeResult.indexOf('Already up to date.') > -1) {
           message.say('**There was nothing to update!**')
         } else {
@@ -50,8 +47,7 @@ module.exports = class UpdateCommand extends Command {
           })
         }
       } catch (error) {
-        message.say('```\n' + error.message + '\n```')
-        .then(message.say('**An error has occurred.**'))
+        message.say('```\n' + error.message + '\n```').then(message.say('**An error has occurred.**'))
       }
     })
   }
