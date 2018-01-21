@@ -1,6 +1,7 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, command, promise, message) => {
+  message.channel.stopTyping()
   client.botStats.commandsUsed = client.botStats.commandsUsed + 1
   client.log.info(stripIndents`
     ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}

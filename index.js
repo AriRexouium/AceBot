@@ -104,6 +104,11 @@ client.dispatcher.addInhibitor(message => {
   return 'lockdown'
 })
 
+client.dispatcher.addInhibitor(message => {
+  message.channel.startTyping()
+  return false
+})
+
 /* Start Assinging to Client */
 // Bot Stats
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
