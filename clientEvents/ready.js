@@ -43,6 +43,7 @@ module.exports = async (client) => {
       if (!client.shard) {
         totalGuilds = await client.guilds.size
       } else {
+        if (!client.shard !== 0) return
         var totalGuildsData = await client.shard.fetchClientValues('guilds.size')
         totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
       }
