@@ -43,6 +43,6 @@ You can view the Todo List [here](http://github.com/Aceheliflyer/AceBot/projects
 * * *
 
 <p align="center">
-  <a href="http://discord.gg/UwvMSAa" title="Discord Guild"><img src="http://discordapp.com/api/guilds/278946297736724501/embed.png?style=banner2"></a>
+  <a href="http://discord.gg/UwvMSAa" title="Discord Guild"><img src="http://discordapp.com/api/guilds/278946297736724501/embed.png?style=banner2"></a><br />
   <a href="http://discordbots.org/bot/253254587341996032"><img src="http://discordbots.org/api/widget/253254587341996032.svg" alt="Discord Bots" /></a>
 </p>
