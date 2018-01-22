@@ -51,7 +51,7 @@ module.exports = class UserInfoCommand extends Command {
         },
         {
           'name': '🔗 Nickname',
-          'value': args.user.nickname !== null ? escapeMarkdown(args.user.nickname) : 'N/A',
+          'value': typeof args.user.nickname === 'string' ? escapeMarkdown(args.user.nickname) : 'N/A',
           'inline': true
         },
         {
