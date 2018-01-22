@@ -1,4 +1,5 @@
 const pluralize = require('pluralize')
+const unirest = require('unirest')
 
 module.exports = async (client) => {
   await client.log.info(`Logged in as ${client.user.tag} (${client.user.id})`, 'Discord')
@@ -33,5 +34,22 @@ module.exports = async (client) => {
         }]
       })
     }
+  }
+  var postStatsEnabled = false
+  var DiscordBotsOrgToken = ''
+  if (postStatsEnabled === true) {
+    setInterval(async function () {
+      var totalGuilds
+      if (!client.shard) {
+        totalGuilds = await client.guilds.size
+      } else {
+        var totalGuildsData = await client.shard.fetchClientValues('guilds.size')
+        totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
+      }
+      unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
+      .headers({ 'Authorization': DiscordBotsOrgToken, 'Content-Type': 'application/json' })
+      .send({ 'server_count': totalGuilds })
+      .end(function () { client.log.info('Servercount sent to http://discordbots.org.') })
+    }, 600000)
   }
 }
