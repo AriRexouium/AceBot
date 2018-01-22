@@ -59,35 +59,27 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': '📋 Members',
+          'name': `📋 Members - (${guild.members.size})`,
           'value': stripIndents`
-            **Total:** ${guild.members.size}
-            **Online:** ${guild.members.filter(s => s.user.presence.status === 'online').size}
-            **Idle:** ${guild.members.filter(s => s.user.presence.status === 'idle').size}
-            **DND:** ${guild.members.filter(s => s.user.presence.status === 'dnd').size}
-            **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size}
+            **Online:** ${guild.members.filter(s => s.user.presence.status === 'online').size} | **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size}
+            **Idle:** ${guild.members.filter(s => s.user.presence.status === 'idle').size} | **DND:** ${guild.members.filter(s => s.user.presence.status === 'dnd').size}
           `,
           'inline': true
         },
         {
-          'name': '🕵 Users',
+          'name': `🕵 Users - (${totalUsers.size})`,
           'value': stripIndents`
-            **Total:** ${totalUsers.size}
-            **Online:** ${totalUsers.filter(s => s.user.presence.status === 'online').size}
-            **Idle:** ${totalUsers.filter(s => s.user.presence.status === 'idle').size}
-            **DND:** ${totalUsers.filter(s => s.user.presence.status === 'dnd').size}
-            **Offline:** ${totalUsers.filter(s => s.user.presence.status === 'offline').size}
+            **Online:** ${totalUsers.filter(s => s.user.presence.status === 'online').size} | **Offline:** ${totalUsers.filter(s => s.user.presence.status === 'offline').size}
+            **Idle:** ${totalUsers.filter(s => s.user.presence.status === 'idle').size} | **DND:** ${totalUsers.filter(s => s.user.presence.status === 'dnd').size}
           `,
           'inline': true
         },
         {
-          'name': '🤖 Bots',
+          'name': `🤖 Bots - (${totalBots.size})`,
           'value': stripIndents`
-            **Total:** ${totalBots.size}
-            **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size}
-            **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size}
-            **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size}
-            **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size}
+            **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size} | **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size}
+            **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size} | **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size}
+
           `,
           'inline': true
         },

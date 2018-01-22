@@ -120,7 +120,7 @@ module.exports = class StatsCommand extends Command {
           {
             'name': '💾 System Stats',
             'value': stripIndents`
-              **System OS:** ${os.platform()}
+              **System OS:** ${os.platform()} (${process.arch})
               **CPU Usage (%):** ${cpuUsage.toFixed(2)}
               **Memory Used (MB):** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} Used **/** ${os.totalmem().toFixed(2)} Avaliable
             `,
