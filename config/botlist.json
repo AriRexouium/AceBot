@@ -1,0 +1,7 @@
+{
+  "DiscordBotsOrg": {
+    "enabled": false,
+    "token": "token",
+    "refreshRate": 600000
+  }
+}
