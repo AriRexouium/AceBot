@@ -45,13 +45,13 @@ module.exports = async (client) => {
     if (!client.shard) {
       totalGuilds = await client.guilds.size
     } else {
-      if (client.shard.id !== 0) return
+      if (client.shard.id !== client.config.shardConfig.totalShards - 1) return
       var totalGuildsData = await client.shard.fetchClientValues('guilds.size')
       totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
     }
     unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
     .headers({ 'Authorization': botListConfig.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
-    .send({ 'server_count': totalGuilds }).catch(error => { client.log.error(error) })
+    .send({ 'server_count': totalGuilds })
     .end(function () { client.log.info('Servercount sent to http://discordbots.org.') })
   }
   if (botListConfig.DiscordBotsOrg.enabled === true) DiscordBotsOrg(); setInterval(DiscordBotsOrg, botListConfig.DiscordBotsOrg.refreshRate)
