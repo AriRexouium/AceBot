@@ -60,9 +60,5 @@ module.exports = async (client) => {
   }
 
   // Travis Tests
-  if (this.travisTest === true) {
-    setTimeout(() => {
-      process.exit(0)
-    }, 5000)
-  }
+  if (process.env.TRAVISTEST === true) { setTimeout(() => { process.exit(0) }, 5000) }
 }
