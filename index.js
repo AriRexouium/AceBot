@@ -1,4 +1,4 @@
-if (process.argv[2] === '--travis-test') { process.env.TRAVISTEST = true } else { process.env.TRAVISTEST = false }
+if (process.argv[2] === '--travis-test') { this.travisTest = true } else { this.travisTest = false }
 const config = require('./config/config.json')
 const fs = require('fs')
 const path = require('path')
@@ -116,7 +116,7 @@ client.config = config
 
 // Login
 var token
-if (process.env.TRAVISTEST === true) {
+if (this.travisTest === true) {
   token = process.env.TRAVISTOKEN
 } else if (client.config.loginConfig.token) {
   token = client.config.loginConfig.token
@@ -124,8 +124,9 @@ if (process.env.TRAVISTEST === true) {
   client.log.error('No valid token!', 'Login').then(process.exit(1))
 }
 
-client.login(token)
-.catch(error => client.log.error(stripIndents`\n
+client.login(token).catch(error => {
+  client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
-`, 'Login'))
+  `, 'Login').then(process.exit(1))
+})
