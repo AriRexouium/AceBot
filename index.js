@@ -114,7 +114,16 @@ client.config = config
 /* Stop Assigning to Client */
 
 // Login
-client.login(client.config.loginConfig.token)
+var token
+if (client.config.loginConfig.token) {
+  token = client.config.loginConfig.token
+} else if (process.env.TOKEN) {
+  token = process.env.TOKEN
+} else {
+  client.log.error('No valid token!', 'Login').then(process.exit(1))
+}
+
+client.login(token)
 .catch(error => client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}

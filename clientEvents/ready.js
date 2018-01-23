@@ -54,5 +54,8 @@ module.exports = async (client) => {
     .send({ 'server_count': totalGuilds })
     .end(function () { client.log.info('Servercount sent to http://discordbots.org.') })
   }
-  if (botListConfig.DiscordBotsOrg.enabled === true) DiscordBotsOrg(); setInterval(DiscordBotsOrg, botListConfig.DiscordBotsOrg.refreshRate)
+  if (botListConfig.DiscordBotsOrg.enabled === true) {
+    DiscordBotsOrg()
+    setInterval(DiscordBotsOrg, botListConfig.DiscordBotsOrg.refreshRate)
+  }
 }
