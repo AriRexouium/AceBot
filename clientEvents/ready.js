@@ -61,7 +61,7 @@ module.exports = async (client) => {
 
   // Travis Tests
   if (client.travisTest === true) {
-    client.log.debug('Running in Travis CI mode, now exiting with 0 exit code in 5 seconds...', 'TRAVIS TEST')
-    .then(setTimeout(() => { process.exit(0) }, 5000))
+    await client.log.debug('Running in Travis CI mode, now exiting with 0 exit code in 5 seconds...', 'TRAVIS TEST')
+    await setTimeout(() => { process.exit(0) }, 5000)
   }
 }
