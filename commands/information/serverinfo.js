@@ -89,6 +89,17 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
+          'name': '💤 AFK Channel',
+          'value': guild.afkChannelID !== null
+          ? stripIndents`
+            **Name:** ${guild.afkChannel.name}
+            **ID:** ${guild.afkChannel.id}
+            **Timeout:** ${guild.afkTimeout} seconds
+          `
+          : 'N/A',
+          'inline': true
+        },
+        {
           'name': '⚖ Verification Level',
           'value': verificationLevel[guild.verificationLevel],
           'inline': true
