@@ -1,0 +1,35 @@
+{
+  "webhookID": "id",
+  "webhookToken": "token",
+  "enabled": false,
+  "clientEvents": {
+    "commandBlocked": false,
+    "commandError": false,
+    "commandPrefixChange": false,
+    "commandRegister": false,
+    "commandReregister": false,
+    "commandRun": false,
+    "commandStatusChange": false,
+    "commandUnregister": false,
+    "disconnect": false,
+    "error": false,
+    "groupRegister": false,
+    "groupStatusChange": false,
+    "guildCreate": false,
+    "guildDelete": false,
+    "rateLimit": false,
+    "ready": false,
+    "reconnecting": false,
+    "typeRegister": false,
+    "warn": false
+  },
+  "processEvents": {
+    "uncaughtException": false,
+    "unhandledRejection": false,
+    "warning": false
+  },
+  "blacklistEvents": {
+    "blacklistAdd": false,
+    "blacklistRemove": false
+  }
+}
