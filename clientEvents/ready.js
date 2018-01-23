@@ -1,4 +1,3 @@
-if (process.argv[2] === '--travis-test') { this.travisTest = true } else { this.travisTest = false }
 const pluralize = require('pluralize')
 const unirest = require('unirest')
 const botListConfig = require('../config/botlist.json')
@@ -61,7 +60,8 @@ module.exports = async (client) => {
   }
 
   // Travis Tests
-  if (this.travisTest === true) {
-    client.log.debug('Running in Travis CI mode, now exiting with 0 exit code...', 'TRAVIS TEST').then(process.exit(0))
+  if (client.travisTest === true) {
+    client.log.debug('Running in Travis CI mode, now exiting with 0 exit code in 5 seconds...', 'TRAVIS TEST')
+    .then(setTimeout(() => { process.exit(0) }, 5000))
   }
 }

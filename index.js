@@ -1,4 +1,3 @@
-if (process.argv[2] === '--travis-test') { this.travisTest = true } else { this.travisTest = false }
 const config = require('./config/config.json')
 const fs = require('fs')
 const path = require('path')
@@ -106,6 +105,9 @@ client.dispatcher.addInhibitor(message => {
 })
 
 /* Start Assinging to Client */
+// Travis Test Mode
+if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
+
 // Bot Stats
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
 client.botStats = botStats
@@ -116,7 +118,7 @@ client.config = config
 
 // Login
 var token
-if (this.travisTest === true) {
+if (client.travisTest === true) {
   token = process.env.TRAVISTOKEN
 } else if (client.config.loginConfig.token) {
   token = client.config.loginConfig.token
