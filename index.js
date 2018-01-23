@@ -115,10 +115,10 @@ client.config = config
 
 // Login
 var token
-if (client.config.loginConfig.token) {
-  token = client.config.loginConfig.token
-} else if (process.env.TOKEN) {
+if (process.env.TOKEN) {
   token = process.env.TOKEN
+} else if (client.config.loginConfig.token) {
+  token = client.config.loginConfig.token
 } else {
   client.log.error('No valid token!', 'Login').then(process.exit(1))
 }
