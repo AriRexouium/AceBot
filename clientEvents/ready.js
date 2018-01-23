@@ -58,4 +58,11 @@ module.exports = async (client) => {
     DiscordBotsOrg()
     setInterval(DiscordBotsOrg, botListConfig.DiscordBotsOrg.refreshRate)
   }
+
+  // Travis Tests
+  if (this.travisTest === true) {
+    setTimeout(() => {
+      process.exit(0)
+    }, 5000)
+  }
 }

@@ -1,3 +1,4 @@
+if (process.argv[2] === '--travis-test') { this.travisTest = true } else { this.travisTest = false }
 const config = require('./config/config.json')
 const fs = require('fs')
 const path = require('path')
@@ -115,8 +116,8 @@ client.config = config
 
 // Login
 var token
-if (process.env.TOKEN) {
-  token = process.env.TOKEN
+if (this.travisTest === true) {
+  token = process.env.TRAVISTOKEN
 } else if (client.config.loginConfig.token) {
   token = client.config.loginConfig.token
 } else {
