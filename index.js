@@ -130,5 +130,5 @@ client.login(token).catch(error => {
   client.log.error(stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
-  `, 'Login').then(process.exit(1))
+  `, 'Login').then(process.exit(8))
 })

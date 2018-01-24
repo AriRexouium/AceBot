@@ -1,11 +1,15 @@
+const { oneLine } = require('common-tags')
 const { stripIndents } = require('common-tags')
+const { escapeMarkdown } = require('discord.js')
 
-module.exports = (client, guild) => {
+module.exports = async (client, guild) => {
   client.log.info(stripIndents`
     Guild: ${guild.name} (${guild.id})
     Owner: ${guild.owner.user.tag} (${guild.owner.user.id})
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'guildDelete')
+
+  var ownerInfo = guild.members.find('id', guild.ownerID)
 
   // Webhook
   if (client.config.webhookConfig.enabled) {
@@ -27,7 +31,19 @@ module.exports = (client, guild) => {
             },
             {
               'name': 'Owner',
-              'value': `${guild.owner.user.tag} \`(${guild.owner.user.id})\``,
+              'value': stripIndents`
+                **Name:** ${escapeMarkdown(ownerInfo.user.tag)}
+                **ID:** ${ownerInfo.user.id}
+                **Status:** ${ownerInfo.user.presence.status}
+              `,
+              'inline': true
+            },
+            {
+              'name': `Members - (${guild.members.size})`,
+              'value': oneLine`
+                **Users:** ${await guild.members.filter(s => s.user.bot !== true).size}
+                | **Bots:** ${await guild.members.filter(s => s.user.bot !== false).size}
+              `,
               'inline': true
             }
           ],

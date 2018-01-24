@@ -39,7 +39,7 @@ module.exports = class RestartCommand extends Command {
     })
     await this.client.log.info(this.client.shard ? `Restarting! | Shard ID: ${this.client.shard.id}` : 'Restarting!', 'Restart')
     await this.client.destroy()
-    await process.exit()
+    await process.exit(0)
     // }
   }
 }
