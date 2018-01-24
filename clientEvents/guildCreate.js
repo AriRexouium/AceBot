@@ -1,3 +1,4 @@
+const { oneLine } = require('common-tags')
 const { stripIndents } = require('common-tags')
 const { escapeMarkdown } = require('discord.js')
 
@@ -39,9 +40,9 @@ module.exports = async (client, guild) => {
             },
             {
               'name': `Members - (${guild.members.size})`,
-              'value': stripIndents`
+              'value': oneLine`
                 **Users:** ${await guild.members.filter(s => s.user.bot !== true).size}
-                **Bots:** ${await guild.members.filter(s => s.user.bot !== false).size}
+                | **Bots:** ${await guild.members.filter(s => s.user.bot !== false).size}
               `,
               'inline': true
             }
