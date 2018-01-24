@@ -10,10 +10,13 @@
 </div>
 
 ## Build Status
+
 |                                                                                            Version                                                                                            |                                                                     Test                                                                     |                                                                                  Health                                                                                 |                                                                              Style                                                                             |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | [![Latest Version](http://img.shields.io/github/package-json/v/Aceheliflyer/AceBot.svg?colorB=green&style=flat-square)](http://github.com/Aceheliflyer/AceBot/commit/master "Latest Version") | [![Travis CI](http://img.shields.io/travis/Aceheliflyer/AceBot.svg?style=flat-square)](http://travis-ci.org/Aceheliflyer/AceBot "Travis CI") | [![Code Analysis](http://img.shields.io/bithound/code/github/Aceheliflyer/AceBot.svg?style=flat-square)](http://bithound.io/github/Aceheliflyer/AceBot "Code Analysis") | [![JavaScript Style Guide](http://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](htts://standardjs.com "JavaScript Style Guide") |
+
 ##### Dependencies
+
 [![dependencies Analysis](http://img.shields.io/david/Aceheliflyer/AceBot.svg?style=flat-square)](http://david-dm.org/Aceheliflyer/AceBot "dependencies Analysis")
 [![devDependencies Analysis](http://img.shields.io/david/dev/Aceheliflyer/AceBot.svg?style=flat-square)](http://david-dm.org/Aceheliflyer/AceBot?type=dev "devDependencies Analysis")
 
