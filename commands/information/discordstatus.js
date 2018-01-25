@@ -75,7 +75,6 @@ module.exports = class DiscordStatsCommand extends Command {
           color: 0x7289DA
         }
       })
-    }
-    )
+    })
   }
 }

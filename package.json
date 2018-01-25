@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Aceheliflyer <aceheliflyer@gmail.com> (http://aceheliflyer.github.io)",
   "main": "index.js",
   "scripts": {
