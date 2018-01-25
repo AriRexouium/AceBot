@@ -48,6 +48,6 @@ You can view the Todo List [here](http://github.com/Aceheliflyer/AceBot/projects
 
 <p align="center">
   <a href="http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE.md" title="License">
-    <img src="http://img.shields.io/github/license/Aceheliflyer/AceBot.svg?style=flat-square">
+    <img src="http://img.shields.io/github/license/Aceheliflyer/AceBot.svg?style=for-the-badge">
   </a>
 </p>
