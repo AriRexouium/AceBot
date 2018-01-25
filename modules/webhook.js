@@ -1,5 +1,7 @@
 const discord = require('discord.js')
-const config = require('../config/config.json')
+const fs = require('fs')
+const yaml = require('js-yaml')
+const config = yaml.safeLoad(fs.readFileSync('./config/config.yaml', 'utf8'))
 const log = require('./log.js')
 const webhookClient = new discord.WebhookClient(
   config.webhookConfig.webhookID,

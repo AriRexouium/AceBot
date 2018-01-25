@@ -34,7 +34,7 @@ echo goto Start>>shardStart.bat
 echo Finished Generating the shardLauncher!
 :: Finished
 echo.
-<nul set /p "=Finished! Press any key to exit. (When you want to launch the bot, use `Start.bat`. Make sure you've edited `./config/config.json`.)"
+<nul set /p "=Finished! Press any key to exit. (When you want to launch the bot, use `Start.bat`. Make sure you've edited `./config/config.yaml`.)"
 pause >nul
 del "%~f0"
 exit

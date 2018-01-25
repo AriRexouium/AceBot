@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "A rewrite of the original AceBot.",
-  "version": "2.35.1",
+  "version": "3.0.0",
   "author": "Aceheliflyer <aceheliflyer@gmail.com> (http://aceheliflyer.github.io)",
   "main": "index.js",
   "scripts": {
@@ -34,8 +34,9 @@
     "common-tags": "^1.7.2",
     "discord.js": "github:hydrabolt/discord.js",
     "discord.js-commando": "github:gawdl3y/discord.js-commando",
+    "js-yaml": "^3.10.0",
     "moment": "^2.20.1",
-    "moment-duration-format": "^2.2.0",
+    "moment-duration-format": "^2.2.1",
     "os-utils": "0.0.14",
     "pluralize": "^7.0.0",
     "scrape-it": "^4.1.2",

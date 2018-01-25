@@ -1,6 +1,8 @@
 const pluralize = require('pluralize')
 const unirest = require('unirest')
-const botListConfig = require('../config/botlist.json')
+const fs = require('fs')
+const yaml = require('js-yaml')
+const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yaml', 'utf8'))
 
 module.exports = async (client) => {
   await client.log.info(`Logged in as ${client.user.tag} (${client.user.id})`, 'Discord')

@@ -1,8 +1,8 @@
 <div align="center">
 <h1 align="center"><strong>AceBot</strong></h1>
   AceBot is a Discord bot designed for providing information on demand.<br />
-  <a href="http://discord.gg/UwvMSAa" title="Discord Guild">
-    <img src="http://discordapp.com/api/guilds/278946297736724501/embed.png?style=shield">
+  <a href="http://discord.gg/Y6Vgfyd" title="Discord Guild">
+    <img src="http://discordapp.com/api/guilds/247815199539593216/embed.png?style=shield">
   </a>
   <a href="http://discordbots.org/bot/253254587341996032">
     <img src="http://discordbots.org/api/widget/servers/253254587341996032.svg" alt="Discord Bots" />

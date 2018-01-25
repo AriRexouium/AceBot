@@ -28,4 +28,4 @@ node_modules/
 .vscode/
 
 # Configuration
-config/
+config/database.sqlite

@@ -1,5 +1,6 @@
-const config = require('./config/config.json')
 const fs = require('fs')
+const yaml = require('js-yaml')
+const config = yaml.safeLoad(fs.readFileSync('./config/config.yaml', 'utf8'))
 const path = require('path')
 const sqlite = require('sqlite')
 const { oneLine, stripIndents } = require('common-tags')
