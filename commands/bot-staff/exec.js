@@ -98,6 +98,12 @@ module.exports = class ExecCommand extends Command {
     }
   }
 }
+
+/**
+ * Adds a nospace character to embed breaking text.
+ * @param {string} text
+ * @return {string}
+ */
 var clean = (text) => {
   if (typeof (text) === 'string') {
     return text
