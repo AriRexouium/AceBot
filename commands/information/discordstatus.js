@@ -22,6 +22,7 @@ module.exports = class DiscordStatsCommand extends Command {
     scrapeIt(`http://status.discordapp.com`, {
       // Overall
       overall: 'body > div.layout-content.status.status-index.starter > div.container > div.page-status.status-none > span.status.font-large',
+      overallError: 'body > div.layout-content.status.status-index.starter > div.container > div.unresolved-incidents > div.unresolved-incident.impact-none > div.incident-title.font-large',
       /* Thanks to Thatguychris#3998 for doing the webscraping for the values below. */
       // API
       api: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(1) > div > span.component-status',
@@ -37,6 +38,8 @@ module.exports = class DiscordStatsCommand extends Command {
       // Voice
       voice: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(5) > div > span.component-status'
     }).then(webContent => {
+      var status
+      if (webContent.overall !== '') { status = webContent.overall } else { status = webContent.overallError.replace(/Subscribe/g, '') }
       message.say({
         content: '',
         embed: {
@@ -44,7 +47,7 @@ module.exports = class DiscordStatsCommand extends Command {
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
           title: 'Discord Status',
-          description: `**${webContent.overall}**`,
+          description: `**${status}**`,
           fields: [
             {
               'name': 'API',

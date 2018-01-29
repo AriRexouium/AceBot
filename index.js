@@ -36,7 +36,7 @@ client.registry
 const isFile = source => fs.lstatSync(source).isFile()
 
 /**
- * Gets all files in directory.
+ * Gets all files in a given directory.
  * @param {string} source
  * @return {string[]}
  */

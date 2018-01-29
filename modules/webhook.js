@@ -7,7 +7,11 @@ const webhookClient = new discord.WebhookClient(
   config.webhookConfig.webhookID,
   config.webhookConfig.webhookToken
 )
-
+/**
+ * Send message through config webhook.
+ * @param {any} text
+ * @return {any}
+ */
 module.exports = function (text) {
   if (text) {
     webhookClient.send(text).catch(error => log.error(error, 'Webhook'))
