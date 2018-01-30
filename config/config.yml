@@ -11,7 +11,7 @@ startConfig:
 loginConfig:
   token: token # Your bot's login token, keep this safe!
 shardConfig:
-  totalShards: 3 # The amount of shards to spawn when running the bot in a sharded mode.
+  totalShards: 2 # The amount of shards to spawn when running the bot in a sharded mode.
   respawn: true # Whether shards should respawn if they close.
 webhookConfig:
   webhookID: id # The webhook ID.

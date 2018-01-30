@@ -1,7 +1,7 @@
 const log = require('./modules/log.js')
 const fs = require('fs')
 const yaml = require('js-yaml')
-const config = yaml.safeLoad(fs.readFileSync('./config/config.yaml', 'utf8'))
+const config = yaml.safeLoad(fs.readFileSync('./config/config.yml', 'utf8'))
 const { ShardingManager } = require('discord.js')
 const Manager = new ShardingManager('./index.js', {
   totalShards: config.shardConfig.totalShards,

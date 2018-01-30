@@ -1,6 +1,6 @@
 const fs = require('fs')
 const yaml = require('js-yaml')
-const config = yaml.safeLoad(fs.readFileSync('./config/config.yaml', 'utf8'))
+const config = yaml.safeLoad(fs.readFileSync('./config/config.yml', 'utf8'))
 const path = require('path')
 const sqlite = require('sqlite')
 const { oneLine, stripIndents } = require('common-tags')
