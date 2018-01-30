@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <!--
 
 Have you read the Code of Conduct? By filing an issue, you are expected to comply with it.
@@ -21,9 +22,9 @@ Looking for support or have a question? Go here: http://github.com/Aceheliflyer/
 
 ### Steps to Reproduce
 
-1.  <!-- Step one. -->
-2.  <!-- Step two. -->
-3.  <!-- Step three, etc. -->
+1. <!-- Step one. -->
+2. <!-- Step two. -->
+3. <!-- Step three, etc. -->
 
 ### Screenshot of the issue (if at all possible)
 
@@ -31,8 +32,8 @@ Looking for support or have a question? Go here: http://github.com/Aceheliflyer/
 
 ### Your Environment
 
--   **Operating System:** <!-- What operating system do you use? EX: Windows 10 -->
--   **Node.js Version:** <!-- What version of Node are you using? You can get this by running `node -v` in a CMD/Terminal window. -->
+- **Operating System:** <!-- What operating system do you use? EX: Windows 10 -->
+- **Node.js Version:** <!-- What version of Node are you using? You can get this by running `node -v` in a CMD/Terminal window. -->
 
 ### Additional Information
 

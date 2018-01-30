@@ -8,10 +8,10 @@
     "install:dev": "npm i --only=dev",
     "start": "node index.js",
     "start:shard": "node sharder.js",
-    "test": "standard --verbose | snazzy && remark .",
-    "lint": "standard --verbose | snazzy",
+    "lint:all": "standard --verbose | snazzy && markdownlint *",
+    "lint:js": "standard --verbose | snazzy",
     "lint:fix": "standard --verbose --fix | snazzy",
-    "lint:md": "remark ."
+    "lint:md": "markdownlint *"
   },
   "repository": {
     "type": "git",
@@ -44,9 +44,7 @@
     "unirest": "^0.5.1"
   },
   "devDependencies": {
-    "remark-cli": "^5.0.0",
-    "remark-lint": "^6.0.1",
-    "remark-preset-lint-recommended": "^3.0.1",
+    "markdownlint": "^0.7.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },

@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <!-- Filling out this template is required. -->
 
 ### What is the purpose of this pull request?
