@@ -30,15 +30,16 @@ client.registry
   .registerCommandsIn(path.join(__dirname, 'commands'))
 
 /**
- * @param {string} source
- * @return {boolean}
+ * Checks to see if the file exists.
+ * @param {string} source The file.
+ * @return {boolean} Whether the file exists or not.
  */
 const isFile = source => fs.lstatSync(source).isFile()
 
 /**
  * Gets all files in a given directory.
- * @param {string} source
- * @return {string[]}
+ * @param {string} source The directory.
+ * @return {string[]} List of the files in the directory.
  */
 let getFiles = source => {
   let files = fs.readdirSync(__dirname + source).map(name => path.join(__dirname + source, name)).filter(isFile) // eslint-disable-line no-path-concat

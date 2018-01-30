@@ -2,10 +2,9 @@ const snekfetch = require('snekfetch')
 
 /**
  * Send given text to hastebin.
- * @param {any} text
- * @param {string} syntax=''
- * @param {boolean} secure=true
- * @param {any} client
+ * @param {any} text The text to send to hastebin.
+ * @param {string} syntax The text syntax. (Default is none.)
+ * @param {boolean} secure Whether to return the URL as secured or not. (Defaults to true)
  */
 module.exports = async function (text, syntax = '', secure = true, client) {
   if (text !== undefined) {

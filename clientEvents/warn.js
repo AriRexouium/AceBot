@@ -18,14 +18,20 @@ module.exports = (client, warn) => {
           footer: { text: 'warn' },
           timestamp: new Date(),
           title: `warn${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: '```js\n' + fix(warn.stack) + '\n```',
+          description: '```js\n' + clean(warn.stack) + '\n```',
           color: 0xFFFF00
         }]
       })
     }
   }
 }
-var fix = (text) => {
+
+/**
+ * Adds a nospace character to embed breaking text.
+ * @param {string} text The text to clean.
+ * @return {string} The text after it was cleaned.
+ */
+var clean = (text) => {
   if (typeof (text) === 'string') {
     return text
     .replace(/`/g, '`' + String.fromCharCode(8203))

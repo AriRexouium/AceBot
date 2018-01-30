@@ -1,22 +1,22 @@
 ---
 startConfig:
-  commandPrefix: a@
-  commandEditableDuration: '30'
-  nonCommandEditable: false
-  unknownCommandResponse: false
-  owner:
+  commandPrefix: a@ # Your bot's prefix to use for commands.
+  commandEditableDuration: '30' # The amount of time before a command cannot be edited. (Only ping supports this right now.)
+  nonCommandEditable: false # Whether commands can be edited after they have been executed.
+  unknownCommandResponse: false # Whether to send a if a command is invalid.
+  owner: # The list of owners.
   - '196443959558406144'
   - '253291447137075211'
-  invite: http://discord.gg/Y6Vgfyd
+  invite: http://discord.gg/Y6Vgfyd # The server invite to the support server.
 loginConfig:
-  token: token
+  token: token # Your bot's login token, keep this safe!
 shardConfig:
-  totalShards: 3
-  respawn: true
+  totalShards: 3 # The amount of shards to spawn when running the bot in a sharded mode.
+  respawn: true # Whether shards should respawn if they close.
 webhookConfig:
-  webhookID: id
-  webhookToken: token
-  enabled: false
+  webhookID: id # The webhook ID.
+  webhookToken: token # The webhook token.
+  enabled: false # Whether webhook events should be enabled or not.
   clientEvents:
     commandBlocked: false
     commandError: false

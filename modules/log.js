@@ -9,12 +9,12 @@ const chalk = require('chalk')
 
 /**
  * Log text to console.
- * @param {string} background
- * @param {string} title
- * @param {string} text
- * @param {boolean} time=true
- * @param {string} type
- * @return {boolean}
+ * @param {string} background The background color to use.
+ * @param {string} title The title of the log message.
+ * @param {string} text The text to log.
+ * @param {boolean} time Add a timestamp or not. (Defaults to true.)
+ * @param {string} type What type of log it is. (log, warn, error)
+ * @return {boolean} Whether the log was successful or not.
  */
 function Logger(background, title, text, time = true, type) {
   console[type](`${time ? `[${chalk.cyan(moment().format('H:mm:ss'))}]` : ''}${chalk[background].bold(` ${title} `)} ${text}`)
