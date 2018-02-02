@@ -39,7 +39,7 @@
     "moment-duration-format": "^2.2.1",
     "os-utils": "0.0.14",
     "pluralize": "^7.0.0",
-    "scrape-it": "^4.1.2",
+    "scrape-it": "^5.0.2",
     "sqlite": "^2.9.1",
     "unirest": "^0.5.1"
   },
