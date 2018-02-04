@@ -18,10 +18,10 @@ module.exports = class RestartCommand extends Command {
   }
 
   async run (message) {
-    /*
-      TODO: Add support for restarting all shards.
-      NOTE: This might not be possible because `process.exit()` can't be called with `broadcastEval()`.
-    */
+    /**
+     * TODO: Add support for restarting all shards.
+     * NOTE: This might not be possible because `process.exit()` can't be called with `broadcastEval()`.
+     */
     // if (this.client.shard) {} else {
     await message.say({
       content: '',
