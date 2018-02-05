@@ -1,6 +1,9 @@
 const { oneLine } = require('common-tags')
 const { stripIndents } = require('common-tags')
 const { escapeMarkdown } = require('discord.js')
+const fs = require('fs')
+const yaml = require('js-yaml')
+const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yml', 'utf8'))
 
 module.exports = async (client, guild) => {
   client.log.info(stripIndents`
@@ -52,4 +55,8 @@ module.exports = async (client, guild) => {
       })
     }
   }
+
+  // Bot List
+  if (botListConfig.DiscordBotsOrg.enabled === true) { client.discordbots(client) }
+  if (botListConfig.BotsDiscordPw.enabled === true) { client.botsdiscordpw(client) }
 }

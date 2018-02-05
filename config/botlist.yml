@@ -2,4 +2,6 @@
 DiscordBotsOrg:
   enabled: false # Whether to post server count to http://discordbots.org or not.
   token: token # This is the token you got from http://discordbots.org.
-  refreshRate: 600000 # This is in miliseconds, not seconds or minutes!
+BotsDiscordPw:
+  enabled: false # Whether to post server count to http://bots.discord.pw or not.
+  token: token # This is the token you got from http://bots.discord.pw.

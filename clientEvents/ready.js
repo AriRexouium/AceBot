@@ -1,5 +1,4 @@
 const pluralize = require('pluralize')
-const unirest = require('unirest')
 const fs = require('fs')
 const yaml = require('js-yaml')
 const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yml', 'utf8'))
@@ -41,25 +40,9 @@ module.exports = async (client) => {
 
   /* ************************************************** */
 
-  // http://discordbots.org
-  async function DiscordBotsOrg () {
-    var totalGuilds
-    if (!client.shard) {
-      totalGuilds = await client.guilds.size
-    } else {
-      if (client.shard.id !== client.config.shardConfig.totalShards - 1) return
-      var totalGuildsData = await client.shard.fetchClientValues('guilds.size')
-      totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
-    }
-    unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-    .headers({ 'Authorization': botListConfig.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
-    .send({ 'server_count': totalGuilds })
-    .end(function () { client.log.info('Servercount sent to http://discordbots.org.') })
-  }
-  if (botListConfig.DiscordBotsOrg.enabled === true) {
-    DiscordBotsOrg()
-    setInterval(DiscordBotsOrg, botListConfig.DiscordBotsOrg.refreshRate)
-  }
+  // Bot List
+  if (botListConfig.DiscordBotsOrg.enabled === true) { client.discordbots(client) }
+  if (botListConfig.BotsDiscordPw.enabled === true) { client.botsdiscordpw(client) }
 
   // Travis Tests
   if (client.travisTest === true) {
