@@ -3,15 +3,18 @@
   "description": "A rewrite of the original AceBot.",
   "version": "3.1.0",
   "author": "Aceheliflyer <aceheliflyer@gmail.com> (http://aceheliflyer.github.io)",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "install:dev": "npm i --only=dev",
     "start": "node index.js",
     "start:shard": "node sharder.js",
+    "install:dev": "npm i --only=dev",
     "lint:all": "standard --verbose | snazzy && markdownlint *",
     "lint:js": "standard --verbose | snazzy",
-    "lint:fix": "standard --verbose --fix | snazzy",
-    "lint:md": "markdownlint *"
+    "lint:js-fix": "standard --verbose --fix | snazzy",
+    "lint:md": "markdownlint *",
+    "precommit": "npm run lint:js",
+    "prepush": "npm run lint:js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,6 @@
     "discord.js",
     "discord.js-commando"
   ],
-  "license": "MIT",
   "bugs": {
     "url": "http://github.com/Aceheliflyer/AceBot/issues"
   },
@@ -44,6 +46,7 @@
     "unirest": "^0.5.1"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "markdownlint": "^0.7.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
