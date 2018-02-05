@@ -16,12 +16,12 @@ const chalk = require('chalk')
  * @param {string} type What type of log it is. (log, warn, error)
  * @return {boolean} Whether the log was successful or not.
  */
-function Logger(background, title, text, time = true, type) {
+function Logger (background, title, text, time = true, type) {
   console[type](`${time ? `[${chalk.cyan(moment().format('H:mm:ss'))}]` : ''}${chalk[background].bold(` ${title} `)} ${text}`)
 }
 
 module.exports = {
-  info(text, title = 'Info', background = 'bgCyan', time = true) {
+  info (text, title = 'Info', background = 'bgCyan', time = true) {
     if (text) {
       Logger(background, title, text, time, 'info') // NOTE: Yes I know, console.info() is just an alias for console.log().
       return true
@@ -29,7 +29,7 @@ module.exports = {
       process.emitWarning('text cannot be undefined', 'LoggerError')
     }
   },
-  debug(text, title = 'Debug', time = true) {
+  debug (text, title = 'Debug', time = true) {
     if (text) {
       Logger('bgMagenta', title, text, time, 'log')
       return true
@@ -37,7 +37,7 @@ module.exports = {
       process.emitWarning('text cannot be undefined', 'LoggerError')
     }
   },
-  warn(warn, title) {
+  warn (warn, title) {
     if (warn) {
       if (title) { title = `${title} Warning` } else { title = 'Warning' }
       Logger('bgYellow', title, warn, true, 'warn')
@@ -46,7 +46,7 @@ module.exports = {
       process.emitWarning('warn cannot be undefined', 'LoggerError')
     }
   },
-  error(error, title) {
+  error (error, title) {
     if (error) {
       if (title) { title = `${title} Error` } else { title = 'Error' }
       Logger('bgRed', title, `${(error && error.stack) || error}`, true, 'error')
