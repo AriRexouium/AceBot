@@ -13,6 +13,7 @@
     "lint:js": "standard --verbose | snazzy",
     "lint:js-fix": "standard --verbose --fix | snazzy",
     "lint:md": "markdownlint *",
+    "commitmsg": "commitplease .git/COMMIT_EDITMSG",
     "precommit": "npm run lint:js",
     "prepush": "npm run lint:js"
   },
@@ -46,6 +47,8 @@
     "unirest": "^0.5.1"
   },
   "devDependencies": {
+    "bithound": "^1.7.0",
+    "commitplease": "^3.2.0",
     "husky": "^0.14.3",
     "markdownlint": "^0.7.0",
     "snazzy": "^7.0.0",
@@ -53,5 +56,34 @@
   },
   "engines": {
     "node": "8.4.0"
+  },
+  "commitplease": {
+    "style": "jquery",
+    "component": true,
+    "components": [
+      "Assets",
+      "Docs",
+      "Botlist",
+      "ClientEvents",
+      "Commands",
+      "Comments",
+      "Config",
+      "Core",
+      "Events",
+      "Fix",
+      "Index",
+      "Lint",
+      "Modules",
+      "Packages",
+      "ProcessEvents",
+      "Release",
+      "Support",
+      "Travis"
+    ],
+    "limits": {
+      "firstLine": "72",
+      "otherLine": "80"
+    },
+    "nohook": true
   }
 }
