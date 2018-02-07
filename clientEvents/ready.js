@@ -49,4 +49,12 @@ module.exports = async (client) => {
     await client.log.debug('Running in Travis CI mode, now exiting with 0 exit code in 5 seconds...', 'TRAVIS TEST')
     await setTimeout(() => { process.exit(0) }, 5000)
   }
+
+  // Assign application owner as owner of the bot by default.
+  client.fetchApplication().then(app => {
+    let appOwner = client.config.startConfig.owner.indexOf(app.owner.id) > -1
+    if (appOwner === false) {
+      client.config.startConfig.owner.push(app.owner.id)
+    }
+  })
 }

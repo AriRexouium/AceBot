@@ -23,7 +23,7 @@ client.registry
   .registerDefaultTypes()
   .registerGroups([
     ['bot-staff', 'Bot Staff'],
-    ['bot-management', 'Bot Manangement'],
+    ['bot-management', 'Bot Management'],
     ['information', 'Information'],
     ['utility', 'Utility']
   ])
@@ -106,7 +106,7 @@ client.dispatcher.addInhibitor(message => {
   return 'lockdown'
 })
 
-/* Start Assinging to Client */
+/* Start Assigning to Client */
 // Travis Test Mode
 if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
 
