@@ -1,11 +1,9 @@
-<!-- markdownlint-disable MD022 MD032 -->
+<!-- markdownlint-disable MD022 MD024 MD032 -->
 # Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
 
 <!--
 ## [NEW] - YYYY-MM-DD
@@ -19,9 +17,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Remove here.
 -->
 
+## [Unreleased]
+### Added
+- Added changelog for keeping track of changes.
+- Added detailed JSDocs to source.
+- Added comments to config files.
+- Added AceBot logo as an asset.
+- Added commit linting in jQuery style.
+- The application owner is automatically set as the owner.
+
+### Changed
+- Changed config file extensions from `.yaml` to `.yml`.
+- Improved README documentation.
+- Switched from remark to markdownlint.
+- License is now a plain text file.
+- Improved CONTRIBUTING file.
+
+### Fixed
+- Fixed broken links in README.
+- Fixed config file issues.
+
 ## [3.1.0] - 2018-01-27
 ### Added
-- Add gitstatus and buildstatus to retrieve information on AceBot from respecive websites.
+- Add gitstatus and buildstatus to retrieve information on AceBot from respective websites.
 - Add gitstatus command.
 - Add buildstatus command.
 
