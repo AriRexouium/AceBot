@@ -1,5 +1,6 @@
 <!-- markdownlint-disable MD022 MD024 MD032 -->
 # Changelog
+<!-- http://keepachangelog.com -->
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -18,6 +19,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 -->
 
 ## [Unreleased]
+
+## [3.2.0] - 2018-02-09
 ### Added
 - Added changelog for keeping track of changes.
 - Added detailed JSDocs to source.
@@ -32,12 +35,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Switched from remark to markdownlint.
 - License is now a plain text file.
 - Improved CONTRIBUTING file.
+- Removed unused async.
+- Restart command now restarts all shards.
+- Improved information in commands.
 
 ### Fixed
 - Fixed broken links in README.
 - Fixed config file issues.
 
-## [3.1.0] - 2018-01-27
+## 3.1.0 - 2018-01-27
 ### Added
 - Add gitstatus and buildstatus to retrieve information on AceBot from respective websites.
 - Add gitstatus command.
@@ -47,5 +53,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix style error in the discordstatus command.
 
 <!-- [NEW]: http://github.com/olivierlacan/keep-a-changelog/compare/vOLD...vNEW -->
-[Unreleased]: http://github.com/Aceheliflyer/AceBot/compare/v3.1.0...HEAD
-[3.1.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.1.0...master
+[Unreleased]: http://github.com/Aceheliflyer/AceBot/compare/v3.2.0...HEAD
+[3.2.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.1.0...v3.2.0
