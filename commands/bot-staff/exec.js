@@ -10,8 +10,8 @@ module.exports = class ExecCommand extends Command {
       name: 'exec',
       memberName: 'exec',
       group: 'bot-staff',
-      description: 'Executes a new process.',
-      details: 'Only the bot owner(s) may use this command.',
+      description: 'Execute commands on the host.',
+      details: 'Execute commands on the host system.',
       aliases: ['execute'],
       clientPermissions: ['EMBED_LINKS'],
       args: [

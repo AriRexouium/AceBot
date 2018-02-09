@@ -8,7 +8,7 @@ module.exports = class ExecCommand extends Command {
       memberName: 'contact',
       group: 'bot-staff',
       description: 'Sends a message to the owner(s).',
-      details: 'Sends a message to the owner(s).',
+      details: 'Sends a message to the owner(s). Abusing this will lead to be blacklisted from the bot.',
       throttling: {
         usages: 2,
         duration: 300

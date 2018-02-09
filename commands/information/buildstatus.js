@@ -10,7 +10,8 @@ module.exports = class DiscordStatsCommand extends Command {
       name: 'buildstatus',
       memberName: 'buildstatus',
       group: 'information',
-      description: 'Displays the build status for the latest release of the bot.',
+      description: 'Displays the current build info.',
+      details: 'Displays the build status for the latest release of the bot.',
       aliases: ['buildstats'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {

@@ -7,10 +7,9 @@ module.exports = class BlacklistCommand extends Command {
       name: 'blacklist',
       memberName: 'blacklist',
       group: 'bot-staff',
-      description: 'Adds a user to the blacklist.',
-      details: 'Only the bot owner(s) may use this command.',
+      description: 'Add or remove a user from the blacklist.',
+      details: 'Allows the owners to add or remove a user from the bot blacklist.',
       aliases: ['ban'],
-      clientPermissions: ['MANAGE_MESSAGES'],
       examples: [
         'blacklist add 253254587341996032',
         'blacklist remove 253254587341996032'

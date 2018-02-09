@@ -8,6 +8,7 @@ module.exports = class ListCommand extends Command {
       memberName: 'list',
       group: 'bot-management',
       description: 'Lists all commands or groups.',
+      details: 'Lists all commands or groups with their enabled states.',
       aliases: [
         'show',
         'view',

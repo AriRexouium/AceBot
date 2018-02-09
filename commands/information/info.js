@@ -9,7 +9,6 @@ module.exports = class InfoCommand extends Command {
       memberName: 'info',
       group: 'information',
       description: 'Displays information about the bot.',
-      details: 'Displays information and information about this bot.',
       aliases: ['about'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {

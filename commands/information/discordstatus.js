@@ -9,6 +9,7 @@ module.exports = class DiscordStatsCommand extends Command {
       memberName: 'discordstatus',
       group: 'information',
       description: 'Displays Discord server statistics.',
+      details: 'Displays Discord server statistics such as uptime and operational status.',
       aliases: ['discordstats'],
       clientPermissions: ['EMBED_LINKS'],
       throttling: {

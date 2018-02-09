@@ -7,7 +7,7 @@ module.exports = class SetStatusCommand extends Command {
       name: 'setstatus',
       memberName: 'setstatus',
       group: 'bot-staff',
-      description: 'Changes the bot\'s/shard\'s status.',
+      description: 'Changes the bot\'s status.',
       details: 'Only the bot owner(s) may use this command.',
       examples: [
         'setstatus online',

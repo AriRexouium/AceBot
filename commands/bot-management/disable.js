@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { oneLine } = require('common-tags')
 
-module.exports = class DisableCommandCommand extends Command {
+module.exports = class DisableCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'disable',
@@ -9,12 +9,12 @@ module.exports = class DisableCommandCommand extends Command {
       group: 'bot-management',
       description: 'Disables a command or command group.',
       details: oneLine`
-      The argument must be the name/ID (partial or whole) of a command or command group.
-      Only administrators may use this command.
+        The argument must be the name/ID (partial or whole) of a command or command group.
+        Only server Administrators may use this command.
       `,
+      userPermissions: ['MANAGE_SERVER'],
       examples: [
-        'disable util',
-        'disable Utility',
+        'disable stats',
         'disable ping'
       ],
       throttling: {
@@ -31,11 +31,6 @@ module.exports = class DisableCommandCommand extends Command {
       ],
       guarded: true
     })
-  }
-
-  hasPermission (message) {
-    if (!message.guild) return this.client.isOwner(message.author)
-    return message.member.hasPermission('ADMINISTRATOR') || this.client.isOwner(message.author)
   }
 
   run (message, args) {

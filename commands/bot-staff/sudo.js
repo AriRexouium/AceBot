@@ -12,7 +12,7 @@ module.exports = class SudoCommand extends Command {
       memberName: 'sudo',
       group: 'bot-staff',
       description: 'Executes code on a bot or user account.',
-      details: 'Only the bot owner(s) may use this command.',
+      details: 'Allows the bot owners(s) to execute code on a different account via token.',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {

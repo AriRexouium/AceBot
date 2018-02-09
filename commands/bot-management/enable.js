@@ -12,6 +12,7 @@ module.exports = class EnableCommandCommand extends Command {
       The argument must be the name/ID (partial or whole) of a command or command group.
       Only administrators may use this command.
       `,
+      userPermissions: ['MANAGE_SERVER'],
       examples: [
         'enable util',
         'enable Utility',
@@ -31,11 +32,6 @@ module.exports = class EnableCommandCommand extends Command {
       ],
       guarded: true
     })
-  }
-
-  hasPermission (message) {
-    if (!message.guild) return this.client.isOwner(message.author)
-    return message.member.hasPermission('ADMINISTRATOR') || this.client.isOwner(message.author)
   }
 
   run (message, args) {

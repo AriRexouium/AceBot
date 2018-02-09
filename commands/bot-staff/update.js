@@ -11,7 +11,7 @@ module.exports = class UpdateCommand extends Command {
       memberName: 'update',
       group: 'bot-staff',
       description: 'Updates the bot.',
-      details: 'Only the bot owner(s) may use this command.',
+      details: 'Pulls code from GitHub.',
       aliases: ['upgrade'],
       ownerOnly: true,
       guarded: true
