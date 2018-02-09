@@ -18,7 +18,7 @@ module.exports = class UpdateCommand extends Command {
     })
   }
 
-  async run (message) {
+  run (message) {
     message.say('**Update requested, please wait.**').then(function () {
       try {
         var codeResult = childProcess.execSync('git pull').toString()

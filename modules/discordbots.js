@@ -3,7 +3,7 @@ const fs = require('fs')
 const yaml = require('js-yaml')
 const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yml', 'utf8'))
 
-module.exports = async function (client) {
+module.exports = function (client) {
   var totalGuilds
   if (!client.shard) {
     totalGuilds = { 'server_count': client.guilds.size }

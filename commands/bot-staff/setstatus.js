@@ -27,7 +27,7 @@ module.exports = class SetStatusCommand extends Command {
     })
   }
 
-  async run (message, args) {
+  run (message, args) {
     var status
     if (args.status === 'online') { status = 'online' } else
     if (args.status === 'idle') { status = 'idle' } else
@@ -38,6 +38,6 @@ module.exports = class SetStatusCommand extends Command {
     .then(
       this.client.user.setActivity(`${this.client.config.startConfig.commandPrefix}help | ${pluralize('Guild', this.client.guilds.size, true)} | ${pluralize('User', this.client.users.size, true)}${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`)
     )
-    message.say(`Succesfully set status to \`${status}\` ${this.client.shard ? `on all shards.\n*(Allow up to 10 minutes for this to take effect on all shards.)*` : ''}`)
+    message.say(`Successfully set status to \`${status}\` ${this.client.shard ? `on all shards.\n*(Allow up to 10 minutes for this to take effect on all shards.)*` : ''}`)
   }
 }

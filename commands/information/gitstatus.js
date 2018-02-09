@@ -21,7 +21,7 @@ module.exports = class DiscordStatsCommand extends Command {
     })
   }
 
-  async run (message) {
+  run (message) {
     request({ url: 'http://api.github.com/repositories/77184461', headers: { 'User-Agent': 'AceBot' } }, function (error, response, body) {
       if (error) {
         message.reply('It appears there was an error pulling stats from GitHub.')

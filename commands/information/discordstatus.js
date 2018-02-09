@@ -19,7 +19,7 @@ module.exports = class DiscordStatsCommand extends Command {
     })
   }
 
-  async run (message) {
+  run (message) {
     scrapeIt(`http://status.discordapp.com`, {
       // Overall
       overall: 'body > div.layout-content.status.status-index.starter > div.container > div.page-status.status-none > span.status.font-large',

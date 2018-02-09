@@ -21,7 +21,7 @@ module.exports = class DiscordStatsCommand extends Command {
     })
   }
 
-  async run (message) {
+  run (message) {
     request({ url: 'http://api.travis-ci.org/repositories/12117361.json', headers: { 'User-Agent': 'AceBot' } }, function (error, response, body) {
       if (error) {
         return message.reply('It appears there was an error pulling stats from Travis CI.')
