@@ -20,6 +20,7 @@ module.exports = class DiscordStatsCommand extends Command {
   }
 
   run (message) {
+    // TODO: Redo this command using the StatusPage API.
     scrapeIt(`http://status.discordapp.com`, {
       // Overall
       overall: 'body > div.layout-content.status.status-index.starter > div.container > div.page-status.status-none > span.status.font-large',
@@ -41,43 +42,40 @@ module.exports = class DiscordStatsCommand extends Command {
     }).then(webContent => {
       var status
       if (webContent.overall !== '') { status = webContent.overall } else { status = webContent.overallError.replace(/Subscribe/g, '') }
-      message.say({
-        content: '',
-        embed: {
-          author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
-          footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-          timestamp: new Date(),
-          title: 'Discord Status',
-          description: `**${status}**`,
-          fields: [
-            {
-              'name': 'API',
-              'value': `**${webContent.api}**\n❯ ${webContent.apiUptime.replace(' ', '')}`,
-              'inline': true
-            },
-            {
-              'name': 'Gateway',
-              'value': `**${webContent.gateway}**\n❯ ${webContent.gatewayUptime.replace(' ', '')}`,
-              'inline': true
-            },
-            {
-              'name': 'Media Proxy',
-              'value': `**${webContent.mediaproxy}**\n❯ ${webContent.mediaproxyUptime.replace(' ', '')}`,
-              'inline': true
-            },
-            {
-              'name': 'CloudFlare',
-              'value': `**${webContent.cloudflare}**`,
-              'inline': true
-            },
-            {
-              'name': 'Voice',
-              'value': `**${webContent.voice}**`,
-              'inline': true
-            }
-          ],
-          color: 0x7289DA
-        }
+      message.embed({
+        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+        timestamp: new Date(),
+        title: 'Discord Status',
+        description: `**${status}**`,
+        fields: [
+          {
+            'name': 'API',
+            'value': `**${webContent.api}**\n❯ ${webContent.apiUptime.replace(' ', '')}`,
+            'inline': true
+          },
+          {
+            'name': 'Gateway',
+            'value': `**${webContent.gateway}**\n❯ ${webContent.gatewayUptime.replace(' ', '')}`,
+            'inline': true
+          },
+          {
+            'name': 'Media Proxy',
+            'value': `**${webContent.mediaproxy}**\n❯ ${webContent.mediaproxyUptime.replace(' ', '')}`,
+            'inline': true
+          },
+          {
+            'name': 'CloudFlare',
+            'value': `**${webContent.cloudflare}**`,
+            'inline': true
+          },
+          {
+            'name': 'Voice',
+            'value': `**${webContent.voice}**`,
+            'inline': true
+          }
+        ],
+        color: 0x7289DA
       })
     })
   }

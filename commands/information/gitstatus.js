@@ -27,37 +27,34 @@ module.exports = class DiscordStatsCommand extends Command {
         message.reply('It appears there was an error pulling stats from GitHub.')
       } else {
         body = JSON.parse(body)
-        message.say({
-          content: '',
-          embed: {
-            author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
-            footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-            timestamp: new Date(),
-            title: body.full_name,
-            description: `Status for [${body.name}](${body.html_url})`,
-            fields: [
-              {
-                'name': 'Current Stats',
-                'value': stripIndents`
-                  **Watchers:** ${body.watchers_count}
-                  **Stars:** ${body.stargazers_count}
-                  **Forks:** ${body.forks_count}
-                `,
-                'inline': true
-              },
-              {
-                'name': 'License',
-                'value': body.license.name,
-                'inline': true
-              },
-              {
-                'name': 'Last Updated',
-                'value': `${moment(body.pushed_at).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(body.pushed_at).fromNow()})`,
-                'inline': true
-              }
-            ],
-            color: 0x7289DA
-          }
+        message.embed({
+          author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
+          footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+          timestamp: new Date(),
+          title: body.full_name,
+          description: `Status for [${body.name}](${body.html_url})`,
+          fields: [
+            {
+              'name': 'Current Stats',
+              'value': stripIndents`
+                **Watchers:** ${body.watchers_count}
+                **Stars:** ${body.stargazers_count}
+                **Forks:** ${body.forks_count}
+              `,
+              'inline': true
+            },
+            {
+              'name': 'License',
+              'value': body.license.name,
+              'inline': true
+            },
+            {
+              'name': 'Last Updated',
+              'value': `${moment(body.pushed_at).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(body.pushed_at).fromNow()})`,
+              'inline': true
+            }
+          ],
+          color: 0x7289DA
         })
       }
     })

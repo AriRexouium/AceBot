@@ -32,6 +32,9 @@ module.exports = class UserInfoCommand extends Command {
     let user = args.user.user
     var timeZone = new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]
 
+    var userColor = (args.user).displayHexColor
+    if (userColor === '#000000') { userColor = 0x7289DA } else { userColor = Number(userColor.replace('#', '0x')) }
+
     var userStatus
     if (user.presence.activity !== null) {
       if (user.presence.activity.type === 'PLAYING') {
@@ -99,7 +102,7 @@ module.exports = class UserInfoCommand extends Command {
           'inline': false
         }
       ],
-      color: 0x7289DA
+      color: userColor
     })
   }
 }

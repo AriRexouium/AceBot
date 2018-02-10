@@ -41,47 +41,44 @@ module.exports = class InfoCommand extends Command {
       var totalUsersData = await this.client.shard.fetchClientValues('users.size')
       totalUsers = await totalUsersData.reduce((prev, val) => prev + val, 0)
     }
-    message.say({
-      content: '',
-      embed: {
-        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
-        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-        timestamp: new Date(),
-        fields: [
-          /* eslint-disable object-property-newline */
-          { 'name': 'Developer', 'value': `**${escapeMarkdown(dev)}**`, 'inline': true },
-          { 'name': 'Version', 'value': require('../../package.json').version, 'inline': true },
-          { 'name': 'Library', 'value': stripIndents`
-            **discord.js-commando** v${require('discord.js-commando/package.json').version}
-            **discord.js** v${require('discord.js/package.json').version}
-          `, 'inline': true },
-          { 'name': 'Invites', 'value': stripIndents`
+    message.embed({
+      author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+      footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+      timestamp: new Date(),
+      fields: [
+        /* eslint-disable object-property-newline */
+        { 'name': 'Developer', 'value': `**${escapeMarkdown(dev)}**`, 'inline': true },
+        { 'name': 'Version', 'value': require('../../package.json').version, 'inline': true },
+        { 'name': 'Library', 'value': stripIndents`
+          **discord.js-commando** v${require('discord.js-commando/package.json').version}
+          **discord.js** v${require('discord.js/package.json').version}
+        `, 'inline': true },
+        { 'name': 'Invites', 'value': stripIndents`
           [Bot Invite](${await this.client.generateInvite()})
           [Server Invite](${this.client.config.startConfig.invite})
-          `, 'inline': true },
-          { 'name': 'Websites', 'value': stripIndents`
+        `, 'inline': true },
+        { 'name': 'Websites', 'value': stripIndents`
           [Homepage](${require('../../package.json').homepage})
           [Repository](${require('../../package.json').homepageGithub})
-          `, 'inline': true },
-          { 'name': 'Discord Stats', 'value': stripIndents`
-            ${this.client.shard ? `**Shards:** ${this.client.shard.count}\n` : ''}**Guilds:** ${totalGuilds}
-            **Channels:** ${totalChannels}
-            **Users:** ${totalUsers}
-          `, 'inline': true },
-          {
-            'name': 'Contributors',
-            'value': stripIndents`
-              **${escapeMarkdown(contrib1)} -** Helped with a lot of issues I had.
-              **${escapeMarkdown(contrib2)} -** Offered suggestions and feedback.
-              **${escapeMarkdown(contrib3)} -** Designed the avatar for Acebot.
-              **${escapeMarkdown(contrib4)} -** Did the web scraping for \`discordstatus\`.
-            `,
-            'inline': false
-          }
-          /* eslint-enable object-property-newline */
-        ],
-        color: 0x7289DA
-      }
+        `, 'inline': true },
+        { 'name': 'Discord Stats', 'value': stripIndents`
+          ${this.client.shard ? `**Shards:** ${this.client.shard.count}\n` : ''}**Guilds:** ${totalGuilds}
+          **Channels:** ${totalChannels}
+          **Users:** ${totalUsers}
+        `, 'inline': true },
+        {
+          'name': 'Contributors',
+          'value': stripIndents`
+            **${escapeMarkdown(contrib1)} -** Helped with a lot of issues I had.
+            **${escapeMarkdown(contrib2)} -** Offered suggestions and feedback.
+            **${escapeMarkdown(contrib3)} -** Designed the avatar for Acebot.
+            **${escapeMarkdown(contrib4)} -** Did the web scraping for \`discordstatus\`.
+          `,
+          'inline': false
+        }
+        /* eslint-enable object-property-newline */
+      ],
+      color: 0x7289DA
     })
   }
 }

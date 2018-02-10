@@ -25,6 +25,14 @@ module.exports = class ServerInfoCommand extends Command {
     var guild = message.guild
     var ownerInfo = message.guild.members.find('id', guild.ownerID)
 
+    var clientColor
+    if (message.guild) {
+      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
+      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
+    } else {
+      clientColor = 0x7289DA
+    }
+
     var verificationLevel = [
       '**None**\n(Unrestricted)',
       '**Low**\n(Must have verified email on account)',
@@ -110,7 +118,7 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         }
       ],
-      color: 0x7289DA
+      color: clientColor
     })
   }
 }

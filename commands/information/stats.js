@@ -21,6 +21,14 @@ module.exports = class StatsCommand extends Command {
   }
 
   async run (message) {
+    var clientColor
+    if (message.guild) {
+      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
+      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
+    } else {
+      clientColor = 0x7289DA
+    }
+
     if (this.client.shard) {
       // Messages Sent
       var totalMessagesSentData = await this.client.shard.fetchClientValues('botStats.messagesSent')
@@ -127,7 +135,7 @@ module.exports = class StatsCommand extends Command {
             'inline': true
           }
         ],
-        color: 0x7289DA
+        color: clientColor
       })
     })
   }

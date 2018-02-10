@@ -28,6 +28,9 @@ module.exports = class UserInfoCommand extends Command {
 
   run (message, args) {
     var user = args.user.user
+    var userColor = (args.user).displayHexColor
+    if (userColor === '#000000') { userColor = 0x7289DA } else { userColor = Number(userColor.replace('#', '0x')) }
+
     message.embed({
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
@@ -82,7 +85,7 @@ module.exports = class UserInfoCommand extends Command {
           'inline': true
         }
       ],
-      color: 0x7289DA
+      color: userColor
     })
   }
 }
