@@ -28,7 +28,8 @@ module.exports = class PrefixCommand extends Command {
           max: 15,
           default: ''
         }
-      ]
+      ],
+      guarded: true
     })
   }
 
