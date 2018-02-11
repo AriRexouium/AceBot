@@ -18,12 +18,20 @@ module.exports = class PingCommand extends Command {
   }
 
   async run (message) {
+    var clientColor
+    if (message.guild) {
+      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
+      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
+    } else {
+      clientColor = 0x7289DA
+    }
+
     if (!message.editable) {
       const pingMessage = await message.say({
         content: '',
         embed: {
           description: 'Pinging...',
-          color: 0x7289DA
+          color: clientColor
         }
       })
       return pingMessage.edit({
@@ -36,7 +44,7 @@ module.exports = class PingCommand extends Command {
           **REST Latency:** \`${pingMessage.createdTimestamp - message.createdTimestamp}ms\`
           ${this.client.ping ? `**| Websocket Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
           `),
-          color: 0x7289DA
+          color: clientColor
         }
       })
     } else {
@@ -44,7 +52,7 @@ module.exports = class PingCommand extends Command {
         content: '',
         embed: {
           description: 'Pinging...',
-          color: 0x7289DA
+          color: clientColor
         }
       })
       return message.edit({
@@ -57,7 +65,7 @@ module.exports = class PingCommand extends Command {
           **REST Latency:** \`${message.editedTimestamp - message.createdTimestamp}ms\`
           ${this.client.ping ? `**| Websocket Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
           `),
-          color: 0x7289DA
+          color: clientColor
         }
       })
     }

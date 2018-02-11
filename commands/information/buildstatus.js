@@ -27,34 +27,32 @@ module.exports = class DiscordStatsCommand extends Command {
         return message.reply('It appears there was an error pulling stats from Travis CI.')
       } else {
         var buildResult = ['Passing', 'Failing', 'Invalid']
+        var buildResultColor = [0x39AA56, 0xDB4545, 0x9D9D9D]
         body = JSON.parse(body)
-        message.say({
-          content: '',
-          embed: {
-            author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
-            footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-            timestamp: new Date(),
-            title: body.slug,
-            description: `[Status for build #${body.last_build_number}](http://travis-ci.org/Aceheliflyer/AceBot/builds/${body.last_build_id})`,
-            fields: [
-              {
-                'name': 'Build Result',
-                'value': buildResult[body.last_build_result],
-                'inline': true
-              },
-              {
-                'name': 'Build Duration',
-                'value': `Ran for ${moment.duration(body.last_build_duration * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min, and] s [sec]')}`,
-                'inline': true
-              },
-              {
-                'name': 'Last Build',
-                'value': `${moment(body.last_build_started_at).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(body.last_build_started_at).fromNow()})`,
-                'inline': false
-              }
-            ],
-            color: 0x7289DA
-          }
+        message.embed({
+          author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
+          footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+          timestamp: new Date(),
+          title: body.slug,
+          description: `[Status for build #${body.last_build_number}](http://travis-ci.org/Aceheliflyer/AceBot/builds/${body.last_build_id})`,
+          fields: [
+            {
+              'name': 'Build Result',
+              'value': buildResult[body.last_build_result],
+              'inline': true
+            },
+            {
+              'name': 'Build Duration',
+              'value': `Ran for ${moment.duration(body.last_build_duration * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min, and] s [sec]')}`,
+              'inline': true
+            },
+            {
+              'name': 'Last Build',
+              'value': `${moment(body.last_build_started_at).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(body.last_build_started_at).fromNow()})`,
+              'inline': false
+            }
+          ],
+          color: buildResultColor[body.last_build_result]
         })
       }
     })
