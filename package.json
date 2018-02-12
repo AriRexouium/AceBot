@@ -1,8 +1,12 @@
 {
   "name": "acebot",
-  "description": "A rewrite of the original AceBot.",
-  "version": "3.2.0",
-  "author": "Aceheliflyer <aceheliflyer@gmail.com> (http://aceheliflyer.github.io)",
+  "description": "AceBot is a Discord bot designed for providing information on demand.",
+  "version": "3.2.0-dev",
+  "author": {
+    "name": "Aceheliflyer",
+    "email": "aceheliflyer@gmail.com",
+    "url": "http://aceheliflyer.github.io"
+  },
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -33,7 +37,7 @@
   "homepage": "http://aceheliflyer.github.io/AceBot",
   "homepageGithub": "http://github.com/Aceheliflyer/AceBot#readme",
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.3.1",
     "common-tags": "^1.7.2",
     "discord.js": "github:hydrabolt/discord.js",
     "discord.js-commando": "github:gawdl3y/discord.js-commando",
@@ -42,6 +46,7 @@
     "moment-duration-format": "^2.2.1",
     "os-utils": "0.0.14",
     "pluralize": "^7.0.0",
+    "raven": "^2.4.1",
     "scrape-it": "^5.0.2",
     "sqlite": "^2.9.1",
     "unirest": "^0.5.1"
@@ -54,7 +59,8 @@
     "standard": "^10.0.3"
   },
   "engines": {
-    "node": "8.4.0"
+    "node": ">=8.4.0",
+    "npm": ">=5.3.0"
   },
   "commitplease": {
     "style": "jquery",
