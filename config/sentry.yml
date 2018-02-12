@@ -1,0 +1,5 @@
+---
+# EX: https://TOKEN@sentry.io/ID
+enabled: false # Only use this if you know what you're doing.
+token: token
+id: id

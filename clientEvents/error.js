@@ -1,4 +1,7 @@
 const { stripIndents } = require('common-tags')
+const fs = require('fs')
+const yaml = require('js-yaml')
+const sentryConfig = yaml.safeLoad(fs.readFileSync('./config/sentry.yml', 'utf8'))
 
 module.exports = (client, error) => {
   client.log.error(stripIndents`\n
@@ -23,6 +26,13 @@ module.exports = (client, error) => {
         }]
       })
     }
+  }
+
+  // Sentry
+  if (sentryConfig.enabled === true) {
+    var Raven = require('raven')
+    Raven.config(`https://${sentryConfig.token}@sentry.io/${sentryConfig.id}`).install()
+    Raven.captureException(error)
   }
 }
 
