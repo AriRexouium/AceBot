@@ -60,6 +60,7 @@ module.exports = class InfoCommand extends Command {
         { 'name': 'Websites', 'value': stripIndents`
           [Homepage](${require('../../package.json').homepage})
           [Repository](${require('../../package.json').homepageGithub})
+          [Trello](${require('../../package.json').homepageTrello})
         `, 'inline': true },
         { 'name': 'Discord Stats', 'value': stripIndents`
           ${this.client.shard ? `**Shards:** ${this.client.shard.count}\n` : ''}**Guilds:** ${totalGuilds}
