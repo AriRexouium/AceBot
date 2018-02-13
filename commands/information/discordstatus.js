@@ -1,6 +1,7 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
-const scrapeIt = require('scrape-it')
+const moment = require('moment')
+const request = require('request')
 
 module.exports = class DiscordStatsCommand extends Command {
   constructor (client) {
@@ -21,62 +22,48 @@ module.exports = class DiscordStatsCommand extends Command {
 
   run (message) {
     // TODO: Redo this command using the StatusPage API.
-    scrapeIt(`http://status.discordapp.com`, {
-      // Overall
-      overall: 'body > div.layout-content.status.status-index.starter > div.container > div.page-status.status-none > span.status.font-large',
-      overallError: 'body > div.layout-content.status.status-index.starter > div.container > div.unresolved-incidents > div.unresolved-incident.impact-none > div.incident-title.font-large',
-      /* Thanks to Thatguychris#3998 for doing the webscraping for the values below. */
-      // API
-      api: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(1) > div > span.component-status',
-      apiUptime: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(1) > div > div > div > div.legend-item.legend-item-uptime-value',
-      // Gateway
-      gateway: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(2) > div > span.component-status',
-      gatewayUptime: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(2) > div > div > div > div.legend-item.legend-item-uptime-value',
-      // CloudFlare
-      cloudflare: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(3) > div > span.component-status',
-      // Media Proxy
-      mediaproxy: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(4) > div > span.component-status',
-      mediaproxyUptime: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(4) > div > div > div > div.legend-item.legend-item-uptime-value',
-      // Voice
-      voice: 'body > div.layout-content.status.status-index.starter > div.container > div.components-section.font-regular > div.components-container.one-column > div:nth-child(5) > div > span.component-status'
-    }).then(webContent => {
-      var status
-      if (webContent.overall !== '') { status = webContent.overall } else { status = webContent.overallError.replace(/Subscribe/g, '') }
-      message.embed({
-        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
-        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-        timestamp: new Date(),
-        title: 'Discord Status',
-        description: `**${status}**`,
-        fields: [
-          {
-            'name': 'API',
-            'value': `**${webContent.api}**\n❯ ${webContent.apiUptime.replace(' ', '')}`,
-            'inline': true
-          },
-          {
-            'name': 'Gateway',
-            'value': `**${webContent.gateway}**\n❯ ${webContent.gatewayUptime.replace(' ', '')}`,
-            'inline': true
-          },
-          {
-            'name': 'Media Proxy',
-            'value': `**${webContent.mediaproxy}**\n❯ ${webContent.mediaproxyUptime.replace(' ', '')}`,
-            'inline': true
-          },
-          {
-            'name': 'CloudFlare',
-            'value': `**${webContent.cloudflare}**`,
-            'inline': true
-          },
-          {
-            'name': 'Voice',
-            'value': `**${webContent.voice}**`,
-            'inline': true
-          }
-        ],
-        color: 0x7289DA
-      })
+    request({ url: 'http://srhpyqt94yxb.statuspage.io/api/v2/summary.json', headers: { 'User-Agent': 'AceBot' } }, function (error, response, body) {
+      if (error) {
+        return message.reply('It appears there was an error pulling stats from Statuspage.')
+      } else {
+        body = JSON.parse(body)
+        message.embed({
+          author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
+          footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+          url: body.page.url,
+          timestamp: new Date(),
+          title: 'Discord Status',
+          description: `**${body.status.description}**`,
+          fields: [
+            {
+              'name': body.components[0].name, // API
+              'value': `❯ **${body.components[0].status}**`,
+              'inline': true
+            },
+            {
+              'name': body.components[2].name, // Gateway
+              'value': `❯ **${body.components[2].status}**`,
+              'inline': true
+            },
+            {
+              'name': body.components[6].name, // Media Proxy
+              'value': `❯ **${body.components[6].status}**`,
+              'inline': true
+            },
+            {
+              'name': body.components[4].name, // CloudFlare
+              'value': `❯ **${body.components[4].status}**`,
+              'inline': true
+            },
+            {
+              'name': body.components[8].name, // Voice
+              'value': `❯ **${body.components[8].status}**`,
+              'inline': true
+            }
+          ],
+          color: 0x7289DA
+        })
+      }
     })
   }
 }
