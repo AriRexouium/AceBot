@@ -1,6 +1,7 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
+const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
 const request = require('request')
@@ -50,7 +51,7 @@ module.exports = class DiscordStatsCommand extends Command {
             },
             {
               'name': 'Last Updated',
-              'value': `${moment(body.pushed_at).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(body.pushed_at).fromNow()})`,
+              'value': `${moment(body.pushed_at).format('llll')} ${si.time().timezone})`,
               'inline': true
             }
           ],

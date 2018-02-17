@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 const { oneLineCommaListsAnd } = require('common-tags')
+const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
 
@@ -30,7 +31,6 @@ module.exports = class UserInfoCommand extends Command {
 
   run (message, args) {
     let user = args.user.user
-    var timeZone = new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]
 
     var userColor = (args.user).displayHexColor
     if (userColor === '#000000') { userColor = 0x7289DA } else { userColor = Number(userColor.replace('#', '0x')) }
@@ -88,12 +88,12 @@ module.exports = class UserInfoCommand extends Command {
         },
         {
           'name': `🔧 Account Created - (${moment(user.createdAt).fromNow()})`,
-          'value': `${moment(user.createdAt).format('llll')} ${timeZone}`,
+          'value': `${moment(user.createdAt).format('llll')} ${si.time().timezone}`,
           'inline': false
         },
         {
           'name': `📥 Joined Guild - (${moment(args.user.joinedAt).fromNow()})`,
-          'value': `${moment(args.user.joinedAt).format('llll')} ${timeZone}`,
+          'value': `${moment(args.user.joinedAt).format('llll')} ${si.time().timezone}`,
           'inline': false
         },
         {

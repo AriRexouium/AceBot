@@ -12,6 +12,8 @@
   "scripts": {
     "start": "node index.js",
     "start:shard": "node sharder.js",
+    "start:dev": "nodemon index.js",
+    "start:dev-shard": "nodemon sharder.js",
     "install:dev": "npm i --only=dev",
     "lint:all": "standard --verbose | snazzy && markdownlint *",
     "lint:js": "standard --verbose | snazzy",
@@ -50,12 +52,14 @@
     "raven": "^2.4.1",
     "scrape-it": "^5.0.2",
     "sqlite": "^2.9.1",
+    "systeminformation": "^3.37.2",
     "unirest": "^0.5.1"
   },
   "devDependencies": {
     "commitplease": "^3.2.0",
     "husky": "^0.14.3",
     "markdownlint": "^0.7.0",
+    "nodemon": "^1.14.12",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },

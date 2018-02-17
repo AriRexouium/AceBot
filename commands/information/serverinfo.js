@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
+const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
 
@@ -54,7 +55,7 @@ module.exports = class ServerInfoCommand extends Command {
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
       title: guild.name,
-      description: `Since ${moment(guild.createdAt).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(guild.createdAt).fromNow()})`,
+      description: `Since ${moment(guild.createdAt).format('llll')} ${si.time().timezone})`,
       thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {

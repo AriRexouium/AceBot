@@ -1,6 +1,5 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
-const moment = require('moment')
 const request = require('request')
 
 module.exports = class DiscordStatsCommand extends Command {

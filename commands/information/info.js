@@ -20,14 +20,53 @@ module.exports = class InfoCommand extends Command {
   }
 
   async run (message) {
-    /* Start Contributors */
-    var dev; var contrib1; var contrib2; var contrib3; var contrib4
+    var dev
     try { dev = this.client.users.find('id', '196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
-    try { contrib1 = this.client.users.find('id', '217797734982352896').tag } catch (e) { contrib1 = 'cat16#0725' }
-    try { contrib2 = this.client.users.find('id', '171319044715053057').tag } catch (e) { contrib2 = 'Michael | ASIANBOI#9310' }
-    try { contrib3 = this.client.users.find('id', '325828052422492162').tag } catch (e) { contrib3 = 'Ariathe#4163' }
-    try { contrib4 = this.client.users.find('id', '158397118611062785').tag } catch (e) { contrib3 = 'Thatguychris#3998' }
+
+    /* Start Contributors */
+    var contributors = [
+      {
+        'name': 'cat16#0725',
+        'id': '217797734982352896',
+        'info': 'Helped with *a lot* of issues and questions I had.',
+        'github': 'cat16'
+      },
+      {
+        'name': 'Michael | ASIANBOI#4150',
+        'id': '171319044715053057',
+        'info': 'Offered suggestions and feedback.',
+        'github': 'mcao'
+      },
+      {
+        'name': 'Ariathe#4163',
+        'id': '325828052422492162',
+        'info': 'Designed the avatar for AceBot.'
+      },
+      {
+        'name': 'Thatguychris#3998',
+        'id': '158397118611062785',
+        'info': 'Did the web scraping for the old version of `discordstatus`'
+      }
+    ]
+    var contributorsList = ''
+    contributors.forEach(contributor => {
+      try {
+        let contribTemp = this.client.users.find('id', contributor.id).tag
+        if (contributor.github) {
+          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github}) -** ${contributor.info}`
+        } else {
+          contributorsList = `${contributorsList}\n**${escapeMarkdown(contribTemp)} -** ${contributor.info}`
+        }
+      } catch (e) {
+        if (contributor.github) {
+          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contributor.name)}](http://github.com/${contributor.github}) -** ${contributor.info}`
+        } else {
+          contributorsList = `${contributorsList}\n**${escapeMarkdown(contributor.name)} -** ${contributor.info}`
+        }
+      }
+    })
     /* End Contributors */
+
     var totalGuilds; var totalChannels; var totalUsers
     if (!this.client.shard) {
       totalGuilds = await this.client.guilds.size
@@ -41,40 +80,57 @@ module.exports = class InfoCommand extends Command {
       var totalUsersData = await this.client.shard.fetchClientValues('users.size')
       totalUsers = await totalUsersData.reduce((prev, val) => prev + val, 0)
     }
+
     message.embed({
-      author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
-      footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+      author: {
+        name: await this.client.fetchApplication().then(app => { return `${app.owner.tag} | ${this.client.user.tag}` }),
+        icon_url: this.client.user.displayAvatarURL(),
+        url: require('../../package.json').homepageGithub
+      },
+      footer: {
+        text: message.author.tag,
+        icon_url: message.author.displayAvatarURL()
+      },
       timestamp: new Date(),
       fields: [
         /* eslint-disable object-property-newline */
-        { 'name': 'Developer', 'value': `**${escapeMarkdown(dev)}**`, 'inline': true },
-        { 'name': 'Version', 'value': require('../../package.json').version, 'inline': true },
-        { 'name': 'Library', 'value': stripIndents`
-          **discord.js-commando** v${require('discord.js-commando/package.json').version}
-          **discord.js** v${require('discord.js/package.json').version}
-        `, 'inline': true },
-        { 'name': 'Invites', 'value': stripIndents`
-          [Bot Invite](${await this.client.generateInvite()})
-          [Server Invite](${this.client.config.startConfig.invite})
-        `, 'inline': true },
-        { 'name': 'Websites', 'value': stripIndents`
-          [Homepage](${require('../../package.json').homepage})
-          [Repository](${require('../../package.json').homepageGithub})
-          [Trello](${require('../../package.json').homepageTrello})
-        `, 'inline': true },
-        { 'name': 'Discord Stats', 'value': stripIndents`
-          ${this.client.shard ? `**Shards:** ${this.client.shard.count}\n` : ''}**Guilds:** ${totalGuilds}
-          **Channels:** ${totalChannels}
-          **Users:** ${totalUsers}
-        `, 'inline': true },
+        {
+          'name': 'Developer',
+          'value': stripIndents`
+            Discord: **${escapeMarkdown(dev)}**
+            GitHub: [@Aceheliflyer](http://github.com/Aceheliflyer)
+          `,
+          'inline': false
+        },
+        {
+          'name': 'Developed In',
+          'value': stripIndents`
+            Language: **JavaScript** (NodeJS)
+            Library: **discord.js** (v${require('discord.js/package.json').version})
+            Framework: **discord.js-commando** (v${require('discord.js-commando/package.json').version})
+            Bot Version: **${require('../../package.json').version}**
+          `,
+          'inline': false
+        },
+        {
+          'name': 'Links', 'value': stripIndents`
+          Bot Invite: [Click Here!](${await this.client.generateInvite()})
+          Server Invite: [Click Here!](${this.client.config.startConfig.invite})
+          Homepage: [Click Here!](${require('../../package.json').homepage})
+          Repository: [Click Here!](${require('../../package.json').homepageGithub})
+          Trello: [Click Here!](${require('../../package.json').homepageTrello})
+        `, 'inline': false
+        },
+        {
+          'name': 'Discord Stats', 'value': stripIndents`
+          ${this.client.shard ? `Shards: **${this.client.shard.count}**\n` : ''}Guilds: **${totalGuilds}**
+          Channels: **${totalChannels}**
+          Users: **${totalUsers}**
+        `, 'inline': false
+        },
         {
           'name': 'Contributors',
-          'value': stripIndents`
-            **${escapeMarkdown(contrib1)} -** Helped with a lot of issues I had.
-            **${escapeMarkdown(contrib2)} -** Offered suggestions and feedback.
-            **${escapeMarkdown(contrib3)} -** Designed the avatar for Acebot.
-            **${escapeMarkdown(contrib4)} -** Did the web scraping for \`discordstatus\`.
-          `,
+          'value': contributorsList,
           'inline': false
         }
         /* eslint-enable object-property-newline */

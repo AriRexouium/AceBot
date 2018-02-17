@@ -111,7 +111,7 @@ client.dispatcher.addInhibitor(message => {
 if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
 
 // Bot Stats
-const botStats = { clientMentions: 0, commandsUsed: 0, messagesRecieved: 0, messagesSent: 0 }
+const botStats = { clientMentions: 0, commandsUsed: 0, messagesReceived: 0, messagesSent: 0 }
 client.botStats = botStats
 
 // Config

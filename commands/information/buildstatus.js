@@ -1,5 +1,6 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
+const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
 const request = require('request')
@@ -48,7 +49,7 @@ module.exports = class DiscordStatsCommand extends Command {
             },
             {
               'name': 'Last Build',
-              'value': `${moment(body.last_build_started_at).format('llll')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}\n(${moment(body.last_build_started_at).fromNow()})`,
+              'value': `${moment(body.last_build_started_at).format('llll')} ${si.time().timezone})`,
               'inline': false
             }
           ],

@@ -1,9 +1,9 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
+const si = require('systeminformation')
 const os = require('os-utils')
 const moment = require('moment')
 require('moment-duration-format')
-
 module.exports = class StatsCommand extends Command {
   constructor (client) {
     super(client, {
@@ -33,9 +33,9 @@ module.exports = class StatsCommand extends Command {
       // Messages Sent
       var totalMessagesSentData = await this.client.shard.fetchClientValues('botStats.messagesSent')
       var totalMessagesSent = await totalMessagesSentData.reduce((prev, val) => prev + val, 0)
-      // Total Messages Recieved
-      var totalMessagesRecievedData = await this.client.shard.fetchClientValues('botStats.messagesRecieved')
-      var totalMessagesRecieved = await totalMessagesRecievedData.reduce((prev, val) => prev + val, 0)
+      // Total Messages Received
+      var totalMessagesReceivedData = await this.client.shard.fetchClientValues('botStats.messagesReceived')
+      var totalMessagesReceived = await totalMessagesReceivedData.reduce((prev, val) => prev + val, 0)
       // Total Mentions
       var totalMentionsData = await this.client.shard.fetchClientValues('botStats.clientMentions')
       var totalMentions = await totalMentionsData.reduce((prev, val) => prev + val, 0)
@@ -51,9 +51,12 @@ module.exports = class StatsCommand extends Command {
       // Total Users
       var totalUsersData = await this.client.shard.fetchClientValues('users.size')
       var totalUsers = await totalUsersData.reduce((prev, val) => prev + val, 0)
+      // Total Emojis
+      var totalEmojisData = await this.client.shard.fetchClientValues('emojis.size')
+      var totalEmojis = await totalEmojisData.reduce((prev, val) => prev + val, 0)
     }
 
-    os.cpuUsage((cpuUsage) => {
+    os.cpuUsage(async (cpuUsage) => {
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
@@ -65,72 +68,59 @@ module.exports = class StatsCommand extends Command {
             'name': '🕑 Uptime',
             'value': stripIndents`
             ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
-            *(since ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]})*
+            *(since ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${si.time().timezone})*
             `,
             'inline': false
           },
           {
-            'name': '📤 Messages Sent',
+            'name': '✉ Messages',
             'value': !this.client.shard
-              ? this.client.botStats.messagesSent
-              : `**Current Shard:** ${this.client.botStats.messagesSent}\n**All Shards:** ${totalMessagesSent}`,
+              ? stripIndents`
+              Sent: **${this.client.botStats.messagesSent}**
+              Received: **${this.client.botStats.messagesReceived}**
+              Commands: **${this.client.botStats.commandsUsed}**
+              Bot Mentions: **${this.client.botStats.clientMentions}**
+              `
+              : stripIndents`
+              Sent: **${this.client.botStats.messagesSent}** [${totalMessagesSent}]
+              Received: **${this.client.botStats.messagesReceived}** [${totalMessagesReceived}]
+              Commands: **${this.client.botStats.commandsUsed}** [${totalCommandsUsed}]
+              Bot Mentions: **${this.client.botStats.clientMentions}** [${totalMentions}]
+              `,
             'inline': true
           },
           {
-            'name': '📥 Messages Recieved',
+            'name': '🌐 Global Stats',
             'value': !this.client.shard
-              ? this.client.botStats.messagesRecieved
-              : `**Current Shard:** ${this.client.botStats.messagesRecieved}\n**All Shards:** ${totalMessagesRecieved}`,
+              ? stripIndents`
+              Guilds: **${this.client.guilds.size}**
+              Channels: **${this.client.channels.size}**
+              Users: **${this.client.users.size}**
+              Emojis: **${this.client.emojis.size}**
+              `
+              : stripIndents`
+              Shards: **${this.client.shard.id + 1} / ${this.client.shard.count}** [${this.client.shard.id}]
+              Guilds: **${this.client.guilds.size}** [${totalGuilds}]
+              Channels: **${this.client.channels.size}** [${totalChannels}]
+              Users: **${this.client.users.size}** [${totalUsers}]
+              Emojis: **${this.client.emojis.size}** [${totalEmojis}]
+              `,
             'inline': true
           },
           {
-            'name': '❗ Mentions',
-            'value': !this.client.shard
-              ? this.client.botStats.clientMentions
-              : `**Current Shard:** ${this.client.botStats.clientMentions}\n**All Shards:** ${totalMentions}`,
-            'inline': true
-          },
-          {
-            'name': '✏ Commands Used',
-            'value': !this.client.shard
-              ? this.client.botStats.commandsUsed
-              : `**Current Shard:** ${this.client.botStats.commandsUsed}\n**All Shards:** ${totalCommandsUsed}`,
-            'inline': true
-          },
-          {
-            'name': '⚔ Guilds',
-            'value': !this.client.shard
-              ? this.client.guilds.size
-              : `**Current Shard:** ${this.client.guilds.size}\n**All Shards:** ${totalGuilds}`,
-            'inline': true
-          },
-          {
-            'name': '📂 Channels',
-            'value': !this.client.shard
-              ? this.client.channels.size
-              : `**Current Shard:** ${this.client.channels.size}\n**All Shards:** ${totalChannels}`,
-            'inline': true
-          },
-          {
-            'name': '💻 Users',
-            'value': !this.client.shard
-              ? this.client.users.size
-              : `**Current Shard:** ${this.client.users.size}\n**All Shards:** ${totalUsers}`,
-            'inline': true
-          },
-          {
-            'name': '📦 Shards',
-            'value': !this.client.shard
-              ? '*(No Active Shards)*'
-              : `**Current Shard ID:** ${this.client.shard.id}\n**All Shards:** ${this.client.shard.count}`,
-            'inline': true
-          },
-          {
-            'name': '💾 System Stats',
+            'name': '💾 System',
             'value': stripIndents`
-              **System OS:** ${os.platform()} (${process.arch} arch)
-              **CPU Usage (%):** ${cpuUsage.toFixed(2)}
-              **Memory (MB):** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} Used **/** ${os.freemem().toFixed(2)} Avaliable **/** ${os.totalmem().toFixed(2)} Total
+              OS: **${os.platform()}** (${process.arch})
+              CPU Usage (%): **${cpuUsage.toFixed(2).replace('.', '')}**
+            `,
+            'inline': true
+          },
+          {
+            'name': '💾 Memory (MB)',
+            'value': stripIndents`
+              Used: **${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}**
+              Available: **${os.freemem().toFixed(2)}**
+              Total: **${os.totalmem().toFixed(2)}**
             `,
             'inline': true
           }
