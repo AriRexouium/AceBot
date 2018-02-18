@@ -14,7 +14,7 @@ module.exports = class EnableCommandCommand extends Command {
       `,
       userPermissions: ['MANAGE_GUILD'],
       examples: [
-        'enable util',
+        'enable information',
         'enable Utility',
         'enable ping'
       ],

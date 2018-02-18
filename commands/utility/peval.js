@@ -33,7 +33,6 @@ module.exports = class EvalCommand extends Command {
 
   async run (message, args) {
     const client = message.client
-
     var context = {}
 
     // Silent Eval

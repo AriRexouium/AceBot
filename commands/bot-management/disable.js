@@ -14,7 +14,8 @@ module.exports = class DisableCommand extends Command {
       `,
       userPermissions: ['MANAGE_GUILD'],
       examples: [
-        'disable stats',
+        'disable information',
+        'disable Utility',
         'disable ping'
       ],
       throttling: {

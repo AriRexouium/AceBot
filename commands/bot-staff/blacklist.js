@@ -11,12 +11,13 @@ module.exports = class BlacklistCommand extends Command {
       details: 'Allows the owners to add or remove a user from the bot blacklist.',
       aliases: ['ban'],
       examples: [
-        'blacklist add 253254587341996032',
-        'blacklist remove 253254587341996032'
+        'blacklist add <ID>',
+        'blacklist remove <@mention>'
       ],
       args: [
         {
           key: 'query',
+          label: 'add/remove',
           prompt: 'What would you like to do (add, remove)?',
           type: 'string',
           parse: value => value.toLowerCase(),

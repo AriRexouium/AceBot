@@ -25,6 +25,7 @@ module.exports = class ListCommand extends Command {
       args: [
         {
           key: 'query',
+          label: 'command/group',
           prompt: 'What would you like to see (commands, groups)? ',
           type: 'string',
           parse: value => value.toLowerCase(),

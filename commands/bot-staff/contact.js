@@ -16,6 +16,7 @@ module.exports = class ExecCommand extends Command {
       args: [
         {
           key: 'text',
+          label: 'message',
           prompt: 'What would you like to send to the owner(s)?',
           type: 'string'
         }

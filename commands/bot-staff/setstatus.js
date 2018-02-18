@@ -9,6 +9,7 @@ module.exports = class SetStatusCommand extends Command {
       group: 'bot-staff',
       description: 'Changes the bot\'s status.',
       details: 'Only the bot owner(s) may use this command.',
+      format: '[online/idle/dnd/offline]',
       examples: [
         'setstatus online',
         'setstatus idle',
