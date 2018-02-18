@@ -31,7 +31,9 @@ module.exports = (client, error) => {
   // Sentry
   if (sentryConfig.enabled === true) {
     var Raven = require('raven')
-    Raven.config(`https://${sentryConfig.token}@sentry.io/${sentryConfig.id}`).install()
+    Raven.config(`https://${sentryConfig.token}@sentry.io/${sentryConfig.id}`, {
+      release: require('../package.json').version
+    }).install()
     Raven.captureException(error)
   }
 }

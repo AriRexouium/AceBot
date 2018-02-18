@@ -90,6 +90,7 @@
       "Packages",
       "ProcessEvents",
       "Release",
+      "Sentry",
       "Support",
       "Travis"
     ],
