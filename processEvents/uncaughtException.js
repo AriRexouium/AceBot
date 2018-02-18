@@ -32,7 +32,10 @@ module.exports = (client, error) => {
   if (sentryConfig.enabled === true) {
     var Raven = require('raven')
     Raven.config(`https://${sentryConfig.token}@sentry.io/${sentryConfig.id}`, {
-      release: require('../package.json').version
+      release: require('../package.json').version,
+      tags: {
+        shard_id: client.shard ? client.shard.id : ''
+      }
     }).install()
     Raven.captureException(error)
   }

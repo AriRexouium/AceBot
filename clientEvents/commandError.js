@@ -56,7 +56,14 @@ module.exports = (client, command, error, message) => {
   if (sentryConfig.enabled === true) {
     var Raven = require('raven')
     Raven.config(`https://${sentryConfig.token}@sentry.io/${sentryConfig.id}`, {
-      release: require('../package.json').version
+      release: require('../package.json').version,
+      tags: {
+        command: message.command ? `${message.command.memberName} (${message.command.groupID})` : '',
+        user: `${message.author.tag} (${message.author.id})`,
+        channel: message.guild ? `${message.channel.name} (${message.channel.id})` : 'DMs',
+        guild: message.guild ? `${message.guild.name} (${message.guild.id})` : '',
+        shard_id: client.shard ? client.shard.id : ''
+      }
     }).install()
     Raven.captureException(error)
   }
