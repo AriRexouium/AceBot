@@ -112,6 +112,7 @@ module.exports = class StatsCommand extends Command {
             'value': stripIndents`
               OS: **${os.platform()}** (${process.arch})
               CPU Usage (%): **${cpuUsage.toFixed(2).replace('.', '')}**
+              Node Version: **${process.version}**
             `,
             'inline': true
           },
