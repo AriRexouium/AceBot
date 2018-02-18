@@ -18,8 +18,8 @@ module.exports = class SayCommand extends Command {
           type: 'string'
         }
       ],
-      guarded: true
-      ownerOnly: true,
+      guarded: true,
+      ownerOnly: true
     })
   }
 

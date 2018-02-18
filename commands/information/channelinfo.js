@@ -1,5 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { oneLineCommaListsAnd } = require('common-tags')
+const si = require('systeminformation')
+const moment = require('moment')
 
 module.exports = class EmojiCommand extends Command {
   constructor (client) {
@@ -7,10 +9,9 @@ module.exports = class EmojiCommand extends Command {
       name: 'channelinfo',
       memberName: 'channelinfo',
       group: 'information',
-      description: 'Displays information about the bot.',
+      description: 'Displays information about a channel.',
       aliases: [
-        'emojilist',
-        'listemojis'
+        'cinfo'
       ],
       clientPermissions: [
         'EMBED_LINKS'
@@ -19,58 +20,101 @@ module.exports = class EmojiCommand extends Command {
         usages: 2,
         duration: 10
       },
+      args: [
+        {
+          key: 'channel',
+          label: 'voice channel/text channel',
+          prompt: 'What channel would you like to lookup?',
+          type: 'channel'
+        }
+      ],
       guildOnly: true
     })
   }
 
-  async run (message) {
-    if (!message.guild.emojis.length > 0) {
-      var clientColor
-      if (message.guild) {
-        clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-        if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
-      } else {
-        clientColor = 0x7289DA
-      }
+  async run (message, args) {
+    var clientColor
+    if (message.guild) {
+      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
+      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
+    } else {
+      clientColor = 0x7289DA
+    }
 
-      // Static Emojis
-      var staticEmojis = message.guild.emojis.filter(emoji => emoji.animated === false)
-      let staticEmojiCount = staticEmojis.size
-      if (staticEmojis.size > 1) {
-        staticEmojis = oneLineCommaListsAnd`${staticEmojis.map(emoji => `\`:${emoji.name}:\``)}`
+    var channel = args.channel
+    if (channel.type === 'voice') {
+      var channelUsers
+      if (channel.members.size > 1) {
+        channelUsers = oneLineCommaListsAnd`${channel.members.array()}`
       } else {
-        staticEmojis = 'N/A'
+        channelUsers = 'None'
       }
-
-      // Animated Emojis
-      var animatedEmojis = message.guild.emojis.filter(emoji => emoji.animated === true)
-      let animatedEmojiCount = animatedEmojis.size
-      if (animatedEmojis.size > 1) {
-        animatedEmojis = oneLineCommaListsAnd`${animatedEmojis.map(emoji => `\`:${emoji.name}:\``)}`
-      } else {
-        animatedEmojis = 'N/A'
-      }
-
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
+        title: channel.name,
+        description: `Since ${moment(channel.createdAt).format('llll')} ${si.time().timezone})`,
         fields: [
           {
-            'name': `Regular Emojis - (${staticEmojiCount})`,
-            'value': staticEmojis,
+            'name': 'Type',
+            'value': channel.type,
             'inline': true
           },
           {
-            'name': `Animated - (${animatedEmojiCount})`,
-            'value': animatedEmojis,
+            'name': 'ID',
+            'value': channel.id,
+            'inline': true
+          },
+          {
+            'name': 'Position',
+            'value': channel.rawPosition,
+            'inline': true
+          },
+          {
+            'name': 'Bitrate',
+            'value': `${channel.bitrate}kbps`,
+            'inline': true
+          },
+          {
+            'name': 'User Count',
+            'value': `${channel.members.size}/${channel.userLimit === 0 ? 'Infinity' : channel.userLimit}`,
+            'inline': true
+          },
+          {
+            'name': 'Users',
+            'value': channelUsers,
             'inline': true
           }
         ],
         color: clientColor
       })
     } else {
-      message.reply('this guild has no emojis!')
+      message.embed({
+        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+        timestamp: new Date(),
+        title: channel.name,
+        description: `Since ${moment(channel.createdAt).format('llll')} ${si.time().timezone})`,
+        fields: [
+          {
+            'name': 'Type',
+            'value': channel.type,
+            'inline': true
+          },
+          {
+            'name': 'ID',
+            'value': channel.id,
+            'inline': true
+          },
+          {
+            'name': 'Position',
+            'value': channel.rawPosition,
+            'inline': true
+          }
+        ],
+        color: clientColor
+      })
     }
   }
 }

@@ -25,8 +25,8 @@ module.exports = class UnloadCommand extends Command {
           type: 'command'
         }
       ],
-      guarded: true
-      ownerOnly: true,
+      guarded: true,
+      ownerOnly: true
     })
   }
 

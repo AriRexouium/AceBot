@@ -28,8 +28,8 @@ module.exports = class SudoCommand extends Command {
           type: 'string'
         }
       ],
-      guarded: true
-      ownerOnly: true,
+      guarded: true,
+      ownerOnly: true
     })
   }
   async run (message, args) {

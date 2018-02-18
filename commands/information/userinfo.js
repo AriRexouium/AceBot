@@ -33,7 +33,7 @@ module.exports = class UserInfoCommand extends Command {
     })
   }
 
-  run(message, args) {
+  run (message, args) {
     let user = args.user.user
 
     var userColor = (args.user).displayHexColor

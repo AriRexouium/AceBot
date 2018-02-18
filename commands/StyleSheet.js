@@ -25,7 +25,7 @@ module.exports = class StyleSheetCommand extends Command {
       examples: [ // Example usage strings
         'StyleSheet This is not a command.',
         'StyleSheet There are arguments.',
-        'StyleSheet This is just an example.',
+        'StyleSheet This is just an example.'
       ],
       userPermissions: [ // Permissions required by the user to use the command.
         'SEND_MESSAGES',

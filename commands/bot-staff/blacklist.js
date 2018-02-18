@@ -31,8 +31,8 @@ module.exports = class BlacklistCommand extends Command {
           type: 'user'
         }
       ],
-      guarded: true
-      ownerOnly: true,
+      guarded: true,
+      ownerOnly: true
     })
   }
 
