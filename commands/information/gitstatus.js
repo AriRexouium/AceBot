@@ -13,8 +13,12 @@ module.exports = class DiscordStatsCommand extends Command {
       memberName: 'gitstatus',
       group: 'information',
       description: 'Displays the GitHub repository information.',
-      aliases: ['gitstats'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'gitstats'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       throttling: {
         usages: 2,
         duration: 10

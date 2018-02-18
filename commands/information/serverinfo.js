@@ -12,8 +12,12 @@ module.exports = class ServerInfoCommand extends Command {
       memberName: 'serverinfo',
       group: 'information',
       description: 'Displays info about the current guild.',
-      aliases: ['guildinfo'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'guildinfo'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       throttling: {
         usages: 2,
         duration: 10

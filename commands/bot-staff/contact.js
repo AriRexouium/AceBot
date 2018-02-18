@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 
-module.exports = class ExecCommand extends Command {
+module.exports = class ContactCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'contact',

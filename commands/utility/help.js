@@ -13,7 +13,9 @@ module.exports = class HelpCommand extends Command {
       The command may be part of a command name or a whole command name.
       If it isn't specified, all available commands will be listed.
       `,
-      aliases: ['commands'],
+      aliases: [
+        'commands'
+      ],
       examples: [
         'help',
         'help prefix'

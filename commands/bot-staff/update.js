@@ -12,9 +12,11 @@ module.exports = class UpdateCommand extends Command {
       group: 'bot-staff',
       description: 'Updates the bot.',
       details: 'Pulls code from GitHub.',
-      aliases: ['upgrade'],
-      ownerOnly: true,
-      guarded: true
+      aliases: [
+        'upgrade'
+      ],
+      guarded: true,
+      ownerOnly: true
     })
   }
 

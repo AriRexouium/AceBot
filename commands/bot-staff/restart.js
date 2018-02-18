@@ -13,9 +13,11 @@ module.exports = class RestartCommand extends Command {
       group: 'bot-staff',
       description: 'Restarts the bot.',
       details: 'Only the bot owner(s) can restart the bot or current shard.',
-      clientPermissions: ['EMBED_LINKS'],
-      ownerOnly: true,
-      guarded: true
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
+      guarded: true,
+      ownerOnly: true
     })
   }
 

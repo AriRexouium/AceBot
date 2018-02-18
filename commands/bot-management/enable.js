@@ -12,11 +12,13 @@ module.exports = class EnableCommandCommand extends Command {
       The argument must be the name/ID (partial or whole) of a command or command group.
       Only server managers may use this command.
       `,
-      userPermissions: ['MANAGE_GUILD'],
       examples: [
         'enable information',
         'enable Utility',
         'enable ping'
+      ],
+      userPermissions: [
+        'MANAGE_GUILD'
       ],
       throttling: {
         usages: 2,

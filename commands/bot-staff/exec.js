@@ -12,8 +12,12 @@ module.exports = class ExecCommand extends Command {
       group: 'bot-staff',
       description: 'Execute commands on the host.',
       details: 'Execute commands on the host system.',
-      aliases: ['execute'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'execute'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       args: [
         {
           key: 'code',
@@ -21,8 +25,8 @@ module.exports = class ExecCommand extends Command {
           type: 'string'
         }
       ],
-      ownerOnly: true,
       guarded: true
+      ownerOnly: true,
     })
   }
 

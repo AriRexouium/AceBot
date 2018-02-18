@@ -13,7 +13,9 @@ module.exports = class SudoCommand extends Command {
       group: 'bot-staff',
       description: 'Executes code on a bot or user account.',
       details: 'Allows the bot owners(s) to execute code on a different account via token.',
-      clientPermissions: ['EMBED_LINKS'],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       args: [
         {
           key: 'token',
@@ -26,8 +28,8 @@ module.exports = class SudoCommand extends Command {
           type: 'string'
         }
       ],
-      ownerOnly: true,
       guarded: true
+      ownerOnly: true,
     })
   }
   async run (message, args) {

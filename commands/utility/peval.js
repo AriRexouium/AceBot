@@ -12,13 +12,17 @@ module.exports = class EvalCommand extends Command {
       group: 'utility',
       description: 'Evaluates JavaScript.',
       details: 'Evalutate arbitrary JavaScript.',
-      aliases: ['pevaluate'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'pevaluate'
+      ],
       examples: [
         'eval typeof \'This is a string.\'',
         'eval Math.PI',
         'eval 5 / 4',
         'eval new Date()'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
       ],
       args: [
         {

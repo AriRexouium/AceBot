@@ -9,8 +9,12 @@ module.exports = class UserInfoCommand extends Command {
       memberName: 'userperms',
       group: 'information',
       description: 'Displays a user\'s permissions.',
-      aliases: ['memberperms'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'memberperms'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       throttling: {
         usages: 2,
         duration: 10

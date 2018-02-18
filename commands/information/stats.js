@@ -11,8 +11,12 @@ module.exports = class StatsCommand extends Command {
       memberName: 'stats',
       group: 'information',
       description: 'Displays live statistics about the bot.',
-      aliases: ['statistics'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'statistics'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       throttling: {
         usages: 2,
         duration: 10

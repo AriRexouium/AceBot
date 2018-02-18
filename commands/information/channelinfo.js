@@ -4,8 +4,8 @@ const { oneLineCommaListsAnd } = require('common-tags')
 module.exports = class EmojiCommand extends Command {
   constructor (client) {
     super(client, {
-      name: 'emojis',
-      memberName: 'emojis',
+      name: 'channelinfo',
+      memberName: 'channelinfo',
       group: 'information',
       description: 'Displays information about the bot.',
       aliases: [

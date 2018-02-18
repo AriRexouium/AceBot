@@ -14,12 +14,18 @@ module.exports = class PrefixCommand extends Command {
         If the prefix is "none", the prefix will be removed entirely, only allowing mentions to run commands.
         Only administrators may change the prefix.
       `,
-      format: '[prefix/"default"/"none"]',
-      examples: ['prefix', 'prefix -', 'prefix omg!', 'prefix default', 'prefix none'],
+      examples: [
+        'prefix',
+        'prefix -',
+        'prefix omg!',
+        'prefix default',
+        'prefix none'
+      ],
       throttling: {
         usages: 2,
         duration: 10
       },
+      format: '[prefix/"default"/"none"]',
       args: [
         {
           key: 'prefix',

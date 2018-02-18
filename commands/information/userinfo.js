@@ -12,8 +12,12 @@ module.exports = class UserInfoCommand extends Command {
       memberName: 'userinfo',
       group: 'information',
       description: 'Displays info about a user.',
-      aliases: ['memberinfo'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'memberinfo'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
+      ],
       throttling: {
         usages: 2,
         duration: 10
@@ -29,7 +33,7 @@ module.exports = class UserInfoCommand extends Command {
     })
   }
 
-  run (message, args) {
+  run(message, args) {
     let user = args.user.user
 
     var userColor = (args.user).displayHexColor

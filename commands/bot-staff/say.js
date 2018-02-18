@@ -8,7 +8,9 @@ module.exports = class SayCommand extends Command {
       group: 'bot-staff',
       description: 'Has the bot repeat what you say.',
       details: 'Only the bot owner(s) may use this command.',
-      clientPermissions: ['MANAGE_MESSAGES'],
+      clientPermissions: [
+        'MANAGE_MESSAGES'
+      ],
       args: [
         {
           key: 'text',
@@ -16,8 +18,8 @@ module.exports = class SayCommand extends Command {
           type: 'string'
         }
       ],
-      ownerOnly: true,
       guarded: true
+      ownerOnly: true,
     })
   }
 

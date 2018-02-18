@@ -5,14 +5,16 @@ module.exports = class UnloadCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'unload',
-      aliases: ['unload-command'],
-      group: 'bot-staff',
       memberName: 'unload',
+      group: 'bot-staff',
       description: 'Unloads a command.',
       details: oneLine`
         The argument must be the name/ID (partial or whole) of a command.
         Only the bot owner(s) may use this command.
       `,
+      aliases: [
+        'unload-command'
+      ],
       examples: [
         'unload ping'
       ],
@@ -23,8 +25,8 @@ module.exports = class UnloadCommand extends Command {
           type: 'command'
         }
       ],
-      ownerOnly: true,
       guarded: true
+      ownerOnly: true,
     })
   }
 

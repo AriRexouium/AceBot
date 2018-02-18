@@ -9,7 +9,9 @@ module.exports = class BlacklistCommand extends Command {
       group: 'bot-staff',
       description: 'Add or remove a user from the blacklist.',
       details: 'Allows the owners to add or remove a user from the bot blacklist.',
-      aliases: ['ban'],
+      aliases: [
+        'ban'
+      ],
       examples: [
         'blacklist add <ID>',
         'blacklist remove <@mention>'
@@ -29,8 +31,8 @@ module.exports = class BlacklistCommand extends Command {
           type: 'user'
         }
       ],
-      ownerOnly: true,
       guarded: true
+      ownerOnly: true,
     })
   }
 

@@ -11,13 +11,17 @@ module.exports = class EvalCommand extends Command {
       group: 'bot-staff',
       description: 'Evaluates JavaScript.',
       details: 'Allows the bot owners to eval arbitrary JavaScript without restrictions.',
-      aliases: ['evaluate'],
-      clientPermissions: ['EMBED_LINKS'],
+      aliases: [
+        'evaluate'
+      ],
       examples: [
         'eval client',
         'eval guild',
         'eval channel',
         'eval new Date()'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS'
       ],
       args: [
         {
@@ -26,8 +30,8 @@ module.exports = class EvalCommand extends Command {
           type: 'string'
         }
       ],
-      ownerOnly: true,
-      guarded: true
+      guarded: true,
+      ownerOnly: true
     })
     this.lastResult = null
   }
