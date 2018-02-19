@@ -22,9 +22,10 @@ const client = new CommandoClient({
 client.registry
   .registerDefaultTypes()
   .registerGroups([
-    ['bot-staff', 'Bot Staff'],
     ['bot-management', 'Bot Management'],
+    ['bot-staff', 'Bot Staff'],
     ['information', 'Information'],
+    ['time', 'Time'],
     ['utility', 'Utility']
   ])
   .registerCommandsIn(path.join(__dirname, 'commands'))
