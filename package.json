@@ -47,6 +47,7 @@
     "js-yaml": "^3.10.0",
     "moment": "^2.20.1",
     "moment-duration-format": "^2.2.2",
+    "moment-timezone": "^0.5.14",
     "os-utils": "0.0.14",
     "pluralize": "^7.0.0",
     "raven": "^2.4.1",
@@ -60,9 +61,9 @@
     "commitplease": "^3.2.0",
     "husky": "^0.14.3",
     "markdownlint": "^0.7.0",
-    "nodemon": "^1.15.0",
+    "nodemon": "^1.15.1",
     "snazzy": "^7.0.0",
-    "standard": "^10.0.3"
+    "standard": "^11.0.0"
   },
   "engines": {
     "node": ">=8.4.0",
