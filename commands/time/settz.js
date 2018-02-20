@@ -8,6 +8,7 @@ module.exports = class EmojiCommand extends Command {
       memberName: 'settz',
       group: 'time',
       description: 'Set your timezone.',
+      details: 'Allows users to set their timezone for other users to see what time it is for them.',
       aliases: [
         'settimezone',
         'settimeoffset'
@@ -19,7 +20,7 @@ module.exports = class EmojiCommand extends Command {
       args: [
         {
           key: 'timezone',
-          prompt: 'Choose a time offset.',
+          prompt: 'Please choose a timezone.\n*Here is a list -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*',
           type: 'string'
         }
       ]

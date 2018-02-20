@@ -8,6 +8,7 @@ module.exports = class EmojiCommand extends Command {
       memberName: 'time',
       group: 'time',
       description: 'Get the time of a user.',
+      details: 'View another user\'s time and timezone.',
       aliases: [
         'getusertime'
       ],
@@ -30,9 +31,9 @@ module.exports = class EmojiCommand extends Command {
     let user = args.user.user
     var userTimezone = this.client.provider.get(user.id, 'timezone', false)
     if (userTimezone === false) {
-      message.reply(`**${user.tag}** hasn't setup their timezone yet.`)
+      message.reply(`${user.tag} hasn't setup their timezone yet.`)
     } else {
-      message.say(`For **${user.tag}**, it is **${moment.tz(userTimezone).format('llll')}**. Their timezone is **${userTimezone}**`)
+      message.say(`${userTimezone}; where ${user.username} is, it's ${moment.tz(userTimezone).format('llll')}.`)
     }
   }
 }
