@@ -32,7 +32,7 @@ module.exports = class EmojiCommand extends Command {
       this.client.provider.set(message.author.id, 'timezone', args.timezone)
       message.reply(`successfully set your timezone to \`${args.timezone}\`!`)
     } else {
-      message.reply('that is not a valid timezone.')
+      message.reply('that is not a valid timezone.\n*Here is a list -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*')
     }
   }
 }
