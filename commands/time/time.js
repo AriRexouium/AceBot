@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const { oneLine } = require('common-tags')
 const moment = require('moment-timezone')
 
 module.exports = class EmojiCommand extends Command {
@@ -29,11 +30,15 @@ module.exports = class EmojiCommand extends Command {
 
   run (message, args) {
     let user = args.user.user
+    if (user.bot === true) return message.reply('bots can\'t have a timezone.')
     var userTimezone = this.client.provider.get(user.id, 'timezone', false)
     if (userTimezone === false) {
-      message.reply(`${user.tag} hasn't setup their timezone yet.`)
+      message.reply(oneLine`
+        ${user.tag} hasn't setup their timezone yet.
+        They can use the \`settz\` command to change their timezone.
+      `)
     } else {
-      message.say(`${userTimezone}; where ${user.username} is, it's ${moment.tz(userTimezone).format('llll')}.`)
+      message.say(`${userTimezone}; where ${user.username} is, it's **${moment.tz(userTimezone).format('llll')}.**`)
     }
   }
 }
