@@ -104,12 +104,12 @@ module.exports = class ServerInfoCommand extends Command {
         {
           'name': '💤 AFK Channel',
           'value': guild.afkChannelID !== null
-          ? stripIndents`
+            ? stripIndents`
             **Name:** ${guild.afkChannel.name}
             **ID:** ${guild.afkChannel.id}
             **Timeout:** ${guild.afkTimeout} seconds
           `
-          : 'N/A',
+            : 'N/A',
           'inline': true
         },
         {

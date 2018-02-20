@@ -36,9 +36,9 @@ module.exports = class SetStatusCommand extends Command {
     if (args.status === 'invisible') { status = 'invisible' } else { return message.say(`\`${args.status}\` is not a valid status.`) }
     this.client.provider.set('global', 'clientStatus', status)
     this.client.user.setStatus(this.client.provider.get('global', 'clientStatus'))
-    .then(
-      this.client.user.setActivity(`${this.client.config.startConfig.commandPrefix}help | ${pluralize('Guild', this.client.guilds.size, true)} | ${pluralize('User', this.client.users.size, true)}${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`)
-    )
+      .then(
+        this.client.user.setActivity(`${this.client.config.startConfig.commandPrefix}help | ${pluralize('Guild', this.client.guilds.size, true)} | ${pluralize('User', this.client.users.size, true)}${this.client.shard ? ` | Shard ID: ${this.client.shard.id}` : ''}`)
+      )
     message.say(`Successfully set status to \`${status}\` ${this.client.shard ? `on all shards.\n*(Allow up to 10 minutes for this to take effect on all shards.)*` : ''}`)
   }
 }

@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const moment = require('moment-timezone')
 
 module.exports = class EmojiCommand extends Command {
-  constructor(client) {
+  constructor (client) {
     super(client, {
       name: 'time',
       memberName: 'time',

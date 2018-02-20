@@ -34,8 +34,8 @@ module.exports = class ContactCommand extends Command {
           author: { name: this.client.user.tag, icon_url: message.author.displayAvatarURL() },
           footer: {
             text: message.channel.type === 'dm'
-            ? `User ID: ${message.author.id}`
-            : `User ID: ${message.author.id} | Server ID: ${message.guild.id}`
+              ? `User ID: ${message.author.id}`
+              : `User ID: ${message.author.id} | Server ID: ${message.guild.id}`
           },
           timestamp: new Date(),
           title: `Sent by ${escapeMarkdown(message.author.tag)} ${message.channel.type === 'dm' ? 'through DM' : `from ${message.guild.name}`}`,

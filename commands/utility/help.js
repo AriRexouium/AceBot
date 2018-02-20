@@ -93,13 +93,13 @@ module.exports = class HelpCommand extends Command {
           __**${showAll ? 'All commands' : `Available commands in ${message.guild || 'this DM'}`}**__
 
           ${(showAll ? groups : groups.filter(group => group.commands.some(cmd => cmd.isUsable(message))))
-            .map(group => stripIndents`
+    .map(group => stripIndents`
               __${group.name}__
               ${(showAll ? group.commands : group.commands.filter(cmd => cmd.isUsable(message)))
-                .map(cmd => `**${cmd.name}:** ${cmd.description}${cmd.nsfw ? ' (NSFW)' : ''}`).join('\n')
-              }
+    .map(cmd => `**${cmd.name}:** ${cmd.description}${cmd.nsfw ? ' (NSFW)' : ''}`).join('\n')
+}
             `).join('\n\n')
-          }
+}
         `, { split: true }))
         if (message.channel.type !== 'dm') messages.push(await message.reply('I sent you a DM with information.'))
       } catch (err) {

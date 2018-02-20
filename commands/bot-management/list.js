@@ -40,15 +40,15 @@ module.exports = class ListCommand extends Command {
       return message.say(stripIndents`
       __**Commands**__
       ${this.client.registry.commands.map(command =>
-        `**${command.name}:** ${command.isEnabledIn(message.guild) ? 'Enabled' : 'Disabled'}`
-      ).join('\n')}
+    `**${command.name}:** ${command.isEnabledIn(message.guild) ? 'Enabled' : 'Disabled'}`
+  ).join('\n')}
     `)
     }
     return message.say(stripIndents`
       __**Groups**__
       ${this.client.registry.groups.map(group =>
-        `**${group.name}:** ${group.isEnabledIn(message.guild) ? 'Enabled' : 'Disabled'}`
-      ).join('\n')}
+    `**${group.name}:** ${group.isEnabledIn(message.guild) ? 'Enabled' : 'Disabled'}`
+  ).join('\n')}
     `)
   }
 }
