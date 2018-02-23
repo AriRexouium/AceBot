@@ -38,7 +38,27 @@ module.exports = class EmojiCommand extends Command {
         They can use the \`settz\` command to change their timezone.
       `)
     } else {
-      message.say(`${userTimezone}; where ${user.username} is, it's **${moment.tz(userTimezone).format('llll')}.**`)
+      var userColor = (args.user).displayHexColor
+      if (userColor === '#000000') { userColor = 0x7289DA } else { userColor = Number(userColor.replace('#', '0x')) }
+
+      message.embed({
+        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+        timestamp: new Date(),
+        title: user.tag,
+        thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
+        fields: [
+          {
+            name: 'Time',
+            value: moment.tz(userTimezone).format('llll')
+          },
+          {
+            name: 'Timezone',
+            value: userTimezone
+          }
+        ],
+        color: userColor
+      })
     }
   }
 }
