@@ -1,10 +1,10 @@
 <div align="center">
-<h1 align="center"><strong>AceBot</strong></h1>
+  <h1 align="center"><b>AceBot</b></h1>
   AceBot is a Discord bot designed for providing information on demand.<br />
   <a href="http://discord.gg/Y6Vgfyd" title="Discord Guild">
-    <img src="http://discordapp.com/api/guilds/247815199539593216/embed.png?style=shield">
+    <img src="http://discordapp.com/api/guilds/247815199539593216/embed.png?style=shield" alt="Discord Guild" />
   </a>
-  <a href="http://discordbots.org/bot/253254587341996032">
+  <a href="http://discordbots.org/bot/253254587341996032" title="Discord Bots">
     <img src="http://discordbots.org/api/widget/servers/253254587341996032.svg" alt="Discord Bots" />
   </a>
 </div>
@@ -63,6 +63,6 @@ If you can manage to actually follow these instructions then you'll be just fine
 
 <p align="center">
   <a href="http://github.com/Aceheliflyer/AceBot/blob/master/LICENSE.txt" title="License">
-    <img src="http://img.shields.io/github/license/Aceheliflyer/AceBot.svg?style=for-the-badge">
+    <img src="http://img.shields.io/github/license/Aceheliflyer/AceBot.svg?style=for-the-badge" alt="License">
   </a>
 </p>
