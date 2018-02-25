@@ -40,9 +40,21 @@ module.exports = async (client) => {
 
   /* ************************************************** */
 
-  // Bot List
-  if (botListConfig.DiscordBotsOrg.enabled === true) { client.discordbots(client) }
-  if (botListConfig.BotsDiscordPw.enabled === true) { client.botsdiscordpw(client) }
+  /* Bot List */
+  // http://discordbots.org
+  if (botListConfig.DiscordBotsOrg.enabled === true) {
+    client.discordbotsorg(client).catch(error => { client.log.error(error) })
+    setInterval(() => {
+      client.discordbotsorg(client).catch(error => { client.log.error(error) })
+    }, botListConfig.DiscordBotsOrg.refreshRate)
+  }
+  // http://bots.discord.pw
+  if (botListConfig.BotsDiscordPw.enabled === true) {
+    client.botsdiscordpw(client).catch(error => { client.log.error(error) })
+    setInterval(() => {
+      client.botsdiscordpw(client).catch(error => { client.log.error(error) })
+    }, botListConfig.BotsDiscordPw.refreshRate)
+  }
 
   // Travis Tests
   if (client.travisTest === true) {

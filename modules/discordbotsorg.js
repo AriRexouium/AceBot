@@ -16,10 +16,10 @@ module.exports = function (client) {
     totalGuilds = { 'server_count': client.guilds.size, 'shard_id': client.shard.id, 'shard_count': client.shard.count }
   }
   try {
-    unirest.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-      .headers({ 'Authorization': botListConfig.BotsDiscordPw.token, 'Content-Type': 'application/json' })
+    unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
+      .headers({ 'Authorization': botListConfig.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
       .send(totalGuilds)
-      .end(function () { client.log.info('Server count sent to http://bots.discord.pw.') })
+      .end(function () { client.log.info('Server count sent to http://discordbots.org.') })
   } catch (error) {
     throw new Error(error)
   }

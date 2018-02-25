@@ -9,50 +9,72 @@ const chalk = require('chalk')
 
 /**
  * Log text to console.
- * @param {string} background The background color to use.
+ * @param {any} background The background color to use.
  * @param {string} title The title of the log message.
  * @param {string} text The text to log.
  * @param {boolean} time Add a timestamp or not. (Defaults to true.)
- * @param {string} type What type of log it is. (log, warn, error)
- * @return {boolean} Whether the log was successful or not.
+ * @param {string} type What type of log it is. (log, debug, warn, error)
  */
 function Logger (background, title, text, time = true, type) {
   console[type](`${time ? `[${chalk.cyan(moment().format('H:mm:ss'))}]` : ''}${chalk[background].bold(` ${title} `)} ${text}`)
 }
 
 module.exports = {
+  /**
+   * Log an info message.
+   * @param {string} text The info message to log.
+   * @param {string} title The title of the info message.
+   * @param {any} background The background color to use. (Defaults to cyan.)
+   * @param {boolean} time Add a timestamp or not. (Defaults to true.)
+   * @throws {ReferenceError} Will throw an error if text has no content.
+   */
   info (text, title = 'Info', background = 'bgCyan', time = true) {
     if (text) {
       Logger(background, title, text, time, 'info') // NOTE: Yes I know, console.info() is just an alias for console.log().
-      return true
     } else {
-      process.emitWarning('text cannot be undefined', 'LoggerError')
+      throw new ReferenceError('text is not defined')
     }
   },
+  /**
+   * Log a debug message.
+   * @param {string} text The debug message to log.
+   * @param {string} title The title of the debug message.
+   * @param {boolean} time Add a timestamp or not. (Defaults to true.)
+   * @throws {ReferenceError} Will throw an error if text has no content.
+   */
   debug (text, title = 'Debug', time = true) {
     if (text) {
       Logger('bgMagenta', title, text, time, 'log')
-      return true
     } else {
-      process.emitWarning('text cannot be undefined', 'LoggerError')
+      throw new ReferenceError('text is not defined')
     }
   },
-  warn (warn, title) {
-    if (warn) {
+  /**
+   * Log a warning message.
+   * @param {string} text The warning message to log.
+   * @param {string} title The title of the warning message.
+   * @throws {ReferenceError} Will throw an error if text has no content.
+   */
+  warn (text, title) {
+    if (text) {
       if (title) { title = `${title} Warning` } else { title = 'Warning' }
-      Logger('bgYellow', title, warn, true, 'warn')
-      return true
+      Logger('bgYellow', title, text, true, 'warn')
     } else {
-      process.emitWarning('warn cannot be undefined', 'LoggerError')
+      throw new ReferenceError('text is not defined')
     }
   },
-  error (error, title) {
-    if (error) {
+  /**
+   * Log an error message.
+   * @param {string} text The error message to log.
+   * @param {string} title The title of the error message.
+   * @throws {ReferenceError} Will throw an error if text has no content.
+   */
+  error (text, title) {
+    if (text) {
       if (title) { title = `${title} Error` } else { title = 'Error' }
-      Logger('bgRed', title, `${(error && error.stack) || error}`, true, 'error')
-      return true
+      Logger('bgRed', title, `${(text && text.stack) || text}`, true, 'error')
     } else {
-      process.emitWarning('error cannot be undefined', 'LoggerError')
+      throw new ReferenceError('text is not defined')
     }
   }
 }
