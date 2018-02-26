@@ -1,0 +1,3 @@
+---
+totalShards: 2 # The amount of shards to spawn when running the bot in a sharded mode.
+respawn: true # Whether shards should respawn if they close.
