@@ -13,6 +13,8 @@
 
 ## Build Status
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Aceheliflyer/AceBot.svg)](https://greenkeeper.io/)
+
 <!-- markdownlint-enable MD002 MD041 -->
 
 | Latest Version | Latest Build | Code Health | Code Style |
