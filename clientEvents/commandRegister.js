@@ -7,8 +7,8 @@ module.exports = (client, command, registry) => {
   `, 'commandRegister')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandRegister) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.commandRegister) {
       client.webhook({
         content: '',
         username: client.user.username,

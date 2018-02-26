@@ -46,8 +46,8 @@ module.exports = class BlacklistCommand extends Command {
       this.client.log.info(`${args.user.tag} was added to the blacklist by ${message.author.tag}.`, 'blacklistAdd')
 
       // Webhook
-      if (this.client.config.webhookConfig.enabled) {
-        if (this.client.config.webhookConfig.blacklistEvents.blacklistAdd) {
+      if (this.client.config.webhook.enabled) {
+        if (this.client.config.webhook.blacklistEvents.blacklistAdd) {
           this.client.webhook({
             content: '',
             username: this.client.user.username,
@@ -73,8 +73,8 @@ module.exports = class BlacklistCommand extends Command {
       this.client.log.info(`${args.user.tag} was removed from the blacklist by ${message.author.tag}.`, 'blacklistRemove')
 
       // Webhook
-      if (this.client.config.webhookConfig.enabled) {
-        if (this.client.config.webhookConfig.blacklistEvents.blacklistRemove) {
+      if (this.client.config.webhook.enabled) {
+        if (this.client.config.webhook.blacklistEvents.blacklistRemove) {
           this.client.webhook({
             content: '',
             username: this.client.user.username,

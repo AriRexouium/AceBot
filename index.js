@@ -1,6 +1,6 @@
 const fs = require('fs')
 const yaml = require('js-yaml')
-const config = yaml.safeLoad(fs.readFileSync('./config/config.yml', 'utf8'))
+const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
 const path = require('path')
 const sqlite = require('sqlite')
 const { oneLine, stripIndents } = require('common-tags')
@@ -10,12 +10,12 @@ const pluralize = require('pluralize')
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
   selfbot: false,
-  commandPrefix: config.startConfig.commandPrefix,
-  commandEditableDuration: config.startConfig.commandEditableDuration,
-  nonCommandEditable: config.startConfig.nonCommandEditable,
-  unknownCommandResponse: config.startConfig.unknownCommandResponse,
-  owner: config.startConfig.owner,
-  invite: config.startConfig.invite
+  commandPrefix: clientConfig.commandPrefix,
+  commandEditableDuration: clientConfig.commandEditableDuration,
+  nonCommandEditable: clientConfig.nonCommandEditable,
+  unknownCommandResponse: clientConfig.unknownCommandResponse,
+  owner: clientConfig.owner,
+  invite: clientConfig.invite
 })
 
 // Commands / Groups / Types
@@ -61,6 +61,16 @@ client.log.info(oneLine`
   Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
 `, 'Module Initializer')
 
+client.config = {}
+// Load all configurations to client.
+for (let file of getFiles('/config')) {
+  const configFileName = file.split('.')[0].substring(8)
+  if (configFileName !== 'database') {
+    const configFileContents = yaml.safeLoad(fs.readFileSync(`./${file}`, 'utf8'))
+    client.config[configFileName] = configFileContents
+    delete require.cache[require.resolve(`./${file}`)]
+  }
+}
 // Load processEvents
 for (let file of getFiles('/processEvents')) {
   const processEventName = file.split('.')[0].substring(15)
@@ -114,17 +124,14 @@ if (process.argv[2] === '--travis-test') { client.travisTest = true } else { cli
 // Bot Stats
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesReceived: 0, messagesSent: 0 }
 client.botStats = botStats
-
-// Config
-client.config = config
 /* Stop Assigning to Client */
 
 // Login
 var token
 if (client.travisTest === true) {
   token = process.env.TRAVISTOKEN
-} else if (client.config.loginConfig.token) {
-  token = client.config.loginConfig.token
+} else if (client.config.client.token) {
+  token = client.config.client.token
 } else {
   client.log.error('No valid token!', 'Login').then(process.exit(1))
 }

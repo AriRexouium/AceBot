@@ -1,12 +1,13 @@
 const log = require('./modules/log.js')
 const fs = require('fs')
 const yaml = require('js-yaml')
-const config = yaml.safeLoad(fs.readFileSync('./config/config.yml', 'utf8'))
+const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
+const shardConfig = yaml.safeLoad(fs.readFileSync('./config/shard.yml', 'utf8'))
 const { ShardingManager } = require('discord.js')
 const Manager = new ShardingManager('./index.js', {
-  totalShards: config.shardConfig.totalShards,
-  respawn: config.shardConfig.respawn,
-  token: config.loginConfig.token
+  totalShards: shardConfig.totalShards,
+  respawn: shardConfig.respawn,
+  token: clientConfig.token
 })
 
 Manager.spawn().then(log.debug('Spawning shard 0...', 'SHARD MANAGER')).catch(error => log.error(error.stack, 'SHARD MANAGER'))

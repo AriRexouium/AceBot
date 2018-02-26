@@ -8,20 +8,20 @@ module.exports = async (client) => {
 
   await setTimeout(function () {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.config.startConfig.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 1000)
 
   await setInterval(function () {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.config.startConfig.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 600000)
   await client.log.info(client.shard ? `Shard ${client.shard.id} ready!` : 'Client ready!', 'Client', 'bgGreen')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.ready) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.ready) {
       client.webhook({
         content: '',
         username: client.user.username,
@@ -64,9 +64,9 @@ module.exports = async (client) => {
 
   // Assign application owner as owner of the bot by default.
   client.fetchApplication().then(app => {
-    let appOwner = client.config.startConfig.owner.indexOf(app.owner.id) > -1
+    let appOwner = client.config.client.owner.indexOf(app.owner.id) > -1
     if (appOwner === false) {
-      client.config.startConfig.owner.push(app.owner.id)
+      client.config.client.owner.push(app.owner.id)
     }
   })
 }

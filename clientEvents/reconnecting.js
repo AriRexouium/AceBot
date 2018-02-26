@@ -7,8 +7,8 @@ module.exports = (client) => {
   `, 'Client')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.reconnecting) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.reconnecting) {
       client.webhook({
         content: '',
         username: client.user.username,

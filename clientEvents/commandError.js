@@ -13,8 +13,8 @@ module.exports = (client, command, error, message) => {
   `, 'commandError')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandError) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.commandError) {
       client.webhook({
         content: '',
         username: client.user.username,

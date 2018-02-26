@@ -10,8 +10,8 @@ module.exports = (client, command, promise, message) => {
   `, 'commandRun')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandRun) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.commandRun) {
       client.webhook({
         content: '',
         username: client.user.username,

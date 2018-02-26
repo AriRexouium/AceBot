@@ -7,8 +7,8 @@ module.exports = (client, warning) => {
   `, 'process')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.processEvents.warning) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.processEvents.warning) {
       client.webhook({
         content: '',
         username: client.user.username,

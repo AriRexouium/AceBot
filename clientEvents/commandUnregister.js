@@ -7,8 +7,8 @@ module.exports = (client, command, registry) => {
   `, 'commandUnregister')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandUnregister) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.commandUnregister) {
       client.webhook({
         content: '',
         username: client.user.username,

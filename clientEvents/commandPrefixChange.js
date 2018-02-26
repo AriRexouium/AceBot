@@ -8,8 +8,8 @@ module.exports = (client, guild, prefix) => {
   `, 'commandPrefixChange')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandPrefixChange) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.commandPrefixChange) {
       client.webhook({
         content: '',
         username: client.user.username,

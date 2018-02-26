@@ -10,8 +10,8 @@ module.exports = (client, error) => {
   `, 'unhandledRejection')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.processEvents.unhandledRejection) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.processEvents.unhandledRejection) {
       client.webhook({
         content: '',
         username: client.user.username,

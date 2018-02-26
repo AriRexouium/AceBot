@@ -9,8 +9,8 @@ module.exports = (client, guild, command, enabled) => {
   `, 'commandStatusChange')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.commandStatusChange) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.commandStatusChange) {
       client.webhook({
         content: '',
         username: client.user.username,

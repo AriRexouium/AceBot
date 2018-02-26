@@ -9,8 +9,8 @@ module.exports = (client, message, group, enabled) => {
   `, 'groupStatusChange')
 
   // Webhook
-  if (client.config.webhookConfig.enabled) {
-    if (client.config.webhookConfig.clientEvents.groupStatusChange) {
+  if (client.config.webhook.enabled) {
+    if (client.config.webhook.clientEvents.groupStatusChange) {
       client.webhook({
         content: '',
         username: client.user.username,
