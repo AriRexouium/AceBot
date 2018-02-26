@@ -1,0 +1,31 @@
+---
+# Full Colors
+black: '000000'
+white: 'FFFFFF'
+
+# RGB
+red: 'FF0000'
+green: '00FF00'
+blue: '0000FF'
+
+# Sub RGB
+yellow: 'FFFF00'
+pink: 'FF00FF'
+cyan: '00FFFF'
+
+# Official Discord Colors
+discordBlurple: '7289DA' # Also the bot tag color.
+discordGreyple: '99AAB5'
+discordDark: '2C2F33'
+discordBlack: '23272A'
+
+# Official Discord Status Colors
+oneline: '43B581'
+idle: 'FAA61A'
+dnd: 'F04747'
+offline: '747F8D'
+
+# Staff Colors
+manager: '4D4DFF'
+administrator: 'AA0000' # PHPBB forum Administrator color.
+moderator: '00AA00' # PHPBB forum Moderator color.

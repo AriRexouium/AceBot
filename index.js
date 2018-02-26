@@ -21,6 +21,7 @@ const client = new CommandoClient({
 // Commands / Groups / Types
 client.registry
   .registerDefaultTypes()
+  .registerTypesIn(path.join(__dirname, 'types'))
   .registerGroups([
     ['bot-management', 'Bot Management'],
     ['bot-staff', 'Bot Staff'],
