@@ -16,9 +16,38 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Removed
 - Remove here.
+
+## Fixed
+- Fix here.
 -->
 
 ## [Unreleased]
+## [3.3.0] - 2018-02-25
+### Added
+- Add Trello to package.json.
+- Support for Sentry error logging with tags and release tracking.
+- Style sheet for commands.
+- New `channelinfo` command.
+- Add AUTHORS.md file generator.
+- New `settz` and `time` commands for setting and retrieving user's time zones. *(Includes custom group.)*
+- Added lint command for linting code in the JavaScript Standard Style.
+
+### Changed
+- Embed colors for some commands are now dynamic.
+- Made all commands that use embeds to use `message.embed()`.
+- Update package versions.
+- `discordstatus` command uses Statuspage API.
+- Practically rewrote status and info commands respectively.
+- Improve help documentation.
+- Merged `repostatus` and `buildstatus` into `repo` command.
+- Better module management.
+
+### Removed
+- Removed `.gitattributes`.
+- Fixed README.md consistency.
+
+### Fixed
+- Prefix command is now guarded.
 
 ## [3.2.0] - 2018-02-09
 ### Added
@@ -31,10 +60,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Changed config file extensions from `.yaml` to `.yml`.
-- Improved README documentation.
+- Improved README.md documentation.
 - Switched from remark to markdownlint.
 - License is now a plain text file.
-- Improved CONTRIBUTING file.
+- Improved CONTRIBUTING.md file.
 - Removed unused async.
 - Restart command now restarts all shards.
 - Improved information in commands.
@@ -45,13 +74,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 3.1.0 - 2018-01-27
 ### Added
-- Add gitstatus and buildstatus to retrieve information on AceBot from respective websites.
-- Add gitstatus command.
-- Add buildstatus command.
+- Add `gitstatus` and `buildstatus` to retrieve information on AceBot from respective websites.
+- Add `gitstatus` command.
+- Add `buildstatus` command.
 
 ### Changed
 - Fix style error in the discordstatus command.
 
 <!-- [NEW]: http://github.com/olivierlacan/keep-a-changelog/compare/vOLD...vNEW -->
-[Unreleased]: http://github.com/Aceheliflyer/AceBot/compare/v3.2.0...HEAD
+[Unreleased]: http://github.com/Aceheliflyer/AceBot/compare/v3.3.0...HEAD
+[3.3.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.2.0...v3.3.0
 [3.2.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.1.0...v3.2.0
