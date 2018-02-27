@@ -8,6 +8,17 @@ module.exports = (client, message, group, enabled) => {
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'groupStatusChange')
 
+  // Global Group Status Changes (persistent)
+  client.provider.set('global', 'groupStatusChange', client.provider.get('global', 'groupStatusChange', 0) + 1)
+  // User Group Status Changes (persistent)
+  client.provider.set(message.author.id, 'groupStatusChange', client.provider.get(message.author.id, 'groupStatusChange', 0) + 1)
+  if (message.guild) {
+    // Channel Group Status Changes (persistent)
+    client.provider.set(message.channel.id, 'groupStatusChange', client.provider.get(message.channel.id, 'groupStatusChange', 0) + 1)
+    // Guild Group Status Changes (persistent)
+    client.provider.set(message.guild.id, 'groupStatusChange', client.provider.get(message.guild.id, 'groupStatusChange', 0) + 1)
+  }
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.groupStatusChange) {

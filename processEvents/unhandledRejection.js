@@ -9,6 +9,9 @@ module.exports = (client, error) => {
     ${error.stack}
   `, 'unhandledRejection')
 
+  // Global Unhandled Exceptions (persistent)
+  client.provider.set('global', 'unhandledRejection', client.provider.get('global', 'unhandledRejection', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.processEvents.unhandledRejection) {

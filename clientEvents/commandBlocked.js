@@ -9,6 +9,17 @@ module.exports = (client, message, reason) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandBlocked')
 
+  // Global Commands Blocked (persistent)
+  client.provider.set('global', 'commandBlocked', client.provider.get('global', 'commandBlocked', 0) + 1)
+  // User Commands Blocked (persistent)
+  client.provider.set(message.author.id, 'commandBlocked', client.provider.get(message.author.id, 'commandBlocked', 0) + 1)
+  if (message.guild) {
+    // Channel Commands Blocked (persistent)
+    client.provider.set(message.channel.id, 'commandBlocked', client.provider.get(message.channel.id, 'commandBlocked', 0) + 1)
+    // Guild Commands Blocked (persistent)
+    client.provider.set(message.guild.id, 'commandBlocked', client.provider.get(message.guild.id, 'commandBlocked', 0) + 1)
+  }
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandBlocked) {

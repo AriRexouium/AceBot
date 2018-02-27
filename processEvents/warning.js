@@ -6,6 +6,9 @@ module.exports = (client, warning) => {
     ${warning.stack}
   `, 'process')
 
+  // Global Warnings (persistent)
+  client.provider.set('global', 'processWarning', client.provider.get('global', 'processWarning', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.processEvents.warning) {

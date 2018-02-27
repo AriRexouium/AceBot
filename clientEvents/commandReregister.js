@@ -6,6 +6,9 @@ module.exports = (client, command, registry) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandReregister')
 
+  // Global Commands Reregistered (persistent)
+  client.provider.set('global', 'commandReregister', client.provider.get('global', 'commandReregister', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandReregister) {

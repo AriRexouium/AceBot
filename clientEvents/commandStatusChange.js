@@ -8,6 +8,13 @@ module.exports = (client, guild, command, enabled) => {
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'commandStatusChange')
 
+  // Global Command Status Changes (persistent)
+  client.provider.set('global', 'commandStatusChange', client.provider.get('global', 'commandStatusChange', 0) + 1)
+  if (guild) {
+    // Guild Command Status Changes (persistent)
+    client.provider.set(guild.id, 'commandStatusChange', client.provider.get(guild.id, 'commandStatusChange', 0) + 1)
+  }
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandStatusChange) {

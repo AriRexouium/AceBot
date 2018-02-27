@@ -9,6 +9,9 @@ module.exports = (client, error) => {
     ${error.stack}
   `)
 
+  // Global Errors (persistent)
+  client.provider.set('global', 'error', client.provider.get('global', 'error', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.error) {
@@ -20,7 +23,7 @@ module.exports = (client, error) => {
           author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'error' },
           timestamp: new Date(),
-          title: `error${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `c${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: '```js\n' + clean(error.stack) + '\n```',
           color: 0xAA0000
         }]

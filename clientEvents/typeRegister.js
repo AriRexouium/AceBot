@@ -6,6 +6,9 @@ module.exports = (client, command, registry) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'typeRegister')
 
+  // Global Types Registered (persistent)
+  client.provider.set('global', 'typeRegister', client.provider.get('global', 'typeRegister', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.typeRegister) {

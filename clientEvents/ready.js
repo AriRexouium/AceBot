@@ -19,6 +19,9 @@ module.exports = async (client) => {
   }, 600000)
   await client.log.info(client.shard ? `Shard ${client.shard.id} ready!` : 'Client ready!', 'Client', 'bgGreen')
 
+  // Global Ready (persistent)
+  client.provider.set('global', 'ready', client.provider.get('global', 'ready', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.ready) {

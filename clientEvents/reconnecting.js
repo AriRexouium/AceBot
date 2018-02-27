@@ -6,6 +6,9 @@ module.exports = (client) => {
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `, 'Client')
 
+  // Global Reconnects (persistent)
+  client.provider.set('global', 'reconnecting', client.provider.get('global', 'reconnecting', 0) + 1)
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.reconnecting) {

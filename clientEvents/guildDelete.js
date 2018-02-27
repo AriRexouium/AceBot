@@ -12,6 +12,9 @@ module.exports = async (client, guild) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'guildDelete')
 
+  // Global Guild Deletions (persistent)
+  client.provider.set('global', 'guildDelete', client.provider.get('global', 'guildDelete', 0) + 1)
+
   var ownerInfo = guild.members.find('id', guild.ownerID)
 
   // Webhook

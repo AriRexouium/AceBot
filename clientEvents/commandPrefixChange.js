@@ -7,6 +7,13 @@ module.exports = (client, guild, prefix) => {
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'commandPrefixChange')
 
+  // Global Commands Blocked (persistent)
+  client.provider.set('global', 'commandPrefixChange', client.provider.get('global', 'commandPrefixChange', 0) + 1)
+  if (guild) {
+    // Guild Commands Blocked (persistent)
+    client.provider.set(guild.id, 'commandPrefixChange', client.provider.get(guild.id, 'commandPrefixChange', 0) + 1)
+  }
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandPrefixChange) {
