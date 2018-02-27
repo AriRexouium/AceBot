@@ -61,6 +61,11 @@ for (let file of getFiles('/modules')) {
 client.log.info(oneLine`
   Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
 `, 'Module Initializer')
+// SQLite Provider
+
+sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
+  client.setProvider(new SQLiteProvider(db))
+}).then(client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer'))
 
 client.config = {}
 // Load all configurations to client.
@@ -95,11 +100,6 @@ client.log.info(oneLine`
   Initialized ${getFiles('/clientEvents').length}
   client ${pluralize('event', getFiles('/clientEvents').length, false)}!
 `, 'clientEvent Initializer')
-
-// SQLite Provider
-sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
-  client.setProvider(new SQLiteProvider(db))
-}).then(client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer'))
 
 // User Blacklist
 client.dispatcher.addInhibitor(message => {
