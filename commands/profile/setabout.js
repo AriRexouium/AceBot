@@ -22,8 +22,8 @@ module.exports = class SetAboutCommand extends Command {
           prompt: 'Please enter the year you were born. (Type "none" to leave blank.)',
           type: 'string',
           validate: value => {
-            if (value.length > 256) {
-              return 'Please keep the length below or exactly 256 characters (Type "none" to leave blank.)'
+            if (value.length > 512) {
+              return 'Please keep the length below or exactly 512 characters (Type "none" to leave blank.)'
             } else {
               return true
             }
