@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const getAge = require('get-age')
 const moment = require('moment-timezone')
 
-module.exports = class EmojiCommand extends Command {
+module.exports = class ProfileCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'profile',
@@ -30,12 +30,22 @@ module.exports = class EmojiCommand extends Command {
     var embedFields = []
     var user = args.user.user
     var userInfo = {}
-    var userValues = ['about', 'age', 'email', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
+    var userValues = ['about', 'age', 'color', 'email', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
     userValues.forEach(value => {
       userInfo[value] = this.client.provider.get(user.id, value, '')
     })
-    var userColor = (args.user).displayHexColor
-    if (userColor === '#000000') { userColor = 0x7289DA } else { userColor = Number(userColor.replace('#', '0x')) }
+    var userColor
+    if (userInfo.color === 'auto') {
+      if ((args.user).displayHexColor === '#000000') {
+        userColor = 0x7289da
+      } else {
+        userColor = Number((args.user).displayHexColor.replace('#', '0x'))
+      }
+    } else if (userInfo.color === 'none') {
+      userColor = 0x4f545c
+    } else {
+      userColor = Number(`0x${userInfo.color}`)
+    }
     /* Finish Declaring Variables */
 
     // Name Assignment
@@ -105,6 +115,7 @@ module.exports = class EmojiCommand extends Command {
     message.embed({
       author: { name: `${user.username}${userInfo.fullName}` },
       footer: { text: userInfo.timezone !== '' ? `${userInfo.timezone} • ${moment.tz(userInfo.timezone).format('llll')}` : '' },
+      description: message.guild.name,
       thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: embedFields,
       color: userColor

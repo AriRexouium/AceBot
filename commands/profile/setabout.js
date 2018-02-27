@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 
-module.exports = class SetAgeCommand extends Command {
+module.exports = class SetAboutCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'setabout',
