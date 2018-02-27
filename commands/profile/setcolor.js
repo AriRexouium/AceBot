@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const isHex = require('is-hex')
 
 module.exports = class SetAboutCommand extends Command {
   constructor (client) {
@@ -42,9 +43,4 @@ module.exports = class SetAboutCommand extends Command {
     }
     message.reply(`successfully set your color to \`${args.hex}\`!`)
   }
-}
-
-function isHex (input) {
-  return typeof input === 'string' &&
-    (input.match(/([0-9]|[a-f])/gim) || []).length === input.length
 }
