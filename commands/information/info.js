@@ -27,49 +27,23 @@ module.exports = class InfoCommand extends Command {
     var dev
     try { dev = this.client.users.find('id', '196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
 
-    /* Start Contributors */
-    var contributors = [
-      {
-        'name': 'cat16#0725',
-        'id': '217797734982352896',
-        'info': 'Helped with *a lot* of issues and questions I had.',
-        'github': 'cat16'
-      },
-      {
-        'name': 'Michael | ASIANBOI#4150',
-        'id': '171319044715053057',
-        'info': 'Offered suggestions and feedback.',
-        'github': 'mcao'
-      },
-      {
-        'name': 'Ariathe#4163',
-        'id': '325828052422492162',
-        'info': 'Designed the avatar for AceBot.'
-      },
-      {
-        'name': 'Thatguychris#3998',
-        'id': '158397118611062785',
-        'info': 'Did the web scraping for the old version of `discordstatus`'
-      }
-    ]
     var contributorsList = ''
-    contributors.forEach(contributor => {
+    this.client.config.contributors.forEach(contributor => {
       try {
         let contribTemp = this.client.users.find('id', contributor.id).tag
         if (contributor.github) {
           contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github}) -** ${contributor.info}`
         } else {
-          contributorsList = `${contributorsList}\n**${escapeMarkdown(contribTemp)} -** ${contributor.info}`
+          contributorsList = `${contributorsList}\n**${escapeMarkdown(contribTemp)}** - ${contributor.info}`
         }
       } catch (e) {
         if (contributor.github) {
           contributorsList = `${contributorsList}\n**[${escapeMarkdown(contributor.name)}](http://github.com/${contributor.github}) -** ${contributor.info}`
         } else {
-          contributorsList = `${contributorsList}\n**${escapeMarkdown(contributor.name)} -** ${contributor.info}`
+          contributorsList = `${contributorsList}\n**${escapeMarkdown(contributor.name)}** - ${contributor.info}`
         }
       }
     })
-    /* End Contributors */
 
     var totalGuilds; var totalChannels; var totalUsers
     if (!this.client.shard) {
@@ -133,7 +107,7 @@ module.exports = class InfoCommand extends Command {
         `, 'inline': false
         },
         {
-          'name': 'Contributors',
+          'name': 'Special Thanks to the Following:',
           'value': contributorsList,
           'inline': false
         }
