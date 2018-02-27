@@ -6,8 +6,10 @@ module.exports = (client) => {
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `)
 
+  if (client.sqlReady === true) {
   // Global Rate Limits (persistent)
-  client.provider.set('global', 'rateLimit', client.provider.get('global', 'rateLimit', 0) + 1)
+    client.provider.set('global', 'rateLimit', client.provider.get('global', 'rateLimit', 0) + 1)
+  }
 
   // Webhook
   if (client.config.webhook.enabled) {

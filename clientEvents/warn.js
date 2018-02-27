@@ -6,8 +6,10 @@ module.exports = (client, warn) => {
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `)
 
+  if (client.sqlReady === true) {
   // Global Warnings (persistent)
-  client.provider.set('global', 'warn', client.provider.get('global', 'warn', 0) + 1)
+    client.provider.set('global', 'warn', client.provider.get('global', 'warn', 0) + 1)
+  }
 
   // Webhook
   if (client.config.webhook.enabled) {

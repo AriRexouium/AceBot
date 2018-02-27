@@ -58,7 +58,7 @@ module.exports = class ServerInfoCommand extends Command {
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
-      title: guild.name,
+      title: `${guild.name} - (${guild.region})`,
       description: `Since ${moment(guild.createdAt).format('llll')} ${si.time().timezone})`,
       thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
@@ -97,8 +97,11 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': '🌐 Region',
-          'value': guild.region,
+          'name': '📈 Events',
+          'value': stripIndents`
+            Messages Sent: **${this.client.provider.get(guild.id, 'messagesSent', 0)}**
+            User
+          `,
           'inline': true
         },
         {

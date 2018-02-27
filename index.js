@@ -18,6 +18,8 @@ const client = new CommandoClient({
   invite: clientConfig.invite
 })
 
+client.sqlReady = false
+
 // Commands / Groups / Types
 client.registry
   .registerDefaultTypes()
@@ -65,7 +67,10 @@ client.log.info(oneLine`
 
 sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
-}).then(client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer'))
+}).then(e => {
+  client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer')
+  client.sqlReady = true
+})
 
 client.config = {}
 // Load all configurations to client.

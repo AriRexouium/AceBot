@@ -6,9 +6,6 @@ module.exports = (client, error) => {
     ${error.stack}
   `, 'uncaughtException')
 
-  // Global Uncaught Exceptions (persistent)
-  client.provider.set('global', 'uncaughtException', client.provider.get('global', 'uncaughtException', 0) + 1)
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.processEvents.uncaughtException) {
