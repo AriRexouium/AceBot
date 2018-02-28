@@ -3,7 +3,7 @@ const fs = require('fs')
 const yaml = require('js-yaml')
 const sentryConfig = yaml.safeLoad(fs.readFileSync('./config/sentry.yml', 'utf8'))
 
-module.exports = (client, command, error, message) => {
+module.exports = (client, command, error, message, args, fromPattern) => {
   client.log.error(stripIndents`
     ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
     User: ${message.author.tag} (${message.author.id})

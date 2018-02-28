@@ -1,6 +1,6 @@
 const { oneLine } = require('common-tags')
 
-module.exports = (client) => {
+module.exports = (client, rateLimitInfo, timeout, limit, timeDifference, method, path, route) => {
   client.log.warn(oneLine`
     You are being rate limited!
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}

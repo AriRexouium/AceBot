@@ -1,8 +1,8 @@
 const { stripIndents } = require('common-tags')
 
-module.exports = (client, command, registry) => {
+module.exports = (client, type, registry) => {
   client.log.info(stripIndents`
-    ${command.memberName} (${command.groupID})
+    ${type.memberName} (${type.groupID})
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'typeRegister')
 
@@ -24,7 +24,7 @@ module.exports = (client, command, registry) => {
           timestamp: new Date(),
           title: `typeRegister${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: stripIndents`
-            **Type Registered:** ${command.memberName} (${command.groupID})
+            **Type Registered:** ${type.memberName} (${type.groupID})
           `,
           color: 0x00FFFF
         }]

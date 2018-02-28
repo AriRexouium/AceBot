@@ -1,10 +1,10 @@
 const { oneLine } = require('common-tags')
 
-module.exports = (client, message, group, enabled) => {
+module.exports = (client, guild, group, enabled) => {
   client.log.info(oneLine`
     Group ${group.id}
     ${enabled ? 'enabled' : 'disabled'}
-    ${message.guild ? `in guild ${message.guild.name} (${message.guild.id})` : 'globally'}.
+    ${guild.guild ? `in guild ${guild.guild.name} (${guild.guild.id})` : 'globally'}.
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'groupStatusChange')
 
@@ -12,12 +12,12 @@ module.exports = (client, message, group, enabled) => {
   // Global Group Status Changes (persistent)
     client.provider.set('global', 'groupStatusChange', client.provider.get('global', 'groupStatusChange', 0) + 1)
     // User Group Status Changes (persistent)
-    client.provider.set(message.author.id, 'groupStatusChange', client.provider.get(message.author.id, 'groupStatusChange', 0) + 1)
-    if (message.guild) {
+    client.provider.set(guild.author.id, 'groupStatusChange', client.provider.get(guild.author.id, 'groupStatusChange', 0) + 1)
+    if (guild.guild) {
     // Channel Group Status Changes (persistent)
-      client.provider.set(message.channel.id, 'groupStatusChange', client.provider.get(message.channel.id, 'groupStatusChange', 0) + 1)
+      client.provider.set(guild.channel.id, 'groupStatusChange', client.provider.get(guild.channel.id, 'groupStatusChange', 0) + 1)
       // Guild Group Status Changes (persistent)
-      client.provider.set(message.guild.id, 'groupStatusChange', client.provider.get(message.guild.id, 'groupStatusChange', 0) + 1)
+      client.provider.set(guild.guild.id, 'groupStatusChange', client.provider.get(guild.guild.id, 'groupStatusChange', 0) + 1)
     }
   }
 
@@ -36,7 +36,7 @@ module.exports = (client, message, group, enabled) => {
           description: oneLine`
             Group ${group.id}
             ${enabled ? 'enabled' : 'disabled'}
-            ${message.guild ? `in guild ${message.guild.name} \`(${message.guild.id})\`` : 'globally'}.
+            ${guild.guild ? `in guild ${guild.guild.name} \`(${guild.guild.id})\`` : 'globally'}.
           `,
           color: 0x00FFFF
         }]

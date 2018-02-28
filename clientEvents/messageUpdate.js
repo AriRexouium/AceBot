@@ -1,14 +1,14 @@
-module.exports = (client, message) => {
+module.exports = (client, oldMessage, newMessage) => {
   if (client.sqlReady === true) {
     // Global Message Updates (persistent)
     client.provider.set('global', 'messageUpdate', client.provider.get('global', 'messageUpdate', 0) + 1)
     // User Message Updates (persistent)
-    client.provider.set(message.author.id, 'messageUpdate', client.provider.get(message.author.id, 'messageUpdate', 0) + 1)
-    if (message.guild) {
+    client.provider.set(oldMessage.author.id, 'messageUpdate', client.provider.get(oldMessage.author.id, 'messageUpdate', 0) + 1)
+    if (oldMessage.guild) {
       // Channel Message Updates (persistent)
-      client.provider.set(message.channel.id, 'messageUpdate', client.provider.get(message.channel.id, 'messageUpdate', 0) + 1)
+      client.provider.set(oldMessage.channel.id, 'messageUpdate', client.provider.get(oldMessage.channel.id, 'messageUpdate', 0) + 1)
       // Guild Message Updates (persistent)
-      client.provider.set(message.guild.id, 'messageUpdate', client.provider.get(message.guild.id, 'messageUpdate', 0) + 1)
+      client.provider.set(oldMessage.guild.id, 'messageUpdate', client.provider.get(oldMessage.guild.id, 'messageUpdate', 0) + 1)
     }
   }
 }

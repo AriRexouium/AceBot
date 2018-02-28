@@ -1,5 +1,5 @@
 module.exports = (client, emoji) => {
-  if (client.sqlReady) {
+  if (client.sqlReady === true) {
     // Global Emoji Creations (persistent)
     client.provider.set('global', 'emojiDelete', client.provider.get('global', 'emojiDelete', 0) + 1)
     // Guild Emoji Creations (persistent)

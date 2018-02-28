@@ -1,6 +1,6 @@
 const { oneLine } = require('common-tags')
 
-module.exports = (client) => {
+module.exports = (client, event) => {
   client.log.warn(oneLine`
     Disconnected!
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}

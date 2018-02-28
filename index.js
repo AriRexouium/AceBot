@@ -67,9 +67,6 @@ client.log.info(oneLine`
 
 sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
-}).then(e => {
-  client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer')
-  client.sqlReady = true
 })
 
 client.config = {}
@@ -97,9 +94,11 @@ client.log.info(oneLine`
 // Load clientEvents
 for (let file of getFiles('/clientEvents')) {
   const clientEventName = file.split('.')[0].substring(14)
-  const clientEvent = require(`./${file}`)
-  client.on(clientEventName, clientEvent.bind(null, client))
-  delete require.cache[require.resolve(`./${file}`)]
+  if (clientEventName !== 'README') {
+    const clientEvent = require(`./${file}`)
+    client.on(clientEventName, clientEvent.bind(null, client))
+    delete require.cache[require.resolve(`./${file}`)]
+  }
 }
 client.log.info(oneLine`
   Initialized ${getFiles('/clientEvents').length}

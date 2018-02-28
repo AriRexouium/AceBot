@@ -1,8 +1,8 @@
 const { oneLine } = require('common-tags')
 
-module.exports = (client, warn) => {
+module.exports = (client, info) => {
   client.log.warn(oneLine`
-    ${warn}
+    ${info}
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `)
 
@@ -23,7 +23,7 @@ module.exports = (client, warn) => {
           footer: { text: 'warn' },
           timestamp: new Date(),
           title: `warn${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: '```js\n' + clean(warn.stack) + '\n```',
+          description: '```js\n' + clean(info.stack) + '\n```',
           color: 0xFFFF00
         }]
       })

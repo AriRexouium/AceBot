@@ -1,6 +1,6 @@
 const { stripIndents } = require('common-tags')
 
-module.exports = (client, command, registry) => {
+module.exports = (client, command) => {
   client.log.info(stripIndents`
     ${command.memberName} (${command.groupID})
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
