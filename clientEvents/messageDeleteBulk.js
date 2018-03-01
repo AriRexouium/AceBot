@@ -10,10 +10,10 @@ module.exports = (client, messages) => {
       authorStore.push(message.author)
     })
     // Channel Messages Bulk Deleted (persistent)
-    client.provider.set(messages[0].channel.id, 'messageDeleteBulk', client.provider.get(messages[0].channel.id, 'messageDeleteBulk', 0) + 1)
-    if (messages[0].guild) {
+    client.provider.set(messages.first().channel.id, 'messageDeleteBulk', client.provider.get(messages.first().channel.id, 'messageDeleteBulk', 0) + 1)
+    if (messages.first().guild) {
       // Guild Messages Bulk Deleted (persistent)
-      client.provider.set(messages[0].guild.id, 'messageDeleteBulk', client.provider.get(messages[0].guild.id, 'messageDeleteBulk', 0) + 1)
+      client.provider.set(messages.first().guild.id, 'messageDeleteBulk', client.provider.get(messages.first().guild.id, 'messageDeleteBulk', 0) + 1)
     }
   }
 }
