@@ -17,9 +17,9 @@ module.exports = (client, command, error, message, args, fromPattern) => {
     client.provider.set('global', 'commandError', client.provider.get('global', 'commandError', 0) + 1)
     // User Command Errors (persistent)
     client.provider.set(message.author.id, 'commandError', client.provider.get(message.author.id, 'commandError', 0) + 1)
-    if (message.guild) {
     // Channel Command Errors (persistent)
-      client.provider.set(message.channel.id, 'commandError', client.provider.get(message.channel.id, 'commandError', 0) + 1)
+    client.provider.set(message.channel.id, 'commandError', client.provider.get(message.channel.id, 'commandError', 0) + 1)
+    if (message.guild) {
       // Guild Command Errors (persistent)
       client.provider.set(message.guild.id, 'commandError', client.provider.get(message.guild.id, 'commandError', 0) + 1)
     }

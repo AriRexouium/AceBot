@@ -14,9 +14,9 @@ module.exports = (client, message, reason) => {
     client.provider.set('global', 'commandBlocked', client.provider.get('global', 'commandBlocked', 0) + 1)
     // User Commands Blocked (persistent)
     client.provider.set(message.author.id, 'commandBlocked', client.provider.get(message.author.id, 'commandBlocked', 0) + 1)
-    if (message.guild) {
     // Channel Commands Blocked (persistent)
-      client.provider.set(message.channel.id, 'commandBlocked', client.provider.get(message.channel.id, 'commandBlocked', 0) + 1)
+    client.provider.set(message.channel.id, 'commandBlocked', client.provider.get(message.channel.id, 'commandBlocked', 0) + 1)
+    if (message.guild) {
       // Guild Commands Blocked (persistent)
       client.provider.set(message.guild.id, 'commandBlocked', client.provider.get(message.guild.id, 'commandBlocked', 0) + 1)
     }

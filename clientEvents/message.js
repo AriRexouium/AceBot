@@ -18,9 +18,9 @@ module.exports = (client, message) => {
     client.provider.set('global', 'message', client.provider.get('global', 'message', 0) + 1)
     // User Messages Sent (persistent)
     client.provider.set(message.author.id, 'message', client.provider.get(message.author.id, 'message', 0) + 1)
-    if (message.guild) {
     // Channel Messages Sent (persistent)
-      client.provider.set(message.channel.id, 'message', client.provider.get(message.channel.id, 'message', 0) + 1)
+    client.provider.set(message.channel.id, 'message', client.provider.get(message.channel.id, 'message', 0) + 1)
+    if (message.guild) {
       // Guild Messages Sent (persistent)
       client.provider.set(message.guild.id, 'message', client.provider.get(message.guild.id, 'message', 0) + 1)
     }

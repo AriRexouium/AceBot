@@ -9,13 +9,9 @@ module.exports = (client, guild, group, enabled) => {
   `, 'groupStatusChange')
 
   if (client.sqlReady === true) {
-  // Global Group Status Changes (persistent)
+    // Global Group Status Changes (persistent)
     client.provider.set('global', 'groupStatusChange', client.provider.get('global', 'groupStatusChange', 0) + 1)
-    // User Group Status Changes (persistent)
-    client.provider.set(guild.author.id, 'groupStatusChange', client.provider.get(guild.author.id, 'groupStatusChange', 0) + 1)
     if (guild.guild) {
-    // Channel Group Status Changes (persistent)
-      client.provider.set(guild.channel.id, 'groupStatusChange', client.provider.get(guild.channel.id, 'groupStatusChange', 0) + 1)
       // Guild Group Status Changes (persistent)
       client.provider.set(guild.guild.id, 'groupStatusChange', client.provider.get(guild.guild.id, 'groupStatusChange', 0) + 1)
     }

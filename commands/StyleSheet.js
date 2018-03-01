@@ -10,19 +10,19 @@ const { oneLine } = require('common-tags')
 module.exports = class StyleSheetCommand extends Command {
   constructor (client) {
     super(client, {
-      name: 'StyleSheet', // Name of this command
-      memberName: 'StyleSheet', // Name of this command
-      group: 'StyleSheet', // The group the command belongs to, assigned upon registration
-      description: 'A short description goes here.', // Short description of the command
+      name: 'StyleSheet', // Name of this command.
+      memberName: 'StyleSheet', // Name of this command.
+      group: 'StyleSheet', // The group the command belongs to, assigned upon registration.
+      description: 'A short description goes here.', // Short description of the command.
       details: oneLine` // Short description of the command
       A long description for
       your command goes here.
       `,
-      aliases: [ // Aliases for this command
+      aliases: [ // Aliases for this command.
         'SheetStyle',
         'CommandExample'
       ],
-      examples: [ // Example usage strings
+      examples: [ // Example usage strings.
         'StyleSheet This is not a command.',
         'StyleSheet There are arguments.',
         'StyleSheet This is just an example.'
@@ -35,11 +35,11 @@ module.exports = class StyleSheetCommand extends Command {
         'SEND_MESSAGES',
         'VIEW_CHANNEL'
       ],
-      throttling: { // Options for throttling command usages
+      throttling: { // Options for throttling command usages.
         usages: 2,
         duration: 10
       },
-      format: '[Test/Testing/Testing123]', // Usage format string of the command
+      format: '[Test/Testing/Testing123]', // Usage format string of the command.
       args: [ // Go here for argument help: http://discord.js.org/#/docs/commando/master/class/Argument
         {
           key: 'message',
@@ -48,11 +48,12 @@ module.exports = class StyleSheetCommand extends Command {
           type: 'string'
         }
       ],
-      guarded: false, // Whether the command is protected from being disabled
-      guildOnly: false, // Whether the command can only be run in a guild channel
-      ownerOnly: false // Whether the command can only be used by an owner
+      guarded: false, // Whether the command is protected from being disabled.
+      guildOnly: false, // Whether the command can only be run in a guild channel.
+      ownerOnly: false // Whether the command can only be used by an owner.
     })
   }
+
   async run (message, args) {
     // Code goes here etc.
   }

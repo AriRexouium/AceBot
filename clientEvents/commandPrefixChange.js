@@ -8,10 +8,10 @@ module.exports = (client, guild, prefix) => {
   `, 'commandPrefixChange')
 
   if (client.sqlReady === true) {
-  // Global Commands Blocked (persistent)
+  // Global Prefix Changes (persistent)
     client.provider.set('global', 'commandPrefixChange', client.provider.get('global', 'commandPrefixChange', 0) + 1)
     if (guild) {
-    // Guild Commands Blocked (persistent)
+    // Guild Prefix Changes (persistent)
       client.provider.set(guild.id, 'commandPrefixChange', client.provider.get(guild.id, 'commandPrefixChange', 0) + 1)
     }
   }
