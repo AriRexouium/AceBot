@@ -11,9 +11,9 @@ module.exports = async (client, guild) => {
 
   if (client.sqlReady === true) {
     // Global Guild Creations (persistent)
-    client.provider.set('global', 'guildCreate', client.provider.get('global', 'guildCreate', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'guildCreate' })
     // Guild Creations (persistent)
-    client.provider.set(guild.id, 'guildCreate', client.provider.get(guild.id, 'guildCreate', 0) + 1)
+    client.temp.sqlData.push({ location: guild.id, type: 'guildCreate' })
   }
 
   var ownerInfo = guild.members.find('id', guild.ownerID)

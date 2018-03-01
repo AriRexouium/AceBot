@@ -1,14 +1,14 @@
 module.exports = (client, messageReaction, user) => {
   if (client.sqlReady === true) {
     // Global Message Reaction Additions (persistent)
-    client.provider.set('global', 'messageReactionAdd', client.provider.get('global', 'messageReactionAdd', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'messageReactionAdd' })
     // User Message Reaction Additions (persistent)
-    client.provider.set(user.id, 'messageReactionAdd', client.provider.get(user.id, 'messageReactionAdd', 0) + 1)
+    client.temp.sqlData.push({ location: user.id, type: 'messageReactionAdd' })
     // Channel Message Reaction Additions (persistent)
-    client.provider.set(messageReaction.message.channel.id, 'messageReactionAdd', client.provider.get(messageReaction.message.channel.id, 'messageReactionAdd', 0) + 1)
+    client.temp.sqlData.push({ location: messageReaction.message.channel.id, type: 'messageReactionAdd' })
     if (messageReaction.message.guild) {
       // Guild Message Reaction Additions (persistent)
-      client.provider.set(messageReaction.message.guild.id, 'messageReactionAdd', client.provider.get(messageReaction.message.guild.id, 'messageReactionAdd', 0) + 1)
+      client.temp.sqlData.push({ location: messageReaction.message.guild.id, type: 'messageReactionAdd' })
     }
   }
 }

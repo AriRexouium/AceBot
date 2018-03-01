@@ -1,14 +1,14 @@
 module.exports = (client, channel, user) => {
   if (client.sqlReady === true) {
     // Global Stop Typing Count (persistent)
-    client.provider.set('global', 'typingStop', client.provider.get('global', 'typingStop', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'typingStop' })
     // User Stop Typing Count (persistent)
-    client.provider.set(user.id, 'typingStop', client.provider.get(user.id, 'typingStop', 0) + 1)
+    client.temp.sqlData.push({ location: user.id, type: 'typingStop' })
     // Channel Stop Typing Count (persistent)
-    client.provider.set(channel.id, 'typingStop', client.provider.get(channel.id, 'typingStop', 0) + 1)
+    client.temp.sqlData.push({ location: channel.id, type: 'typingStop' })
     if (channel.guild) {
       // Guild Stop Typing Count (persistent)
-      client.provider.set(channel.guild.id, 'typingStop', client.provider.get(channel.guild.id, 'typingStop', 0) + 1)
+      client.temp.sqlData.push({ location: channel.guild.id, type: 'typingStop' })
     }
   }
 }

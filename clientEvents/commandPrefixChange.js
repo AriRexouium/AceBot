@@ -9,10 +9,10 @@ module.exports = (client, guild, prefix) => {
 
   if (client.sqlReady === true) {
   // Global Prefix Changes (persistent)
-    client.provider.set('global', 'commandPrefixChange', client.provider.get('global', 'commandPrefixChange', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'commandPrefixChange' })
     if (guild) {
     // Guild Prefix Changes (persistent)
-      client.provider.set(guild.id, 'commandPrefixChange', client.provider.get(guild.id, 'commandPrefixChange', 0) + 1)
+      client.temp.sqlData.push({ location: guild.id, type: 'commandPrefixChange' })
     }
   }
 

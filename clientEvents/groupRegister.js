@@ -8,7 +8,7 @@ module.exports = (client, group, registry) => {
 
   if (client.sqlReady === true) {
   // Global Groups Registered (persistent)
-    client.provider.set('global', 'groupRegister', client.provider.get('global', 'groupRegister', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'groupRegister' })
   }
 
   // Webhook

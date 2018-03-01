@@ -1,14 +1,14 @@
 module.exports = (client, message) => {
   if (client.sqlReady === true) {
   // Global Unknown Commands (persistent)
-    client.provider.set('global', 'unknownCommand', client.provider.get('global', 'unknownCommand', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'unknownCommand' })
     // User Unknown Commands (persistent)
-    client.provider.set(message.author.id, 'unknownCommand', client.provider.get(message.author.id, 'unknownCommand', 0) + 1)
+    client.temp.sqlData.push({ location: message.author.id, type: 'unknownCommand' })
     // Channel Unknown Commands (persistent)
-    client.provider.set(message.channel.id, 'unknownCommand', client.provider.get(message.channel.id, 'unknownCommand', 0) + 1)
+    client.temp.sqlData.push({ location: message.channel.id, type: 'unknownCommand' })
     if (message.guild) {
       // Guild Unknown Commands (persistent)
-      client.provider.set(message.guild.id, 'unknownCommand', client.provider.get(message.guild.id, 'unknownCommand', 0) + 1)
+      client.temp.sqlData.push({ location: message.guild.id, type: 'unknownCommand' })
     }
   }
 }

@@ -10,10 +10,10 @@ module.exports = async (client, guild) => {
   `, 'guildDelete')
 
   if (client.sqlReady === true) {
-  // Global Guild Deletions (persistent)
-    client.provider.set('global', 'guildDelete', client.provider.get('global', 'guildDelete', 0) + 1)
+    // Global Guild Deletions (persistent)
+    client.temp.sqlData.push({ location: 'global', type: 'guildDelete' })
     // Guild Deletions (persistent)
-    client.provider.set(guild.id, 'guildCreate', client.provider.get(guild.id, 'guildCreate', 0) + 1)
+    client.temp.sqlData.push({ location: guild.id, type: 'guildDelete' })
   }
 
   var ownerInfo = guild.members.find('id', guild.ownerID)

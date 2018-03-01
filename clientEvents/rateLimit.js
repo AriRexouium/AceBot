@@ -8,7 +8,7 @@ module.exports = (client, rateLimitInfo, timeout, limit, timeDifference, method,
 
   if (client.sqlReady === true) {
   // Global Rate Limits (persistent)
-    client.provider.set('global', 'rateLimit', client.provider.get('global', 'rateLimit', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'rateLimit' })
   }
 
   // Webhook

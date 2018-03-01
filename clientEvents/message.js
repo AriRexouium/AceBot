@@ -15,14 +15,14 @@ module.exports = (client, message) => {
 
   if (client.sqlReady === true) {
   // Global Messages Sent (persistent)
-    client.provider.set('global', 'message', client.provider.get('global', 'message', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'message' })
     // User Messages Sent (persistent)
-    client.provider.set(message.author.id, 'message', client.provider.get(message.author.id, 'message', 0) + 1)
+    client.temp.sqlData.push({ location: message.author.id, type: 'message' })
     // Channel Messages Sent (persistent)
-    client.provider.set(message.channel.id, 'message', client.provider.get(message.channel.id, 'message', 0) + 1)
+    client.temp.sqlData.push({ location: message.channel.id, type: 'message' })
     if (message.guild) {
       // Guild Messages Sent (persistent)
-      client.provider.set(message.guild.id, 'message', client.provider.get(message.guild.id, 'message', 0) + 1)
+      client.temp.sqlData.push({ location: message.guild.id, type: 'message' })
     }
   }
 

@@ -1,10 +1,10 @@
 module.exports = (client, member) => {
   if (client.sqlReady === true) {
     // Global Guild Member Add (persistent)
-    client.provider.set('global', 'guildMemberAdd', client.provider.get('global', 'guildMemberAdd', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'guildMemberAdd' })
     // User Guild Member Add (persistent)
-    client.provider.set(member.user.id, 'guildMemberAdd', client.provider.get(member.user.id, 'guildMemberAdd', 0) + 1)
+    client.temp.sqlData.push({ location: member.user.id, type: 'guildMemberAdd' })
     // Guild Member Add (persistent)
-    client.provider.set(member.guild.id, 'guildMemberAdd', client.provider.get(member.guild.id, 'guildMemberAdd', 0) + 1)
+    client.temp.sqlData.push({ location: member.guild.id, type: 'guildMemberAdd' })
   }
 }

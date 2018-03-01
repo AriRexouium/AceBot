@@ -63,14 +63,14 @@ for (let file of getFiles('/modules')) {
 client.log.info(oneLine`
   Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
 `, 'Module Initializer')
-// SQLite Provider
 
+// SQLite Provider
 sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
   client.setProvider(new SQLiteProvider(db))
 })
 
 client.config = {}
-// Load all configurations to client.
+// Load all configuration files to the client.
 for (let file of getFiles('/config')) {
   const configFileName = file.split('.')[0].substring(8)
   if (configFileName !== 'database') {
@@ -79,6 +79,7 @@ for (let file of getFiles('/config')) {
     delete require.cache[require.resolve(`./${file}`)]
   }
 }
+
 // Load processEvents
 for (let file of getFiles('/processEvents')) {
   const processEventName = file.split('.')[0].substring(15)
@@ -123,6 +124,10 @@ client.dispatcher.addInhibitor(message => {
 })
 
 /* Start Assigning to Client */
+// Event RateLimit
+client.temp = {}
+client.temp.sqlData = []
+
 // Travis Test Mode
 if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
 

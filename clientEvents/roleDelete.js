@@ -1,8 +1,8 @@
 module.exports = (client, role) => {
   if (client.sqlReady === true) {
     // Global Emoji Creations (persistent)
-    client.provider.set('global', 'roleDelete', client.provider.get('global', 'roleDelete', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'roleDelete' })
     // Guild Emoji Creations (persistent)
-    client.provider.set(role.guild.id, 'roleDelete', client.provider.get(role.guild.id, 'roleDelete', 0) + 1)
+    client.temp.sqlData.push({ location: role.guild.id, type: 'roleDelete' })
   }
 }

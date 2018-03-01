@@ -5,6 +5,6 @@
 module.exports = (client, clientUserSettings) => {
   if (client.sqlReady === true) {
     // Global Client User Settings Update (persistent)
-    client.provider.set('global', 'clientUserSettingsUpdate', client.provider.get('global', 'clientUserSettingsUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'clientUserSettingsUpdate' })
   }
 }

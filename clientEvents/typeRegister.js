@@ -8,7 +8,7 @@ module.exports = (client, type, registry) => {
 
   if (client.sqlReady === true) {
   // Global Types Registered (persistent)
-    client.provider.set('global', 'typeRegister', client.provider.get('global', 'typeRegister', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'typeRegister' })
   }
 
   // Webhook

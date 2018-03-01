@@ -11,7 +11,7 @@ module.exports = (client, error) => {
 
   if (client.sqlReady === true) {
   // Global Errors (persistent)
-    client.provider.set('global', 'error', client.provider.get('global', 'error', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'error' })
   }
 
   // Webhook

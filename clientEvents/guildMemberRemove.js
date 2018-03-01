@@ -1,10 +1,10 @@
 module.exports = (client, member) => {
   if (client.sqlReady === true) {
     // Global Guild Member Remove (persistent)
-    client.provider.set('global', 'guildMembersChunk', client.provider.get('global', 'guildMembersChunk', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'guildMembersChunk' })
     // User Guild Member Remove (persistent)
-    client.provider.set(member.user.id, 'guildMembersChunk', client.provider.get(member.user.id, 'guildMembersChunk', 0) + 1)
+    client.temp.sqlData.push({ location: member.user.id, type: 'guildMembersChunk' })
     // Guild Member Remove (persistent)
-    client.provider.set(member.guild.id, 'guildMembersChunk', client.provider.get(member.guild.id, 'guildMembersChunk', 0) + 1)
+    client.temp.sqlData.push({ location: member.guild.id, type: 'guildMembersChunk' })
   }
 }

@@ -8,7 +8,7 @@ module.exports = (client, event) => {
 
   if (client.sqlReady === true) {
   // Global Disconnects (persistent)
-    client.provider.set('global', 'disconnect', client.provider.get('global', 'disconnect', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'disconnect' })
   }
 
   // Webhook

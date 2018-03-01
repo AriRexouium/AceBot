@@ -1,10 +1,10 @@
 module.exports = async (client, channel) => {
   if (client.sqlReady === true) {
     // Global Channel Deletions (persistent)
-    client.provider.set('global', 'channelDelete', client.provider.get('global', 'channelDelete', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'channelDelete' })
     if (channel.guild) {
       // Guild Channel Deletions (persistent)
-      client.provider.set(channel.guild.id, 'channelDelete', client.provider.get(channel.guild.id, 'channelDelete', 0) + 1)
+      client.temp.sqlData.push({ location: channel.guild.id, type: 'channelDelete' })
     }
   }
 }

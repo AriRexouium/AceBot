@@ -8,7 +8,7 @@ module.exports = (client, newCommand, oldCommand) => {
 
   if (client.sqlReady === true) {
   // Global Commands Reregistered (persistent)
-    client.provider.set('global', 'commandReregister', client.provider.get('global', 'commandReregister', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'commandReregister' })
   }
 
   // Webhook

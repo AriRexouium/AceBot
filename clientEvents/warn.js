@@ -8,7 +8,7 @@ module.exports = (client, info) => {
 
   if (client.sqlReady === true) {
   // Global Warnings (persistent)
-    client.provider.set('global', 'warn', client.provider.get('global', 'warn', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'warn' })
   }
 
   // Webhook

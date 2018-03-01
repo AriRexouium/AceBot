@@ -10,10 +10,10 @@ module.exports = (client, guild, group, enabled) => {
 
   if (client.sqlReady === true) {
     // Global Group Status Changes (persistent)
-    client.provider.set('global', 'groupStatusChange', client.provider.get('global', 'groupStatusChange', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'groupStatusChange' })
     if (guild.guild) {
       // Guild Group Status Changes (persistent)
-      client.provider.set(guild.guild.id, 'groupStatusChange', client.provider.get(guild.guild.id, 'groupStatusChange', 0) + 1)
+      client.temp.sqlData.push({ location: guild.guild.id, type: 'groupStatusChange' })
     }
   }
 

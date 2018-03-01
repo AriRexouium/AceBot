@@ -5,8 +5,8 @@
 module.exports = (client, user, oldNote, newNote) => {
   if (client.sqlReady === true) {
     // Global User Note Update (persistent)
-    client.provider.set('global', 'userNoteUpdate', client.provider.get('global', 'userNoteUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'userNoteUpdate' })
     // User Note Update (persistent)
-    client.provider.set(user.id, 'userNoteUpdate', client.provider.get(user.id, 'userNoteUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: user.id, type: 'userNoteUpdate' })
   }
 }

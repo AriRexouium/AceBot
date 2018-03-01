@@ -1,12 +1,12 @@
 module.exports = (client, channel, time) => {
   if (client.sqlReady === true) {
     // Global Pin Updates (persistent)
-    client.provider.set('global', 'channelPinsUpdate', client.provider.get('global', 'channelPinsUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'channelPinsUpdate' })
     // Channel Pin Updates (persistent)
-    client.provider.set(channel.id, 'channelPinsUpdate', client.provider.get(channel.id, 'channelPinsUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: channel.id, type: 'channelPinsUpdate' })
     if (channel.guild) {
       // Guild Pin Updates (persistent)
-      client.provider.set(channel.guild.id, 'channelPinsUpdate', client.provider.get(channel.guild.id, 'channelPinsUpdate', 0) + 1)
+      client.temp.sqlData.push({ location: channel.guild.id, type: 'channelPinsUpdate' })
     }
   }
 }

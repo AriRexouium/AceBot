@@ -8,7 +8,7 @@ module.exports = (client, command) => {
 
   if (client.sqlReady === true) {
   // Global Commands Unregistered (persistent)
-    client.provider.set('global', 'commandUnregister', client.provider.get('global', 'commandUnregister', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'commandUnregister' })
   }
 
   // Webhook

@@ -14,14 +14,14 @@ module.exports = (client, command, error, message, args, fromPattern) => {
 
   if (client.sqlReady === true) {
   // Global Command Errors (persistent)
-    client.provider.set('global', 'commandError', client.provider.get('global', 'commandError', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'commandError' })
     // User Command Errors (persistent)
-    client.provider.set(message.author.id, 'commandError', client.provider.get(message.author.id, 'commandError', 0) + 1)
+    client.temp.sqlData.push({ location: message.author.id, type: 'commandError' })
     // Channel Command Errors (persistent)
-    client.provider.set(message.channel.id, 'commandError', client.provider.get(message.channel.id, 'commandError', 0) + 1)
+    client.temp.sqlData.push({ location: message.channel.id, type: 'commandError' })
     if (message.guild) {
       // Guild Command Errors (persistent)
-      client.provider.set(message.guild.id, 'commandError', client.provider.get(message.guild.id, 'commandError', 0) + 1)
+      client.temp.sqlData.push({ location: message.guild.id, type: 'commandError' })
     }
   }
 

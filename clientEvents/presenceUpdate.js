@@ -1,10 +1,10 @@
 module.exports = (client, oldMember, newMember) => {
   if (client.sqlReady === true) {
     // Global Presence Updates (persistent)
-    client.provider.set('global', 'presenceUpdate', client.provider.get('global', 'presenceUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'presenceUpdate' })
     // User Presence Updates (persistent)
-    client.provider.set(oldMember.user.id, 'presenceUpdate', client.provider.get(oldMember.user.id, 'presenceUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: oldMember.user.id, type: 'presenceUpdate' })
     // Guild Presence Updates (persistent)
-    client.provider.set(oldMember.guild.id, 'presenceUpdate', client.provider.get(oldMember.guild.id, 'presenceUpdate', 0) + 1)
+    client.temp.sqlData.push({ location: oldMember.guild.id, type: 'presenceUpdate' })
   }
 }

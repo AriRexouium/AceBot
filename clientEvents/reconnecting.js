@@ -8,7 +8,7 @@ module.exports = (client) => {
 
   if (client.sqlReady === true) {
   // Global Reconnects (persistent)
-    client.provider.set('global', 'reconnecting', client.provider.get('global', 'reconnecting', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'reconnecting' })
   }
 
   // Webhook

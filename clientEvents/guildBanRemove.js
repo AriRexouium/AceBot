@@ -1,10 +1,10 @@
 module.exports = (client, guild, user) => {
   if (client.sqlReady === true) {
     // Global Ban Removals (persistent)
-    client.provider.set('global', 'guildBanRemove', client.provider.get('global', 'guildBanRemove', 0) + 1)
+    client.temp.sqlData.push({ location: 'global', type: 'guildBanRemove' })
     // User Ban Removals (persistent)
-    client.provider.set(user.id, 'guildBanRemove', client.provider.get(user.id, 'guildBanRemove', 0) + 1)
+    client.temp.sqlData.push({ location: user.id, type: 'guildBanRemove' })
     // Guild Ban Removals (persistent)
-    client.provider.set(guild.id, 'guildBanRemove', client.provider.get(guild.id, 'guildBanRemove', 0) + 1)
+    client.temp.sqlData.push({ location: guild.id, type: 'guildBanRemove' })
   }
 }
