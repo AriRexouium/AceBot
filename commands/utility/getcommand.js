@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando')
-const os = require('os')
+const fs = require('fs')
 
 module.exports = class GetCodeCommand extends Command {
   constructor (client) {
@@ -20,16 +20,16 @@ module.exports = class GetCodeCommand extends Command {
 
   async run (message, args) {
     var command = args.command
-    var code
-    if (os.platform() === 'win32') {
-      code = code = require(`${process.cwd()}\\commands\\${command.groupID}\\${command.name}.js`).toString()
-    } else {
-      code = code = require(`${process.cwd()}/commands/${command.groupID}/${command.name}.js`).toString()
-    }
-    code = clean(code)
-    for (let i = 0; i < code.length; i += 1950) {
-      message.say(`\`\`\`js\n${code.substring(i, i + 1950)}\n\`\`\``)
-    }
+    fs.readFile(`${process.cwd()}/commands/${command.groupID}/${command.name}.js`, { encoding: 'utf-8' }, function (error, data) {
+      if (error) {
+        message.say(`There was an error getting that command: \`${error.message}\``)
+      } else {
+        data = clean(data.toString())
+        for (let i = 0; i < data.length; i += 1950) {
+          message.say(`\`\`\`js\n${data.substring(i, i + 1950)}\n\`\`\``)
+        }
+      }
+    })
   }
 }
 
