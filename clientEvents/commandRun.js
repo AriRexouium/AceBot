@@ -10,17 +10,15 @@ module.exports = (client, command, promise, message, args, fromPattern) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandRun')
 
-  if (client.sqlReady === true) {
   // Global Commands Run (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandRun' })
-    // User Commands Run (persistent)
-    client.temp.sqlData.push({ location: message.author.id, type: 'commandRun' })
-    // Channel Commands Run (persistent)
-    client.temp.sqlData.push({ location: message.channel.id, type: 'commandRun' })
-    if (message.guild) {
-      // Guild Commands Run (persistent)
-      client.temp.sqlData.push({ location: message.guild.id, type: 'commandRun' })
-    }
+  client.temp.sqlData.push({ location: 'global', type: 'commandRun' })
+  // User Commands Run (persistent)
+  client.temp.sqlData.push({ location: message.author.id, type: 'commandRun' })
+  // Channel Commands Run (persistent)
+  client.temp.sqlData.push({ location: message.channel.id, type: 'commandRun' })
+  if (message.guild) {
+    // Guild Commands Run (persistent)
+    client.temp.sqlData.push({ location: message.guild.id, type: 'commandRun' })
   }
 
   // Webhook

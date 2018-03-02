@@ -6,10 +6,8 @@ module.exports = (client, command) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandUnregister')
 
-  if (client.sqlReady === true) {
   // Global Commands Unregistered (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandUnregister' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'commandUnregister' })
 
   // Webhook
   if (client.config.webhook.enabled) {

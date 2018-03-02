@@ -6,10 +6,8 @@ module.exports = (client) => {
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `, 'Client')
 
-  if (client.sqlReady === true) {
   // Global Reconnects (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'reconnecting' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'reconnecting' })
 
   // Webhook
   if (client.config.webhook.enabled) {

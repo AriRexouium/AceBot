@@ -9,12 +9,10 @@ module.exports = async (client, guild) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'guildCreate')
 
-  if (client.sqlReady === true) {
-    // Global Guild Creations (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'guildCreate' })
-    // Guild Creations (persistent)
-    client.temp.sqlData.push({ location: guild.id, type: 'guildCreate' })
-  }
+  // Global Guild Creations (persistent)
+  client.temp.sqlData.push({ location: 'global', type: 'guildCreate' })
+  // Guild Creations (persistent)
+  client.temp.sqlData.push({ location: guild.id, type: 'guildCreate' })
 
   var ownerInfo = guild.members.find('id', guild.ownerID)
 

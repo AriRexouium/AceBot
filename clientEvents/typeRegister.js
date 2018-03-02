@@ -6,10 +6,8 @@ module.exports = (client, type, registry) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'typeRegister')
 
-  if (client.sqlReady === true) {
   // Global Types Registered (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'typeRegister' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'typeRegister' })
 
   // Webhook
   if (client.config.webhook.enabled) {

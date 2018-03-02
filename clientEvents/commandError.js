@@ -12,17 +12,15 @@ module.exports = (client, command, error, message, args, fromPattern) => {
     ${error.stack}
   `, 'commandError')
 
-  if (client.sqlReady === true) {
   // Global Command Errors (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandError' })
-    // User Command Errors (persistent)
-    client.temp.sqlData.push({ location: message.author.id, type: 'commandError' })
-    // Channel Command Errors (persistent)
-    client.temp.sqlData.push({ location: message.channel.id, type: 'commandError' })
-    if (message.guild) {
-      // Guild Command Errors (persistent)
-      client.temp.sqlData.push({ location: message.guild.id, type: 'commandError' })
-    }
+  client.temp.sqlData.push({ location: 'global', type: 'commandError' })
+  // User Command Errors (persistent)
+  client.temp.sqlData.push({ location: message.author.id, type: 'commandError' })
+  // Channel Command Errors (persistent)
+  client.temp.sqlData.push({ location: message.channel.id, type: 'commandError' })
+  if (message.guild) {
+    // Guild Command Errors (persistent)
+    client.temp.sqlData.push({ location: message.guild.id, type: 'commandError' })
   }
 
   // Webhook

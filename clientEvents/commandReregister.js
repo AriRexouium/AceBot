@@ -6,10 +6,8 @@ module.exports = (client, newCommand, oldCommand) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandReregister')
 
-  if (client.sqlReady === true) {
   // Global Commands Reregistered (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandReregister' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'commandReregister' })
 
   // Webhook
   if (client.config.webhook.enabled) {

@@ -6,10 +6,8 @@ module.exports = (client, rateLimitInfo, timeout, limit, timeDifference, method,
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `)
 
-  if (client.sqlReady === true) {
   // Global Rate Limits (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'rateLimit' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'rateLimit' })
 
   // Webhook
   if (client.config.webhook.enabled) {

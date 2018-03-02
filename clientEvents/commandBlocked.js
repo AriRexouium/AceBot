@@ -9,17 +9,15 @@ module.exports = (client, message, reason) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandBlocked')
 
-  if (client.sqlReady === true) {
   // Global Commands Blocked (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandBlocked' })
-    // User Commands Blocked (persistent)
-    client.temp.sqlData.push({ location: message.author.id, type: 'commandBlocked' })
-    // Channel Commands Blocked (persistent)
-    client.temp.sqlData.push({ location: message.channel.id, type: 'commandBlocked' })
-    if (message.guild) {
-      // Guild Commands Blocked (persistent)
-      client.temp.sqlData.push({ location: message.guild.id, type: 'commandBlocked' })
-    }
+  client.temp.sqlData.push({ location: 'global', type: 'commandBlocked' })
+  // User Commands Blocked (persistent)
+  client.temp.sqlData.push({ location: message.author.id, type: 'commandBlocked' })
+  // Channel Commands Blocked (persistent)
+  client.temp.sqlData.push({ location: message.channel.id, type: 'commandBlocked' })
+  if (message.guild) {
+    // Guild Commands Blocked (persistent)
+    client.temp.sqlData.push({ location: message.guild.id, type: 'commandBlocked' })
   }
 
   // Webhook

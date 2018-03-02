@@ -47,8 +47,35 @@ module.exports = class RestartCommand extends Command {
         color: clientColor
       })
       await this.client.log.info('Restarting!', 'Restart')
+      await sqlUpdateData(this.client)
       await this.client.destroy()
       await process.exit(0)
     }
   }
+}
+
+/**
+ * Updates the database with the most recent events.
+ * @param {object} client The client of the application.
+ */
+let sqlUpdateData = (client) => {
+  var tempData = client.temp.sqlData
+  client.temp.sqlData = []
+  var eventsProcessed = 0
+  tempData.forEach(event => {
+    client.provider.set(event.location, event.type, client.provider.get(event.location, event.type, 0) + 1)
+    eventsProcessed++
+    if (eventsProcessed === tempData.length) {
+      sqlUpdateMessage(client, tempData.length)
+    }
+  })
+}
+
+/**
+ * Logs debug message to console with the number of events sent to the database.
+ * @param {object} client The client of the application.
+ * @param {number} eventCount The number of events.
+ */
+let sqlUpdateMessage = (client, eventCount) => {
+  client.log.debug(`Updated database with ${eventCount} events.`, 'EVENT LOGGER')
 }

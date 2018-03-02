@@ -9,10 +9,8 @@ module.exports = (client, error) => {
     ${error.stack}
   `)
 
-  if (client.sqlReady === true) {
   // Global Errors (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'error' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'error' })
 
   // Webhook
   if (client.config.webhook.enabled) {

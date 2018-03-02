@@ -6,10 +6,8 @@ module.exports = (client, command, registry) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandRegister')
 
-  if (client.sqlReady === true) {
   // Global Commands Registered (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandRegister' })
-  }
+  client.temp.sqlData.push({ location: 'global', type: 'commandRegister' })
 
   // Webhook
   if (client.config.webhook.enabled) {

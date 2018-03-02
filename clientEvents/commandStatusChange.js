@@ -8,13 +8,11 @@ module.exports = (client, guild, command, enabled) => {
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'commandStatusChange')
 
-  if (client.sqlReady === true) {
   // Global Command Status Changes (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'commandStatusChange' })
-    if (guild) {
+  client.temp.sqlData.push({ location: 'global', type: 'commandStatusChange' })
+  if (guild) {
     // Guild Command Status Changes (persistent)
-      client.temp.sqlData.push({ location: guild.id, type: 'commandStatusChange' })
-    }
+    client.temp.sqlData.push({ location: guild.id, type: 'commandStatusChange' })
   }
 
   // Webhook

@@ -8,13 +8,11 @@ module.exports = (client, guild, group, enabled) => {
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'groupStatusChange')
 
-  if (client.sqlReady === true) {
-    // Global Group Status Changes (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'groupStatusChange' })
-    if (guild.guild) {
-      // Guild Group Status Changes (persistent)
-      client.temp.sqlData.push({ location: guild.guild.id, type: 'groupStatusChange' })
-    }
+  // Global Group Status Changes (persistent)
+  client.temp.sqlData.push({ location: 'global', type: 'groupStatusChange' })
+  if (guild.guild) {
+    // Guild Group Status Changes (persistent)
+    client.temp.sqlData.push({ location: guild.guild.id, type: 'groupStatusChange' })
   }
 
   // Webhook

@@ -3,10 +3,8 @@
 */
 
 module.exports = (client, user, oldNote, newNote) => {
-  if (client.sqlReady === true) {
-    // Global User Note Update (persistent)
-    client.temp.sqlData.push({ location: 'global', type: 'userNoteUpdate' })
-    // User Note Update (persistent)
-    client.temp.sqlData.push({ location: user.id, type: 'userNoteUpdate' })
-  }
+  // Global User Note Update (persistent)
+  client.temp.sqlData.push({ location: 'global', type: 'userNoteUpdate' })
+  // User Note Update (persistent)
+  client.temp.sqlData.push({ location: user.id, type: 'userNoteUpdate' })
 }

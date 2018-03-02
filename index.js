@@ -18,8 +18,6 @@ const client = new CommandoClient({
   invite: clientConfig.invite
 })
 
-client.sqlReady = false
-
 // Commands / Groups / Types
 client.registry
   .registerDefaultTypes()
