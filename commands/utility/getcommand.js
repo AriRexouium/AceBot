@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando')
+const os = require('os')
 
 module.exports = class GetCodeCommand extends Command {
   constructor (client) {
@@ -18,8 +19,13 @@ module.exports = class GetCodeCommand extends Command {
   }
 
   async run (message, args) {
-    let command = args.command
-    let code = require(`${process.cwd()}\\commands\\${command.groupID}\\${command.name}.js`).toString()
+    var command = args.command
+    var code
+    if (os.platform() === 'win32') {
+      code = code = require(`${process.cwd()}\\commands\\${command.groupID}\\${command.name}.js`).toString()
+    } else {
+      code = code = require(`${process.cwd()}/commands/${command.groupID}/${command.name}.js`).toString()
+    }
     code = clean(code)
     for (let i = 0; i < code.length; i += 1950) {
       message.say(`\`\`\`js\n${code.substring(i, i + 1950)}\n\`\`\``)
