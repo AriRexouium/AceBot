@@ -1,4 +1,4 @@
-module.exports = async (client, channel) => {
+module.exports = (client, channel) => {
   // Global Channel Deletions (persistent)
   client.temp.sqlData.push({ location: 'global', type: 'channelDelete' })
   if (channel.guild) {

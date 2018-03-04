@@ -1,4 +1,4 @@
-module.exports = async (client, channel) => {
+module.exports = (client, channel) => {
   // Global Channel Creations (persistent)
   client.temp.sqlData.push({ location: 'global', type: 'channelCreate' })
   if (channel.guild) {

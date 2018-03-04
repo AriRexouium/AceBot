@@ -36,7 +36,7 @@ module.exports = class EvalCommand extends Command {
     }
 
     var hrStart = await process.hrtime(this.hrStart)
-    var lintResult = standard.lintTextSync(`${args.code}\n`)
+    var lintResult = await standard.lintTextSync(`${args.code}\n`)
     var lintLatency = await process.hrtime(hrStart)
 
     var messages = lintResult.results[0].messages.map(m => stripIndents`

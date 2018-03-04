@@ -23,7 +23,7 @@ module.exports = class EmojiCommand extends Command {
     })
   }
 
-  async run (message) {
+  run (message) {
     if (!message.guild.emojis.length > 0) {
       var clientColor
       if (message.guild) {

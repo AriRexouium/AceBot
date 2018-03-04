@@ -32,7 +32,7 @@ module.exports = class EmojiCommand extends Command {
     })
   }
 
-  async run (message, args) {
+  run (message, args) {
     var clientColor
     if (message.guild) {
       clientColor = message.guild.members.get(this.client.user.id).displayHexColor

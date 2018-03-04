@@ -1,4 +1,4 @@
-module.exports = async (client, provider) => {
+module.exports = (client, provider) => {
   client.log.info(`Initialized SQLite Provider!`, 'SQLite Initializer')
 
   setInterval(() => {
@@ -9,17 +9,8 @@ module.exports = async (client, provider) => {
       client.provider.set(event.location, event.type, client.provider.get(event.location, event.type, 0) + 1)
       eventsProcessed++
       if (eventsProcessed === tempData.length) {
-        sqlUpdateMessage(client, tempData.length)
+        client.log.debug(`Updated database with ${tempData.length} events.`, 'EVENT LOGGER')
       }
     })
   }, client.config.client.eventLogRefresh)
-}
-
-/**
- * Sends a message to the terminal with the number of events sent to the database.
- * @param {any} client The client of the application.
- * @param {number} eventCount The amount of events.
- */
-let sqlUpdateMessage = (client, eventCount) => {
-  client.log.debug(`Updated database with ${eventCount} events.`, 'EVENT LOGGER')
 }
