@@ -35,6 +35,7 @@ module.exports = {
       throw new ReferenceError('text is not defined')
     }
   },
+
   /**
    * Log a debug message.
    * @param {string} text The debug message to log.
@@ -49,6 +50,7 @@ module.exports = {
       throw new ReferenceError('text is not defined')
     }
   },
+
   /**
    * Log a warning message.
    * @param {string} text The warning message to log.
@@ -63,6 +65,7 @@ module.exports = {
       throw new ReferenceError('text is not defined')
     }
   },
+
   /**
    * Log an error message.
    * @param {string} text The error message to log.

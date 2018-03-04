@@ -7,18 +7,13 @@ const snekfetch = require('snekfetch')
  * @param {boolean} secure Whether to return the URL as secured or not. (Defaults to true.)
  * @throws {ReferenceError} Will throw an error if text has no content.
  */
-module.exports = async function hastebin (text, syntax = '', secure = true, client) {
-  if (text) {
-    let haste = await snekfetch
-      .post('https://hastebin.com/documents')
-      .send(text)
-      .catch(error => { throw new Error(error) })
-    if (secure === true) {
-      return `https://hastebin.com/${haste.body.key}${syntax ? `.${syntax}` : ``}`
-    } else {
-      return `http://hastebin.com/${haste.body.key}${syntax ? `.${syntax}` : ``}`
-    }
+module.exports = async function hastebin (text, syntax = '', secure = true) {
+  let haste = await snekfetch
+    .post('https://hastebin.com/documents')
+    .send(text)
+  if (secure === true) {
+    return `https://hastebin.com/${haste.body.key}${syntax ? `.${syntax}` : ``}`
   } else {
-    throw new ReferenceError('text is not defined')
+    return `http://hastebin.com/${haste.body.key}${syntax ? `.${syntax}` : ``}`
   }
 }

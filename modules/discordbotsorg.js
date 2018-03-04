@@ -12,12 +12,9 @@ module.exports = function discordBotsOrg (client) {
   } else {
     totalGuilds = { 'server_count': client.guilds.size, 'shard_id': client.shard.id, 'shard_count': client.shard.count }
   }
-  try {
-    unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-      .headers({ 'Authorization': client.config.botlist.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
-      .send(totalGuilds)
-      .end(() => { client.log.info('Server count sent to http://discordbots.org.') })
-  } catch (error) {
-    throw new Error(error)
-  }
+
+  unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
+    .headers({ 'Authorization': client.config.botlist.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
+    .send(totalGuilds)
+    .end(() => { client.log.info('Server count sent to http://discordbots.org.') })
 }
