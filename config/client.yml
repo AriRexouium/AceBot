@@ -1,6 +1,7 @@
 ---
 token: token # Your bot's login token, keep this safe!
 commandPrefix: a@ # Your bot's prefix to use for commands.
+eventLogRefresh: 1800000 # In miliseconds how often the bot should update the database with events.
 commandEditableDuration: 30 # The amount of time before a command cannot be edited. (Only ping supports this right now.)
 nonCommandEditable: false # Whether commands can be edited after they have been executed.
 unknownCommandResponse: false # Whether to send a if a command is invalid.
