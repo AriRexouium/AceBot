@@ -7,7 +7,7 @@ const snekfetch = require('snekfetch')
  * @param {boolean} secure Whether to return the URL as secured or not. (Defaults to true.)
  * @throws {ReferenceError} Will throw an error if text has no content.
  */
-module.exports = async function (text, syntax = '', secure = true, client) {
+module.exports = async function hastebin (text, syntax = '', secure = true, client) {
   if (text) {
     let haste = await snekfetch
       .post('https://hastebin.com/documents')

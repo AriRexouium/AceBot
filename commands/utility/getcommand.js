@@ -20,7 +20,7 @@ module.exports = class GetCodeCommand extends Command {
 
   async run (message, args) {
     var command = args.command
-    fs.readFile(`${process.cwd()}/commands/${command.groupID}/${command.name}.js`, { encoding: 'utf-8' }, function (error, data) {
+    fs.readFile(`${process.cwd()}/commands/${command.groupID}/${command.name}.js`, { encoding: 'utf-8' }, (error, data) => {
       if (error) {
         message.say(`There was an error getting that command: \`${error.message}\``)
       } else {

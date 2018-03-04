@@ -1,6 +1,7 @@
 // TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
+const { oneLine } = require('common-tags')
 const util = require('util')
 
 module.exports = class EvalCommand extends Command {
@@ -38,9 +39,11 @@ module.exports = class EvalCommand extends Command {
 
   async run (message, args) {
     /* eslint-disable no-unused-vars */
-    const client = message.client
+    const msg = message
     const channel = message.channel
     const guild = message.guild
+    const client = message.client
+    const objects = client.registry.evalObjects
     const lastResult = this.lastResult
     /* eslint-enable no-unused-vars */
 
@@ -67,8 +70,26 @@ module.exports = class EvalCommand extends Command {
       evaledLatency = await process.hrtime(hrStart)
       /* End Eval Block */
 
-      var type = typeof (result) === 'object' ? 'object - ' + result.constructor.name : typeof (result)
-      if (typeof (result) !== 'string') { result = util.inspect(result, { depth: 0 }) }
+      var type
+      if (typeof result === 'object') {
+        type = `object - ${result.constructor.name}`
+      } else if (typeof result === 'function') {
+        type = oneLine`
+          function
+          ${result.name || result.length ? '-' : ''}
+          ${result.name ? `Name: ${result.name}` : ''}
+          ${result.name && result.length ? `|` : ''}
+          ${result.length ? `#Args: ${result.length}` : ''}
+        `
+      } else {
+        type = typeof result
+      }
+      if (typeof (result) !== 'string') {
+        result = util.inspect(result, {
+          showHidden: true,
+          depth: 0
+        })
+      }
 
       this.lastResult = result
 

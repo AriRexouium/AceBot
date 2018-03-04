@@ -31,9 +31,8 @@ module.exports = class RestartCommand extends Command {
     }
 
     if (this.client.shard) {
-      await message.reply(`restarting ${pluralize('shard', this.client.shard.count, true)}!`)
-      await this.client.log.info(`Restarting ${pluralize('shard', this.client.shard.count, true)}!`, 'Restart')
-      await this.client.shard.broadcastEval('process.exit(0)')
+      await message.reply(`restarting ${pluralize('shard', this.client.shard.count, true)}, please wait.`)
+      await this.client.shard.broadcastEval(`process.emit('message', 'shutdown')`)
     } else {
       await message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
@@ -46,36 +45,7 @@ module.exports = class RestartCommand extends Command {
         `),
         color: clientColor
       })
-      await this.client.log.info('Restarting!', 'Restart')
-      await sqlUpdateData(this.client)
-      await this.client.destroy()
-      await process.exit(0)
+      await process.emit('message', 'shutdown')
     }
   }
-}
-
-/**
- * Updates the database with the most recent events.
- * @param {object} client The client of the application.
- */
-let sqlUpdateData = (client) => {
-  var tempData = client.temp.sqlData
-  client.temp.sqlData = []
-  var eventsProcessed = 0
-  tempData.forEach(event => {
-    client.provider.set(event.location, event.type, client.provider.get(event.location, event.type, 0) + 1)
-    eventsProcessed++
-    if (eventsProcessed === tempData.length) {
-      sqlUpdateMessage(client, tempData.length)
-    }
-  })
-}
-
-/**
- * Logs debug message to console with the number of events sent to the database.
- * @param {object} client The client of the application.
- * @param {number} eventCount The number of events.
- */
-let sqlUpdateMessage = (client, eventCount) => {
-  client.log.debug(`Updated database with ${eventCount} events.`, 'EVENT LOGGER')
 }

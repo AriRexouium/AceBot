@@ -89,7 +89,7 @@ module.exports = class EmojiCommand extends Command {
         ],
         color: clientColor
       })
-    } else {
+    } else if (channel.type === 'voice') {
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
@@ -115,6 +115,8 @@ module.exports = class EmojiCommand extends Command {
         ],
         color: clientColor
       })
+    } else {
+      return message.reply('please choose a valid voice or text channel.')
     }
   }
 }

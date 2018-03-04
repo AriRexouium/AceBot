@@ -1,14 +1,11 @@
 const unirest = require('unirest')
-const fs = require('fs')
-const yaml = require('js-yaml')
-const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yml', 'utf8'))
 
 /**
  * Send server count to http://discordbots.org.
  * @param {string} client The client of the application.
  * @throws {any} Throws an error if sending server client server count fails.
  */
-module.exports = function (client) {
+module.exports = function discordBotsPw (client) {
   var totalGuilds
   if (!client.shard) {
     totalGuilds = { 'server_count': client.guilds.size }
@@ -17,9 +14,9 @@ module.exports = function (client) {
   }
   try {
     unirest.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-      .headers({ 'Authorization': botListConfig.BotsDiscordPw.token, 'Content-Type': 'application/json' })
+      .headers({ 'Authorization': client.config.botlist.BotsDiscordPw.token, 'Content-Type': 'application/json' })
       .send(totalGuilds)
-      .end(function () { client.log.info('Server count sent to http://bots.discord.pw.') })
+      .end(() => { client.log.info('Server count sent to http://bots.discord.pw.') })
   } catch (error) {
     throw new Error(error)
   }

@@ -21,7 +21,7 @@ module.exports = class UpdateCommand extends Command {
   }
 
   run (message) {
-    message.say('**Update requested, please wait.**').then(function () {
+    message.say('**Update requested, please wait.**').then(() => {
       try {
         var codeResult = childProcess.execSync('git pull').toString()
         if (codeResult.length > 1950) {
@@ -37,7 +37,7 @@ module.exports = class UpdateCommand extends Command {
           message.say(stripIndents`
             **Successfully updated code! Now updating node modules, this might take a while.**
             *(The bot will not work while updating the node modules.)*
-          `).then(function () {
+          `).then(() => {
             var npmResult = childProcess.execSync('npm i').toString()
             if (npmResult.length > 1950) {
               this.client.hastebin(npmResult).then(link => {

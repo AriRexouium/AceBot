@@ -6,13 +6,13 @@ const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yml', 'utf
 module.exports = async (client) => {
   await client.log.info(`Logged in as ${client.user.tag} (${client.user.id})`, 'Discord')
 
-  await setTimeout(function () {
+  await setTimeout(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
       client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 1000)
 
-  await setInterval(function () {
+  await setInterval(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
       client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )

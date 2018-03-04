@@ -11,7 +11,7 @@ const webhookClient = new discord.WebhookClient(
  * @param {string} text The content to send to the webhook.
  * @throws {ReferenceError} Will throw an error if text has no content.
  */
-module.exports = function (text) {
+module.exports = function webhook (text) {
   if (text) {
     webhookClient.send(text).catch(error => { throw new Error(error) })
   } else {
