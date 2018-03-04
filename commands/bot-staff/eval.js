@@ -81,6 +81,7 @@ module.exports = class EvalCommand extends Command {
           ${result.name && result.length ? `|` : ''}
           ${result.length ? `#Args: ${result.length}` : ''}
         `
+        result = result.toString()
       } else {
         type = typeof result
       }
