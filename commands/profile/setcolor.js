@@ -7,11 +7,7 @@ module.exports = class SetAboutCommand extends Command {
       name: 'setcolor',
       memberName: 'setcolor',
       group: 'profile',
-      description: 'Set your about field.',
-      details: 'Set your about me field on your profile.',
-      aliases: [
-        'setc'
-      ],
+      description: 'Sets your embed color on your profile.',
       throttling: {
         usages: 2,
         duration: 10
@@ -19,10 +15,10 @@ module.exports = class SetAboutCommand extends Command {
       args: [
         {
           key: 'hex',
-          prompt: 'Please enter a valid hex code. (Type "auto" to choose your role color.)',
+          prompt: 'Please enter a valid hex code. (Type "auto" to use your role color.)',
           type: 'string',
           validate: value => {
-            if (value === 'auto' || value === 'none' || isHex(value)) {
+            if (value === 'auto' || isHex(value)) {
               return true
             } else {
               return 'That is not a valid hex code.'
@@ -36,8 +32,6 @@ module.exports = class SetAboutCommand extends Command {
   run (message, args) {
     if (args.hex === 'auto') {
       this.client.provider.set(message.author.id, 'color', 'auto')
-    } else if (args.hex === 'none') {
-      this.client.provider.set(message.author.id, 'color', '')
     } else {
       this.client.provider.set(message.author.id, 'color', args.hex)
     }

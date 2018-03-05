@@ -7,11 +7,7 @@ module.exports = class SetNameCommand extends Command {
       name: 'setname',
       memberName: 'setname',
       group: 'profile',
-      description: 'Set your profile name.',
-      details: 'Set your first and last name on your profile.',
-      aliases: [
-        'setn'
-      ],
+      description: 'Set your first and/or last name on your profile.',
       throttling: {
         usages: 2,
         duration: 10
@@ -23,7 +19,7 @@ module.exports = class SetNameCommand extends Command {
           type: 'string',
           validate: value => {
             if (value.length > 12 || value.length < 2) {
-              return 'Must be between 2 and 12 characters in length. (Type "none" to leave blank.)'
+              return 'Must be between 2 and 12 characters in length.'
             } else {
               return true
             }
@@ -35,7 +31,7 @@ module.exports = class SetNameCommand extends Command {
           type: 'string',
           validate: value => {
             if (value.length > 12 || value.length < 2) {
-              return 'Must be between 2 and 12 characters in length. (Type "none" to leave blank.)'
+              return 'Must be between 2 and 12 characters in length.'
             } else {
               return true
             }

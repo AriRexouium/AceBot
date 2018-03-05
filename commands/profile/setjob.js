@@ -7,11 +7,10 @@ module.exports = class SetJobCommand extends Command {
       name: 'setjob',
       memberName: 'setjob',
       group: 'profile',
-      description: 'Set your job name.',
-      details: 'Set your job name on your profile.',
+      description: 'Set your occupation on your profile.',
       aliases: [
         'setprofession',
-        'setj'
+        'setoccupation'
       ],
       throttling: {
         usages: 2,
@@ -20,11 +19,11 @@ module.exports = class SetJobCommand extends Command {
       args: [
         {
           key: 'job',
-          prompt: 'Please enter your job name. (Type "none" to leave blank.)',
+          prompt: 'Please enter your occupation name.',
           type: 'string',
           validate: value => {
             if (value.length > 64 || value.length < 2) {
-              return 'Must be between 2 and 64 characters in length. (Type "none" to leave blank.)'
+              return 'Must be between 2 and 64 characters in length.'
             } else {
               return true
             }

@@ -7,8 +7,7 @@ module.exports = class SetTimeZoneCommand extends Command {
       name: 'settimezone',
       memberName: 'settimezone',
       group: 'profile',
-      description: 'Set your profile timezone.',
-      details: 'Set your timezone on your profile.',
+      description: 'Set your time zone on your profile.',
       aliases: [
         'settz'
       ],
@@ -19,13 +18,13 @@ module.exports = class SetTimeZoneCommand extends Command {
       args: [
         {
           key: 'timezone',
-          prompt: 'Please choose a timezone. (Type "none" to leave blank.)\n*Here is a list -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*',
+          prompt: 'Please choose a time zone.\n*Here is a list of valid time zones -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*',
           type: 'string',
           validate: value => {
-            if (value === 'none' || moment.tz.names().includes(value)) {
+            if (moment.tz.names().includes(value)) {
               return true
             } else {
-              return 'that is not a valid timezone. (Type "none" to leave blank.)\n*Here is a list -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*'
+              return 'that is not a valid time zone.\n*Here is a list of valid time zones -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*'
             }
           }
         }
@@ -34,7 +33,7 @@ module.exports = class SetTimeZoneCommand extends Command {
   }
 
   run (message, args) {
-    this.client.provider.set(message.author.id, 'timezone', args.timezone === 'none' ? '' : args.timezone)
+    this.client.provider.set(message.author.id, 'timezone', args.timezone)
     message.reply(`successfully set your timezone to \`${args.timezone}\`!`)
   }
 }

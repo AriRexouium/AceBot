@@ -7,11 +7,7 @@ module.exports = class SetGenderCommand extends Command {
       name: 'setgender',
       memberName: 'setgender',
       group: 'profile',
-      description: 'Set your gender.',
-      details: 'Set your gender on your profile.',
-      aliases: [
-        'setg'
-      ],
+      description: 'Set your gender on your profile.',
       throttling: {
         usages: 2,
         duration: 10
@@ -19,7 +15,7 @@ module.exports = class SetGenderCommand extends Command {
       args: [
         {
           key: 'gender',
-          prompt: 'Please enter your gender. (Type "none" to leave blank.)',
+          prompt: 'Please enter your gender.',
           type: 'string',
           validate: value => {
             if (value.length > 18 || value.length < 2) {
@@ -34,7 +30,7 @@ module.exports = class SetGenderCommand extends Command {
   }
 
   run (message, args) {
-    this.client.provider.set(message.author.id, 'gender', args.gender === 'none' ? '' : args.gender)
+    this.client.provider.set(message.author.id, 'gender', args.gender)
     message.reply(`successfully set your gender to \`${escapeMarkdown(args.gender)}\`!`)
   }
 }

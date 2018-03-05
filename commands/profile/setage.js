@@ -6,11 +6,7 @@ module.exports = class SetAgeCommand extends Command {
       name: 'setage',
       memberName: 'setage',
       group: 'profile',
-      description: 'Set your age. **(FOR USE IN DM ONLY)**',
-      details: 'Set your age on your profile. **(FOR USE IN DM ONLY)**',
-      aliases: [
-        'seta'
-      ],
+      description: 'Set your age on your profile. **(FOR USE IN DM ONLY)**',
       throttling: {
         usages: 2,
         duration: 10
@@ -18,21 +14,21 @@ module.exports = class SetAgeCommand extends Command {
       args: [
         {
           key: 'year',
-          prompt: 'Please enter the year you were born. (Type "none" to leave blank.)',
+          prompt: 'Please enter the year you were born.',
           type: 'integer',
           max: new Date().getUTCFullYear(),
-          min: 1800
+          min: new Date().getUTCFullYear() - 100
         },
         {
           key: 'month',
-          prompt: 'Please enter the month you were born. (Type "none" to leave blank.)',
+          prompt: 'Please enter the month you were born.',
           type: 'integer',
           max: 12,
           min: 1
         },
         {
           key: 'day',
-          prompt: 'Please enter the day you were born. (Type "none" to leave blank.)',
+          prompt: 'Please enter the day you were born.',
           type: 'integer',
           max: 30,
           min: 1
@@ -50,14 +46,8 @@ module.exports = class SetAgeCommand extends Command {
   }
 
   run (message, args) {
-    var year
-    if (args.year === 'none' || args.month === 'none' || args.day === 'none') {
-      year = ''
-    } else {
-      year = `${args.year}-${args.month}-${args.day}`
-    }
-
-    this.client.provider.set(message.author.id, 'age', year)
-    message.reply(`successfully set your age to \`${getAge(year)}\`!`)
+    var birthDate = `${args.year}-${args.month}-${args.day}`
+    this.client.provider.set(message.author.id, 'age', birthDate)
+    message.reply(`successfully set your age to \`${getAge(birthDate)}\`!`)
   }
 }

@@ -7,10 +7,8 @@ module.exports = class SetWebsiteCommand extends Command {
       name: 'setwebsite',
       memberName: 'setwebsite',
       group: 'profile',
-      description: 'Set your profile website.',
-      details: 'Set your website on your profile.',
+      description: 'Set your website on your profile.',
       aliases: [
-        'setws',
         'seturl'
       ],
       throttling: {
@@ -20,13 +18,13 @@ module.exports = class SetWebsiteCommand extends Command {
       args: [
         {
           key: 'website',
-          prompt: 'Please enter your website. (Type "none" to leave blank.)',
+          prompt: 'Please enter your website.',
           type: 'string',
           validate: value => {
-            if (value === 'none' || urlRegex({ exact: true, strict: true }).test(value)) {
+            if (urlRegex({ exact: true, strict: true }).test(value)) {
               return true
             } else {
-              return 'That is not a valid URL. (Type "none" to leave blank.)'
+              return 'That is not a valid URL.'
             }
           }
         }
@@ -35,7 +33,7 @@ module.exports = class SetWebsiteCommand extends Command {
   }
 
   run (message, args) {
-    this.client.provider.set(message.author.id, 'website', args.website === 'none' ? '' : args.website)
+    this.client.provider.set(message.author.id, 'website', args.website)
     message.reply(`successfully set your website to \`${args.website}\`!`)
   }
 }

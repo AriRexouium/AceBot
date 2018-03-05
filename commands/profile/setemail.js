@@ -6,8 +6,7 @@ module.exports = class SetEmailCommand extends Command {
       name: 'setemail',
       memberName: 'setemail',
       group: 'profile',
-      description: 'Set your email.',
-      details: 'Set your email on your profile.',
+      description: 'Set your email on your profile.',
       aliases: [
         'setmailto'
       ],
@@ -18,13 +17,13 @@ module.exports = class SetEmailCommand extends Command {
       args: [
         {
           key: 'email',
-          prompt: 'Please enter your email. (Type "none" to leave blank.)',
+          prompt: 'Please enter your email.',
           type: 'string',
           validate: value => {
             if (value.length > 32) {
               return 'Must be less than 32 characters in length.'
             } else {
-              if (value === 'none' || value.match(/^([\w_.\-+])+@([\w-]+\.)+([\w]{2,10})+$/)) {
+              if (value.match(/^([\w_.\-+])+@([\w-]+\.)+([\w]{2,10})+$/)) {
                 return true
               } else {
                 return 'That is not a valid email.'
@@ -37,7 +36,7 @@ module.exports = class SetEmailCommand extends Command {
   }
 
   run (message, args) {
-    this.client.provider.set(message.author.id, 'email', args.email === 'none' ? '' : args.email)
+    this.client.provider.set(message.author.id, 'email', args.email)
     message.reply(`successfully set your email to \`${args.email}\`!`)
   }
 }

@@ -8,8 +8,7 @@ module.exports = class ProfileCommand extends Command {
       name: 'profile',
       memberName: 'profile',
       group: 'profile',
-      description: 'Get the time of a user.',
-      details: 'View another user\'s time and timezone.',
+      description: 'View a user\'s profile.',
       throttling: {
         usages: 2,
         duration: 10
