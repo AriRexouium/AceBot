@@ -26,13 +26,13 @@ module.exports = {
    * @param {string} title The title of the info message.
    * @param {any} background The background color to use. (Defaults to cyan.)
    * @param {boolean} time Add a timestamp or not. (Defaults to true.)
-   * @throws {ReferenceError} Will throw an error if text has no content.
+   * @throws {Error} Will throw an error if there is nothing to send to the console.
    */
   info (text, title = 'Info', background = 'bgCyan', time = true) {
     if (text) {
       Logger(background, title, text, time, 'info') // NOTE: Yes I know, console.info() is just an alias for console.log().
     } else {
-      throw new ReferenceError('text is not defined')
+      throw new Error('Value must be specified.')
     }
   },
 
@@ -41,13 +41,13 @@ module.exports = {
    * @param {string} text The debug message to log.
    * @param {string} title The title of the debug message.
    * @param {boolean} time Add a timestamp or not. (Defaults to true.)
-   * @throws {ReferenceError} Will throw an error if text has no content.
+   * @throws {Error} Will throw an error if there is nothing to send to the console.
    */
   debug (text, title = 'Debug', time = true) {
     if (text) {
       Logger('bgMagenta', title, text, time, 'log')
     } else {
-      throw new ReferenceError('text is not defined')
+      throw new Error('Value must be specified.')
     }
   },
 
@@ -55,14 +55,14 @@ module.exports = {
    * Log a warning message.
    * @param {string} text The warning message to log.
    * @param {string} title The title of the warning message.
-   * @throws {ReferenceError} Will throw an error if text has no content.
+   * @throws {Error} Will throw an error if there is nothing to send to the console.
    */
   warn (text, title) {
     if (text) {
       if (title) { title = `${title} Warning` } else { title = 'Warning' }
       Logger('bgYellow', title, text, true, 'warn')
     } else {
-      throw new ReferenceError('text is not defined')
+      throw new Error('Value must be specified.')
     }
   },
 
@@ -70,14 +70,14 @@ module.exports = {
    * Log an error message.
    * @param {string} text The error message to log.
    * @param {string} title The title of the error message.
-   * @throws {ReferenceError} Will throw an error if text has no content.
+   * @throws {Error} Will throw an error if there is nothing to send to the console.
    */
   error (text, title) {
     if (text) {
       if (title) { title = `${title} Error` } else { title = 'Error' }
       Logger('bgRed', title, `${(text && text.stack) || text}`, true, 'error')
     } else {
-      throw new ReferenceError('text is not defined')
+      throw new Error('Value must be specified.')
     }
   }
 }

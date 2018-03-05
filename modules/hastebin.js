@@ -5,7 +5,6 @@ const snekfetch = require('snekfetch')
  * @param {any} text The text to send to hastebin.
  * @param {string} syntax The text syntax. (Default is none.)
  * @param {boolean} secure Whether to return the URL as secured or not. (Defaults to true.)
- * @throws {ReferenceError} Will throw an error if text has no content.
  */
 module.exports = async function hastebin (text, syntax = '', secure = true) {
   let haste = await snekfetch

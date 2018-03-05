@@ -10,7 +10,6 @@ const webhookClient = new discord.WebhookClient(
 /**
  * Send message through config webhook.
  * @param {string} text The content to send to the webhook.
- * @throws {ReferenceError} Will throw an error if text has no content.
  */
 module.exports = function webhook (text) {
   webhookClient.send(text)

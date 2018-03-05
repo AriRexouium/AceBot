@@ -3,7 +3,6 @@ const unirest = require('unirest')
 /**
  * Send server count to http://discordbots.org.
  * @param {string} client The client of the application.
- * @throws {any} Throws an error if sending server client server count fails.
  */
 module.exports = function discordBotsOrg (client) {
   var totalGuilds
