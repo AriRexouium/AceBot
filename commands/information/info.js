@@ -32,13 +32,13 @@ module.exports = class InfoCommand extends Command {
       try {
         let contribTemp = this.client.users.find('id', contributor.id).tag
         if (contributor.github) {
-          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github}) -** ${contributor.info}`
+          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github})** - ${contributor.info}`
         } else {
           contributorsList = `${contributorsList}\n**${escapeMarkdown(contribTemp)}** - ${contributor.info}`
         }
       } catch (e) {
         if (contributor.github) {
-          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contributor.name)}](http://github.com/${contributor.github}) -** ${contributor.info}`
+          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contributor.name)}](http://github.com/${contributor.github})** - ${contributor.info}`
         } else {
           contributorsList = `${contributorsList}\n**${escapeMarkdown(contributor.name)}** - ${contributor.info}`
         }
