@@ -10,7 +10,9 @@ module.exports = (client, message, reason) => {
   `, 'commandBlocked')
 
   if (client.config.react.commandBlocked.enabled === true) {
-    message.react(client.config.react.commandBlocked.emoji)
+    try {
+      message.react(client.config.react.commandBlocked.emoji)
+    } catch (error) {}
   }
 
   // Global Commands Blocked (persistent)

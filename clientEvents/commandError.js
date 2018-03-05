@@ -13,7 +13,9 @@ module.exports = (client, command, error, message, args, fromPattern) => {
   `, 'commandError')
 
   if (client.config.react.commandError.enabled === true) {
-    message.react(client.config.react.commandError.emoji)
+    try {
+      message.react(client.config.react.commandError.emoji)
+    } catch (error) {}
   }
 
   // Global Command Errors (persistent)

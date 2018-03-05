@@ -1,6 +1,8 @@
 module.exports = (client, message) => {
   if (client.config.react.unknownCommand.enabled === true) {
-    message.react(client.config.react.unknownCommand.emoji)
+    try {
+      message.react(client.config.react.unknownCommand.emoji)
+    } catch (error) {}
   }
 
   // Global Unknown Commands (persistent)

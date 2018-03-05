@@ -4,7 +4,9 @@ module.exports = (client, command, promise, message, args, fromPattern) => {
   client.botStats.commandsUsed = client.botStats.commandsUsed + 1
 
   if (client.config.react.commandRun.enabled === true) {
-    message.react(client.config.react.commandRun.emoji)
+    try {
+      message.react(client.config.react.commandRun.emoji)
+    } catch (error) {}
   }
 
   client.log.info(stripIndents`
