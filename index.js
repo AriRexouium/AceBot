@@ -25,6 +25,7 @@ client.registry
   .registerGroups([
     ['bot-management', 'Bot Management'],
     ['bot-staff', 'Bot Staff'],
+    ['events', 'Events'],
     ['information', 'Information'],
     ['profile', 'Profile'],
     ['utility', 'Utility']
