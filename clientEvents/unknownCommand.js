@@ -1,4 +1,8 @@
 module.exports = (client, message) => {
+  if (client.config.react.unknownCommand.enabled === true) {
+    message.react(client.config.react.unknownCommand.emoji)
+  }
+
   // Global Unknown Commands (persistent)
   client.temp.sqlData.push({ location: 'global', type: 'unknownCommand' })
   // User Unknown Commands (persistent)

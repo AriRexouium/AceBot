@@ -3,6 +3,10 @@ const { stripIndents } = require('common-tags')
 module.exports = (client, command, promise, message, args, fromPattern) => {
   client.botStats.commandsUsed = client.botStats.commandsUsed + 1
 
+  if (client.config.react.commandRun.enabled === true) {
+    message.react(client.config.react.commandRun.emoji)
+  }
+
   client.log.info(stripIndents`
     ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
     User: ${message.author.tag} (${message.author.id})

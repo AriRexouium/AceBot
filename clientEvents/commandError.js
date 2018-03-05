@@ -12,6 +12,10 @@ module.exports = (client, command, error, message, args, fromPattern) => {
     ${error.stack}
   `, 'commandError')
 
+  if (client.config.react.commandError.enabled === true) {
+    message.react(client.config.react.commandError.emoji)
+  }
+
   // Global Command Errors (persistent)
   client.temp.sqlData.push({ location: 'global', type: 'commandError' })
   // User Command Errors (persistent)

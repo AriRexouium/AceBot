@@ -1,0 +1,13 @@
+---
+commandRun:
+  enabled: false
+  emoji: ✅
+commandBlocked:
+  enabled: false
+  emoji: ❎
+commandError:
+  enabled: false
+  emoji: ☠
+unknownCommand:
+  enabled: false
+  emoji: 🗑

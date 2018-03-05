@@ -1,10 +1,13 @@
-const { oneLine } = require('common-tags')
+const { stripIndents } = require('common-tags')
 
-module.exports = (client, rateLimitInfo, timeout, limit, timeDifference, method, path, route) => {
-  client.log.warn(oneLine`
+module.exports = (client, rateLimitInfo) => {
+  client.log.warn(stripIndents`
     You are being rate limited!
-    ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
-  `)
+    Limit: ${rateLimitInfo.limit}
+    Timeout: ${rateLimitInfo.timeout}ms.
+    Method: ${rateLimitInfo.method}
+    Path: ${rateLimitInfo.path}
+  `, 'rateLimit')
 
   // Global Rate Limits (persistent)
   client.temp.sqlData.push({ location: 'global', type: 'rateLimit' })
@@ -21,7 +24,28 @@ module.exports = (client, rateLimitInfo, timeout, limit, timeDifference, method,
           footer: { text: 'rateLimit' },
           timestamp: new Date(),
           title: `rateLimit${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: `You are being rate limited!`,
+          fields: [
+            {
+              'name': 'Limit',
+              'value': rateLimitInfo.limit,
+              'inline': true
+            },
+            {
+              'name': 'Timeout',
+              'value': `${rateLimitInfo.timeout}ms.`,
+              'inline': true
+            },
+            {
+              'name': 'Method',
+              'value': rateLimitInfo.method,
+              'inline': true
+            },
+            {
+              'name': 'Path',
+              'value': `\`${rateLimitInfo.path}\``,
+              'inline': true
+            }
+          ],
           color: 0xFFFF00
         }]
       })

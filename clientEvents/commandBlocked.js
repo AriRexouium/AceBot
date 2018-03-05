@@ -9,6 +9,10 @@ module.exports = (client, message, reason) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'commandBlocked')
 
+  if (client.config.react.commandBlocked.enabled === true) {
+    message.react(client.config.react.commandBlocked.emoji)
+  }
+
   // Global Commands Blocked (persistent)
   client.temp.sqlData.push({ location: 'global', type: 'commandBlocked' })
   // User Commands Blocked (persistent)
