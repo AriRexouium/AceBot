@@ -13,17 +13,6 @@ module.exports = (client, message) => {
     client.botStats.clientMentions = client.botStats.clientMentions + 1
   }
 
-  // Global Messages Sent (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'message' })
-  // User Messages Sent (persistent)
-  client.temp.sqlData.push({ location: message.author.id, type: 'message' })
-  // Channel Messages Sent (persistent)
-  client.temp.sqlData.push({ location: message.channel.id, type: 'message' })
-  if (message.guild) {
-    // Guild Messages Sent (persistent)
-    client.temp.sqlData.push({ location: message.guild.id, type: 'message' })
-  }
-
   // Token Protection
   if (message.content.toLowerCase().includes(client.token.toLowerCase())) {
     client.log.info(stripIndents`

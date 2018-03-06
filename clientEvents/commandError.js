@@ -18,17 +18,6 @@ module.exports = (client, command, error, message, args, fromPattern) => {
     } catch (error) {}
   }
 
-  // Global Command Errors (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'commandError' })
-  // User Command Errors (persistent)
-  client.temp.sqlData.push({ location: message.author.id, type: 'commandError' })
-  // Channel Command Errors (persistent)
-  client.temp.sqlData.push({ location: message.channel.id, type: 'commandError' })
-  if (message.guild) {
-    // Guild Command Errors (persistent)
-    client.temp.sqlData.push({ location: message.guild.id, type: 'commandError' })
-  }
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandError) {

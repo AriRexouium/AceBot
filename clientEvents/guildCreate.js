@@ -3,18 +3,13 @@ const { stripIndents } = require('common-tags')
 const { escapeMarkdown } = require('discord.js')
 
 module.exports = async (client, guild) => {
+  var ownerInfo = guild.owner.user
+
   client.log.info(stripIndents`
     Guild: ${guild.name} (${guild.id})
-    Owner: ${guild.owner.user.tag} (${guild.owner.user.id})
+    Owner: ${ownerInfo.tag} (${ownerInfo.id})
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'guildCreate')
-
-  // Global Guild Creations (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'guildCreate' })
-  // Guild Creations (persistent)
-  client.temp.sqlData.push({ location: guild.id, type: 'guildCreate' })
-
-  var ownerInfo = guild.members.find('id', guild.ownerID)
 
   // Webhook
   if (client.config.webhook.enabled) {
@@ -37,9 +32,9 @@ module.exports = async (client, guild) => {
             {
               'name': 'Owner',
               'value': stripIndents`
-                **Name:** ${escapeMarkdown(ownerInfo.user.tag)}
+                **Name:** ${escapeMarkdown(ownerInfo.tag)}
                 **ID:** ${ownerInfo.user.id}
-                **Status:** ${ownerInfo.user.presence.status}
+                **Status:** ${ownerInfo.presence.status}
               `,
               'inline': true
             },

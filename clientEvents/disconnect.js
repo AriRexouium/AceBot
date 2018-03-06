@@ -6,9 +6,6 @@ module.exports = (client, event) => {
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `, 'Client')
 
-  // Global Disconnects (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'disconnect' })
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.disconnect) {

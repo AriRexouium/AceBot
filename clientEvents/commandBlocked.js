@@ -15,17 +15,6 @@ module.exports = (client, message, reason) => {
     } catch (error) {}
   }
 
-  // Global Commands Blocked (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'commandBlocked' })
-  // User Commands Blocked (persistent)
-  client.temp.sqlData.push({ location: message.author.id, type: 'commandBlocked' })
-  // Channel Commands Blocked (persistent)
-  client.temp.sqlData.push({ location: message.channel.id, type: 'commandBlocked' })
-  if (message.guild) {
-    // Guild Commands Blocked (persistent)
-    client.temp.sqlData.push({ location: message.guild.id, type: 'commandBlocked' })
-  }
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandBlocked) {

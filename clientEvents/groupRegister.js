@@ -6,9 +6,6 @@ module.exports = (client, group, registry) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'groupRegister')
 
-  // Global Groups Registered (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'groupRegister' })
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.groupRegister) {

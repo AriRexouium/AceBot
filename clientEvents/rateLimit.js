@@ -9,9 +9,6 @@ module.exports = (client, rateLimitInfo) => {
     Path: ${rateLimitInfo.path}
   `, 'rateLimit')
 
-  // Global Rate Limits (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'rateLimit' })
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.rateLimit) {

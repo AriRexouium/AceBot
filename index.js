@@ -25,7 +25,6 @@ client.registry
   .registerGroups([
     ['bot-management', 'Bot Management'],
     ['bot-staff', 'Bot Staff'],
-    ['events', 'Events'],
     ['information', 'Information'],
     ['profile', 'Profile'],
     ['utility', 'Utility']
@@ -133,10 +132,6 @@ client.dispatcher.addInhibitor(message => {
 })
 
 /* Start Assigning to Client */
-// Event RateLimit
-client.temp = {}
-client.temp.sqlData = []
-
 // Travis Test Mode
 if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
 

@@ -7,13 +7,6 @@ module.exports = (client, guild, prefix) => {
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
   `, 'commandPrefixChange')
 
-  // Global Prefix Changes (persistent)
-  client.temp.sqlData.push({ location: 'global', type: 'commandPrefixChange' })
-  if (guild) {
-    // Guild Prefix Changes (persistent)
-    client.temp.sqlData.push({ location: guild.id, type: 'commandPrefixChange' })
-  }
-
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandPrefixChange) {
