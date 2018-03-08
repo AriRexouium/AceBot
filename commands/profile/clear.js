@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
-const profileValues = ['about', 'age', 'color', 'email', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
+const profileValues = ['about', 'age', 'color', 'email', 'flag', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
 
 module.exports = class ClearCommand extends Command {
   constructor (client) {
@@ -22,13 +22,13 @@ module.exports = class ClearCommand extends Command {
           `,
           type: 'string',
           validate: value => {
-            if (profileValues.contains(value)) {
+            if (profileValues.includes(value)) {
+              return true
+            } else {
               return stripIndents`
                 That is not a valid value.
                 Choices include the following: ${profileValues.join(' / ')}
               `
-            } else {
-              return true
             }
           }
         }
