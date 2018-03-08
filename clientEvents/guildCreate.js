@@ -33,7 +33,7 @@ module.exports = async (client, guild) => {
               'name': 'Owner',
               'value': stripIndents`
                 **Name:** ${escapeMarkdown(ownerInfo.tag)}
-                **ID:** ${ownerInfo.user.id}
+                **ID:** ${ownerInfo.id}
                 **Status:** ${ownerInfo.presence.status}
               `,
               'inline': true
