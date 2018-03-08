@@ -18,7 +18,6 @@ module.exports = async (client, guild) => {
         content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
-        thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
         embeds: [{
           author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'guildDelete' },
