@@ -41,6 +41,7 @@
   "homepageTrello": "http://trello.com/b/YU3307Hi",
   "dependencies": {
     "chalk": "^2.3.2",
+    "columnify": "^1.5.4",
     "common-tags": "^1.7.2",
     "discord.js": "github:hydrabolt/discord.js",
     "discord.js-commando": "github:gawdl3y/discord.js-commando",
