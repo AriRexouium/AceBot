@@ -51,7 +51,7 @@ module.exports = class EvalCommand extends Command {
     var code = args.code
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
+        eval(code.substr(code.indexOf(' ') + 1)) // eslint-disable-line no-eval
       } catch (error) {
         message.say({
           content: `${error.name}: ${error.message}`,
