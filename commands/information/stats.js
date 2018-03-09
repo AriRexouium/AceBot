@@ -4,6 +4,7 @@ const si = require('systeminformation')
 const os = require('os-utils')
 const moment = require('moment')
 require('moment-duration-format')
+
 module.exports = class StatsCommand extends Command {
   constructor (client) {
     super(client, {
@@ -24,7 +25,7 @@ module.exports = class StatsCommand extends Command {
     })
   }
 
-  async run (message) {
+  run (message) {
     var clientColor
     if (message.guild) {
       clientColor = message.guild.members.get(this.client.user.id).displayHexColor
@@ -34,33 +35,24 @@ module.exports = class StatsCommand extends Command {
     }
 
     if (this.client.shard) {
-      // Messages Sent
-      var totalMessagesSentData = await this.client.shard.fetchClientValues('botStats.messagesSent')
-      var totalMessagesSent = await totalMessagesSentData.reduce((prev, val) => prev + val, 0)
-      // Total Messages Received
-      var totalMessagesReceivedData = await this.client.shard.fetchClientValues('botStats.messagesReceived')
-      var totalMessagesReceived = await totalMessagesReceivedData.reduce((prev, val) => prev + val, 0)
-      // Total Mentions
-      var totalMentionsData = await this.client.shard.fetchClientValues('botStats.clientMentions')
-      var totalMentions = await totalMentionsData.reduce((prev, val) => prev + val, 0)
-      // Total Commands Used
-      var totalCommandsUsedData = await this.client.shard.fetchClientValues('botStats.commandsUsed')
-      var totalCommandsUsed = await totalCommandsUsedData.reduce((prev, val) => prev + val, 0)
-      // Total Guilds
-      var totalGuildsData = await this.client.shard.fetchClientValues('guilds.size')
-      var totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
-      // Total Channels
-      var totalChannelsData = await this.client.shard.fetchClientValues('channels.size')
-      var totalChannels = await totalChannelsData.reduce((prev, val) => prev + val, 0)
-      // Total Users
-      var totalUsersData = await this.client.shard.fetchClientValues('users.size')
-      var totalUsers = await totalUsersData.reduce((prev, val) => prev + val, 0)
-      // Total Emojis
-      var totalEmojisData = await this.client.shard.fetchClientValues('emojis.size')
-      var totalEmojis = await totalEmojisData.reduce((prev, val) => prev + val, 0)
+      var data = [
+        { name: 'totalMessagesSent', code: 'botStats.messagesSent' },
+        { name: 'totalMessagesReceived', code: 'botStats.messagesReceived' },
+        { name: 'totalClientMentions', code: 'botStats.clientMentions' },
+        { name: 'totalCommandsUsed', code: 'botStats.commandsUsed' },
+        { name: 'totalGuilds', code: 'guilds.size' },
+        { name: 'totalChannels', code: 'channels.size' },
+        { name: 'totalUsers', code: 'users.size' },
+        { name: 'totalEmojis', code: 'emojis.size' }
+      ]
+      var stats = {}
+      data.forEach(element => {
+        this.client.shard.fetchClientValues(element.code).then(async results => {
+          stats[element.name] = await results.reduce((prev, val) => prev + val, 0)
+        })
+      })
     }
-
-    os.cpuUsage(async (cpuUsage) => {
+    os.cpuUsage(cpuUsage => {
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
@@ -86,10 +78,10 @@ module.exports = class StatsCommand extends Command {
               Bot Mentions: **${this.client.botStats.clientMentions}**
               `
               : stripIndents`
-              Sent: **${this.client.botStats.messagesSent}** [${totalMessagesSent}]
-              Received: **${this.client.botStats.messagesReceived}** [${totalMessagesReceived}]
-              Commands: **${this.client.botStats.commandsUsed}** [${totalCommandsUsed}]
-              Bot Mentions: **${this.client.botStats.clientMentions}** [${totalMentions}]
+              Sent: **${this.client.botStats.messagesSent}** [${stats.totalMessagesSent}]
+              Received: **${this.client.botStats.messagesReceived}** [${stats.totalMessagesReceived}]
+              Commands: **${this.client.botStats.commandsUsed}** [${stats.totalCommandsUsed}]
+              Bot Mentions: **${this.client.botStats.clientMentions}** [${stats.totalClientMentions}]
               `,
             'inline': true
           },
@@ -104,10 +96,10 @@ module.exports = class StatsCommand extends Command {
               `
               : stripIndents`
               Shards: **${this.client.shard.id + 1} / ${this.client.shard.count}** [${this.client.shard.id}]
-              Guilds: **${this.client.guilds.size}** [${totalGuilds}]
-              Channels: **${this.client.channels.size}** [${totalChannels}]
-              Users: **${this.client.users.size}** [${totalUsers}]
-              Emojis: **${this.client.emojis.size}** [${totalEmojis}]
+              Guilds: **${this.client.guilds.size}** [${stats.totalGuilds}]
+              Channels: **${this.client.channels.size}** [${stats.totalChannels}]
+              Users: **${this.client.users.size}** [${stats.totalUsers}]
+              Emojis: **${this.client.emojis.size}** [${stats.totalEmojis}]
               `,
             'inline': true
           },
