@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
-const { stripIndents } = require('common-tags')
+const { oneLineCommaListsAnd, stripIndents } = require('common-tags')
 const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
@@ -54,6 +54,13 @@ module.exports = class ServerInfoCommand extends Command {
     var totalUsers = guild.members.filter(s => s.user.bot !== true)
     var totalBots = guild.members.filter(s => s.user.bot !== false)
 
+    var guildRoles
+    if (guild.roles.size > 1) {
+      guildRoles = oneLineCommaListsAnd`${guild.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => `**\`${role.name}\`**`)}`
+    } else {
+      guildRoles = 'N/A'
+    }
+
     message.embed({
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
@@ -97,14 +104,6 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': '📈 Events',
-          'value': stripIndents`
-            Messages Sent: **${this.client.provider.get(guild.id, 'messagesSent', 0)}**
-            User
-          `,
-          'inline': true
-        },
-        {
           'name': '💤 AFK Channel',
           'value': guild.afkChannelID !== null
             ? stripIndents`
@@ -123,6 +122,11 @@ module.exports = class ServerInfoCommand extends Command {
         {
           'name': '📰 Explicit Content Filter',
           'value': explicitContentFilter[guild.explicitContentFilter],
+          'inline': true
+        },
+        {
+          'name': '🔖 Roles',
+          'value': guildRoles,
           'inline': true
         }
       ],

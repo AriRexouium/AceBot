@@ -57,7 +57,7 @@ module.exports = class UserInfoCommand extends Command {
 
     var userRoles
     if (args.user.roles.size > 1) {
-      userRoles = oneLineCommaListsAnd`${args.user.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name)}`
+      userRoles = oneLineCommaListsAnd`${args.user.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => `**\`${role.name}\`**`)}`
     } else {
       userRoles = 'N/A'
     }
