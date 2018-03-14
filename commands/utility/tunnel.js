@@ -4,7 +4,7 @@
 
 const { Command } = require('discord.js-commando')
 
-module.exports = class RiftCommand extends Command {
+module.exports = class TunnelCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'tunnel',
@@ -25,7 +25,8 @@ module.exports = class RiftCommand extends Command {
             }
           }
         }
-      ]
+      ],
+      ownerOnly: true
     })
   }
 
@@ -37,6 +38,6 @@ module.exports = class RiftCommand extends Command {
       source: message.channel.id,
       destination: channel.id
     })
-    return message.say(`Opened tunnel in \`${channel.guild.name}/#${channel.name}\``)
+    return message.say(`Opened tunnel in \`${channel.guild.name}/#${channel.name}\`, use \`//exit\` to exit the tunnel.`)
   }
 }
