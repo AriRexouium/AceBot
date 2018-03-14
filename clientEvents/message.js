@@ -25,6 +25,9 @@ module.exports = (client, message) => {
 
   // Entire Tunnel System
   client.temp.tunnels.forEach((openRift, index, object) => {
+    var sourceChannel = client.channels.get(openRift.source)
+    var destinationChannel = client.channels.get(openRift.destination)
+    openRift.lastSentContent = message.content
     /*
       Source Channel
     */
@@ -33,11 +36,15 @@ module.exports = (client, message) => {
         // Check to see if message is exit.
         if (message.content === '//exit') {
           object.splice(index, 1)
-          return message.channel.send('Exited the tunnel.')
+          return sourceChannel.send('Exited the tunnel.').catch(() => {})
         }
         // Send message to destination.
-        openRift.lastSentContent = message.content
-        client.channels.get(openRift.destination).send(message.content)
+        destinationChannel.send(message.content).catch(error => {
+          sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
+            client.log.debug('Error sending message to Source channel, disconnecting tunnel.', 'Tunnel')
+            object.splice(index, 1)
+          })
+        })
       }
       /*
         Destination Channel
@@ -45,7 +52,12 @@ module.exports = (client, message) => {
     } else if (message.channel.id === openRift.destination) {
       // Send message to source
       if (!(openRift.lastSentContent === message.content && message.author.id === client.user.id)) {
-        client.channels.get(openRift.source).send(`__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`)
+        sourceChannel.send(`__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`).catch(error => {
+          sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
+            client.log.debug('Error sending message to Source channel, disconnecting tunnel.', 'Tunnel')
+            object.splice(index, 1)
+          })
+        })
       }
     }
   })
