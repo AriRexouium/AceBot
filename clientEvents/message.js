@@ -22,4 +22,31 @@ module.exports = (client, message) => {
     Message: ${message.content}
     `, 'CLIENT NOTICE', 'bgRed')
   }
+
+  // Entire Tunnel System
+  client.temp.tunnels.forEach((openRift, index, object) => {
+    /*
+      Source Channel
+    */
+    if (message.channel.id === openRift.source) {
+      if (message.author.id === openRift.user) {
+        // Check to see if message is exit.
+        if (message.content === '//exit') {
+          object.splice(index, 1)
+          return message.channel.send('Exited the tunnel.')
+        }
+        // Send message to destination.
+        openRift.lastSentContent = message.content
+        client.channels.get(openRift.destination).send(message.content)
+      }
+      /*
+        Destination Channel
+      */
+    } else if (message.channel.id === openRift.destination) {
+      // Send message to source
+      if (!(openRift.lastSentContent === message.content && message.author.id === client.user.id)) {
+        client.channels.get(openRift.source).send(`__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`)
+      }
+    }
+  })
 }
