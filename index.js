@@ -133,7 +133,7 @@ client.dispatcher.addInhibitor(message => {
 
 /* Start Assigning to Client */
 client.temp = {}
-// Rift System
+// Tunnel System
 client.temp.tunnels = []
 // Travis Test Mode
 if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }

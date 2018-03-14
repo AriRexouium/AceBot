@@ -24,37 +24,52 @@ module.exports = (client, message) => {
   }
 
   // Entire Tunnel System
-  client.temp.tunnels.forEach((openRift, index, object) => {
-    var sourceChannel = client.channels.get(openRift.source)
-    var destinationChannel = client.channels.get(openRift.destination)
-    openRift.lastSentContent = message.content
+  client.temp.tunnels.forEach((tunnel, index, object) => {
+    var sourceChannel = client.channels.get(tunnel.source)
+    var destinationChannel = client.channels.get(tunnel.destination)
+    var sendMessage = {}
+    // Attachments
+    if (message.attachments) {
+      sendMessage.files = []
+      message.attachments.array().forEach(attachment => {
+        sendMessage.files.push(attachment.url)
+      })
+    }
+    // Embeds
+    if (message.embeds) {
+      sendMessage.embed = message.embeds[0]
+    }
     /*
       Source Channel
     */
-    if (message.channel.id === openRift.source) {
-      if (message.author.id === openRift.user) {
+    if (message.channel.id === tunnel.source) {
+      if (message.author.id === tunnel.user) {
         // Check to see if message is exit.
         if (message.content === '//exit') {
           object.splice(index, 1)
-          return sourceChannel.send('Exited the tunnel.').catch(() => {})
+          return sourceChannel.send(`Closed tunnel to \`${destinationChannel.guild.name}/#${destinationChannel.name}\``).catch(() => {})
         }
         // Send message to destination.
-        destinationChannel.send(message.content).catch(error => {
+        sendMessage.content = message.content
+        destinationChannel.send(sendMessage).catch(error => {
           sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
-            client.log.debug('Error sending message to Source channel, disconnecting tunnel.', 'Tunnel')
+            client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
             object.splice(index, 1)
           })
         })
+        tunnel.lastSentContent = message.content
       }
       /*
         Destination Channel
       */
-    } else if (message.channel.id === openRift.destination) {
-      // Send message to source
-      if (!(openRift.lastSentContent === message.content && message.author.id === client.user.id)) {
-        sourceChannel.send(`__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`).catch(error => {
+    } else if (message.channel.id === tunnel.destination) {
+      if (!(tunnel.lastSentContent === message.content && message.author.id === client.user.id)) {
+        // Content
+        sendMessage.content = `__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`
+        // Send message to source
+        sourceChannel.send(sendMessage).catch(error => {
           sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
-            client.log.debug('Error sending message to Source channel, disconnecting tunnel.', 'Tunnel')
+            client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
             object.splice(index, 1)
           })
         })
