@@ -20,7 +20,7 @@ module.exports = async (client, guild) => {
       Hello, **${guild.name}**! I am, **${client.user.username}**!
 
       **|**  Use \`${client.options.commandPrefix}help\` to view all commands available to you.
-      **|**  Use \`${client.options.commandPrefix}contact\` to get in contact with an agent.
+      **|**  Use \`${client.options.commandPrefix}contact\` to get in contact with a developer.
       **|**  I am created and owned by **${dev}**.
 
       **For help, feedback, bugs, info, and more go to <http://discord.gg/Y6Vgfyd>**.
