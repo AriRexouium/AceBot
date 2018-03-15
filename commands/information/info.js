@@ -25,12 +25,12 @@ module.exports = class InfoCommand extends Command {
 
   async run (message) {
     var dev
-    try { dev = this.client.users.find('id', '196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
+    try { dev = this.client.users.get('196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
 
     var contributorsList = ''
     this.client.config.contributors.forEach(contributor => {
       try {
-        let contribTemp = this.client.users.find('id', contributor.id).tag
+        let contribTemp = this.client.users.get(contributor.id).tag
         if (contributor.github) {
           contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github})** - ${contributor.info}`
         } else {

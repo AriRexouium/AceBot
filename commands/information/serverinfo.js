@@ -28,7 +28,7 @@ module.exports = class ServerInfoCommand extends Command {
 
   run (message) {
     var guild = message.guild
-    var ownerInfo = message.guild.members.find('id', guild.ownerID)
+    var ownerInfo = guild.owner.user
 
     var clientColor
     if (message.guild) {
