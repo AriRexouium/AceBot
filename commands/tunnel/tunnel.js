@@ -18,11 +18,7 @@ module.exports = class TunnelCommand extends Command {
           type: 'string',
           validate: value => {
             var channel = client.channels.get(value)
-            var user = client.users.get(value).createDM()
-            user = user.id
-            if (user) {
-
-            } else if (channel && channel.type === 'text') {
+            if (channel && channel.type === 'text') {
               return true
             } else {
               return 'That is an invalid channel, please make sure it is a channel ID and a text channel.'
