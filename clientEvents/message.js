@@ -51,12 +51,19 @@ module.exports = (client, message) => {
         }
         // Send message to destination.
         sendMessage.content = message.content
-        destinationChannel.send(sendMessage).catch(error => {
-          sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
-            client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
-            object.splice(index, 1)
+        destinationChannel.send(sendMessage)
+          .then(sentMessage => {
+            tunnel.cache.push({
+              fromMessage: message,
+              sentMessage: sentMessage
+            })
           })
-        })
+          .catch(error => {
+            sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
+              client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              object.splice(index, 1)
+            })
+          })
         tunnel.lastSentContent = message.content
       }
       /*
@@ -67,12 +74,19 @@ module.exports = (client, message) => {
         // Content
         sendMessage.content = `__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`
         // Send message to source
-        sourceChannel.send(sendMessage).catch(error => {
-          sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
-            client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
-            object.splice(index, 1)
+        sourceChannel.send(sendMessage)
+          .then(sentMessage => {
+            tunnel.cache.push({
+              fromMessage: message,
+              sentMessage: sentMessage
+            })
           })
-        })
+          .catch(error => {
+            sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
+              client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              object.splice(index, 1)
+            })
+          })
       }
     }
   })

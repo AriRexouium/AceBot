@@ -36,7 +36,8 @@ module.exports = class TunnelCommand extends Command {
     this.client.temp.tunnels.push({
       user: message.author.id,
       source: message.channel.id,
-      destination: channel.id
+      destination: channel.id,
+      cache: []
     })
     return message.say(`Opened tunnel in \`${channel.guild.name}/#${channel.name}\`, use \`//exit\` to exit the tunnel.`)
   }
