@@ -1,0 +1,38 @@
+/*
+  Inspired From -> http://github.com/Twentysix26/26-Cogs/blob/a8c83790ae4eed543e7c47b871a0d711a9578ca3/rift/rift.py
+*/
+
+const { Command } = require('discord.js-commando')
+const columnify = require('columnify')
+
+module.exports = class ListServers extends Command {
+  constructor (client) {
+    super(client, {
+      name: 'listservers',
+      memberName: 'listservers',
+      group: 'tunnel',
+      description: 'List the servers the bot is in.',
+      ownerOnly: true
+    })
+  }
+
+  run (message, args) {
+    var guilds = this.client.guilds.array()
+    var columnifyGuilds = []
+    guilds.forEach(guild => {
+      columnifyGuilds.push({
+        name: guild.name,
+        id: guild.id,
+        members: guild.members.size,
+        owner: guild.owner.user.tag
+      })
+    })
+    message.say({
+      content: columnify(columnifyGuilds, {
+        columnSplitter: ' │ '
+      }),
+      split: true,
+      code: ''
+    })
+  }
+}

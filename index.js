@@ -27,6 +27,7 @@ client.registry
     ['bot-staff', 'Bot Staff'],
     ['information', 'Information'],
     ['profile', 'Profile'],
+    ['tunnel', 'Tunnel'],
     ['utility', 'Utility']
   ])
   .registerCommandsIn(path.join(__dirname, 'commands'))
