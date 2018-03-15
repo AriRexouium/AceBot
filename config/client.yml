@@ -1,11 +1,13 @@
 ---
 token: token # Your bot's login token, keep this safe!
 commandPrefix: a@ # Your bot's prefix to use for commands.
-eventLogRefresh: 1800000 # In miliseconds how often the bot should update the database with events.
 commandEditableDuration: 30 # The amount of time before a command cannot be edited. (Only ping supports this right now.)
 nonCommandEditable: false # Whether commands can be edited after they have been executed.
 unknownCommandResponse: false # Whether to send a if a command is invalid.
 invite: http://discord.gg/Y6Vgfyd # The server invite to the support server.
+joinMessageBlacklist: # The blacklist of servers to not send a join message to when joining a new server.
+  - '110373943822540800' # Discord Bots
+  - '264445053596991498' # Discord Bots List
 owner: # The list of owners.
   - '196443959558406144'
   - '253291447137075211'

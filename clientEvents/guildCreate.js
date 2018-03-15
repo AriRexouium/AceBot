@@ -11,6 +11,22 @@ module.exports = async (client, guild) => {
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
   `, 'guildCreate')
 
+  // Server Join Message
+  if (!client.config.client.joinMessageBlacklist.includes(guild.id)) {
+    var dev
+    try { dev = this.client.users.get('196443959558406144').tag } catch (e) { dev = 'Aceheliflyer#0950' }
+    var messageChannel = guild.channels.find(channel => channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
+    messageChannel.send(stripIndents`
+      Hello, **${guild.name}**! I am, **${client.user.username}**!
+
+      **|**  Use \`${client.options.commandPrefix}help\` to view all commands available to you.
+      **|**  Use \`${client.options.commandPrefix}contact\` to get in contact with an agent.
+      **|**  I am created and owned by **${dev}**.
+
+      **For help, feedback, bugs, info, and more go to <http://discord.gg/Y6Vgfyd>**.
+    `)
+  }
+
   // Webhook
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.guildCreate) {
