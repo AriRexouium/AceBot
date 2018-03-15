@@ -23,8 +23,8 @@ client.registry
   .registerDefaultTypes()
   .registerTypesIn(path.join(__dirname, 'types'))
   .registerGroups([
-    ['bot-management', 'Bot Management'],
     ['bot-staff', 'Bot Staff'],
+    ['development', 'Development'],
     ['information', 'Information'],
     ['profile', 'Profile'],
     ['tunnel', 'Tunnel'],

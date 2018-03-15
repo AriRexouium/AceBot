@@ -1,43 +1,57 @@
 // TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
-const Discord = require('discord.js')
-const sudoClient = new Discord.Client()
+const { oneLine } = require('common-tags')
 const util = require('util')
 
-module.exports = class SudoCommand extends Command {
+module.exports = class EvalCommand extends Command {
   constructor (client) {
     super(client, {
-      name: 'sudo',
-      memberName: 'sudo',
-      group: 'bot-staff',
-      description: 'Executes code on a bot or user account.',
-      details: 'Allows the bot owners(s) to execute code on a different account via token.',
+      name: 'eval',
+      memberName: 'eval',
+      group: 'development',
+      description: 'Evaluates JavaScript.',
+      details: 'Allows the bot owners to eval arbitrary JavaScript without restrictions.',
+      aliases: [
+        'evaluate'
+      ],
+      examples: [
+        'eval client',
+        'eval guild',
+        'eval channel',
+        'eval new Date()'
+      ],
       clientPermissions: [
         'EMBED_LINKS'
       ],
       args: [
         {
-          key: 'token',
-          prompt: 'You must enter a token.\n*(Once the token has been sent via message, it will be compromised.)*',
-          type: 'string'
-        },
-        {
           key: 'code',
-          prompt: 'What code would you like to execute?',
+          prompt: 'What code would you like to evaluate?',
           type: 'string'
         }
       ],
       guarded: true,
       ownerOnly: true
     })
+    this.lastResult = null
   }
-  async run (message, args) {
-    var code = args.code; var evaledLatency
 
+  async run (message, args) {
+    /* eslint-disable no-unused-vars */
+    const msg = message
+    const channel = message.channel
+    const guild = message.guild
+    const client = message.client
+    const objects = client.registry.evalObjects
+    const lastResult = this.lastResult
+    /* eslint-enable no-unused-vars */
+
+    // Silent Eval
+    var code = args.code
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        eval(code.split(/ (.+)/)[1]) // eslint-disable-line no-eval
+        eval(code.substr(code.indexOf(' ') + 1)) // eslint-disable-line no-eval
       } catch (error) {
         message.say({
           content: `${error.name}: ${error.message}`,
@@ -47,17 +61,36 @@ module.exports = class SudoCommand extends Command {
       return
     }
 
+    // Normal Eval
+    var evaledLatency
     try {
-      await sudoClient.login(args.token)
-
       /* Start Eval Block */
       var hrStart = await process.hrtime(this.hrStart)
       var result = await eval(code) // eslint-disable-line no-eval
       evaledLatency = await process.hrtime(hrStart)
       /* End Eval Block */
 
-      var type = typeof (result) === 'object' ? 'object - ' + result.constructor.name : typeof (result)
-      if (typeof (result) !== 'string') { result = util.inspect(result, { depth: 0 }) }
+      var type
+      if (typeof result === 'object') {
+        type = `object - ${result.constructor.name}`
+      } else if (typeof result === 'function') {
+        type = oneLine`
+          function
+          ${result.name || result.length ? '-' : ''}
+          ${result.name ? `Name: ${result.name}` : ''}
+          ${result.name && result.length ? `|` : ''}
+          ${result.length ? `#Args: ${result.length}` : ''}
+        `
+        result = result.toString()
+      } else {
+        type = typeof result
+      }
+      if (typeof (result) !== 'string') {
+        result = util.inspect(result, {
+          showHidden: true,
+          depth: 0
+        })
+      }
 
       this.lastResult = result
 
@@ -75,7 +108,7 @@ module.exports = class SudoCommand extends Command {
           },
           {
             'name': 'Result',
-            'value': ('```js\n' + clean(result.toString()) + '\n```'),
+            'value': ('```js\n' + clean(result.toString()) + '\n```').replace(client.token, '[TOKEN]'),
             'inline': false
           },
           {
@@ -86,12 +119,11 @@ module.exports = class SudoCommand extends Command {
         ],
         color: 0x00AA00
       }).catch(error => { message.reply(`there was an error when sending a message:\n\`${clean(error)}\``) })
-      await sudoClient.destroy()
     } catch (error) {
       evaledLatency = await process.hrtime(hrStart)
 
       // Evaluation Error
-      this.client.hastebin(error.stack, 'js').then(link => {
+      client.hastebin(error.stack, 'js').then(link => {
         message.embed({
           author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
@@ -112,7 +144,6 @@ module.exports = class SudoCommand extends Command {
           color: 0xAA0000
         }).catch(error => { message.reply(`there was an error when sending a message:\n\`${clean(error)}\``) })
       })
-      await sudoClient.destroy()
     }
   }
 }

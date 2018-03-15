@@ -6,7 +6,7 @@ module.exports = class EnableCommandCommand extends Command {
     super(client, {
       name: 'enable',
       memberName: 'enable',
-      group: 'bot-management',
+      group: 'utility',
       description: 'Enables a command or command group.',
       details: oneLine`
       The argument must be the name/ID (partial or whole) of a command or command group.

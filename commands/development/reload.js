@@ -8,7 +8,7 @@ module.exports = class ReloadCommand extends Command {
       aliases: [
         'reload-command'
       ],
-      group: 'bot-staff',
+      group: 'development',
       memberName: 'reload',
       description: 'Reloads a command or command group.',
       details: oneLine`

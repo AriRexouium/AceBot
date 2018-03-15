@@ -7,7 +7,7 @@ module.exports = class LoadCommand extends Command {
     super(client, {
       name: 'load',
       memberName: 'load',
-      group: 'bot-staff',
+      group: 'development',
       description: 'Loads a new command.',
       details: oneLine`
         The argument must be full name of the command in the format of \`group:memberName\`.

@@ -10,7 +10,7 @@ module.exports = class RestartCommand extends Command {
     super(client, {
       name: 'restart',
       memberName: 'restart',
-      group: 'bot-staff',
+      group: 'development',
       description: 'Restarts the bot.',
       details: 'Only the bot owner(s) can restart the bot or current shard.',
       clientPermissions: [

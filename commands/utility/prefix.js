@@ -6,7 +6,7 @@ module.exports = class PrefixCommand extends Command {
     super(client, {
       name: 'prefix',
       memberName: 'prefix',
-      group: 'bot-management',
+      group: 'utility',
       description: 'Shows or sets the command prefix.',
       details: oneLine`
         If no prefix is provided, the current prefix will be shown.

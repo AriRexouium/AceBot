@@ -6,7 +6,7 @@ module.exports = class UnloadCommand extends Command {
     super(client, {
       name: 'unload',
       memberName: 'unload',
-      group: 'bot-staff',
+      group: 'development',
       description: 'Unloads a command.',
       details: oneLine`
         The argument must be the name/ID (partial or whole) of a command.

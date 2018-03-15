@@ -9,7 +9,7 @@ module.exports = class UpdateCommand extends Command {
     super(client, {
       name: 'update',
       memberName: 'update',
-      group: 'bot-staff',
+      group: 'development',
       description: 'Updates the bot.',
       details: 'Pulls code from GitHub.',
       aliases: [
@@ -23,7 +23,7 @@ module.exports = class UpdateCommand extends Command {
   run (message) {
     message.say('**Update requested, please wait.**').then(() => {
       try {
-        var codeResult = childProcess.execSync('git pull').toString()
+        var codeResult = childProcess.execSync('git pull --all').toString()
         if (codeResult.length > 1950) {
           this.client.hastebin(codeResult).then(link => {
             message.say('```\n' + `<${link}>` + '\n```')

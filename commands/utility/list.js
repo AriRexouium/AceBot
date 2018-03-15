@@ -6,7 +6,7 @@ module.exports = class ListCommand extends Command {
     super(client, {
       name: 'list',
       memberName: 'list',
-      group: 'bot-management',
+      group: 'utility',
       description: 'Lists all commands or groups.',
       details: 'Lists all commands or groups with their enabled states.',
       aliases: [

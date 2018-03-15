@@ -1,6 +1,6 @@
 ---
-token: token # Your bot's login token, keep this safe!
-commandPrefix: a@ # Your bot's prefix to use for commands.
+token: MjUzMzUyNDMwNjE0MzQ3Nzc2.DXT9wQ.mVIoGFF-HQDHT4re_FmGPTiKZ2I # Your bot's login token, keep this safe!
+commandPrefix: a# # Your bot's prefix to use for commands.
 commandEditableDuration: 30 # The amount of time before a command cannot be edited. (Only ping supports this right now.)
 nonCommandEditable: false # Whether commands can be edited after they have been executed.
 unknownCommandResponse: false # Whether to send a if a command is invalid.

@@ -6,7 +6,7 @@ module.exports = class DisableCommand extends Command {
     super(client, {
       name: 'disable',
       memberName: 'disable',
-      group: 'bot-management',
+      group: 'development',
       description: 'Disables a command or command group.',
       details: oneLine`
         The argument must be the name/ID (partial or whole) of a command or command group.
