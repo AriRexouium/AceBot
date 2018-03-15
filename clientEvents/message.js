@@ -45,10 +45,10 @@ module.exports = (client, message) => {
     if (message.channel.id === tunnel.source) {
       if (message.author.id === tunnel.user) {
         // Check to see if message is exit.
-        if (message.content === '//exit') {
+        if (message.content === '$exit') {
           object.splice(index, 1)
           return sourceChannel.send(`Closed tunnel to \`${destinationChannel.guild.name}/#${destinationChannel.name}\``).catch(() => {})
-        }
+        } else if (message.content.startsWith('$ ')) return
         // Send message to destination.
         sendMessage.content = message.content
         destinationChannel.send(sendMessage)

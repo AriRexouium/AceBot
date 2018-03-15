@@ -3,6 +3,7 @@
 */
 
 const { Command } = require('discord.js-commando')
+const { stripIndents } = require('common-tags')
 
 module.exports = class TunnelCommand extends Command {
   constructor (client) {
@@ -39,6 +40,16 @@ module.exports = class TunnelCommand extends Command {
       destination: channel.id,
       cache: []
     })
-    return message.say(`Opened tunnel in \`${channel.guild.name}/#${channel.name}\`, use \`//exit\` to exit the tunnel.`)
+    return message.say(stripIndents`
+      Opened tunnel in \`${channel.guild.name}/#${channel.name}\`!
+      Use \`$ <message>\` to escape sending a message.
+      You can use \`$exit\` to exit the tunnel.
+
+      __**Perms:**__
+      \`SEND_MESSAGES\`: ${channel.permissionsFor(this.client.user.id).has('SEND_MESSAGES')}
+      \`READ_MESSAGES\`: ${channel.permissionsFor(this.client.user.id).has('READ_MESSAGES')}
+      \`EMBED_LINKS\`: ${channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')}
+      \`ATTACH_FILES\`: ${channel.permissionsFor(this.client.user.id).has('ATTACH_FILES')}
+    `)
   }
 }
