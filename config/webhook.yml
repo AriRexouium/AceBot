@@ -1,31 +1,31 @@
 ---
-webhookID: '379795992012390411' # The webhook ID.
-webhookToken: 'BXADXivdzppG8L4MuIc39_ASatdRjONZA7BoXikjv45yD817Ocz70gOUYi31sPxniMsI' # The webhook token.
-enabled: true # Whether webhook events should be enabled or not.
+webhookID: 'ID' # The webhook ID.
+webhookToken: 'Token' # The webhook token.
+enabled: false # Whether webhook events should be enabled or not.
 clientEvents: # Enable and disable individual events.
-  commandBlocked: true
-  commandError: true
-  commandPrefixChange: true
-  commandRegister: true
-  commandReregister: true
-  commandRun: true
-  commandStatusChange: true
-  commandUnregister: true
-  disconnect: true
-  error: true
-  groupRegister: true
-  groupStatusChange: true
-  guildCreate: true
-  guildDelete: true
-  rateLimit: true
-  ready: true
-  reconnecting: true
-  typeRegister: true
-  warn: true
+  commandBlocked: false
+  commandError: false
+  commandPrefixChange: false
+  commandRegister: false
+  commandReregister: false
+  commandRun: false
+  commandStatusChange: false
+  commandUnregister: false
+  disconnect: false
+  error: false
+  groupRegister: false
+  groupStatusChange: false
+  guildCreate: false
+  guildDelete: false
+  rateLimit: false
+  ready: false
+  reconnecting: false
+  typeRegister: false
+  warn: false
 processEvents:
-  uncaughtException: true
-  unhandledRejection: true
-  warning: true
+  uncaughtException: false
+  unhandledRejection: false
+  warning: false
 blacklistEvents:
-  blacklistAdd: true
-  blacklistRemove: true
+  blacklistAdd: false
+  blacklistRemove: false
