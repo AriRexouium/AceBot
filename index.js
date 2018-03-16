@@ -1,10 +1,18 @@
+// Misc
+const { oneLine, stripIndents } = require('common-tags')
+const pluralize = require('pluralize')
+
+// Files
 const fs = require('fs')
 const yaml = require('js-yaml')
 const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
+const sqlConfig = yaml.safeLoad(fs.readFileSync('./config/sql.yml', 'utf8'))
 const path = require('path')
+
+// Database
 const sqlite = require('sqlite')
-const { oneLine, stripIndents } = require('common-tags')
-const pluralize = require('pluralize')
+const MySQL = require('mysql2/promise')
+const MySQLProvider = require('discord.js-commando-mysqlprovider')
 
 // Commando
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
@@ -17,6 +25,32 @@ const client = new CommandoClient({
   owner: clientConfig.owner,
   invite: clientConfig.invite
 })
+
+// SQL Provider
+if (sqlConfig.useMySQL === false) {
+  sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
+    client.setProvider(new SQLiteProvider(db))
+    setInterval(async () => {
+      await client.provider.destroy()
+      await client.provider.init(client)
+      client.log.debug(`Synced Database`, client.provider.constructor.name)
+    }, sqlConfig.sqlSync)
+  })
+} else {
+  MySQL.createConnection({
+    host: sqlConfig.host,
+    user: sqlConfig.user,
+    password: sqlConfig.password,
+    database: sqlConfig.database
+  }).then((db) => {
+    client.setProvider(new MySQLProvider(db))
+    setInterval(async () => {
+      await client.provider.destroy()
+      await client.provider.init(client)
+      client.log.debug(`Synced Database`, client.provider.constructor.name)
+    }, sqlConfig.sqlSync)
+  })
+}
 
 // Commands / Groups / Types
 client.registry
@@ -62,11 +96,6 @@ for (let file of getFiles('/modules')) {
 client.log.info(oneLine`
   Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
 `, 'Module Initializer')
-
-// SQLite Provider
-sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
-  client.setProvider(new SQLiteProvider(db))
-})
 
 client.config = {}
 // Load all configuration files to the client.

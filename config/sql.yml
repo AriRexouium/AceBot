@@ -1,0 +1,8 @@
+---
+sqlSync: 1800000 # How often to sync from the database in miliseconds.
+# Only change the following values below if you know what you're doing.
+useMySQL: true # False for SQLite.
+host: 'host'
+user: 'user'
+password: 'password'
+database: 'database'
