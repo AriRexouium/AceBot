@@ -42,7 +42,7 @@ module.exports = class ListChannels extends Command {
         columnSplitter: ' │ '
       }),
       split: true,
-      code: ''
+      code: 'css'
     })
   }
 }

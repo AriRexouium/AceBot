@@ -3,6 +3,7 @@
 */
 
 const { Command } = require('discord.js-commando')
+const { oneLineTrim } = require('common-tags')
 const columnify = require('columnify')
 
 module.exports = class ListServers extends Command {
@@ -20,10 +21,15 @@ module.exports = class ListServers extends Command {
     var guilds = this.client.guilds.array()
     var columnifyGuilds = []
     guilds.forEach(guild => {
+      var members = oneLineTrim`
+        ${guild.members.filter(member => member.user.bot === false).size} USR/
+        ${guild.members.filter(member => member.user.bot === true).size} BOT/
+        ${guild.members.size} TOT
+      `
       columnifyGuilds.push({
         name: guild.name,
         id: guild.id,
-        members: guild.members.size,
+        members: members,
         owner: guild.owner.user.tag
       })
     })
@@ -32,7 +38,7 @@ module.exports = class ListServers extends Command {
         columnSplitter: ' │ '
       }),
       split: true,
-      code: ''
+      code: 'css'
     })
   }
 }
