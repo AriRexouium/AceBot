@@ -8,6 +8,7 @@ const yaml = require('js-yaml')
 const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
 const sqlConfig = yaml.safeLoad(fs.readFileSync('./config/sql.yml', 'utf8'))
 const path = require('path')
+process.chdir(__dirname)
 
 // Database
 const sqlite = require('sqlite')

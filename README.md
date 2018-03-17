@@ -44,8 +44,8 @@ If you can manage to actually follow these instructions then you'll be just fine
 
 1. If and when you have Git installed, right click on the location you want to put your bot root folder _(EX: your documents)_ and click `Git Bash Here`.
 2. - To install stable build (recommended): `git clone -b stable --single-branch http://github.com/Aceheliflyer/AceBot.git AceBot`
-- To install development build: `git clone -b master --single-branch http://github.com/Aceheliflyer/AceBot.git AceBot`
-- To install all branches: `git clone http://github.com/Aceheliflyer/AceBot.git AceBot`
+   - To install development build: `git clone -b master --single-branch http://github.com/Aceheliflyer/AceBot.git AceBot`
+   - To install all branches: `git clone http://github.com/Aceheliflyer/AceBot.git AceBot`
 3. Be sure to edit your configuration files in the [config](http://github.com/Aceheliflyer/AceBot/blob/master/config "Configuration") folder to your desired settings.
 
 <!-- markdownlint-enable MD004 MD029 -->
