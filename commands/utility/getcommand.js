@@ -25,9 +25,11 @@ module.exports = class GetCodeCommand extends Command {
         message.say(`There was an error getting that command: \`${error.message}\``)
       } else {
         data = clean(data.toString())
-        for (let i = 0; i < data.length; i += 1950) {
-          message.say(`\`\`\`js\n${data.substring(i, i + 1950)}\n\`\`\``)
-        }
+        message.say({
+          content: data,
+          code: 'js',
+          split: true
+        })
       }
     })
   }
