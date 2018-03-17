@@ -78,7 +78,7 @@ fileGroups.forEach(group => {
 // Load Commands, Groups and Types
 client.registry
   .registerDefaultTypes()
-  .registerTypesIn(path.join(__dirname, 'types'))
+  .registerTypesIn(path.join(__dirname, './src/types'))
   .registerGroups(groups)
   .registerCommandsIn(path.join(__dirname, 'commands'))
 
