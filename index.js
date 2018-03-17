@@ -1,8 +1,8 @@
-// Misc
+/* Misc */
 const { oneLine, stripIndents } = require('common-tags')
 const pluralize = require('pluralize')
 
-// Files
+/* Files */
 process.chdir(__dirname)
 const fs = require('fs')
 const path = require('path')
@@ -10,12 +10,12 @@ const yaml = require('js-yaml')
 const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
 const sqlConfig = yaml.safeLoad(fs.readFileSync('./config/sql.yml', 'utf8'))
 
-// Database
+/* Database */
 const sqlite = require('sqlite')
 const MySQL = require('mysql2/promise')
 const MySQLProvider = require('discord.js-commando-mysqlprovider')
 
-// Commando
+/* Commando */
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
   selfbot: false,
@@ -53,18 +53,33 @@ if (sqlConfig.useMySQL === false) {
   })
 }
 
-// Commands / Groups / Types
+// Auto Group Loader
+var fileGroups = fs.readdirSync('./commands').filter(f => fs.statSync(path.join('./commands', f)).isDirectory())
+/**
+ * Converts something like `bot-staff` to `Bot Staff`.
+ * @param {string} str The string you want to convert to a group name.
+ * @return {string} The string after it was converted to a group name.
+ */
+var createGroup = str => {
+  var arr = str.split('-')
+  var temp = []
+  arr.forEach(char => {
+    char = char.charAt(0).toUpperCase() + char.slice(1)
+    temp.push(char)
+  })
+  str = temp.join(' ')
+  return str
+}
+var groups = []
+fileGroups.forEach(group => {
+  groups.push([group, createGroup(group)])
+})
+
+// Load Commands, Groups and Types
 client.registry
   .registerDefaultTypes()
   .registerTypesIn(path.join(__dirname, 'types'))
-  .registerGroups([
-    ['bot-staff', 'Bot Staff'],
-    ['development', 'Development'],
-    ['information', 'Information'],
-    ['profile', 'Profile'],
-    ['tunnel', 'Tunnel'],
-    ['utility', 'Utility']
-  ])
+  .registerGroups(groups)
   .registerCommandsIn(path.join(__dirname, 'commands'))
 
 /**
