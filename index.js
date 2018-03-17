@@ -3,12 +3,12 @@ const { oneLine, stripIndents } = require('common-tags')
 const pluralize = require('pluralize')
 
 // Files
+process.chdir(__dirname)
 const fs = require('fs')
+const path = require('path')
 const yaml = require('js-yaml')
 const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
 const sqlConfig = yaml.safeLoad(fs.readFileSync('./config/sql.yml', 'utf8'))
-const path = require('path')
-process.chdir(__dirname)
 
 // Database
 const sqlite = require('sqlite')
