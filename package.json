@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "AceBot is a Discord bot designed for providing information on demand.",
-  "version": "3.3.0-dev",
+  "version": "3.4.0",
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
