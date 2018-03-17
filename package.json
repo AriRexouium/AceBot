@@ -1,7 +1,7 @@
 {
   "name": "acebot",
   "description": "AceBot is a Discord bot designed for providing information on demand.",
-  "version": "3.4.0",
+  "version": "3.4.0-dev",
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
@@ -58,7 +58,7 @@
     "raven": "^2.4.2",
     "request": "^2.85.0",
     "sqlite": "^2.9.1",
-    "standard": "^11.0.0",
+    "standard": "^11.0.1",
     "systeminformation": "^3.37.7",
     "unirest": "^0.5.1",
     "url-regex": "^4.1.1"
