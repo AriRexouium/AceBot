@@ -124,31 +124,33 @@ for (let file of getFiles('/config')) {
   }
 }
 
-// Load processEvents
-for (let file of getFiles('/processEvents')) {
-  const processEventName = file.split('.')[0].substring(15)
-  const processEvent = require(`./${file}`)
-  process.on(processEventName, processEvent.bind(null, client))
-  delete require.cache[require.resolve(`./${file}`)]
-}
-client.log.info(oneLine`
-  Initialized ${getFiles('/processEvents').length}
-  process ${pluralize('event', getFiles('/processEvents').length, false)}!
-`, 'processEvent Initializer')
+var events = []
+var eventFolders = fs.readdirSync('./src/events').filter(f => fs.statSync(path.join('./src/events', f)).isDirectory())
+eventFolders.forEach(folder => {
+  events.push({
+    type: folder,
+    location: `./src/events/${folder}/`
+  })
+})
 
-// Load clientEvents
-for (let file of getFiles('/clientEvents')) {
-  const clientEventName = file.split('.')[0].substring(14)
-  if (clientEventName !== 'README') {
-    const clientEvent = require(`./${file}`)
-    client.on(clientEventName, clientEvent.bind(null, client))
-    delete require.cache[require.resolve(`./${file}`)]
-  }
-}
-client.log.info(oneLine`
-  Initialized ${getFiles('/clientEvents').length}
-  client ${pluralize('event', getFiles('/clientEvents').length, false)}!
-`, 'clientEvent Initializer')
+events.forEach(event => {
+  fs.readdir(event.location, (error, files) => {
+    if (error) {
+      client.log.error(error, `${event.type.charAt(0).toUpperCase()}${event.type.slice(1)} Event Initializer`)
+    }
+    files.forEach(file => {
+      var eventName = file.split('.')[0]
+      var eventFile = require(`${event.location}${file}`)
+      client.on(eventName, eventFile.bind(null, client))
+      delete require.cache[require.resolve(`${event.location}${file}`)]
+    })
+    client.log.info(oneLine`
+      Initialized ${files.length}
+      ${event.type.charAt(0).toUpperCase()}${event.type.slice(1)}
+      ${pluralize('event', files.length, false)}!
+    `, `${event.type.charAt(0).toUpperCase()}${event.type.slice(1)} Event Initializer`)
+  })
+})
 
 // User Blacklist
 client.dispatcher.addInhibitor(message => {
