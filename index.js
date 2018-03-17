@@ -58,9 +58,27 @@ if (sqlConfig.useMySQL === false) {
 }
 
 /* **************************************************************************************************** *\
+Functions
+\* **************************************************************************************************** */
+/**
+ * Lists the directories in a directory.
+ * @param {string} dir The directory that you want to get a list of directories from.
+ */
+var listDirs = dir => {
+  return fs.readdirSync(dir).filter(f => fs.statSync(path.join(dir, f)).isDirectory())
+}
+
+/**
+ * Capitalizes a word.
+ * @param {string} char The character you want to capitalize.
+ */
+var capitalize = char => {
+  return char.charAt(0).toUpperCase() + char.slice(1)
+}
+
+/* **************************************************************************************************** *\
 Automatic Group Loading System
 \* **************************************************************************************************** */
-var fileGroups = fs.readdirSync('./commands').filter(f => fs.statSync(path.join('./commands', f)).isDirectory())
 /**
  * Converts something like `bot-staff` to `Bot Staff`.
  * @param {string} str The string you want to convert to a group name.
@@ -70,14 +88,14 @@ var createGroup = str => {
   var arr = str.split('-')
   var temp = []
   arr.forEach(char => {
-    char = char.charAt(0).toUpperCase() + char.slice(1)
+    char = capitalize(char)
     temp.push(char)
   })
   str = temp.join(' ')
   return str
 }
 var groups = []
-fileGroups.forEach(group => {
+listDirs('./commands').forEach(group => {
   groups.push([group, createGroup(group)])
 })
 
@@ -140,9 +158,8 @@ for (let file of getFiles('/config')) {
 Load All Events
 \* **************************************************************************************************** */
 var events = []
-var eventFolders = fs.readdirSync('./src/events').filter(f => fs.statSync(path.join('./src/events', f)).isDirectory())
 
-eventFolders.forEach(folder => {
+listDirs('./src/events').forEach(folder => {
   events.push({
     type: folder,
     location: `./src/events/${folder}/`
@@ -150,9 +167,10 @@ eventFolders.forEach(folder => {
 })
 
 events.forEach(event => {
+  var type = capitalize(event.type)
   fs.readdir(event.location, (error, files) => {
     if (error) {
-      client.log.error(error, `${event.type.charAt(0).toUpperCase()}${event.type.slice(1)} Event Initializer`)
+      client.log.error(error, `${type} Event Initializer`)
     }
     files.forEach(file => {
       var eventName = file.split('.')[0]
@@ -161,10 +179,9 @@ events.forEach(event => {
       delete require.cache[require.resolve(`${event.location}${file}`)]
     })
     client.log.info(oneLine`
-      Initialized ${files.length}
-      ${event.type.charAt(0).toUpperCase()}${event.type.slice(1)}
+      Initialized ${files.length} ${type}
       ${pluralize('event', files.length, false)}!
-    `, `${event.type.charAt(0).toUpperCase()}${event.type.slice(1)} Event Initializer`)
+    `, `${type} Event Initializer`)
   })
 })
 
