@@ -15,7 +15,9 @@ const sqlite = require('sqlite')
 const MySQL = require('mysql2/promise')
 const MySQLProvider = require('discord.js-commando-mysqlprovider')
 
-/* Commando */
+/* **************************************************************************************************** *\
+Load Commando Client
+\* **************************************************************************************************** */
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
   selfbot: false,
@@ -27,7 +29,9 @@ const client = new CommandoClient({
   invite: clientConfig.invite
 })
 
-// SQL Provider
+/* **************************************************************************************************** *\
+Load SQL Provider
+\* **************************************************************************************************** */
 if (sqlConfig.useMySQL === false) {
   sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
     client.setProvider(new SQLiteProvider(db))
@@ -53,7 +57,9 @@ if (sqlConfig.useMySQL === false) {
   })
 }
 
-// Auto Group Loader
+/* **************************************************************************************************** *\
+Automatic Group Loading System
+\* **************************************************************************************************** */
 var fileGroups = fs.readdirSync('./commands').filter(f => fs.statSync(path.join('./commands', f)).isDirectory())
 /**
  * Converts something like `bot-staff` to `Bot Staff`.
@@ -75,7 +81,9 @@ fileGroups.forEach(group => {
   groups.push([group, createGroup(group)])
 })
 
-// Load Commands, Groups and Types
+/* **************************************************************************************************** *\
+Load Client Registry
+\* **************************************************************************************************** */
 client.registry
   .registerDefaultTypes()
   .registerTypesIn(path.join(__dirname, './src/types'))
@@ -102,7 +110,9 @@ let getFiles = source => {
   return files
 }
 
-// Load Modules  // Loading modules first so the logger can be used.
+/* **************************************************************************************************** *\
+Load Client Modules
+\* **************************************************************************************************** */
 for (let file of getFiles('/modules')) {
   const moduleName = file.split('.')[0].substring(9)
   const moduleFile = require(`./${file}`)
@@ -113,8 +123,10 @@ client.log.info(oneLine`
   Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
 `, 'Module Initializer')
 
+/* **************************************************************************************************** *\
+Load Client Configuation
+\* **************************************************************************************************** */
 client.config = {}
-// Load all configuration files to the client.
 for (let file of getFiles('/config')) {
   const configFileName = file.split('.')[0].substring(8)
   if (configFileName !== 'database') {
@@ -124,8 +136,12 @@ for (let file of getFiles('/config')) {
   }
 }
 
+/* **************************************************************************************************** *\
+Load All Events
+\* **************************************************************************************************** */
 var events = []
 var eventFolders = fs.readdirSync('./src/events').filter(f => fs.statSync(path.join('./src/events', f)).isDirectory())
+
 eventFolders.forEach(folder => {
   events.push({
     type: folder,
@@ -152,6 +168,9 @@ events.forEach(event => {
   })
 })
 
+/* **************************************************************************************************** *\
+Load Commando Inhibitors
+\* **************************************************************************************************** */
 // User Blacklist
 client.dispatcher.addInhibitor(message => {
   const blacklist = client.provider.get('global', 'userBlacklist', [])
@@ -179,7 +198,9 @@ client.dispatcher.addInhibitor(message => {
   }
 })
 
-/* Start Assigning to Client */
+/* **************************************************************************************************** *\
+Load Misc Data
+\* **************************************************************************************************** */
 client.temp = {}
 // Tunnel System
 client.temp.tunnels = []
@@ -189,9 +210,10 @@ if (process.argv[2] === '--travis-test') { client.travisTest = true } else { cli
 // Bot Stats
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesReceived: 0, messagesSent: 0 }
 client.botStats = botStats
-/* Stop Assigning to Client */
 
-// Login
+/* **************************************************************************************************** *\
+Login
+\* **************************************************************************************************** */
 var token
 if (client.travisTest === true) {
   token = process.env.TRAVISTOKEN
