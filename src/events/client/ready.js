@@ -1,7 +1,4 @@
 const pluralize = require('pluralize')
-const fs = require('fs')
-const yaml = require('js-yaml')
-const botListConfig = yaml.safeLoad(fs.readFileSync('./config/botlist.yml', 'utf8'))
 
 module.exports = async (client) => {
   await client.log.info(`Logged in as ${client.user.tag} (${client.user.id})`, 'Discord')
@@ -42,18 +39,18 @@ module.exports = async (client) => {
 
   /* Bot List */
   // http://discordbots.org
-  if (botListConfig.DiscordBotsOrg.enabled === true) {
+  if (client.config.botlist.DiscordBotsOrg.enabled === true) {
     try { client.discordbotsorg(client) } catch (error) { client.log.error(error) }
     setInterval(() => {
       try { client.discordbotsorg(client) } catch (error) { client.log.error(error) }
-    }, botListConfig.DiscordBotsOrg.refreshRate)
+    }, client.config.botlist.DiscordBotsOrg.refreshRate)
   }
   // http://bots.discord.pw
-  if (botListConfig.BotsDiscordPw.enabled === true) {
+  if (client.config.botlist.BotsDiscordPw.enabled === true) {
     try { client.botsdiscordpw(client) } catch (error) { client.log.error(error) }
     setInterval(() => {
       try { client.botsdiscordpw(client) } catch (error) { client.log.error(error) }
-    }, botListConfig.BotsDiscordPw.refreshRate)
+    }, client.config.botlist.BotsDiscordPw.refreshRate)
   }
 
   // Travis Tests

@@ -7,8 +7,8 @@ process.chdir(__dirname)
 const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
-const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))
-const sqlConfig = yaml.safeLoad(fs.readFileSync('./config/sql.yml', 'utf8'))
+const clientConfig = yaml.safeLoad(fs.readFileSync('./src/config/client.yml', 'utf8'))
+const sqlConfig = yaml.safeLoad(fs.readFileSync('./src/config/sql.yml', 'utf8'))
 
 /* Database */
 const sqlite = require('sqlite')
@@ -33,7 +33,7 @@ const client = new CommandoClient({
 Load SQL Provider
 \* **************************************************************************************************** */
 if (sqlConfig.useMySQL === false) {
-  sqlite.open(path.join(__dirname, './config/database.sqlite')).then((db) => {
+  sqlite.open(path.join(__dirname, './src/config/database.sqlite')).then((db) => {
     client.setProvider(new SQLiteProvider(db))
     setInterval(async () => {
       await client.provider.destroy()
@@ -93,26 +93,6 @@ var capitalize = char => {
   return char.charAt(0).toUpperCase() + char.slice(1)
 }
 
-/**
- * Checks to see if the file exists.
- * @param {string} source The file.
- * @return {boolean} Whether the file exists or not.
- */
-const isFile = source => fs.lstatSync(source).isFile()
-
-/**
- * Gets all files in a given directory.
- * @param {string} source The directory.
- * @return {string[]} List of the files in the directory.
- */
-let getFiles = source => {
-  let files = fs.readdirSync(__dirname + source).map(name => path.join(__dirname + source, name)).filter(isFile) // eslint-disable-line no-path-concat
-  for (let file in files) {
-    files[file] = files[file].slice(__dirname.length)
-  }
-  return files
-}
-
 /* **************************************************************************************************** *\
 Automatic Group Loading System
 \* **************************************************************************************************** */
@@ -163,14 +143,10 @@ client.log.info(oneLine`
 Load Client Configuration
 \* **************************************************************************************************** */
 client.config = {}
-for (let file of getFiles('/config')) {
-  const configFileName = file.split('.')[0].substring(8)
-  if (configFileName !== 'database') {
-    const configFileContents = yaml.safeLoad(fs.readFileSync(`./${file}`, 'utf8'))
-    client.config[configFileName] = configFileContents
-    delete require.cache[require.resolve(`./${file}`)]
-  }
-}
+listFiles('./src/config', 'yml').forEach(config => {
+  client.config[config.split('.')[0]] = yaml.safeLoad(fs.readFileSync(`./src/config/${config}`, 'utf8'))
+  delete require.cache[require.resolve(`./src/config/${config}`)]
+})
 
 /* **************************************************************************************************** *\
 Load All Events
