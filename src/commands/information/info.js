@@ -63,7 +63,7 @@ module.exports = class InfoCommand extends Command {
       author: {
         name: await this.client.fetchApplication().then(app => { return `${app.owner.tag} | ${this.client.user.tag}` }),
         icon_url: this.client.user.displayAvatarURL(),
-        url: require('../../package.json').homepageGithub
+        url: require(`${process.cwd()}/package.json`).homepageGithub
       },
       footer: {
         text: message.author.tag,
@@ -86,7 +86,7 @@ module.exports = class InfoCommand extends Command {
             Language: **JavaScript** (NodeJS)
             Library: **discord.js** (v${require('discord.js/package.json').version})
             Framework: **discord.js-commando** (v${require('discord.js-commando/package.json').version})
-            Bot Version: **${require('../../package.json').version}**
+            Bot Version: **${require(`${process.cwd()}/package.json`).version}**
           `,
           'inline': false
         },
@@ -94,9 +94,9 @@ module.exports = class InfoCommand extends Command {
           'name': 'Links', 'value': stripIndents`
           Bot Invite: [Click Here!](${await this.client.generateInvite()})
           Server Invite: [Click Here!](${this.client.config.client.invite})
-          Homepage: [Click Here!](${require('../../package.json').homepage})
-          Repository: [Click Here!](${require('../../package.json').homepageGithub})
-          Trello: [Click Here!](${require('../../package.json').homepageTrello})
+          Homepage: [Click Here!](${require(`${process.cwd()}/package.json`).homepage})
+          Repository: [Click Here!](${require(`${process.cwd()}/package.json`).homepageGithub})
+          Trello: [Click Here!](${require(`${process.cwd()}/package.json`).homepageTrello})
         `, 'inline': false
         },
         {

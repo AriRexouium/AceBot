@@ -29,7 +29,7 @@ module.exports = (client, error) => {
   if (client.config.sentry.enabled === true) {
     var Raven = require('raven')
     Raven.config(`https://${client.config.sentry.token}@sentry.io/${client.config.sentry.id}`, {
-      release: require('../package.json').version,
+      release: require(`${process.cwd()}/package.json`).version,
       tags: {
         shard_id: client.shard ? client.shard.id : ''
       }

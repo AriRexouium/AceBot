@@ -1,4 +1,4 @@
-const log = require('./modules/log.js')
+const log = require(`${process.cwd}/package.json`)
 const fs = require('fs')
 const yaml = require('js-yaml')
 const clientConfig = yaml.safeLoad(fs.readFileSync('./config/client.yml', 'utf8'))

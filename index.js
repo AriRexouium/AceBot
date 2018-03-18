@@ -113,7 +113,7 @@ var createGroup = str => {
 }
 
 var groups = []
-listDirs('./commands').forEach(group => {
+listDirs('./src/commands').forEach(group => {
   groups.push([group, createGroup(group)])
 })
 
@@ -124,7 +124,7 @@ client.registry
   .registerDefaultTypes()
   .registerTypesIn(path.join(__dirname, './src/types'))
   .registerGroups(groups)
-  .registerCommandsIn(path.join(__dirname, 'commands'))
+  .registerCommandsIn(path.join(__dirname, './src/commands'))
 
 /* **************************************************************************************************** *\
 Load Modules
