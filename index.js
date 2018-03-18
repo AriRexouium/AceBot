@@ -63,6 +63,7 @@ Functions
 /**
  * Lists the directories in a directory.
  * @param {string} dir The directory that you want to get a list of directories from.
+ * @return {array} Returns all the folder names.
  */
 var listDirs = dir => {
   return fs.readdirSync(dir).filter(f => fs.statSync(path.join(dir, f)).isDirectory())
@@ -70,7 +71,8 @@ var listDirs = dir => {
 
 /**
  * Capitalizes a word.
- * @param {string} char The character you want to capitalize.
+ * @param {string} char The word you want to capitalize.
+ * @return {string} The new capitalized word
  */
 var capitalize = char => {
   return char.charAt(0).toUpperCase() + char.slice(1)
