@@ -2,11 +2,6 @@
 # Files
 # ==============================
 
-# Install / Start Files
-Installer.bat
-shardStart.bat
-Start.bat
-
 # Logs
 logs
 *.log
@@ -28,4 +23,4 @@ node_modules/
 .vscode/
 
 # Configuration
-config/database.sqlite
+*.sqlite
