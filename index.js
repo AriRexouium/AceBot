@@ -76,6 +76,26 @@ var capitalize = char => {
   return char.charAt(0).toUpperCase() + char.slice(1)
 }
 
+/**
+ * Checks to see if the file exists.
+ * @param {string} source The file.
+ * @return {boolean} Whether the file exists or not.
+ */
+const isFile = source => fs.lstatSync(source).isFile()
+
+/**
+ * Gets all files in a given directory.
+ * @param {string} source The directory.
+ * @return {string[]} List of the files in the directory.
+ */
+let getFiles = source => {
+  let files = fs.readdirSync(__dirname + source).map(name => path.join(__dirname + source, name)).filter(isFile) // eslint-disable-line no-path-concat
+  for (let file in files) {
+    files[file] = files[file].slice(__dirname.length)
+  }
+  return files
+}
+
 /* **************************************************************************************************** *\
 Automatic Group Loading System
 \* **************************************************************************************************** */
@@ -108,26 +128,6 @@ client.registry
   .registerGroups(groups)
   .registerCommandsIn(path.join(__dirname, 'commands'))
 
-/**
- * Checks to see if the file exists.
- * @param {string} source The file.
- * @return {boolean} Whether the file exists or not.
- */
-const isFile = source => fs.lstatSync(source).isFile()
-
-/**
- * Gets all files in a given directory.
- * @param {string} source The directory.
- * @return {string[]} List of the files in the directory.
- */
-let getFiles = source => {
-  let files = fs.readdirSync(__dirname + source).map(name => path.join(__dirname + source, name)).filter(isFile) // eslint-disable-line no-path-concat
-  for (let file in files) {
-    files[file] = files[file].slice(__dirname.length)
-  }
-  return files
-}
-
 /* **************************************************************************************************** *\
 Load Client Modules
 \* **************************************************************************************************** */
@@ -142,7 +142,7 @@ client.log.info(oneLine`
 `, 'Module Initializer')
 
 /* **************************************************************************************************** *\
-Load Client Configuation
+Load Client Configuration
 \* **************************************************************************************************** */
 client.config = {}
 for (let file of getFiles('/config')) {
@@ -158,6 +158,7 @@ for (let file of getFiles('/config')) {
 Load All Events
 \* **************************************************************************************************** */
 var events = []
+let eventEmitters = { client, process }
 
 listDirs('./src/events').forEach(folder => {
   events.push({
@@ -175,7 +176,7 @@ events.forEach(event => {
     files.forEach(file => {
       var eventName = file.split('.')[0]
       var eventFile = require(`${event.location}${file}`)
-      client.on(eventName, eventFile.bind(null, client))
+      eventEmitters[event.type].on(eventName, eventFile.bind(null, client))
       delete require.cache[require.resolve(`${event.location}${file}`)]
     })
     client.log.info(oneLine`
