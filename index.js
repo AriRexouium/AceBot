@@ -61,6 +61,21 @@ if (sqlConfig.useMySQL === false) {
 Functions
 \* **************************************************************************************************** */
 /**
+ * Lists the files in a directory.
+ * @param {string} dir The directory that you want to get a list of files from.
+ * @param {string} filter The file type you want to get. IE: `js`
+ * @return {array} Returns all the file names.
+ */
+var listFiles = (dir, filter) => { // eslint-disable-line no-unused-vars
+  var files = fs.readdirSync(dir).filter(f => fs.statSync(path.join(dir, f)).isFile())
+  if (filter) {
+    return files.filter(file => file.endsWith(`.${filter}`))
+  } else {
+    return files
+  }
+}
+
+/**
  * Lists the directories in a directory.
  * @param {string} dir The directory that you want to get a list of directories from.
  * @return {array} Returns all the folder names.
@@ -116,6 +131,7 @@ var createGroup = str => {
   str = temp.join(' ')
   return str
 }
+
 var groups = []
 listDirs('./commands').forEach(group => {
   groups.push([group, createGroup(group)])
@@ -131,7 +147,7 @@ client.registry
   .registerCommandsIn(path.join(__dirname, 'commands'))
 
 /* **************************************************************************************************** *\
-Load Client Modules
+Load Modules
 \* **************************************************************************************************** */
 for (let file of getFiles('/modules')) {
   const moduleName = file.split('.')[0].substring(9)
@@ -160,12 +176,13 @@ for (let file of getFiles('/config')) {
 Load All Events
 \* **************************************************************************************************** */
 var events = []
+// You will have to manually add event emitters here because apparently you can use `[event.type]on( //etc )`.
 let eventEmitters = { client, process }
 
-listDirs('./src/events').forEach(folder => {
+listDirs('./src/events').forEach(directory => {
   events.push({
-    type: folder,
-    location: `./src/events/${folder}/`
+    type: directory,
+    location: `./src/events/${directory}/`
   })
 })
 
