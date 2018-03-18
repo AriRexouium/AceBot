@@ -149,14 +149,14 @@ client.registry
 /* **************************************************************************************************** *\
 Load Modules
 \* **************************************************************************************************** */
-for (let file of getFiles('/modules')) {
-  const moduleName = file.split('.')[0].substring(9)
-  const moduleFile = require(`./${file}`)
-  client[moduleName] = moduleFile
-  delete require.cache[require.resolve(`./${file}`)]
-}
+listFiles('./src/modules', 'js').forEach(clientModule => {
+  client[clientModule.split('.')[0]] = require(`./src/modules/${clientModule}`)
+  delete require.cache[require.resolve(`./src/modules/${clientModule}`)]
+})
+
 client.log.info(oneLine`
-  Initialized ${getFiles('/modules').length} ${pluralize('module', getFiles('/modules').length, false)}!
+  Initialized ${listFiles('./src/modules', 'js').length}
+  ${pluralize('module', listFiles('./src/modules', 'js').length, false)}!
 `, 'Module Initializer')
 
 /* **************************************************************************************************** *\
@@ -190,9 +190,7 @@ events.forEach(event => {
   var files = listFiles(event.location, 'js')
   var type = capitalize(event.type)
   files.forEach(file => {
-    var eventName = file.split('.')[0]
-    var eventFile = require(`${event.location}${file}`)
-    eventEmitters[event.type].on(eventName, eventFile.bind(null, client))
+    eventEmitters[event.type].on(file.split('.')[0], require(`${event.location}${file}`).bind(null, client))
     delete require.cache[require.resolve(`${event.location}${file}`)]
   })
   client.log.info(oneLine`
