@@ -1,6 +1,5 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
-const { oneLine } = require('common-tags')
 
 module.exports = class ListStaffCommand extends Command {
   constructor (client) {
@@ -38,11 +37,7 @@ module.exports = class ListStaffCommand extends Command {
     var developer = this.client.provider.get('global', 'developer', [])
 
     text += '__**Application Owner**__\n'
-    text += oneLine`
-      ${emojiList[ownerInfo.presence.status]}**
-      ${escapeMarkdown(ownerInfo.tag)}**
-      (\`${ownerInfo.id}\`)
-    `
+    text += `${emojiList[ownerInfo.presence.status]}** ${escapeMarkdown(ownerInfo.tag)}** (\`${ownerInfo.id}\`)`
 
     if (developer.length > 0) {
       text += '\n\n__**Developers**__\n'
