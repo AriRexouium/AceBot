@@ -23,9 +23,20 @@ module.exports = class SetStatusCommand extends Command {
           type: 'string'
         }
       ],
-      ownerOnly: true,
       guarded: true
     })
+  }
+
+  hasPermission (message) {
+    if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id)
+    ) {
+      return true
+    } else {
+      return 'only bot staff can run this command.'
+    }
   }
 
   run (message, args) {

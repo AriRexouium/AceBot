@@ -15,9 +15,19 @@ module.exports = class UpdateCommand extends Command {
       aliases: [
         'upgrade'
       ],
-      guarded: true,
-      ownerOnly: true
+      guarded: true
     })
+  }
+
+  hasPermission (message) {
+    if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id)
+    ) {
+      return true
+    } else {
+      return 'only bot developers can run this command.'
+    }
   }
 
   run (message) {

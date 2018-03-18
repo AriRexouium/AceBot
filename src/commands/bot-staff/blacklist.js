@@ -31,9 +31,20 @@ module.exports = class BlacklistCommand extends Command {
           type: 'user'
         }
       ],
-      guarded: true,
-      ownerOnly: true
+      guarded: true
     })
+  }
+
+  hasPermission (message) {
+    if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id)
+    ) {
+      return true
+    } else {
+      return 'only bot staff can run this command.'
+    }
   }
 
   run (message, args) {
@@ -68,8 +79,11 @@ module.exports = class BlacklistCommand extends Command {
       if (!blacklist.includes(args.user.id)) return message.say('That user is not in the blacklist.')
       var index = blacklist.indexOf(args.user.id)
       blacklist.splice(index, 1)
-      if (blacklist.length === 0) this.client.provider.remove('global', 'userBlacklist')
-      else this.client.provider.set('global', 'userBlacklist', blacklist)
+      if (blacklist.length === 0) {
+        this.client.provider.remove('global', 'userBlacklist')
+      } else {
+        this.client.provider.set('global', 'userBlacklist', blacklist)
+      }
       this.client.log.info(`${args.user.tag} was removed from the blacklist by ${message.author.tag}.`, 'blacklistRemove')
 
       // Webhook

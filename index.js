@@ -25,7 +25,7 @@ const client = new CommandoClient({
   commandEditableDuration: clientConfig.commandEditableDuration,
   nonCommandEditable: clientConfig.nonCommandEditable,
   unknownCommandResponse: clientConfig.unknownCommandResponse,
-  owner: clientConfig.owner,
+  owner: [],
   invite: clientConfig.invite
 })
 

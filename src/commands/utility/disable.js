@@ -37,8 +37,16 @@ module.exports = class DisableCommand extends Command {
   }
 
   hasPermission (message) {
-    if (!message.guild) return this.client.isOwner(message.author)
-    return message.member.hasPermission('MANAGE_GUILD') || this.client.isOwner(message.author)
+    if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id) ||
+      message.member.hasPermission('MANAGE_GUILD')
+    ) {
+      return true
+    } else {
+      return 'Only users with `MANAGE_GUILD` or bot staff can use this command.'
+    }
   }
 
   run (message, args) {

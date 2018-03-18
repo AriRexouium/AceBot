@@ -8,9 +8,20 @@ module.exports = class ListServers extends Command {
       name: 'listservers',
       memberName: 'listservers',
       group: 'tunnel',
-      description: 'List the servers the bot is in.',
-      ownerOnly: true
+      description: 'List the servers the bot is in.'
     })
+  }
+
+  hasPermission (message) {
+    if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id)
+    ) {
+      return true
+    } else {
+      return 'only bot staff can run this command.'
+    }
   }
 
   run (message, args) {

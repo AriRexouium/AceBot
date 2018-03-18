@@ -39,6 +39,19 @@ module.exports = class PrefixCommand extends Command {
     })
   }
 
+  hasPermission (message) {
+    if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id) ||
+      message.member.hasPermission('MANAGE_GUILD')
+    ) {
+      return true
+    } else {
+      return 'Only users with `MANAGE_GUILD` or bot staff can use this command.'
+    }
+  }
+
   async run (message, args) {
     // Just output the prefix
     if (!args.prefix) {
@@ -51,11 +64,20 @@ module.exports = class PrefixCommand extends Command {
 
     // Check the user's permission before changing anything
     if (message.guild) {
-      if (!message.member.hasPermission('MANAGE_GUILD') && !this.client.isOwner(message.author)) {
+      if (
+        !this.client.provider.get('global', 'developer', []).includes(message.author.id) &&
+        !this.client.provider.get('global', 'staff', []).includes(message.author.id) &&
+        !this.client.isOwner(message.author.id) &&
+        !message.member.hasPermission('MANAGE_GUILD')
+      ) {
         return message.reply('only server managers may change the command prefix.')
       }
-    } else if (!this.client.isOwner(message.author)) {
-      return message.reply('only the bot owner(s) may change the global command prefix.')
+    } else if (
+      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
+      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
+      this.client.isOwner(message.author.id)
+    ) {
+      return message.reply('only the bot staff can change the global command prefix.')
     }
 
     // Save the prefix
