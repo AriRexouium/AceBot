@@ -66,7 +66,7 @@ Functions
  * @param {string} filter The file type you want to get. IE: `js`
  * @return {array} Returns all the file names.
  */
-var listFiles = (dir, filter) => { // eslint-disable-line no-unused-vars
+var listFiles = (dir, filter) => {
   var files = fs.readdirSync(dir).filter(f => fs.statSync(path.join(dir, f)).isFile())
   if (filter) {
     return files.filter(file => file.endsWith(`.${filter}`))
@@ -187,22 +187,18 @@ listDirs('./src/events').forEach(directory => {
 })
 
 events.forEach(event => {
+  var files = listFiles(event.location, 'js')
   var type = capitalize(event.type)
-  fs.readdir(event.location, (error, files) => {
-    if (error) {
-      client.log.error(error, `${type} Event Initializer`)
-    }
-    files.forEach(file => {
-      var eventName = file.split('.')[0]
-      var eventFile = require(`${event.location}${file}`)
-      eventEmitters[event.type].on(eventName, eventFile.bind(null, client))
-      delete require.cache[require.resolve(`${event.location}${file}`)]
-    })
-    client.log.info(oneLine`
-      Initialized ${files.length} ${type}
-      ${pluralize('event', files.length, false)}!
-    `, `${type} Event Initializer`)
+  files.forEach(file => {
+    var eventName = file.split('.')[0]
+    var eventFile = require(`${event.location}${file}`)
+    eventEmitters[event.type].on(eventName, eventFile.bind(null, client))
+    delete require.cache[require.resolve(`${event.location}${file}`)]
   })
+  client.log.info(oneLine`
+    Initialized ${files.length} ${type}
+    ${pluralize('event', files.length, false)}!
+    `, `${type} Event Initializer`)
 })
 
 /* **************************************************************************************************** *\
