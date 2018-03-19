@@ -86,8 +86,8 @@ module.exports = class UserInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': '🤖 Bot',
-          'value': user.bot,
+          'name': '🔎 Identity',
+          'value': user.bot === true ? 'Bot' : 'User',
           'inline': true
         },
         {
