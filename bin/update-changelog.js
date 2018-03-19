@@ -1,5 +1,5 @@
 /*
-  update-changelog.js by Aveheliflyer
+  update-changelog.js by Aceheliflyer
   This script automatically updates `CHANGELOG.md` based on `assets/changelog.json`.
 */
 const changelog = require('./../assets/changelog.json')
