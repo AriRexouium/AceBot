@@ -189,7 +189,11 @@ client.dispatcher.addInhibitor(message => {
 // Lockdown
 client.dispatcher.addInhibitor(message => {
   // Check in the user is an Owner.
-  if (client.isOwner(message.author.id)) return false
+  if (
+    client.provider.get('global', 'developer', []).includes(message.author.id) ||
+    client.provider.get('global', 'staff', []).includes(message.author.id) ||
+    client.isOwner(message.author.id)
+  ) return false
   // Get lockdown status and reason for a possible lockdown.
   const lockdown = client.provider.get('global', 'lockdown', false)
   const reasonTemp = client.provider.get('global', 'lockdownReason', false)
@@ -209,8 +213,12 @@ client.dispatcher.addInhibitor(message => {
 Load Misc Data
 \* **************************************************************************************************** */
 client.temp = {}
+// Most Recent Error
+client.temp.error = ''
+
 // Tunnel System
 client.temp.tunnels = []
+
 // Travis Test Mode
 if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
 
