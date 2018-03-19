@@ -1,0 +1,16 @@
+{
+  "releases": [
+    {
+      "version": "1.0.0",
+      "releaseDate": "1970-01-01",
+      "types": {
+        "added": [],
+        "changed": [],
+        "deprecated": [],
+        "removed": [],
+        "fixed": [],
+        "security": []
+      }
+    }
+  ]
+}

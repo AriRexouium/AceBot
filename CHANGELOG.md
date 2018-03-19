@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-> Last Updated 2018/03/19 07:08:20
+> Last Updated 2018/03/19 12:46:21
 
 ## [Unreleased]
+
 ## [3.4.0] - 2018-03-16
 ### Added
 - Bot now sends a message when it joins a new guild.
