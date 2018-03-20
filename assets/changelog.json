@@ -1,6 +1,35 @@
 {
   "releases": [
     {
+      "version": "3.5.0",
+      "released": null,
+      "types": {
+        "added": [
+          "Start scripts for for both Windows and Linux.",
+          "New event loader.",
+          "New module loader.",
+          "New configuration loader.",
+          "New permission system.",
+          "`liststaff` command to list the current bot staff with their position and status.",
+          "Add `traceback` command to get the most recent error.",
+          "Add `update-changelog.js` and replace `update-authors.sh` with `update-authors.js`.",
+          "Add `discrim` and `throwerror` command."
+        ],
+        "changed": [
+          "Moved core parts of the bot to `./src` folder.",
+          "Organized `index.js`.",
+          "`userinfo` command show's the user's identity instead of if they're a bot or not."
+        ],
+        "deprecated": [],
+        "removed": [],
+        "fixed": [
+          "Fix `serverinfo` command now showing owner.",
+          "Fix random credits in `listservers` and `listchannels`."
+        ],
+        "security": []
+      }
+    },
+    {
       "version": "3.4.0",
       "released": "2018-03-16",
       "types": {

@@ -10,6 +10,9 @@ const fs = require('fs')
 var repo = 'Aceheliflyer/AceBot'
 var text = ''
 
+var verbose = false
+if (process.argv[2] === '--verbose') verbose = true
+
 // Header text.
 text += stripIndents`
   # Changelog
@@ -25,6 +28,7 @@ text += stripIndents`
 text += '\n\n'
 
 changelog.releases.forEach((release, index, object) => {
+  if (verbose) { console.log(release.version) }
   // Changelog header.
   if (index === changelog.releases.length - 1) {
     text += `## ${release.version} - ${release.released}\n`
@@ -36,9 +40,12 @@ changelog.releases.forEach((release, index, object) => {
   ['added', 'changed', 'deprecated', 'removed', 'fixed', 'security']
     .forEach(typeName => {
       if (release.types[typeName].length > 0) {
-        text += `### ${typeName.charAt(0).toUpperCase() + typeName.slice(1)}\n`
+        var typeFix = typeName.charAt(0).toUpperCase() + typeName.slice(1)
+        if (verbose) { console.log(`  ❯ ${typeFix}`) }
+        text += `### ${typeFix}\n`
         release.types[typeName].sort()
         release.types[typeName].forEach(str => {
+          if (verbose) { console.log(`    ❯ ${str}`) }
           text += `- ${str}\n`
         })
         text += '\n'
