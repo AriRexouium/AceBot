@@ -15,8 +15,4 @@
 
 - name: Thatguychris#3998
   id: '158397118611062785'
-  info: Did the web scraping for the old version of `discordstatus`
-
-- name: DarthAbhinav#6579
-  id: '374439777136541697'
-  info: Tests literally everything.
+  info: Did the web scraping for the old version of `discordstatus`.
