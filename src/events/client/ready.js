@@ -1,7 +1,7 @@
 const pluralize = require('pluralize')
 
 module.exports = async (client) => {
-  await client.log.info(`Logged in as ${client.user.tag} (${client.user.id})`, 'Discord')
+  await client.log('success', `Logged in as ${client.user.tag} (${client.user.id})`, 'Discord', 'Login')
 
   await setTimeout(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
@@ -14,7 +14,7 @@ module.exports = async (client) => {
       client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 600000)
-  await client.log.info(client.shard ? `Shard ${client.shard.id} ready!` : 'Client ready!', 'Client', 'bgGreen')
+  await client.log('info', client.shard ? `Shard ${client.shard.id} ready!` : 'Client Ready!', 'Client', 'Login')
 
   // Webhook
   if (client.config.webhook.enabled) {
@@ -40,22 +40,22 @@ module.exports = async (client) => {
   /* Bot List */
   // http://discordbots.org
   if (client.config.botlist.DiscordBotsOrg.enabled === true) {
-    try { client.discordbotsorg(client) } catch (error) { client.log.error(error) }
+    try { client.discordbotsorg(client) } catch (error) { client.log('error', error) }
     setInterval(() => {
-      try { client.discordbotsorg(client) } catch (error) { client.log.error(error) }
+      try { client.discordbotsorg(client) } catch (error) { client.log('error', error) }
     }, client.config.botlist.DiscordBotsOrg.refreshRate)
   }
   // http://bots.discord.pw
   if (client.config.botlist.BotsDiscordPw.enabled === true) {
-    try { client.botsdiscordpw(client) } catch (error) { client.log.error(error) }
+    try { client.botsdiscordpw(client) } catch (error) { client.log('error', error) }
     setInterval(() => {
-      try { client.botsdiscordpw(client) } catch (error) { client.log.error(error) }
+      try { client.botsdiscordpw(client) } catch (error) { client.log('error', error) }
     }, client.config.botlist.BotsDiscordPw.refreshRate)
   }
 
   // Travis Tests
   if (client.travisTest === true) {
-    await client.log.debug('Running in Travis CI mode, now exiting with 0 exit code in 5 seconds...', 'TRAVIS TEST')
+    await client.log('debug', 'Running in Travis CI mode, now exiting with 0 exit code in 5 seconds...', '', 'TRAVIS TEST')
     await setTimeout(() => { process.exit(0) }, 5000)
   }
 

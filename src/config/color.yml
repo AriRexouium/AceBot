@@ -25,7 +25,7 @@ idle: 'FAA61A'
 dnd: 'F04747'
 offline: '747F8D'
 
-# Staff Colors
-manager: '4D4DFF'
-administrator: 'AA0000' # PHPBB forum Administrator color.
-moderator: '00AA00' # PHPBB forum Moderator color.
+# Status Colors
+info: '4D4DFF'
+error: 'AA0000'
+success: '00AA00'

@@ -9,7 +9,7 @@ module.exports = (client, message) => {
         } else if (message.channel.id === tunnel.destination) {
           element.sentMessage.edit(`__**${message.author.tag}** \`(${message.author.id})\`__ **[DELETED]**\n${message.content}`).catch(error => {
             sourceChannel.send(`Error editing a message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log.debug(`Error a message in Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              client.log('info', `Error a message in Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
               object.splice(index, 1)
             })
           })

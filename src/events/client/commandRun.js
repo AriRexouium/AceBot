@@ -9,12 +9,11 @@ module.exports = (client, command, promise, message, args, fromPattern) => {
     } catch (error) {}
   }
 
-  client.log.info(stripIndents`
-    ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
+  client.log('info', stripIndents`
     User: ${message.author.tag} (${message.author.id})
     ${message.guild ? `Guild: ${message.guild.name} (${message.guild.id})\n` : ''}Channel: ${message.guild ? `${message.channel.name} (${message.channel.id})` : 'DMs'}
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
-  `, 'commandRun')
+  `, 'Command Run', message.command ? `${message.command.memberName} (${message.command.groupID})` : '')
 
   // Webhook
   if (client.config.webhook.enabled) {

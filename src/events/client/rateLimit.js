@@ -1,13 +1,12 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, rateLimitInfo) => {
-  client.log.warn(stripIndents`
-    You are being rate limited!
+  client.log('warn', stripIndents`
     Limit: ${rateLimitInfo.limit}
     Timeout: ${rateLimitInfo.timeout}ms.
     Method: ${rateLimitInfo.method}
     Path: ${rateLimitInfo.path}
-  `, 'rateLimit')
+  `, 'B1nzy Rate Limited You!', `${rateLimitInfo.timeout}ms.`)
 
   // Webhook
   if (client.config.webhook.enabled) {

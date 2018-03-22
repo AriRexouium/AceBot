@@ -15,5 +15,5 @@ module.exports = function discordBotsPw (client) {
   unirest.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
     .headers({ 'Authorization': client.config.botlist.BotsDiscordPw.token, 'Content-Type': 'application/json' })
     .send(totalGuilds)
-    .end(() => { client.log.info('Server count sent to http://bots.discord.pw.') })
+    .end(() => { client.log('info', 'Server count sent to http://bots.discord.pw.') })
 }

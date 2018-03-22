@@ -1,12 +1,12 @@
 const oneLine = require('common-tags').oneLine
 
 module.exports = (client, guild, command, enabled) => {
-  client.log.info(oneLine`
+  client.log('info', oneLine`
     Command ${command.memberName} (${command.groupID})
     ${enabled ? 'enabled' : 'disabled'}
     ${guild ? `in guild ${guild.name} (${guild.id})` : 'globally'}.
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
-  `, 'commandStatusChange')
+  `, 'Command Status Change', guild ? guild.name : 'Global')
 
   // Webhook
   if (client.config.webhook.enabled) {

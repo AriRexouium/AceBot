@@ -1,10 +1,9 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, command) => {
-  client.log.info(stripIndents`
-    ${command.memberName} (${command.groupID})
+  client.log('info', stripIndents`
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
-  `, 'commandUnregister')
+  `, 'Command Unregister', `${command.memberName} (${command.groupID})`)
 
   // Webhook
   if (client.config.webhook.enabled) {

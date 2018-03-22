@@ -1,11 +1,11 @@
 const { oneLine } = require('common-tags')
 
 module.exports = (client, guild, prefix) => {
-  client.log.info(oneLine`
+  client.log('info', oneLine`
     Prefix ${prefix === '' ? 'removed' : `changed to ${prefix || 'the default'}`}
     ${guild ? `in guild ${guild.name} (${guild.id})` : 'globally'}.
     ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
-  `, 'commandPrefixChange')
+  `, 'Prefix Change', guild ? guild.name : 'Global')
 
   // Webhook
   if (client.config.webhook.enabled) {

@@ -54,7 +54,7 @@ module.exports = class BlacklistCommand extends Command {
       if (blacklist.includes(args.user.id)) return message.say('That user is already in the blacklist.')
       blacklist.push(args.user.id)
       this.client.provider.set('global', 'userBlacklist', blacklist)
-      this.client.log.info(`${args.user.tag} was added to the blacklist by ${message.author.tag}.`, 'blacklistAdd')
+      this.client.log('notice', `${args.user.tag} was added to the blacklist by ${message.author.tag}.`, 'Blacklist', 'Add')
 
       // Webhook
       if (this.client.config.webhook.enabled) {
@@ -84,7 +84,7 @@ module.exports = class BlacklistCommand extends Command {
       } else {
         this.client.provider.set('global', 'userBlacklist', blacklist)
       }
-      this.client.log.info(`${args.user.tag} was removed from the blacklist by ${message.author.tag}.`, 'blacklistRemove')
+      this.client.log('notice', `${args.user.tag} was removed from the blacklist by ${message.author.tag}.`, 'Blacklist', 'Remove')
 
       // Webhook
       if (this.client.config.webhook.enabled) {

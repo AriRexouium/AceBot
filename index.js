@@ -38,7 +38,7 @@ if (sqlConfig.useMySQL === false) {
     setInterval(async () => {
       await client.provider.destroy()
       await client.provider.init(client)
-      client.log.debug(`Synced Database`, client.provider.constructor.name)
+      client.log('debug', 'Synced Database', '', client.provider.constructor.name)
     }, sqlConfig.sqlSync)
   })
 } else {
@@ -52,7 +52,7 @@ if (sqlConfig.useMySQL === false) {
     setInterval(async () => {
       await client.provider.destroy()
       await client.provider.init(client)
-      client.log.debug(`Synced Database`, client.provider.constructor.name)
+      client.log('debug', 'Synced Database', '', client.provider.constructor.name)
     }, sqlConfig.sqlSync)
   })
 }
@@ -134,10 +134,10 @@ listFiles('./src/modules', 'js').forEach(clientModule => {
   delete require.cache[require.resolve(`./src/modules/${clientModule}`)]
 })
 
-client.log.info(oneLine`
+client.log('success', oneLine`
   Initialized ${listFiles('./src/modules', 'js').length}
   ${pluralize('module', listFiles('./src/modules', 'js').length, false)}!
-`, 'Module Initializer')
+`, 'Initializer', 'Module')
 
 /* **************************************************************************************************** *\
 Load Client Configuration
@@ -169,10 +169,10 @@ events.forEach(event => {
     eventEmitters[event.type].on(file.split('.')[0], require(`${event.location}${file}`).bind(null, client))
     delete require.cache[require.resolve(`${event.location}${file}`)]
   })
-  client.log.info(oneLine`
+  client.log('success', oneLine`
     Initialized ${files.length} ${type}
     ${pluralize('event', files.length, false)}!
-    `, `${type} Event Initializer`)
+    `, 'Initializer', `${type} Events`)
 })
 
 /* **************************************************************************************************** *\
@@ -235,12 +235,12 @@ if (client.travisTest === true) {
 } else if (client.config.client.token) {
   token = client.config.client.token
 } else {
-  client.log.error('No valid token!', 'Login').then(process.exit(1))
+  client.log('error', 'No valid token!', '', 'Login').then(process.exit(1))
 }
 
 client.login(token).catch(error => {
-  client.log.error(stripIndents`\n
+  client.log('error', stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}
   ${error.stack}
-  `, 'Login').then(process.exit(8))
+  `, '', 'Login').then(process.exit(8))
 })

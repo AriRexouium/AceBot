@@ -15,5 +15,5 @@ module.exports = function discordBotsOrg (client) {
   unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
     .headers({ 'Authorization': client.config.botlist.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
     .send(totalGuilds)
-    .end(() => { client.log.info('Server count sent to http://discordbots.org.') })
+    .end(() => { client.log('info', 'Server count sent to http://discordbots.org.') })
 }

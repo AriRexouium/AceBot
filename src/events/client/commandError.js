@@ -2,13 +2,12 @@ const { stripIndents } = require('common-tags')
 
 module.exports = (client, command, error, message, args, fromPattern) => {
   client.temp.error = error
-  client.log.error(stripIndents`
-    ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
+  client.log('error', stripIndents`\n
     User: ${message.author.tag} (${message.author.id})
     ${message.guild ? `Guild: ${message.guild.name} (${message.guild.id})\n` : ''}Channel: ${message.guild ? `${message.channel.name} (${message.channel.id})` : 'DMs'}
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
     ${error.stack}
-  `, 'commandError')
+  `, 'Command Error', message.command ? `${message.command.memberName} (${message.command.groupID})` : '')
 
   if (client.config.react.commandError.enabled === true) {
     try {

@@ -20,7 +20,7 @@ module.exports = (client, oldMessage, newMessage) => {
           editMessage.content = newMessage.content
           element.sentMessage.edit(editMessage).catch(error => {
             sourceChannel.send(`Error editing a message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log.debug(`Error a message in Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              client.log('info', `Error a message in Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
               object.splice(index, 1)
             })
           })
@@ -28,7 +28,7 @@ module.exports = (client, oldMessage, newMessage) => {
           editMessage.content = `__**${newMessage.author.tag}** \`(${newMessage.author.id})\`__ **[EDITED]**\n${newMessage.content}`
           element.sentMessage.edit(editMessage).catch(error => {
             sourceChannel.send(`Error editing a message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log.debug(`Error a message in Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              client.log('info', `Error a message in Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
               object.splice(index, 1)
             })
           })

@@ -1,13 +1,12 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, message, reason) => {
-  client.log.warn(stripIndents`
-    ${message.command ? `${message.command.memberName} (${message.command.groupID})` : ''}
+  client.log('warn', stripIndents`\n
     User: ${message.author.tag} (${message.author.id})
     ${message.guild ? `Guild: ${message.guild.name} (${message.guild.id})\n` : ''}Channel: ${message.guild ? `${message.channel.name} (${message.channel.id})` : 'DMs'}
     Reason: ${reason}
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
-  `, 'commandBlocked')
+  `, 'Commando Blocked', message.command ? `${message.command.memberName} (${message.command.groupID})` : '')
 
   if (client.config.react.commandBlocked.enabled === true) {
     try {

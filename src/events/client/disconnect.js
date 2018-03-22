@@ -1,10 +1,9 @@
 const { oneLine } = require('common-tags')
 
 module.exports = (client, event) => {
-  client.log.warn(oneLine`
-    Disconnected!
+  client.log('critical', oneLine`
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
-  `, 'Client')
+  `, 'Client', 'Disconnected')
 
   // Webhook
   if (client.config.webhook.enabled) {

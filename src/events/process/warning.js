@@ -1,10 +1,10 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, warning) => {
-  client.log.warn(stripIndents`
+  client.log('warn', stripIndents`
     ${client.shard ? `Shard ID: ${client.shard.id}` : '\n'}
     ${warning.stack}
-  `, 'process')
+  `, 'Process', 'Warning')
 
   // Webhook
   if (client.config.webhook.enabled) {

@@ -15,12 +15,12 @@ module.exports = (client, message) => {
 
   // Token Protection
   if (message.content.toLowerCase().includes(client.token.toLowerCase())) {
-    client.log.info(stripIndents`
+    client.log('emergency', stripIndents`
     RESET YOUR TOKEN IMMEDIATELY! YOUR TOKEN HAS BEEN EXPOSED!
     User: ${message.author.tag} (${message.author.id})
     ${message.guild ? `Guild: ${message.guild.name} (${message.guild.id})\n` : ''}Channel: ${message.guild ? `${message.channel.name} (${message.channel.id})` : 'DMs'}
     Message: ${message.content}
-    `, 'CLIENT NOTICE', 'bgRed')
+    `, 'CRITICAL NOTICE')
   }
 
   // Entire Tunnel System
@@ -60,7 +60,7 @@ module.exports = (client, message) => {
           })
           .catch(error => {
             sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              client.log('info', `Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
               object.splice(index, 1)
             })
           })
@@ -83,7 +83,7 @@ module.exports = (client, message) => {
           })
           .catch(error => {
             sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log.debug(`Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
+              client.log('info', `Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
               object.splice(index, 1)
             })
           })

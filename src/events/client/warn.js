@@ -1,7 +1,7 @@
 const { oneLine } = require('common-tags')
 
 module.exports = (client, info) => {
-  client.log.warn(oneLine`
+  client.log('warn', oneLine`
     ${info}
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
   `)

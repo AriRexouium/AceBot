@@ -5,11 +5,11 @@ const { escapeMarkdown } = require('discord.js')
 module.exports = async (client, guild) => {
   var ownerInfo = guild.owner.user
 
-  client.log.info(stripIndents`
+  client.log('info', stripIndents`
     Guild: ${guild.name} (${guild.id})
     Owner: ${ownerInfo.tag} (${ownerInfo.id})
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
-  `, 'guildCreate')
+  `, 'Joined Server', guild.name)
 
   // Server Join Message
   if (!client.config.client.joinMessageBlacklist.includes(guild.id)) {

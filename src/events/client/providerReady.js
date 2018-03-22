@@ -1,7 +1,8 @@
 module.exports = (client, provider) => {
-  client.log.info(
+  client.log(
+    'success',
     `Initialized ${client.provider.constructor.name}!`,
-    `${client.provider.constructor.name} Initializer`,
-    'bgGreen'
+    'Initializer',
+    client.provider.constructor.name
   )
 }
