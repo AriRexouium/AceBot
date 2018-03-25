@@ -234,10 +234,9 @@ if (client.travisTest === true) {
   token = process.env.TRAVISTOKEN
 } else if (client.config.client.token) {
   token = client.config.client.token
-} else {
-  client.log('error', 'No valid token!', '', 'Login').then(process.exit(1))
 }
 
+client.log('info', 'Client', 'Login', 'Attempting login...')
 client.login(token).catch(error => {
   client.log('error', stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}

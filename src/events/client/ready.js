@@ -1,20 +1,27 @@
 const pluralize = require('pluralize')
+const { oneLine } = require('common-tags')
 
 module.exports = async (client) => {
-  await client.log('success', `Logged in as ${client.user.tag} (${client.user.id})`, 'Discord', 'Login')
+  await client.log('success', `Logged in as ${client.user.tag} (${client.user.id}).`, 'Discord', 'Login')
 
   await setTimeout(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Server', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 1000)
 
   await setInterval(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Server', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 600000)
-  await client.log('info', client.shard ? `Shard ${client.shard.id} ready!` : 'Client Ready!', 'Client', 'Login')
+
+  await client.log('info', oneLine`
+    ${client.shard ? `Shard ${client.shard.id} ready!` : 'Client Ready!'}
+    Loaded ${pluralize('guild', client.guilds.size, true)},
+    ${pluralize('channel', client.channels.size, true)}
+    and ${pluralize('user', client.users.size, true)}.
+  `, 'Client', 'Login')
 
   // Webhook
   if (client.config.webhook.enabled) {
