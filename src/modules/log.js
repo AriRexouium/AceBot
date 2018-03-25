@@ -17,11 +17,11 @@ var cases = {
 /**
  * The client's default logger.
  * @param {string} type The type of log. (Ex: info)
- * @param {string} desc The description/body of the log.
+ * @param {string} body The description/body of the log.
  * @param {string} parent The parent of the error. (Use '' to ignore value.)
- * @param {string} child The child of the error. (Supports `__filename`
+ * @param {string} child The child of the error. (Supports `__filename`, also use '' to ignore value and default to current working directory.)
  */
-module.exports = function logger (type, desc, parent, child) {
+module.exports = function logger (type, body, parent, child) {
   if (!Object.keys(cases).includes(type)) throw new Error('Must be a valid log case.')
 
   if (parent == null || parent === '') {
@@ -42,7 +42,7 @@ module.exports = function logger (type, desc, parent, child) {
     }
   }
 
-  var date = chalk.gray(moment().format(`YYYY-MM-DD│HH:mm:ss:SSSS`))
+  var date = chalk.gray(moment().format(`YYYY-MM-DD|HH:mm:ss:SSSS`))
   var title = `${chalk.cyan(parent)}${chalk.gray('→')}${(chalk.cyan(child))}`
-  console[cases[type].type](`[${date}]─[${title}]─[${cases[type].content}] ${desc}`)
+  console[cases[type].type](`┌─[${date}]─[${title}]─[${cases[type].content}]\n└─► ${body}`)
 }
