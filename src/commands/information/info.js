@@ -93,7 +93,7 @@ module.exports = class InfoCommand extends Command {
         {
           'name': 'Links', 'value': stripIndents`
           Bot Invite: [Click Here!](${await this.client.generateInvite()})
-          Server Invite: [Click Here!](${this.client.config.client.invite})
+          Server Invite: [Click Here!](${this.client.options.invite})
           Homepage: [Click Here!](${require(`${process.cwd()}/package.json`).homepage})
           Repository: [Click Here!](${require(`${process.cwd()}/package.json`).homepageGithub})
           Trello: [Click Here!](${require(`${process.cwd()}/package.json`).homepageTrello})

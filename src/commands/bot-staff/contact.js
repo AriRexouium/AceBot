@@ -26,7 +26,7 @@ module.exports = class ContactCommand extends Command {
   }
 
   async run (message, args) {
-    const owners = this.client.config.client.owner
+    const owners = this.client.options.owner
     await owners.forEach(owner => {
       this.client.users.get(owner).send({
         content: '',

@@ -5,13 +5,13 @@ module.exports = async (client) => {
 
   await setTimeout(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 1000)
 
   await setInterval(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.config.client.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Guild', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
     )
   }, 600000)
   await client.log('info', client.shard ? `Shard ${client.shard.id} ready!` : 'Client Ready!', 'Client', 'Login')
