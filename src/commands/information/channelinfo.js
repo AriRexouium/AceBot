@@ -78,7 +78,7 @@ module.exports = class EmojiCommand extends Command {
           },
           {
             'name': 'User Count',
-            'value': `${channel.members.size}/${channel.userLimit === 0 ? 'Infinity' : channel.userLimit}`,
+            'value': `${channel.members.size.toLocaleString()}/${channel.userLimit === 0 ? 'Infinity' : channel.userLimit}`,
             'inline': true
           },
           {

@@ -47,15 +47,15 @@ module.exports = class InfoCommand extends Command {
 
     var totalGuilds; var totalChannels; var totalUsers
     if (!this.client.shard) {
-      totalGuilds = await this.client.guilds.size
-      totalChannels = await this.client.channels.size
-      totalUsers = await this.client.users.size
+      totalGuilds = await this.client.guilds.size.toLocaleString()
+      totalChannels = await this.client.channels.size.toLocaleString()
+      totalUsers = await this.client.users.size.toLocaleString()
     } else {
-      var totalGuildsData = await this.client.shard.fetchClientValues('guilds.size')
+      var totalGuildsData = await this.client.shard.fetchClientValues('guilds.size.toLocaleString()')
       totalGuilds = await totalGuildsData.reduce((prev, val) => prev + val, 0)
-      var totalChannelsData = await this.client.shard.fetchClientValues('channels.size')
+      var totalChannelsData = await this.client.shard.fetchClientValues('channels.size.toLocaleString()')
       totalChannels = await totalChannelsData.reduce((prev, val) => prev + val, 0)
-      var totalUsersData = await this.client.shard.fetchClientValues('users.size')
+      var totalUsersData = await this.client.shard.fetchClientValues('users.size.toLocaleString()')
       totalUsers = await totalUsersData.reduce((prev, val) => prev + val, 0)
     }
 

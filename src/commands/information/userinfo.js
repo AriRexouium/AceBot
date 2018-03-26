@@ -101,7 +101,7 @@ module.exports = class UserInfoCommand extends Command {
           'inline': false
         },
         {
-          'name': `🔖 Roles - (${args.user.roles.size - 1})`,
+          'name': `🔖 Roles - (${args.user.roles.size.toLocaleString() - 1})`,
           'value': userRoles,
           'inline': false
         }

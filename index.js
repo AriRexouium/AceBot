@@ -236,7 +236,7 @@ if (client.travisTest === true) {
   token = client.config.client.token
 }
 
-client.log('info', 'Client', 'Login', 'Attempting login...')
+client.log('info', 'Attempting login...', 'Client', 'Login')
 client.login(token).catch(error => {
   client.log('error', stripIndents`\n
   ${client.shard ? `Shard ID: ${client.shard.id}\n` : ''}

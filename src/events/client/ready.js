@@ -6,21 +6,31 @@ module.exports = async (client) => {
 
   await setTimeout(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Server', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(oneLine`
+        ${client.options.commandPrefix}help |
+        ${pluralize('Server', client.guilds.size.toLocaleString(), true)} |
+        ${pluralize('User', client.users.size.toLocaleString(), true)}
+        ${client.shard ? ` | Shard ${client.shard.id}` : ''}
+      `)
     )
   }, 1000)
 
   await setInterval(() => {
     client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(`${client.options.commandPrefix}help | ${pluralize('Server', client.guilds.size, true)} | ${pluralize('User', client.users.size, true)}${client.shard ? ` | Shard ${client.shard.id}` : ''}`)
+      client.user.setActivity(oneLine`
+        ${client.options.commandPrefix}help |
+        ${pluralize('Server', client.guilds.size.toLocaleString(), true)} |
+        ${pluralize('User', client.users.size.toLocaleString(), true)}
+        ${client.shard ? ` | Shard ${client.shard.id}` : ''}
+      `)
     )
   }, 600000)
 
   await client.log('info', oneLine`
     ${client.shard ? `Shard ${client.shard.id} ready!` : 'Client Ready!'}
-    Loaded ${pluralize('guild', client.guilds.size, true)},
-    ${pluralize('channel', client.channels.size, true)}
-    and ${pluralize('user', client.users.size, true)}.
+    Loaded ${pluralize('guild', client.guilds.size.toLocaleString(), true)},
+    ${pluralize('channel', client.channels.size.toLocaleString(), true)}
+    and ${pluralize('user', client.users.size.toLocaleString(), true)}.
   `, 'Client', 'Login')
 
   // Webhook

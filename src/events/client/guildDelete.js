@@ -39,10 +39,10 @@ module.exports = async (client, guild) => {
               'inline': true
             },
             {
-              'name': `Members - (${guild.members.size})`,
+              'name': `Members - (${guild.members.size.toLocaleString()})`,
               'value': oneLine`
-                **Users:** ${await guild.members.filter(s => s.user.bot !== true).size}
-                | **Bots:** ${await guild.members.filter(s => s.user.bot !== false).size}
+                **Users:** ${await guild.members.filter(s => s.user.bot !== true).size.toLocaleString()}
+                | **Bots:** ${await guild.members.filter(s => s.user.bot !== false).size.toLocaleString()}
               `,
               'inline': true
             }

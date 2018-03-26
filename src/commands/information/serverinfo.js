@@ -79,26 +79,26 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': `📋 Members - (${guild.members.size})`,
+          'name': `📋 Members - (${guild.members.size.toLocaleString()})`,
           'value': stripIndents`
-            **Online:** ${guild.members.filter(s => s.user.presence.status === 'online').size} | **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size}
-            **Idle:** ${guild.members.filter(s => s.user.presence.status === 'idle').size} | **DND:** ${guild.members.filter(s => s.user.presence.status === 'dnd').size}
+            **Online:** ${guild.members.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
+            **Idle:** ${guild.members.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${guild.members.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
           'inline': true
         },
         {
-          'name': `🕵 Users - (${totalUsers.size})`,
+          'name': `🕵 Users - (${totalUsers.size.toLocaleString()})`,
           'value': stripIndents`
-            **Online:** ${totalUsers.filter(s => s.user.presence.status === 'online').size} | **Offline:** ${totalUsers.filter(s => s.user.presence.status === 'offline').size}
-            **Idle:** ${totalUsers.filter(s => s.user.presence.status === 'idle').size} | **DND:** ${totalUsers.filter(s => s.user.presence.status === 'dnd').size}
+            **Online:** ${totalUsers.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${totalUsers.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
+            **Idle:** ${totalUsers.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${totalUsers.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
           'inline': true
         },
         {
-          'name': `🤖 Bots - (${totalBots.size})`,
+          'name': `🤖 Bots - (${totalBots.size.toLocaleString()})`,
           'value': stripIndents`
-            **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size} | **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size}
-            **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size} | **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size}
+            **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
+            **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
 
           `,
           'inline': true

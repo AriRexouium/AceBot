@@ -35,7 +35,7 @@ module.exports = class EmojiCommand extends Command {
 
       // Static Emojis
       var staticEmojis = message.guild.emojis.filter(emoji => emoji.animated === false)
-      let staticEmojiCount = staticEmojis.size
+      let staticEmojiCount = staticEmojis.size.toLocaleString()
       if (staticEmojis.size > 1) {
         staticEmojis = oneLineCommaListsAnd`${staticEmojis.map(emoji => `\`:${emoji.name}:\``)}`
       } else {
@@ -44,7 +44,7 @@ module.exports = class EmojiCommand extends Command {
 
       // Animated Emojis
       var animatedEmojis = message.guild.emojis.filter(emoji => emoji.animated === true)
-      let animatedEmojiCount = animatedEmojis.size
+      let animatedEmojiCount = animatedEmojis.size.toLocaleString()
       if (animatedEmojis.size > 1) {
         animatedEmojis = oneLineCommaListsAnd`${animatedEmojis.map(emoji => `\`:${emoji.name}:\``)}`
       } else {

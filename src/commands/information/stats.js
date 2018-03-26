@@ -40,10 +40,10 @@ module.exports = class StatsCommand extends Command {
         { name: 'totalMessagesReceived', code: 'botStats.messagesReceived' },
         { name: 'totalClientMentions', code: 'botStats.clientMentions' },
         { name: 'totalCommandsUsed', code: 'botStats.commandsUsed' },
-        { name: 'totalGuilds', code: 'guilds.size' },
-        { name: 'totalChannels', code: 'channels.size' },
-        { name: 'totalUsers', code: 'users.size' },
-        { name: 'totalEmojis', code: 'emojis.size' }
+        { name: 'totalGuilds', code: 'guilds.size.toLocaleString()' },
+        { name: 'totalChannels', code: 'channels.size.toLocaleString()' },
+        { name: 'totalUsers', code: 'users.size.toLocaleString()' },
+        { name: 'totalEmojis', code: 'emojis.size.toLocaleString()' }
       ]
       var stats = {}
       data.forEach(element => {
@@ -89,17 +89,17 @@ module.exports = class StatsCommand extends Command {
             'name': '🌐 Global Stats',
             'value': !this.client.shard
               ? stripIndents`
-              Guilds: **${this.client.guilds.size}**
-              Channels: **${this.client.channels.size}**
-              Users: **${this.client.users.size}**
-              Emojis: **${this.client.emojis.size}**
+              Guilds: **${this.client.guilds.size.toLocaleString()}**
+              Channels: **${this.client.channels.size.toLocaleString()}**
+              Users: **${this.client.users.size.toLocaleString()}**
+              Emojis: **${this.client.emojis.size.toLocaleString()}**
               `
               : stripIndents`
               Shards: **${this.client.shard.id + 1} / ${this.client.shard.count}** [${this.client.shard.id}]
-              Guilds: **${this.client.guilds.size}** [${stats.totalGuilds}]
-              Channels: **${this.client.channels.size}** [${stats.totalChannels}]
-              Users: **${this.client.users.size}** [${stats.totalUsers}]
-              Emojis: **${this.client.emojis.size}** [${stats.totalEmojis}]
+              Guilds: **${this.client.guilds.size.toLocaleString()}** [${stats.totalGuilds}]
+              Channels: **${this.client.channels.size.toLocaleString()}** [${stats.totalChannels}]
+              Users: **${this.client.users.size.toLocaleString()}** [${stats.totalUsers}]
+              Emojis: **${this.client.emojis.size.toLocaleString()}** [${stats.totalEmojis}]
               `,
             'inline': true
           },
