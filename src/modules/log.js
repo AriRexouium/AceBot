@@ -23,10 +23,7 @@ var cases = {
  */
 module.exports = function logger (type, body, parent, child) {
   if (!Object.keys(cases).includes(type)) throw new Error('Must be a valid log case.')
-
-  if (parent == null || parent === '') {
-    parent = getName(process.cwd())
-  }
+  if (parent == null || parent === '') { parent = getName(process.cwd()) }
 
   try {
     require(child)
@@ -39,19 +36,14 @@ module.exports = function logger (type, body, parent, child) {
   }
 
   body = body.toString().split('\n')
-  var text = ''
+  var formatBody = ''
   for (var i = 0; i < body.length; i++) {
-    if (i + 1 !== body.length) {
-      text += `│ ${body[i]}\n`
-    } else {
-      text += `└ ${body[i]}`
-    }
+    i + 1 !== body.length ? formatBody += `│ ${body[i]}\n` : formatBody += `└ ${body[i]}`
   }
-  body = text
 
   var date = chalk.gray(moment().format(`YYYY-MM-DD|HH:mm:ss:SSSS`))
   var title = `${chalk.cyan(parent)}${chalk.gray('→')}${(chalk.cyan(child))}`
-  console[cases[type].type](`┌─[${date}]─[${title}]─[${cases[type].content}]\n${body}`)
+  console[cases[type].type](`┌─[${date}]─[${title}]─[${cases[type].content}]\n${formatBody}`)
 }
 
 var getName = str => {
