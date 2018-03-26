@@ -18,31 +18,47 @@ var cases = {
  * The client's default logger.
  * @param {string} type The type of log. (Ex: info)
  * @param {string} body The description/body of the log.
- * @param {string} parent The parent of the error. (Use '' to ignore value.)
- * @param {string} child The child of the error. (Supports `__filename`, also use '' to ignore value and default to current working directory.)
+ * @param {string} parent The parent of the error. (Use '' to ignore value and default to cwd.)
+ * @param {string} child The child of the error. (Supports `__filename`, also use '' to default to <anonymous>.)
  */
 module.exports = function logger (type, body, parent, child) {
   if (!Object.keys(cases).includes(type)) throw new Error('Must be a valid log case.')
 
   if (parent == null || parent === '') {
-    parent = process.cwd()
-    if (parent.indexOf('/') > -1) {
-      parent = parent.split('/').pop()
-    } else {
-      parent = parent.split('\\').pop()
-    }
+    parent = getName(process.cwd())
   }
 
   try {
     require(child)
     delete require.cache[require.resolve(child)]
+    child = getName(child)
   } catch (err) {
     if (child == null || child === '') {
       child = '<anonymous>'
     }
   }
 
+  body = body.toString().split('\n')
+  var text = ''
+  for (var i = 0; i < body.length; i++) {
+    if (i + 1 !== body.length) {
+      text += `│ ${body[i]}\n`
+    } else {
+      text += `└ ${body[i]}`
+    }
+  }
+  body = text
+
   var date = chalk.gray(moment().format(`YYYY-MM-DD|HH:mm:ss:SSSS`))
   var title = `${chalk.cyan(parent)}${chalk.gray('→')}${(chalk.cyan(child))}`
-  console[cases[type].type](`┌─[${date}]─[${title}]─[${cases[type].content}]\n└─► ${body}`)
+  console[cases[type].type](`┌─[${date}]─[${title}]─[${cases[type].content}]\n${body}`)
+}
+
+var getName = str => {
+  str = str.toString()
+  if (str.indexOf('/') > -1) {
+    return str.indexOf('.') > -1 ? str.split('/').pop().split('.')[0] : str.split('/').pop()
+  } else if (str.indexOf('\\') > -1) {
+    return str.indexOf('.') > -1 ? str.split('\\').pop().split('.')[0] : str.split('\\').pop()
+  } else return str
 }
