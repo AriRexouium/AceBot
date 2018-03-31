@@ -29,10 +29,8 @@ module.exports = class ProfileCommand extends Command {
     var embedFields = []
     var user = args.user.user
     var userInfo = {}
-    var userValues = ['about', 'age', 'color', 'email', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
-    userValues.forEach(value => {
-      userInfo[value] = this.client.provider.get(user.id, value, '')
-    })
+    ;['about', 'age', 'color', 'email', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
+      .forEach(value => { userInfo[value] = this.client.provider.get(user.id, value, '') })
     var userColor
     if (userInfo.color === 'auto') {
       if ((args.user).displayHexColor === '#000000') {
@@ -62,53 +60,17 @@ module.exports = class ProfileCommand extends Command {
 
     /* Start Fancy Embed Fields */
     // Age
-    if (userInfo.age) {
-      embedFields.push({
-        name: 'Age',
-        value: getAge(userInfo.age),
-        inline: true
-      })
-    }
+    if (userInfo.age) { embedFields.push({ name: 'Age', value: getAge(userInfo.age), inline: true }) }
     // Gender
-    if (userInfo.gender) {
-      embedFields.push({
-        name: 'Gender',
-        value: userInfo.gender,
-        inline: true
-      })
-    }
+    if (userInfo.gender) { embedFields.push({ name: 'Gender', value: userInfo.gender, inline: true }) }
     // Website
-    if (userInfo.website) {
-      embedFields.push({
-        name: 'Website',
-        value: userInfo.website,
-        inline: true
-      })
-    }
+    if (userInfo.website) { embedFields.push({ name: 'Website', value: userInfo.website, inline: true }) }
     // Email
-    if (userInfo.email) {
-      embedFields.push({
-        name: 'Email',
-        value: userInfo.email,
-        inline: true
-      })
-    }
+    if (userInfo.email) { embedFields.push({ name: 'Email', value: userInfo.email, inline: true }) }
     // Profession
-    if (userInfo.job) {
-      embedFields.push({
-        name: 'Profession',
-        value: userInfo.job,
-        inline: true
-      })
-    }
+    if (userInfo.job) { embedFields.push({ name: 'Profession', value: userInfo.job, inline: true }) }
     // About
-    if (userInfo.about) {
-      embedFields.push({
-        name: 'About',
-        value: userInfo.about,
-        inline: true
-      })
-    }
+    if (userInfo.about) { embedFields.push({ name: 'About', value: userInfo.about, inline: true }) }
     /* Stop Fancy Embed Fields */
 
     message.embed({
