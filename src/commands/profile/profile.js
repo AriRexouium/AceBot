@@ -17,7 +17,8 @@ module.exports = class ProfileCommand extends Command {
         {
           key: 'user',
           prompt: 'What user would you like to lookup?',
-          type: 'member'
+          type: 'member',
+          default: ''
         }
       ],
       guildOnly: true
@@ -25,18 +26,24 @@ module.exports = class ProfileCommand extends Command {
   }
 
   run (message, args) {
+    var user
+    if (args.user === '') {
+      args.user = message.guild.members.get(message.author.id)
+      user = args.user.user
+    } else {
+      user = args.user.user
+    }
     /* Star Declaring Variables */
     var embedFields = []
-    var user = args.user.user
     var userInfo = {}
     ;['about', 'age', 'color', 'email', 'gender', 'job', 'firstname', 'lastname', 'timezone', 'website']
       .forEach(value => { userInfo[value] = this.client.provider.get(user.id, value, '') })
     var userColor
     if (userInfo.color === 'auto') {
-      if ((args.user).displayHexColor === '#000000') {
+      if (args.user.displayHexColor === '#000000') {
         userColor = 0x7289da
       } else {
-        userColor = Number((args.user).displayHexColor.replace('#', '0x'))
+        userColor = Number(args.user.displayHexColor.replace('#', '0x'))
       }
     } else if (userInfo.color === 'none') {
       userColor = 0x4f545c
