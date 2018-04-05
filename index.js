@@ -20,41 +20,40 @@ Load Commando Client
 \* **************************************************************************************************** */
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
-  selfbot: false,
+  disableEveryone: true,
+  messageCacheLifetime: 4500,
+  messageSweepInterval: 3000,
+  disabledEvents: [
+    'TYPING_START',
+    'TYPING_STOP'
+  ],
   commandPrefix: clientConfig.commandPrefix,
   commandEditableDuration: clientConfig.commandEditableDuration,
   nonCommandEditable: clientConfig.nonCommandEditable,
   unknownCommandResponse: clientConfig.unknownCommandResponse,
-  owner: [],
-  invite: clientConfig.invite
+  invite: clientConfig.invite,
+  owner: []
 })
 
 /* **************************************************************************************************** *\
 Load SQL Provider
 \* **************************************************************************************************** */
 if (sqlConfig.useMySQL === false) {
-  sqlite.open(path.join(__dirname, './src/config/database.sqlite')).then((db) => {
-    client.setProvider(new SQLiteProvider(db))
-    setInterval(async () => {
-      await client.provider.destroy()
-      await client.provider.init(client)
-      client.log('debug', 'Synced Database', '', client.provider.constructor.name)
-    }, sqlConfig.sqlSync)
-  })
+  sqlite.open(path.join(__dirname, './src/config/database.sqlite'))
+    .then((db) => {
+      client.setProvider(new SQLiteProvider(db))
+    })
 } else {
   MySQL.createConnection({
     host: sqlConfig.host,
+    port: sqlConfig.port,
     user: sqlConfig.user,
     password: sqlConfig.password,
     database: sqlConfig.database
-  }).then((db) => {
-    client.setProvider(new MySQLProvider(db))
-    setInterval(async () => {
-      await client.provider.destroy()
-      await client.provider.init(client)
-      client.log('debug', 'Synced Database', '', client.provider.constructor.name)
-    }, sqlConfig.sqlSync)
   })
+    .then((db, error) => {
+      client.setProvider(new MySQLProvider(db))
+    })
 }
 
 /* **************************************************************************************************** *\

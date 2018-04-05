@@ -1,8 +1,8 @@
 ---
-sqlSync: 1800000 # How often to sync from the database in miliseconds.
 # Only change the following values below if you know what you're doing.
 useMySQL: false # False for SQLite.
 host: 'host'
+port: 3306
 user: 'user'
 password: 'password'
 database: 'database'
