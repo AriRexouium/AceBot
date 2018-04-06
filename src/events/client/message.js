@@ -1,3 +1,4 @@
+const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, message) => {
@@ -47,7 +48,11 @@ module.exports = (client, message) => {
         // Check to see if message is exit.
         if (message.content === '$exit') {
           object.splice(index, 1)
-          return sourceChannel.send(`Closed tunnel to \`${destinationChannel.guild.name}/#${destinationChannel.name}\``).catch(() => {})
+          if (destinationChannel.type === 'dm') {
+            return sourceChannel.send(`Closed tunnel to **${escapeMarkdown(destinationChannel.recipient.tag)}**.`)
+          } else {
+            return sourceChannel.send(`Closed tunnel to \`${destinationChannel.guild.name}/#${destinationChannel.name}\`.`).catch(() => {})
+          }
         } else if (message.content.startsWith('$ ')) return
         // Send message to destination.
         sendMessage.content = message.content

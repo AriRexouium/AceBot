@@ -3,6 +3,7 @@
 */
 
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 
 module.exports = class TunnelCommand extends Command {
@@ -14,16 +15,13 @@ module.exports = class TunnelCommand extends Command {
       description: 'Send messages to another channel from the bot.',
       args: [
         {
-          key: 'channel',
+          key: 'id',
           prompt: 'What channel would you like to tunnel to?',
           type: 'string',
           validate: value => {
-            var channel = client.channels.get(value)
-            if (channel && channel.type === 'text') {
-              return true
-            } else {
-              return 'That is an invalid channel, please make sure it is a channel ID and a text channel.'
-            }
+            if (client.users.get(value) && client.users.get(value).bot !== true) return true
+            if (client.channels.get(value) && client.channels.get(value).type === 'text') return true
+            return 'that is an invalid text channel or user ID.'
           }
         }
       ]
@@ -42,25 +40,40 @@ module.exports = class TunnelCommand extends Command {
     }
   }
 
-  run (message, args) {
-    var channel = this.client.channels.get(args.channel)
-    if (channel.type !== 'text') return message.say('Must be a valid text channel.')
-    this.client.temp.tunnels.push({
-      user: message.author.id,
-      source: message.channel.id,
-      destination: channel.id,
-      cache: []
-    })
-    return message.say(stripIndents`
-      Opened tunnel in \`${channel.guild.name}/#${channel.name}\`!
-      Use \`$ <message>\` to escape sending a message.
-      You can use \`$exit\` to exit the tunnel.
+  async run (message, args) {
+    var user = this.client.users.get(args.id)
+    var channel = this.client.channels.get(args.id)
+    if (user) {
+      await user.createDM()
+      this.client.temp.tunnels.push({
+        user: message.author.id,
+        source: message.channel.id,
+        destination: user.dmChannel.id,
+        cache: []
+      })
+      return message.say(stripIndents`
+        Opened tunnel to **${escapeMarkdown(user.tag)}**!
+        Use \`$ <message>\` to escape sending a message.
+        You can use \`$exit\` to exit the tunnel.
+      `)
+    } else {
+      this.client.temp.tunnels.push({
+        user: message.author.id,
+        source: message.channel.id,
+        destination: channel.id,
+        cache: []
+      })
+      return message.say(stripIndents`
+        Opened tunnel in \`${channel.guild.name}/#${channel.name}\`!
+        Use \`$ <message>\` to escape sending a message.
+        You can use \`$exit\` to exit the tunnel.
 
-      __**Perms:**__
-      \`SEND_MESSAGES\`: ${channel.permissionsFor(this.client.user.id).has('SEND_MESSAGES')}
-      \`READ_MESSAGES\`: ${channel.permissionsFor(this.client.user.id).has('READ_MESSAGES')}
-      \`EMBED_LINKS\`: ${channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')}
-      \`ATTACH_FILES\`: ${channel.permissionsFor(this.client.user.id).has('ATTACH_FILES')}
-    `)
+        __**Perms:**__
+        \`SEND_MESSAGES\`: ${channel.permissionsFor(this.client.user.id).has('SEND_MESSAGES')}
+        \`READ_MESSAGES\`: ${channel.permissionsFor(this.client.user.id).has('READ_MESSAGES')}
+        \`EMBED_LINKS\`: ${channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')}
+        \`ATTACH_FILES\`: ${channel.permissionsFor(this.client.user.id).has('ATTACH_FILES')}
+      `)
+    }
   }
 }
