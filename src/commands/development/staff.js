@@ -43,7 +43,7 @@ module.exports = class StaffCommand extends Command {
       var developerList = this.client.provider.get('global', 'developer', [])
 
       /* **************************************************************************************************** *\
-        Staff
+      Staff
       \* **************************************************************************************************** */
       if (args.level === 'staff') {
       /*
@@ -54,7 +54,7 @@ module.exports = class StaffCommand extends Command {
           if (staffList.includes(args.user.id)) return message.say('That user is already a staff member.')
           staffList.push(args.user.id)
           this.client.provider.set('global', 'staff', staffList)
-          return message.reply(`Added **${escapeMarkdown(args.user.tag)}** as a staff member.`)
+          return message.reply(`added **${escapeMarkdown(args.user.tag)}** as a staff member.`)
         /*
           Remove
         */
@@ -68,10 +68,10 @@ module.exports = class StaffCommand extends Command {
           } else {
             this.client.provider.set('global', 'staff', staffList)
           }
-          return message.reply(`Removed **${escapeMarkdown(args.user.tag)}** from staff.`)
+          return message.reply(`removed **${escapeMarkdown(args.user.tag)}** from staff.`)
         }
         /* **************************************************************************************************** *\
-          Developer
+        Developer
         \* **************************************************************************************************** */
       } else if (args.level === 'developer') {
         /*
@@ -82,7 +82,7 @@ module.exports = class StaffCommand extends Command {
           if (developerList.includes(args.user.id)) return message.say('That user is already a developer.')
           developerList.push(args.user.id)
           this.client.provider.set('global', 'developer', developerList)
-          return message.reply(`Added **${escapeMarkdown(args.user.tag)}** as a developer.`)
+          return message.reply(`added **${escapeMarkdown(args.user.tag)}** as a developer.`)
         /*
           Remove
         */
@@ -96,7 +96,7 @@ module.exports = class StaffCommand extends Command {
           } else {
             this.client.provider.set('global', 'developer', developerList)
           }
-          return message.reply(`Removed **${escapeMarkdown(args.user.tag)}** from developer.`)
+          return message.reply(`removed **${escapeMarkdown(args.user.tag)}** from developer.`)
         }
       }
     })

@@ -42,7 +42,7 @@ module.exports = class ClearCommand extends Command {
       this.client.provider.remove(message.author.id, args.query)
       return message.reply(`successfully removed your \`${args.query}\`!`)
     } catch (error) {
-      return message.reply(`There was an error processing your request: \`${error.name}: ${error.message}\``)
+      return message.reply(`there was an error processing your request: \`${error.name}: ${error.message}\``)
     }
   }
 }

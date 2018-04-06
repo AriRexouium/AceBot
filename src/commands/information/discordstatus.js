@@ -24,10 +24,9 @@ module.exports = class DiscordStatsCommand extends Command {
   }
 
   run (message) {
-    // TODO: Redo this command using the StatusPage API.
     request({ url: 'http://srhpyqt94yxb.statuspage.io/api/v2/summary.json', headers: { 'User-Agent': 'AceBot' } }, (error, response, body) => {
       if (error) {
-        return message.reply('It appears there was an error pulling stats from Statuspage.')
+        return message.reply('it appears there was an error pulling stats from Statuspage.')
       } else {
         body = JSON.parse(body)
         message.embed({
