@@ -1,5 +1,5 @@
 const { escapeMarkdown } = require('discord.js')
-const { stripIndents } = require('common-tags')
+const { oneLine, stripIndents } = require('common-tags')
 
 module.exports = (client, message) => {
   if (message.author.id === client.user.id) {
@@ -24,10 +24,15 @@ module.exports = (client, message) => {
     `, 'CRITICAL NOTICE')
   }
 
-  // Entire Tunnel System
+  /* **************************************************************************************************** *\
+  Tunnel System
+  \* **************************************************************************************************** */
   client.temp.tunnels.forEach((tunnel, index, object) => {
+    // Find Channels
     var sourceChannel = client.channels.get(tunnel.source)
     var destinationChannel = client.channels.get(tunnel.destination)
+
+    // Initialize Message to Send
     var sendMessage = {}
     // Attachments
     if (message.attachments) {
@@ -40,58 +45,73 @@ module.exports = (client, message) => {
     if (message.embeds) {
       sendMessage.embed = message.embeds[0]
     }
-    /*
-      Source Channel
-    */
+
+    /* **************************************************************************************************** *\
+    Source Channel Handler
+    \* **************************************************************************************************** */
     if (message.channel.id === tunnel.source) {
       if (message.author.id === tunnel.user) {
-        // Check to see if message is exit.
-        if (message.content === '$exit') {
+        // Source Channel Commands
+        var prefix = '$'
+        if (message.content === `${prefix}exit`) {
           object.splice(index, 1)
           if (destinationChannel.type === 'dm') {
             return sourceChannel.send(`Closed tunnel to **${escapeMarkdown(destinationChannel.recipient.tag)}**.`)
           } else {
-            return sourceChannel.send(`Closed tunnel to \`${destinationChannel.guild.name}/#${destinationChannel.name}\`.`).catch(() => {})
+            return sourceChannel.send(oneLine`
+            Closed tunnel to
+              \`${destinationChannel.guild.name}/#${destinationChannel.name}\`.
+            `).catch(() => {})
           }
-        } else if (message.content.startsWith('$ ')) return
-        // Send message to destination.
+          // Ignore Messages
+        } else if (message.content.startsWith(`${prefix} `)) return
+
+        // Send Message to destination channel.
         sendMessage.content = message.content
-        destinationChannel.send(sendMessage)
-          .then(sentMessage => {
+        destinationChannel.send(sendMessage).then((sentMessage, error) => {
+          if (error) {
+            sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
+              client.log('debug', oneLine`
+                Error sending message to Source channel, disconnecting from
+                \`${destinationChannel.guild.name}/#${destinationChannel.name}\`
+              `, 'Tunnel')
+              object.splice(index, 1)
+            })
+          } else {
             tunnel.cache.push({
               fromMessage: message,
               sentMessage: sentMessage
             })
-          })
-          .catch(error => {
-            sourceChannel.send(`Error sending your message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log('info', `Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
-              object.splice(index, 1)
-            })
-          })
+          }
+        })
         tunnel.lastSentContent = message.content
       }
-      /*
-        Destination Channel
-      */
+
+      /* **************************************************************************************************** *\
+      Destination Channel Handler
+      \* **************************************************************************************************** */
     } else if (message.channel.id === tunnel.destination) {
       if (!(tunnel.lastSentContent === message.content && message.author.id === client.user.id)) {
         // Content
         sendMessage.content = `__**${message.author.tag}** \`(${message.author.id})\`__\n${message.content}`
-        // Send message to source
-        sourceChannel.send(sendMessage)
-          .then(sentMessage => {
+
+        // Send Message to source channel.
+        sourceChannel.send(sendMessage).then((sentMessage, error) => {
+          if (error) {
+            sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
+              client.log('info', oneLine`
+                Error sending message to Source channel, disconnecting from
+                \`${destinationChannel.guild.name}/#${destinationChannel.name}\`
+              `, 'Tunnel')
+              object.splice(index, 1)
+            })
+          } else {
             tunnel.cache.push({
               fromMessage: message,
               sentMessage: sentMessage
             })
-          })
-          .catch(error => {
-            sourceChannel.send(`Error receiving a message: \`${error.name}: ${error.message}\``).catch(() => {
-              client.log('info', `Error sending message to Source channel, disconnecting from \`${destinationChannel.guild.name}/#${destinationChannel.name}\``, 'Tunnel')
-              object.splice(index, 1)
-            })
-          })
+          }
+        })
       }
     }
   })
