@@ -4,18 +4,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-> Last Updated 2018/03/19 12:46:21
+> Last Updated 2018/04/08 16:02:37
 
 ## [Unreleased]
 
+## [3.5.0] - 2018-04-08
+### Added
+- Add `discrim` and `throwerror` command.
+- Add `traceback` command to get the most recent error.
+- Add `update-changelog.js` and replace `update-authors.sh` with `update-authors.js`.
+- New configuration loader.
+- New event loader.
+- New game rotation and selection system.
+- New module loader.
+- New permission system.
+- Start scripts for for both Windows and Linux.
+- `liststaff` command to list the current bot staff with their position and status.
+
+### Changed
+- Moved core parts of the bot to `./src` folder.
+- Organized `index.js` file.
+- Reworked the `profile` command code.
+- Rewrote entire logger module.
+- The `profile` command now defaults to the person who ran the command.
+- The `tunnel` command supports DMs now.
+- The bot now follows the bot's settings instead of the configuration settings.
+- `userinfo` command show's the user's identity instead of if they're a bot or not.
+
+### Removed
+- Bot owners are no longer in the configuration file.
+
+### Fixed
+- Fixed `serverinfo` command now showing owner.
+- Fixed random credits in `listservers` and `listchannels`.
+- Fixed sharder not working.
+- `discrim` command now works without error.
+
 ## [3.4.0] - 2018-03-16
 ### Added
+- Added lockdown system, you can now lockdown the bot with a provided reason.
+- Added tunnel ssystem, send and receive messages from any channel the bot has access to.
 - Bot now sends a message when it joins a new guild.
-- Lockdown system, you can now lockdown the bot with a provided reason.
 - New MySQL support, you can now toggle between MySQL and SQLite.
 - New dynamic config loading system.
 - New profile system, users can now have a custom profile.
-- Tunnel system, send and receive messages from any channel the bot has access to.
 - `getcommand` command for viewing a command's code.
 - `inviteinfo` to get information on an invite.
 - `listservers` and `listchannels`, these commands are self explanatory.
@@ -31,13 +63,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `stats` command is more efficient.
 
 ### Fixed
-- Fix bold text in `info` command.
+- Fixed bold text in `info` command.
 - Fixed bot not shutting down properly.
 
 ## [3.3.0] - 2018-02-25
 ### Added
-- Add Trello to package.json.
-- Add `AUTHORS.md` file generator.
+- Added Trello to package.json.
+- Added `AUTHORS.md` file generator.
 - Added lint command for linting code in the JavaScript Standard Style.
 - New `channelinfo` command.
 - New `settz` and `time` commands for setting and retrieving user's time zones. *(Includes custom group.)*
@@ -45,13 +77,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Support for Sentry error logging with tags and release tracking.
 
 ### Changed
+- All commands that use embeds to use `message.embed()`.
 - Better module management.
 - Embed colors for some commands are now dynamic.
-- Improve help documentation.
-- Made all commands that use embeds to use `message.embed()`.
+- Improved help documentation.
 - Merged `repostatus` and `buildstatus` into `repo` command.
 - Practically rewrote status and info commands respectively.
-- Update package versions.
+- Updated all package versions.
 - `discordstatus` command uses Statuspage API.
 
 ### Removed
@@ -86,14 +118,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 3.1.0 - 2018-01-27
 ### Added
-- Add `buildstatus` command.
-- Add `gitstatus` and `buildstatus` to retrieve information on AceBot from respective websites.
-- Add `gitstatus` command.
+- Added `buildstatus` command.
+- Added `gitstatus` and `buildstatus` to retrieve information on AceBot from respective websites.
+- Added `gitstatus` command.
 
 ### Changed
-- Fix style error in the `discordstatus` command.
+- Fixed style error in the `discordstatus` command.
 
-[Unreleased]: http://github.com/Aceheliflyer/AceBot/compare/v3.4.0...HEAD
+[Unreleased]: http://github.com/Aceheliflyer/AceBot/compare/v3.5.0...HEAD
+[3.5.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.4.0...v3.5.0
 [3.4.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.3.0...v3.4.0
 [3.3.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.2.0...v3.3.0
 [3.2.0]: http://github.com/Aceheliflyer/AceBot/compare/v3.1.0...v3.2.0

@@ -2,7 +2,7 @@
   "releases": [
     {
       "version": "3.5.0",
-      "released": null,
+      "released": "2018-04-08",
       "types": {
         "added": [
           "Start scripts for for both Windows and Linux.",
@@ -13,18 +13,28 @@
           "`liststaff` command to list the current bot staff with their position and status.",
           "Add `traceback` command to get the most recent error.",
           "Add `update-changelog.js` and replace `update-authors.sh` with `update-authors.js`.",
-          "Add `discrim` and `throwerror` command."
+          "Add `discrim` and `throwerror` command.",
+          "New game rotation and selection system."
         ],
         "changed": [
           "Moved core parts of the bot to `./src` folder.",
-          "Organized `index.js`.",
-          "`userinfo` command show's the user's identity instead of if they're a bot or not."
+          "Organized `index.js` file.",
+          "`userinfo` command show's the user's identity instead of if they're a bot or not.",
+          "Rewrote entire logger module.",
+          "The bot now follows the bot's settings instead of the configuration settings.",
+          "Reworked the `profile` command code.",
+          "The `profile` command now defaults to the person who ran the command.",
+          "The `tunnel` command supports DMs now."
         ],
         "deprecated": [],
-        "removed": [],
+        "removed": [
+          "Bot owners are no longer in the configuration file."
+        ],
         "fixed": [
-          "Fix `serverinfo` command now showing owner.",
-          "Fix random credits in `listservers` and `listchannels`."
+          "Fixed `serverinfo` command now showing owner.",
+          "Fixed random credits in `listservers` and `listchannels`.",
+          "Fixed sharder not working.",
+          "`discrim` command now works without error."
         ],
         "security": []
       }
@@ -43,8 +53,8 @@
           "Bot now sends a message when it joins a new guild.",
           "New MySQL support, you can now toggle between MySQL and SQLite.",
           "New profile system, users can now have a custom profile.",
-          "Lockdown system, you can now lockdown the bot with a provided reason.",
-          "Tunnel system, send and receive messages from any channel the bot has access to."
+          "Added lockdown system, you can now lockdown the bot with a provided reason.",
+          "Added tunnel ssystem, send and receive messages from any channel the bot has access to."
         ],
         "changed": [
           "Contributors get their own file.",
@@ -57,7 +67,7 @@
         "deprecated": [],
         "removed": [],
         "fixed": [
-          "Fix bold text in `info` command.",
+          "Fixed bold text in `info` command.",
           "Fixed bot not shutting down properly."
         ],
         "security": []
@@ -68,21 +78,21 @@
       "released": "2018-02-25",
       "types": {
         "added": [
-          "Add Trello to package.json.",
+          "Added Trello to package.json.",
           "Support for Sentry error logging with tags and release tracking.",
           "Style sheet for commands.",
           "New `channelinfo` command.",
-          "Add `AUTHORS.md` file generator.",
+          "Added `AUTHORS.md` file generator.",
           "New `settz` and `time` commands for setting and retrieving user's time zones. *(Includes custom group.)*",
           "Added lint command for linting code in the JavaScript Standard Style."
         ],
         "changed": [
           "Embed colors for some commands are now dynamic.",
-          "Made all commands that use embeds to use `message.embed()`.",
-          "Update package versions.",
+          "All commands that use embeds to use `message.embed()`.",
+          "Updated all package versions.",
           "`discordstatus` command uses Statuspage API.",
           "Practically rewrote status and info commands respectively.",
-          "Improve help documentation.",
+          "Improved help documentation.",
           "Merged `repostatus` and `buildstatus` into `repo` command.",
           "Better module management."
         ],
@@ -133,12 +143,12 @@
       "released": "2018-01-27",
       "types": {
         "added": [
-          "Add `gitstatus` and `buildstatus` to retrieve information on AceBot from respective websites.",
-          "Add `gitstatus` command.",
-          "Add `buildstatus` command."
+          "Added `gitstatus` and `buildstatus` to retrieve information on AceBot from respective websites.",
+          "Added `gitstatus` command.",
+          "Added `buildstatus` command."
         ],
         "changed": [
-          "Fix style error in the `discordstatus` command."
+          "Fixed style error in the `discordstatus` command."
         ],
         "deprecated": [],
         "removed": [],
