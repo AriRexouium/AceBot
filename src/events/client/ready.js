@@ -4,27 +4,20 @@ const { oneLine } = require('common-tags')
 module.exports = async (client) => {
   await client.log('success', `Logged in as ${client.user.tag} (${client.user.id}).`, 'Discord', 'Login')
 
-  await setTimeout(() => {
-    client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(oneLine`
-        ${client.options.commandPrefix}help |
-        ${pluralize('Server', client.guilds.size.toLocaleString(), true)} |
-        ${pluralize('User', client.users.size.toLocaleString(), true)}
-        ${client.shard ? ` | Shard ${client.shard.id}` : ''}
-      `)
-    )
-  }, 1000)
-
-  await setInterval(() => {
-    client.user.setStatus(client.provider.get('global', 'clientStatus', 'online')).then(
-      client.user.setActivity(oneLine`
-        ${client.options.commandPrefix}help |
-        ${pluralize('Server', client.guilds.size.toLocaleString(), true)} |
-        ${pluralize('User', client.users.size.toLocaleString(), true)}
-        ${client.shard ? ` | Shard ${client.shard.id}` : ''}
-      `)
-    )
-  }, 600000)
+  if (client.config.gameConfig.enabled === true) {
+    var games = client.config.gameConfig.games
+    if (client.config.gameConfig.rotate === false) {
+      client.user.setPresence(await calcPresence(client, games[0]))
+      setInterval(async () => {
+        client.user.setPresence(await calcPresence(client, games[0]))
+      }, client.config.gameConfig.rotateTime)
+    } else {
+      client.user.setPresence(await calcPresence(client, games[Math.floor(Math.random() * games.length)]))
+      setInterval(async () => {
+        client.user.setPresence(await calcPresence(client, games[Math.floor(Math.random() * games.length)]))
+      }, client.config.gameConfig.rotateTime)
+    }
+  }
 
   await client.log('info', oneLine`
     ${client.shard ? `Shard ${client.shard.id} ready!` : 'Client Ready!'}
@@ -83,4 +76,29 @@ module.exports = async (client) => {
       client.options.owner.push(app.owner.id)
     }
   })
+}
+
+/**
+ * Dynamic presence hander.
+ * @param {object} game The object of the presence data.
+ */
+var calcPresence = (client, game) => {
+  var presence = {}; presence.activity = {}
+  // Presence Status
+  if (game.status) {
+    presence.status = game.status
+  }
+  // Activity Name
+  if (game.activityName) {
+    presence.activity.name = eval('`' + game.activityName + '`') // eslint-disable-line no-eval
+  }
+  // Activity Type
+  if (game.activityType) {
+    presence.activity.type = game.activityType
+  }
+  // Activity URL
+  if (game.activityURL) {
+    presence.activity.url = eval('`' + game.activityURL + '`') // eslint-disable-line no-eval
+  }
+  return presence
 }

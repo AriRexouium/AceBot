@@ -1,0 +1,18 @@
+---
+# http://discord.js.org/#/docs/main/master/typedef/PresenceData
+enabled: false
+rotate: false # When false, selects first game.
+rotateTime: 150000 # Rotate speed in miliseconds. (This still applies even if rotate is disabled.)
+
+# WARNING: This uses eval to work, careful what you set each value at.
+# If using STREAMING type, you must supply a proper Twitch link.
+games:
+  - activityName: "${client.options.commandPrefix}help | ${client.guilds.size.toLocaleString()} ${pluralize('Server', client.guilds.size)} | ${client.users.size.toLocaleString()} ${pluralize('User', client.users.size)} ${client.shard ? ` | Shard ${client.shard.id}` : ''}"
+    status: 'online'
+
+  - activityName: '${client.options.commandPrefix}help'
+    activityType: 'LISTENING' # Listening to
+    status: 'idle'
+
+  - activityName: '${client.options.commandPrefix}stats to view stats.'
+    status: 'dnd'
