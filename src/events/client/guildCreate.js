@@ -25,7 +25,7 @@ module.exports = async (client, guild) => {
         **|**  Use \`${client.options.commandPrefix}contact\` to get in contact with a developer.
         **|**  I am created and owned by **${dev}**.
 
-        **For help, feedback, bugs, info, and more go to <http://discord.gg/Y6Vgfyd>**.
+        **For help, feedback, bugs, info, and more go to <http://discord.gg/8QebTbk>**.
       `)
     }
   }

@@ -4,7 +4,7 @@ commandPrefix: a@ # Your bot's prefix to use for commands.
 commandEditableDuration: 30 # The amount of time before a command cannot be edited. (Only ping supports this right now.)
 nonCommandEditable: false # Whether commands can be edited after they have been executed.
 unknownCommandResponse: false # Whether to send a if a command is invalid.
-invite: http://discord.gg/Y6Vgfyd # The server invite to the support server.
+invite: http://discord.gg/8QebTbk # The server invite to the support server.
 joinMessageBlacklist: # The blacklist of servers to not send a join message to when joining a new server.
   - '110373943822540800' # Discord Bots
   - '264445053596991498' # Discord Bots List

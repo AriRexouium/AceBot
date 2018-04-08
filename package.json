@@ -5,7 +5,7 @@
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
-    "url": "http://aceheliflyer.github.io"
+    "url": "http://github.aceheliflyer.org"
   },
   "license": "MIT",
   "main": "index.js",
@@ -36,7 +36,7 @@
   "bugs": {
     "url": "http://github.com/Aceheliflyer/AceBot/issues"
   },
-  "homepage": "http://aceheliflyer.github.io/AceBot",
+  "homepage": "http://github.aceheliflyer.org/AceBot",
   "homepageGithub": "http://github.com/Aceheliflyer/AceBot#readme",
   "homepageTrello": "http://trello.com/b/YU3307Hi",
   "dependencies": {

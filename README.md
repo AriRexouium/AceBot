@@ -1,8 +1,8 @@
 <div align="center">
   <h1 align="center"><b>AceBot</b></h1>
   AceBot is a Discord bot designed for providing information on demand.<br />
-  <a href="http://discord.gg/Y6Vgfyd" title="Discord Guild">
-    <img src="http://discordapp.com/api/guilds/247815199539593216/embed.png?style=shield" alt="Discord Guild" />
+  <a href="http://discord.gg/8QebTbk" title="Discord Guild">
+    <img src="http://discordapp.com/api/guilds/374405739382439947/embed.png?style=shield" alt="Discord Guild" />
   </a>
   <a href="http://discordbots.org/bot/253254587341996032" title="Discord Bots">
     <img src="http://discordbots.org/api/widget/servers/253254587341996032.svg" alt="Discord Bots" />
@@ -53,7 +53,7 @@ If you can manage to actually follow these instructions then you'll be just fine
 ## Important Links
 
 - [Public Bot Invite](http://discordapp.com/oauth2/authorize?client_id=253254587341996032&permissions=0&scope=bot "Public Bot Invite")
-- [Discord Guild](http://discord.gg/Y6Vgfyd "Discord Guild")
+- [Discord Server](http://discord.gg/8QebTbk "Discord Server")
 - [Trello Board](http://trello.com/b/YU3307Hi "Trello Board")
 - [Code of Conduct](http://github.com/Aceheliflyer/AceBot/blob/master/.github/CODE_OF_CONDUCT.md "Code of Conduct")
 - [Contributing](http://github.com/Aceheliflyer/AceBot/blob/master/.github/CONTRIBUTING.md "Contributing")
