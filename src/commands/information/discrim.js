@@ -1,7 +1,10 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
+const { oneLine, stripIndents } = require('common-tags')
+const pluralize = require('pluralize')
 
-module.exports = class DscrimCommand extends Command {
+module.exports = class DiscrimCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'discrim',
@@ -23,14 +26,30 @@ module.exports = class DscrimCommand extends Command {
   }
 
   run (message, args) {
-    var users = this.client.users.findAll('discriminator', args.discriminator).map(user => `**\`${user.tag}\`**`).join('~')
-    if (!users) {
-      return message.reply(`there are no users with the discriminator \`${args.discriminator}\``)
-    } else {
+    var availableUsers = this.client.users.findAll('discriminator', args.discriminator)
+    var userStore = []
+    var users = []
+    availableUsers.forEach(user => {
+      users.push(`**${escapeMarkdown(user.tag)}**`)
+    })
+
+    while (users.length > 0) {
+      userStore.push(users.splice(0, 4).join(' | '))
+    }
+
+    if (userStore.length > 0) {
       return message.say({
-        content: users,
+        content: stripIndents`
+          ${oneLine`There is
+          **${userStore.length.toLocaleString()}
+          ${pluralize('user', userStore.length, false)}**
+          with the discriminator **${args.discriminator}**.`}
+          ${userStore.join('\n')}
+        `,
         split: true
       })
+    } else {
+      return message.reply(`there are no users with the discriminator \`${args.discriminator}\``)
     }
   }
 }
