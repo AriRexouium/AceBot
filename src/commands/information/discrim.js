@@ -27,24 +27,24 @@ module.exports = class DiscrimCommand extends Command {
 
   run (message, args) {
     var availableUsers = this.client.users.findAll('discriminator', args.discriminator)
+    var messageStore = []
     var userStore = []
-    var users = []
     availableUsers.forEach(user => {
-      users.push(`**${escapeMarkdown(user.tag)}**`)
+      userStore.push(`**${escapeMarkdown(user.tag)}**`)
     })
 
-    while (users.length > 0) {
-      userStore.push(users.splice(0, 4).join(' | '))
+    while (userStore.length > 0) {
+      messageStore.push(userStore.splice(0, 4).join(' | '))
     }
 
-    if (userStore.length > 0) {
+    if (messageStore.length > 0) {
       return message.say({
         content: stripIndents`
           ${oneLine`There is
-          **${userStore.length.toLocaleString()}
-          ${pluralize('user', userStore.length, false)}**
+          **${availableUsers.length.toLocaleString()}
+          ${pluralize('user', availableUsers.length, false)}**
           with the discriminator **${args.discriminator}**.`}
-          ${userStore.join('\n')}
+          ${messageStore.join('\n')}
         `,
         split: true
       })
