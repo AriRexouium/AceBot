@@ -98,6 +98,7 @@ module.exports = class EvalCommand extends Command {
       if (typeof (result) !== 'string') {
         result = util.inspect(result, {
           showHidden: true,
+          compact: false,
           depth: 0
         })
       }
