@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 const { oneLineCommaListsAnd, stripIndents } = require('common-tags')
-const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
 
@@ -30,14 +29,20 @@ module.exports = class ServerInfoCommand extends Command {
     var guild = message.guild
     var ownerInfo = guild.owner.user
 
+    // Embed Color
     var clientColor
     if (message.guild) {
-      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
+      clientColor = guild.me.displayHexColor
+      if (clientColor === '#000000') {
+        clientColor = 0x7289DA
+      } else {
+        clientColor = Number(clientColor.replace('#', '0x'))
+      }
     } else {
       clientColor = 0x7289DA
     }
 
+    // Security
     var verificationLevel = [
       '**None**\n(Unrestricted)',
       '**Low**\n(Must have verified email on account)',
@@ -51,17 +56,29 @@ module.exports = class ServerInfoCommand extends Command {
       '**Level 3**\n(Scan all messages.)'
     ]
 
-    var totalUsers = guild.members.filter(s => s.user.bot !== true)
-    var totalBots = guild.members.filter(s => s.user.bot !== false)
+    // Member Filter
+    var userFilter = guild.members.filter(s => s.user.bot !== true)
+    var botFilter = guild.members.filter(s => s.user.bot !== false)
 
+    // Region
     var guildRegion = await guild.fetchVoiceRegions().then(regions => {
       var name = JSON.stringify(regions.get(guild.region).name)
       return name.replace(/"/g, '')
     })
 
+    // Features
+    var features = []
+    if (guild.features.indexOf('INVITE_SPASH')) { features.push('Invite Spash') }
+    if (guild.features.indexOf('MORE_EMOJI')) { features.push('More Emojis') }
+    if (guild.features.indexOf('VERIFIED')) { features.push('Verified') }
+    if (guild.features.indexOf('VIP_REGIONS')) { features.push('VIP Regions') }
+    if (guild.features.indexOf('VANITY_URL')) { features.push('Vanity URL') }
+    for (var i = 0; i < features.length; i++) { features[i] = `• ${features[i]}` }
+
+    // Roles
     var guildRoles
     if (guild.roles.size > 1) {
-      guildRoles = oneLineCommaListsAnd`${guild.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => `**\`${role.name}\`**`)}`
+      guildRoles = oneLineCommaListsAnd`${guild._sortedRoles().array().slice(1).reverse().map(role => `**\`${role.name}\`**`)}`
     } else {
       guildRoles = 'N/A'
     }
@@ -70,16 +87,24 @@ module.exports = class ServerInfoCommand extends Command {
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
-      title: `${guild.name} - (${guildRegion})`,
-      description: `Since ${moment(guild.createdAt).format('llll')} ${si.time().timezone})`,
+      title: `${guild.name} - ${guildRegion}`,
+      description: `**ID:** ${guild.id}`,
       thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {
           'name': '🔧 Owner',
           'value': stripIndents`
-            **Name:** ${escapeMarkdown(ownerInfo.tag)}
+            **Tag:** ${escapeMarkdown(ownerInfo.tag)}
             **ID:** ${ownerInfo.id}
             **Status:** ${ownerInfo.presence.status}
+          `,
+          'inline': true
+        },
+        {
+          'name': `🕐 Created - (${moment(guild.createdAt).fromNow()})`,
+          'value': stripIndents`
+          **Date:** ${moment(guild.createdAt).format('L')}
+          **Time:** ${moment(guild.createdAt).format('LTS')} ${moment.tz(moment.tz.guess()).format('z')}
           `,
           'inline': true
         },
@@ -92,18 +117,18 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': `🕵 Users - (${totalUsers.size.toLocaleString()})`,
+          'name': `🕵 Users - (${userFilter.size.toLocaleString()})`,
           'value': stripIndents`
-            **Online:** ${totalUsers.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${totalUsers.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
-            **Idle:** ${totalUsers.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${totalUsers.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
+            **Online:** ${userFilter.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${userFilter.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
+            **Idle:** ${userFilter.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${userFilter.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
           'inline': true
         },
         {
-          'name': `🤖 Bots - (${totalBots.size.toLocaleString()})`,
+          'name': `🤖 Bots - (${botFilter.size.toLocaleString()})`,
           'value': stripIndents`
-            **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
-            **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
+            **Online:** ${botFilter.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${botFilter.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
+            **Idle:** ${botFilter.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${botFilter.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
           'inline': true
         },
@@ -128,6 +153,11 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
+          'name': '⚙ Features',
+          'value': features.size > 0 ? features.join('\n') : 'N/A',
+          'inline': true
+        },
+        {
           'name': '⚖ Verification Level',
           'value': verificationLevel[guild.verificationLevel],
           'inline': true
@@ -140,7 +170,7 @@ module.exports = class ServerInfoCommand extends Command {
         {
           'name': `🔖 Roles - (${guild.roles.size.toLocaleString()})`,
           'value': guildRoles,
-          'inline': true
+          'inline': false
         }
       ],
       color: clientColor

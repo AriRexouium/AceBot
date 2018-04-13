@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
-const { oneLineCommaListsAnd } = require('common-tags')
-const si = require('systeminformation')
+const { stripIndents, oneLineCommaListsAnd } = require('common-tags')
 const moment = require('moment')
 require('moment-duration-format')
 
@@ -26,7 +25,8 @@ module.exports = class UserInfoCommand extends Command {
         {
           key: 'user',
           prompt: 'What user would you like to lookup?',
-          type: 'member'
+          type: 'member',
+          default: ''
         }
       ],
       guildOnly: true
@@ -34,11 +34,23 @@ module.exports = class UserInfoCommand extends Command {
   }
 
   run (message, args) {
-    let user = args.user.user
+    var user
+    if (args.user === '') {
+      args.user = message.guild.members.get(message.author.id)
+      user = args.user.user
+    } else {
+      user = args.user.user
+    }
 
+    // Embed Color
     var userColor = (args.user).displayHexColor
-    if (userColor === '#000000') { userColor = 0x7289DA } else { userColor = Number(userColor.replace('#', '0x')) }
+    if (userColor === '#000000') {
+      userColor = 0x7289DA
+    } else {
+      userColor = Number(userColor.replace('#', '0x'))
+    }
 
+    // Status
     var userStatus
     if (user.presence.activity !== null) {
       if (user.presence.activity.type === 'PLAYING') {
@@ -55,6 +67,7 @@ module.exports = class UserInfoCommand extends Command {
       userStatus = '*User is not doing anything at this time.*'
     }
 
+    // Roles
     var userRoles
     if (args.user.roles.size > 1) {
       userRoles = oneLineCommaListsAnd`${args.user.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => `**\`${role.name}\`**`)}`
@@ -71,34 +84,34 @@ module.exports = class UserInfoCommand extends Command {
       thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {
-          'name': '📇 Tag',
-          'value': escapeMarkdown(user.tag),
+          'name': '📇 Identity',
+          'value': stripIndents`
+          **Tag:** ${escapeMarkdown(user.tag)}
+          **ID:** ${user.id}
+          **Status:** ${user.presence.status}
+          `,
           'inline': true
         },
         {
-          'name': '🌐 ID',
-          'value': user.id,
-          'inline': true
-        },
-        {
-          'name': '📱 Status',
-          'value': user.presence.status,
-          'inline': true
-        },
-        {
-          'name': '🔎 Identity',
+          'name': '🌐 Account Type',
           'value': user.bot === true ? 'Bot' : 'User',
           'inline': true
         },
         {
           'name': `🔧 Account Created - (${moment(user.createdAt).fromNow()})`,
-          'value': `${moment(user.createdAt).format('llll')} ${si.time().timezone}`,
-          'inline': false
+          'value': stripIndents`
+          **Date:** ${moment(user.createdAt).format('L')}
+          **Time:** ${moment(user.createdAt).format('LTS')} ${moment.tz(moment.tz.guess()).format('z')}
+          `,
+          'inline': true
         },
         {
           'name': `📥 Joined Guild - (${moment(args.user.joinedAt).fromNow()})`,
-          'value': `${moment(args.user.joinedAt).format('llll')} ${si.time().timezone}`,
-          'inline': false
+          'value': stripIndents`
+          **Date:** ${moment(args.user.joinedAt).format('L')}
+          **Time:** ${moment(args.user.joinedAt).format('LTS')} ${moment.tz(moment.tz.guess()).format('z')}
+          `,
+          'inline': true
         },
         {
           'name': `🔖 Roles - (${args.user.roles.size.toLocaleString() - 1})`,
