@@ -26,7 +26,7 @@ module.exports = class ServerInfoCommand extends Command {
     })
   }
 
-  run (message) {
+  async run (message) {
     var guild = message.guild
     var ownerInfo = guild.owner.user
 
@@ -54,6 +54,11 @@ module.exports = class ServerInfoCommand extends Command {
     var totalUsers = guild.members.filter(s => s.user.bot !== true)
     var totalBots = guild.members.filter(s => s.user.bot !== false)
 
+    var guildRegion = await guild.fetchVoiceRegions().then(regions => {
+      var name = JSON.stringify(regions.get(guild.region).name)
+      return name.replace(/"/g, '')
+    })
+
     var guildRoles
     if (guild.roles.size > 1) {
       guildRoles = oneLineCommaListsAnd`${guild.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => `**\`${role.name}\`**`)}`
@@ -65,7 +70,7 @@ module.exports = class ServerInfoCommand extends Command {
       author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
-      title: `${guild.name} - (${guild.region})`,
+      title: `${guild.name} - (${guildRegion})`,
       description: `Since ${moment(guild.createdAt).format('llll')} ${si.time().timezone})`,
       thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
@@ -99,7 +104,15 @@ module.exports = class ServerInfoCommand extends Command {
           'value': stripIndents`
             **Online:** ${totalBots.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${totalBots.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
             **Idle:** ${totalBots.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${totalBots.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
-
+          `,
+          'inline': true
+        },
+        {
+          'name': `⌨ Channels - (${guild.channels.size.toLocaleString()})`,
+          'value': stripIndents`
+            **Category:** ${guild.channels.filter(c => c.type === 'category').size.toLocaleString()}
+            **Text:** ${guild.channels.filter(c => c.type === 'text').size.toLocaleString()}
+            **Voice:** ${guild.channels.filter(c => c.type === 'voice').size.toLocaleString()}
           `,
           'inline': true
         },
@@ -125,7 +138,7 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': '🔖 Roles',
+          'name': `🔖 Roles - (${guild.roles.size.toLocaleString()})`,
           'value': guildRoles,
           'inline': true
         }
