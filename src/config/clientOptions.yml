@@ -1,0 +1,11 @@
+---
+# http://discord.js.org/#/docs/main/master/typedef/ClientOptions
+apiRequestMethod: 'sequential' # Default is sequential.
+messageCacheMaxSize: 200 # Default is 200.
+messageCacheLifetime: 4500 # Default is 0.
+messageSweepInterval: 3000 # Default is 0.
+fetchAllMembers: false # Default is false. (Should be avoided whenever possible.)
+disableEveryone: true # Default is false, recommended is true.
+disabledEvents: # http://discord.js.org/#/docs/main/master/typedef/WSEventType
+  - 'TYPING_START'
+  - 'TYPING_STOP'

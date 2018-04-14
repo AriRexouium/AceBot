@@ -8,6 +8,7 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 const clientConfig = yaml.safeLoad(fs.readFileSync('./src/config/client.yml', 'utf8'))
+const clientOptions = yaml.safeLoad(fs.readFileSync('./src/config/clientOptions.yml', 'utf8'))
 const sqlConfig = yaml.safeLoad(fs.readFileSync('./src/config/sql.yml', 'utf8'))
 
 /* Database */
@@ -20,13 +21,15 @@ Load Commando Client
 \* **************************************************************************************************** */
 const { CommandoClient, SQLiteProvider } = require('discord.js-commando')
 const client = new CommandoClient({
-  disableEveryone: true,
-  messageCacheLifetime: 4500,
-  messageSweepInterval: 3000,
-  disabledEvents: [
-    'TYPING_START',
-    'TYPING_STOP'
-  ],
+  // Client Options
+  apiRequestMethod: clientOptions.apiRequestMethod,
+  messageCacheMaxSize: clientOptions.messageCacheMaxSize,
+  messageCacheLifetime: clientOptions.messageCacheLifetime,
+  messageSweepInterval: clientOptions.messageSweepInterval,
+  fetchAllMembers: clientOptions.fetchAllMembers,
+  disableEveryone: clientOptions.disableEveryone,
+  disabledEvents: clientOptions.disabledEvents,
+  // Commando Options
   commandPrefix: clientConfig.commandPrefix,
   commandEditableDuration: clientConfig.commandEditableDuration,
   nonCommandEditable: clientConfig.nonCommandEditable,
