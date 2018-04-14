@@ -24,7 +24,6 @@ module.exports = class GetCodeCommand extends Command {
       if (error) {
         message.say(`There was an error getting that command: \`${error.message}\``)
       } else {
-        data = clean(data.toString())
         message.say({
           content: data,
           code: 'js',
@@ -32,21 +31,5 @@ module.exports = class GetCodeCommand extends Command {
         })
       }
     })
-  }
-}
-
-/**
- * Adds a nospace character to embed breaking text.
- * @param {string} text The text to clean.
- * @return {string} The text after it was cleaned.
- */
-var clean = (text) => {
-  if (typeof (text) === 'string') {
-    return text
-      .replace(/`/g, '`' + String.fromCharCode(8203))
-      .replace(/@/g, '@' + String.fromCharCode(8203))
-      .replace(/#/g, '#' + String.fromCharCode(8203))
-  } else {
-    return text
   }
 }
