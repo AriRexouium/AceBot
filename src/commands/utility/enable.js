@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { oneLine } = require('common-tags')
 
-module.exports = class EnableCommandCommand extends Command {
+module.exports = class EnableCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'enable',
@@ -50,12 +50,19 @@ module.exports = class EnableCommandCommand extends Command {
   }
 
   run (message, args) {
-    if (args.cmdOrGrp.isEnabledIn(message.guild)) {
+    const group = args.cmdOrGrp.group
+    if (args.cmdOrGrp.isEnabledIn(message.guild, true)) {
       return message.reply(
-        `the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'} is already enabled.`
+        `the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'} is already enabled${
+          group && !group.enabled ? `, but the \`${group.name}\` group is disabled, so it still can't be used` : ''
+        }.`
       )
     }
     args.cmdOrGrp.setEnabledIn(message.guild, true)
-    return message.reply(`enabled the \`${args.cmdOrGrp.name}\` ${args.cmdOrGrp.group ? 'command' : 'group'}.`)
+    return message.reply(
+      `enabled the \`${args.cmdOrGrp.name}\` ${group ? 'command' : 'group'}${
+        group && !group.enabled ? `, but the \`${group.name}\` group is disabled, so it still can't be used` : ''
+      }.`
+    )
   }
 }
