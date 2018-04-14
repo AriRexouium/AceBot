@@ -58,7 +58,7 @@ module.exports = class StatsCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         title: 'Client Stats',
-        thumbnail: { url: this.client.user.avatarURL() },
+        thumbnail: { url: this.client.user.displayAvatarURL() },
         fields: [
           {
             'name': '🕑 Uptime',

@@ -35,7 +35,7 @@ module.exports = class SeenCommand extends Command {
       message.embed({
         author: {
           name: `${user.tag} was seen ${moment.duration(messageTime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')} ago.`,
-          icon_url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png'
+          icon_url: user.displayAvatarURL()
         },
         color: userColor
       })

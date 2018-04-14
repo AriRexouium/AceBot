@@ -84,7 +84,7 @@ module.exports = class ProfileCommand extends Command {
       author: { name: `${user.username}${userInfo.fullName}` },
       footer: { text: userInfo.timezone !== '' ? `${userInfo.timezone} • ${moment.tz(userInfo.timezone).format('llll')}` : '' },
       description: message.guild.name,
-      thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
+      thumbnail: { url: user.displayAvatarURL() },
       fields: embedFields,
       color: userColor
     })

@@ -81,7 +81,7 @@ module.exports = class UserInfoCommand extends Command {
       timestamp: new Date(),
       title: `Information for ${escapeMarkdown(user.tag)}${user.bot === true ? ' **[BOT]**' : ''}`,
       description: userStatus,
-      thumbnail: { url: user.avatarURL() !== null ? user.avatarURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
+      thumbnail: { url: user.displayAvatarURL() },
       fields: [
         {
           'name': '📇 Identity',
