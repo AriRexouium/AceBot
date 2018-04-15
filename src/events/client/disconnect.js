@@ -9,15 +9,12 @@ module.exports = (client, event) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.disconnect) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'disconnect' },
           timestamp: new Date(),
-          title: `disconnect${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} disconnected!`,
+          title: client.shard ? `Shard ${client.shard.id} disconnected.` : 'Disconnected!',
           color: 0xFFFF00
         }]
       })

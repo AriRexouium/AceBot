@@ -12,19 +12,17 @@ module.exports = (client, guild, command, enabled) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandStatusChange) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'commandStatusChange' },
           timestamp: new Date(),
-          title: `commandStatusChange${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `Command Status Changed${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          thumbnail: { url: guild ? guild.iconURL() : client.user.displayAvatarURL() },
           description: oneLine`
             Command ${command.memberName} \`(${command.groupID})\`
             ${enabled ? 'enabled' : 'disabled'}
             ${guild ? `in guild ${guild.name} \`(${guild.id})\`` : 'globally'}.
-            ${client.shard ? `\nShard ID: ${client.shard.id}` : ''}
           `,
           color: 0x00FFFF
         }]

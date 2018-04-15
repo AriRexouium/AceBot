@@ -12,14 +12,13 @@ module.exports = (client, guild, group, enabled) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.groupStatusChange) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'groupStatusChange' },
           timestamp: new Date(),
-          title: `groupStatusChange${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `Group Status Changed${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          thumbnail: { url: guild ? guild.iconURL() : client.user.displayAvatarURL() },
           description: oneLine`
             Group ${group.id}
             ${enabled ? 'enabled' : 'disabled'}

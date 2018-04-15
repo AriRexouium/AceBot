@@ -1,3 +1,4 @@
+const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, message, reason) => {
@@ -18,28 +19,34 @@ module.exports = (client, message, reason) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.commandBlocked) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'commandBlocked' },
           timestamp: new Date(),
-          title: `commandBlocked${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `Command Blocked${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          thumbnail: { url: message.author.displayAvatarURL() },
           fields: [
             {
               'name': 'Command',
-              'value': message.command ? `${message.command.memberName} \`(${message.command.groupID})\`` : '',
+              'value': `${message.command.memberName} \`(${message.command.groupID})\``,
               'inline': true
             },
             {
               'name': 'User',
-              'value': `${message.author.tag} \`(${message.author.id})\``,
+              'value': stripIndents`
+                **Tag:** ${escapeMarkdown(message.author.tag)}
+                **ID:** ${message.author.id}
+                **Status:** ${message.author.presence.status}
+              `,
               'inline': true
             },
             {
               'name': 'Location',
-              'value': `${message.guild ? `**Guild:** ${message.guild.name} \`(${message.guild.id})\`\n` : ''}**Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}`,
+              'value': stripIndents`
+                ${message.guild ? `**Guild:** ${escapeMarkdown(message.guild.name)} \`(${message.guild.id})\`\n` : ''}
+                **Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
+              `,
               'inline': true
             },
             {

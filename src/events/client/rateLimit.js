@@ -12,14 +12,12 @@ module.exports = (client, rateLimitInfo) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.rateLimit) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'rateLimit' },
           timestamp: new Date(),
-          title: `rateLimit${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `Rate Limit Hit${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           fields: [
             {
               'name': 'Limit',

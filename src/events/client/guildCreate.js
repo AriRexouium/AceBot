@@ -34,14 +34,13 @@ module.exports = async (client, guild) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.guildCreate) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'guildCreate' },
           timestamp: new Date(),
-          title: `guildCreate${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `New Server${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          thumbnail: { url: guild ? guild.iconURL() : client.user.displayAvatarURL() },
           fields: [
             {
               'name': 'Guild',

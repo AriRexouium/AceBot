@@ -30,15 +30,12 @@ module.exports = async (client) => {
   if (client.config.webhook.enabled) {
     if (client.config.webhook.clientEvents.ready) {
       client.webhook({
-        content: '',
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          author: { name: client.user.tag, icon_url: client.user.displayAvatarURL() },
           footer: { text: 'ready' },
           timestamp: new Date(),
-          title: `ready${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: `${client.shard ? `Shard ${client.shard.id}` : 'Master'} is ready!`,
+          title: client.shard ? `Shard ${client.shard.id} is ready.` : 'Ready!',
           color: 0x00AA00
         }]
       })
