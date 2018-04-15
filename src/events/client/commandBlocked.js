@@ -44,7 +44,7 @@ module.exports = (client, message, reason) => {
             {
               'name': 'Location',
               'value': stripIndents`
-                ${message.guild ? `**Guild:** ${escapeMarkdown(message.guild.name)} \`(${message.guild.id})\`\n` : ''}
+                ${message.guild ? `**Guild:** ${escapeMarkdown(message.guild.name)} \`(${message.guild.id})\`` : ''}
                 **Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
               `,
               'inline': true

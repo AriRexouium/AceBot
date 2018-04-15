@@ -3,7 +3,7 @@ const { stripIndents } = require('common-tags')
 module.exports = (client, type, registry) => {
   client.log('info', stripIndents`
     ${client.shard ? `Shard ID: ${client.shard.id}` : ''}
-  `, 'Type Register', `${type.memberName} (${type.groupID})`)
+  `, 'Type Register', type.id)
 
   // Webhook
   if (client.config.webhook.enabled) {
