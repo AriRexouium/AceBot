@@ -2,6 +2,7 @@ const unirest = require('unirest')
 
 /**
  * Send server count to http://discordbots.org.
+ * @param {any} client The Commando client.
  * @param {string} client The client of the application.
  */
 module.exports = function discordBotsOrg (client) {

@@ -132,7 +132,7 @@ client.registry
 Load Modules
 \* **************************************************************************************************** */
 listFiles('./src/modules', 'js').forEach(clientModule => {
-  client[clientModule.split('.')[0]] = require(`./src/modules/${clientModule}`)
+  client[clientModule.split('.')[0]] = require(`./src/modules/${clientModule}`).bind(null, client)
   delete require.cache[require.resolve(`./src/modules/${clientModule}`)]
 })
 
