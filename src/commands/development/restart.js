@@ -1,6 +1,5 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
-const si = require('systeminformation')
 const moment = require('moment')
 require('moment-duration-format')
 const pluralize = require('pluralize')
@@ -51,7 +50,7 @@ module.exports = class RestartCommand extends Command {
         title: 'Restart requested, please wait.',
         description: (stripIndents`
           **Uptime:** ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
-          **Since**: ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${si.time().timezone}
+          **Since**: ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${moment.tz(moment.tz.guess()).format('z')}
         `),
         color: clientColor
       })

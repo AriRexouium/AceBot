@@ -1,6 +1,5 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
-const si = require('systeminformation')
 const os = require('os-utils')
 const moment = require('moment')
 require('moment-duration-format')
@@ -64,7 +63,7 @@ module.exports = class StatsCommand extends Command {
             'name': '🕑 Uptime',
             'value': stripIndents`
             ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
-            *(since ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${si.time().timezone})*
+            *(since ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${moment.tz(moment.tz.guess()).format('z')})*
             `,
             'inline': false
           },

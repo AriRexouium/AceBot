@@ -1,7 +1,6 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
-const si = require('systeminformation')
 const request = require('request')
 const exec = require('child_process').execSync
 const moment = require('moment')
@@ -63,8 +62,8 @@ module.exports = class RepoCommand extends Command {
         {
           'name': 'Latest Build',
           'value': stripIndents`
-            **Last Git Push:** ${moment(GitHub.pushed_at).format('llll')} ${si.time().timezone}
-            **Last Travis Build:** ${moment(TravisCI.last_build_finished_at).format('llll')} ${si.time().timezone}
+            **Last Git Push:** ${moment(GitHub.pushed_at).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}
+            **Last Travis Build:** ${moment(TravisCI.last_build_finished_at).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}
           `,
           'inline': true
         },

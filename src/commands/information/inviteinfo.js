@@ -2,7 +2,6 @@ const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 const moment = require('moment')
-const si = require('systeminformation')
 
 module.exports = class InviteInfoCommand extends Command {
   constructor (client) {
@@ -48,7 +47,7 @@ module.exports = class InviteInfoCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         title: guild.name,
-        description: `Since ${moment(guild.createdAt).format('llll')} ${si.time().timezone}`,
+        description: `Since ${moment(guild.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}`,
         thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
         fields: [
           {
