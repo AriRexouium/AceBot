@@ -1,6 +1,4 @@
-install:
-  - npm install
 language: node_js
-node_js:
-  - "8.4"
+node_js: 9
+install: npm install
 script: node index.js --travis-test
