@@ -3,6 +3,7 @@ const { stripIndents } = require('common-tags')
 const { escapeMarkdown } = require('discord.js')
 
 module.exports = async (client, guild) => {
+  var eventName = client.getFileName(__filename)
   var ownerInfo = guild.owner.user
 
   client.log('info', stripIndents`
@@ -32,14 +33,14 @@ module.exports = async (client, guild) => {
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.clientEvents.guildCreate) {
+    if (client.config.webhook.clientEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'guildCreate' },
+          footer: { text: eventName },
           timestamp: new Date(),
-          title: `New Server${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
+          title: `Joined Server${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           thumbnail: { url: guild ? guild.iconURL() : client.user.displayAvatarURL() },
           fields: [
             {

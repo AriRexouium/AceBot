@@ -2,6 +2,7 @@ const pluralize = require('pluralize')
 const { oneLine } = require('common-tags')
 
 module.exports = async (client) => {
+  var eventName = client.getFileName(__filename)
   await client.log('success', `Logged in as ${client.user.tag} (${client.user.id}).`, 'Discord', 'Login')
 
   if (client.config.gameConfig.enabled === true) {
@@ -28,12 +29,12 @@ module.exports = async (client) => {
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.clientEvents.ready) {
+    if (client.config.webhook.clientEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'ready' },
+          footer: { text: eventName },
           timestamp: new Date(),
           title: client.shard ? `Shard ${client.shard.id} is ready.` : 'Ready!',
           color: 0x00AA00

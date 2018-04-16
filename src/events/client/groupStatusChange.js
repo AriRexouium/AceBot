@@ -1,6 +1,7 @@
 const { oneLine } = require('common-tags')
 
 module.exports = (client, guild, group, enabled) => {
+  var eventName = client.getFileName(__filename)
   client.log('info', oneLine`
     Group ${group.id}
     ${enabled ? 'enabled' : 'disabled'}
@@ -10,12 +11,12 @@ module.exports = (client, guild, group, enabled) => {
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.clientEvents.groupStatusChange) {
+    if (client.config.webhook.clientEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'groupStatusChange' },
+          footer: { text: eventName },
           timestamp: new Date(),
           title: `Group Status Changed${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           thumbnail: { url: guild ? guild.iconURL() : client.user.displayAvatarURL() },

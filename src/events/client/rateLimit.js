@@ -1,6 +1,7 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, rateLimitInfo) => {
+  var eventName = client.getFileName(__filename)
   client.log('warn', stripIndents`
     Limit: ${rateLimitInfo.limit}
     Timeout: ${rateLimitInfo.timeout}ms.
@@ -10,12 +11,12 @@ module.exports = (client, rateLimitInfo) => {
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.clientEvents.rateLimit) {
+    if (client.config.webhook.clientEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'rateLimit' },
+          footer: { text: eventName },
           timestamp: new Date(),
           title: `Rate Limit Hit${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           fields: [

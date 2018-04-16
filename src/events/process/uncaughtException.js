@@ -1,6 +1,7 @@
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, error) => {
+  var eventName = client.getFileName(__filename)
   client.temp.error = error
   client.log('error', stripIndents`
     ${client.shard ? `Shard ID: ${client.shard.id}` : '\n'}
@@ -9,12 +10,12 @@ module.exports = (client, error) => {
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.processEvents.uncaughtException) {
+    if (client.config.webhook.processEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'uncaughtException' },
+          footer: { text: eventName },
           timestamp: new Date(),
           title: `Uncaught Exception${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           description: '```js\n' + client.cleanText(error.stack) + '\n```',

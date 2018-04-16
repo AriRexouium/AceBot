@@ -2,11 +2,12 @@ const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, command, promise, message, args, fromPattern) => {
+  var eventName = client.getFileName(__filename)
   client.botStats.commandsUsed = client.botStats.commandsUsed + 1
 
-  if (client.config.react.commandRun.enabled === true) {
+  if (client.config.react[eventName].enabled === true) {
     try {
-      message.react(client.config.react.commandRun.emoji)
+      message.react(client.config.react[eventName].emoji)
     } catch (error) {}
   }
 
@@ -18,12 +19,12 @@ module.exports = (client, command, promise, message, args, fromPattern) => {
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.clientEvents.commandRun) {
+    if (client.config.webhook.clientEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'commandRun' },
+          footer: { text: eventName },
           timestamp: new Date(),
           title: `Command Run${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           thumbnail: { url: message.author.displayAvatarURL() },

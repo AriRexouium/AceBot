@@ -4,7 +4,8 @@
  * @param {string} text The content to send to the webhook.
  */
 module.exports = function webhook (client, text) {
-  require('discord.js').WebhookClient(
+  var Discord = require('discord.js')
+  new Discord.WebhookClient(
     client.config.webhook.webhookID,
     client.config.webhook.webhookToken
   ).send(text)

@@ -2,6 +2,7 @@ const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 
 module.exports = (client, command, error, message, args, fromPattern) => {
+  var eventName = client.getFileName(__filename)
   client.temp.error = error
   client.log('error', stripIndents`\n
     User: ${message.author.tag} (${message.author.id})
@@ -10,20 +11,20 @@ module.exports = (client, command, error, message, args, fromPattern) => {
     ${error.stack}
   `, 'Command Error', message.command ? `${message.command.memberName} (${message.command.groupID})` : '')
 
-  if (client.config.react.commandError.enabled === true) {
+  if (client.config.react[eventName].enabled === true) {
     try {
-      message.react(client.config.react.commandError.emoji)
+      message.react(client.config.react[eventName].emoji)
     } catch (error) {}
   }
 
   // Webhook
   if (client.config.webhook.enabled) {
-    if (client.config.webhook.clientEvents.commandError) {
+    if (client.config.webhook.clientEvents[eventName]) {
       client.webhook({
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [{
-          footer: { text: 'commandError' },
+          footer: { text: eventName },
           timestamp: new Date(),
           title: `Command Error${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           thumbnail: { url: message.author.displayAvatarURL() },
