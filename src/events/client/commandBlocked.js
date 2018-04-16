@@ -30,7 +30,11 @@ module.exports = (client, message, reason) => {
           fields: [
             {
               'name': 'Command',
-              'value': `${message.command.memberName} \`(${message.command.groupID})\``,
+              'value': stripIndents`
+                **Name:** ${message.command.memberName}
+                **Group ID:** ${message.command.groupID}
+                ${message.argString ? `**Args:** ${escapeMarkdown(message.argString)}` : ''}
+              `,
               'inline': true
             },
             {
