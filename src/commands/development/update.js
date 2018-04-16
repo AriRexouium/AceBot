@@ -29,34 +29,46 @@ module.exports = class UpdateCommand extends Command {
     }
   }
 
-  run (message) {
-    message.say('**Checking for updates...**').then(() => {
-      try {
-        var gitPull = exec('git pull --all').toString()
-        message.say({
-          content: gitPull,
+  async run (message) {
+    await message.say('**Checking for updates...**')
+    try {
+      /* **************************************************************************************************** *\
+      Git
+      \* **************************************************************************************************** */
+      // Pull Code
+      var gitPull = exec('git pull --all').toString()
+      // Send Git result.
+      await message.say({
+        content: gitPull,
+        code: '',
+        split: true
+      })
+      // Check to see if Git returned an already up to date message.
+      if (gitPull.indexOf('Already up-to-date.') > -1 || gitPull.indexOf('Already up to date.') > -1) {
+        await message.say('**There was nothing to update!**')
+      } else {
+        /* **************************************************************************************************** *\
+        NPM
+        \* **************************************************************************************************** */
+        // Install Node Dependencies
+        var npmUpdate = exec('npm install').toString()
+        // Send NPM result.
+        await message.say({
+          content: npmUpdate,
           code: '',
           split: true
         })
-        if (gitPull.indexOf('Already up-to-date.') > -1 || gitPull.indexOf('Already up to date.') > -1) {
-          message.say('**There was nothing to update!**')
-        } else {
-          message.say('*Successfully updated code! Now updating node modules, this might take a while.**').then(() => {
-            var npmUpdate = exec('npm install').toString()
-            message.say({
-              content: npmUpdate,
-              code: '',
-              split: true
-            }).then(message.say(`**Successfully updated everything! Awaiting next restart.**`))
-          })
-        }
-      } catch (error) {
-        message.say({
-          content: `'**An error has occurred.**'\n${error.stack}`,
-          code: '',
-          split: true
-        }).then(message.say())
+        // Let the user know they need to restart the bot.
+        await message.say(`**Successfully updated everything! Awaiting next restart.**`)
       }
-    })
+    } catch (error) {
+      // Error Message
+      await message.say({
+        content: error.stack,
+        code: '',
+        split: true
+      })
+      message.say('**An error has occurred.**')
+    }
   }
 }
