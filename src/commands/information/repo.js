@@ -7,7 +7,7 @@ const exec = require('child_process').execSync
 const moment = require('moment')
 require('moment-duration-format')
 
-module.exports = class DiscordStatsCommand extends Command {
+module.exports = class RepoCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'repo',

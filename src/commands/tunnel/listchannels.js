@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const columnify = require('columnify')
 
-module.exports = class ListChannels extends Command {
+module.exports = class ListChannelsCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'listchannels',

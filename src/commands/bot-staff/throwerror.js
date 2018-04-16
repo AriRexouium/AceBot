@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando')
 
-module.exports = class SayCommand extends Command {
+module.exports = class ThrowErrorCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'throwerror',
@@ -24,6 +24,6 @@ module.exports = class SayCommand extends Command {
   }
 
   async run (message, args) {
-    throw new Error(`Error invoked by ${message.author.tag} (message.author.id).`)
+    throw new Error(`Error invoked by ${message.author.tag} (${message.author.id}).`)
   }
 }

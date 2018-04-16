@@ -1,7 +1,7 @@
 // TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
-const childProcess = require('child_process')
+const exec = require('child_process').execSync
 const os = require('os')
 
 module.exports = class ExecCommand extends Command {
@@ -49,7 +49,7 @@ module.exports = class ExecCommand extends Command {
 
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        eval(code.substr(code.indexOf(' ') + 1)) // eslint-disable-line no-eval
+        exec(code.substr(code.indexOf(' ') + 1))
       } catch (error) {
         message.say({
           content: `${error.name}: ${error.message}`,
@@ -62,7 +62,7 @@ module.exports = class ExecCommand extends Command {
     var execTime
     try {
       var hrStart = await process.hrtime(this.hrStart)
-      var result = await childProcess.execSync(code)
+      var result = await exec(code)
       var hrEnd = await process.hrtime(hrStart)
       execTime = hrEnd
 

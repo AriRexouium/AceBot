@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { oneLineCommaListsAnd } = require('common-tags')
 
-module.exports = class EmojiCommand extends Command {
+module.exports = class EmojisCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'emojis',

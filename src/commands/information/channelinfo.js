@@ -3,7 +3,7 @@ const { oneLineCommaListsAnd } = require('common-tags')
 const si = require('systeminformation')
 const moment = require('moment')
 
-module.exports = class EmojiCommand extends Command {
+module.exports = class ChannelInfoCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'channelinfo',

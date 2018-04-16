@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const { oneLineTrim } = require('common-tags')
 const columnify = require('columnify')
 
-module.exports = class ListServers extends Command {
+module.exports = class ListServersCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'listservers',

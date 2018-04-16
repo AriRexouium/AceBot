@@ -3,6 +3,7 @@ const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 const moment = require('moment')
 const si = require('systeminformation')
+
 module.exports = class InviteInfoCommand extends Command {
   constructor (client) {
     super(client, {

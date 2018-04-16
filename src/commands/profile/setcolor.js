@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando')
 const isHex = require('is-hex')
 
-module.exports = class SetAboutCommand extends Command {
+module.exports = class SetColorCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'setcolor',

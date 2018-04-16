@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando')
 const { escapeMarkdown } = require('discord.js')
 const { stripIndents } = require('common-tags')
 
-module.exports = class UserInfoCommand extends Command {
+module.exports = class UserPermsCommand extends Command {
   constructor (client) {
     super(client, {
       name: 'userperms',
