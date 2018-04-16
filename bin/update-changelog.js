@@ -11,7 +11,7 @@ var repo = 'Aceheliflyer/AceBot'
 var text = ''
 
 var verbose = false
-if (process.argv[2] === '--verbose') verbose = true
+if (process.argv.includes('--verbose')) verbose = true
 
 // Header text.
 text += stripIndents`

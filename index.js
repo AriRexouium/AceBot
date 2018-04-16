@@ -222,7 +222,11 @@ client.temp.error = ''
 client.temp.tunnels = []
 
 // Travis Test Mode
-if (process.argv[2] === '--travis-test') { client.travisTest = true } else { client.travisTest = false }
+if (process.argv.includes('--travis')) {
+  client.temp.travis = true
+} else {
+  client.temp.travis = false
+}
 
 // Bot Stats
 const botStats = { clientMentions: 0, commandsUsed: 0, messagesReceived: 0, messagesSent: 0 }
@@ -232,7 +236,7 @@ client.botStats = botStats
 Login
 \* **************************************************************************************************** */
 var token
-if (client.travisTest === true) {
+if (client.temp.travis === true) {
   token = process.env.TRAVISTOKEN
 } else if (client.config.client.token) {
   token = client.config.client.token
