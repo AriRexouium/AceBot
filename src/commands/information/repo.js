@@ -1,7 +1,7 @@
 // NOTE: This command has not been tested if there is a server outage.
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
-const request = require('request')
+const snekfetch = require('snekfetch')
 const exec = require('child_process').execSync
 const moment = require('moment')
 require('moment-duration-format')
@@ -32,7 +32,6 @@ module.exports = class RepoCommand extends Command {
 
     let GitHub = await apiRequest('http://api.github.com/repositories/77184461', { 'User-Agent': 'AceBot' })
     let TravisCI = await apiRequest('http://api.travis-ci.org/repositories/12117361.json', { 'User-Agent': 'AceBot' })
-    GitHub = JSON.parse(GitHub); TravisCI = JSON.parse(TravisCI)
 
     message.embed({
       author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
@@ -87,14 +86,14 @@ module.exports = class RepoCommand extends Command {
  */
 let apiRequest = (url, headers) => {
   return new Promise((resolve, reject) => {
-    request({ url, headers: headers },
-      (error, response, data) => {
+    snekfetch.get(url)
+      .set('User-Agent', 'AceBot')
+      .then((data, error) => {
         if (error) {
           return reject(error)
         } else {
-          return resolve(data)
+          return resolve(JSON.parse(data.text))
         }
-      }
-    )
+      })
   })
 }
