@@ -1,4 +1,4 @@
-const unirest = require('unirest')
+const snekfetch = require('snekfetch')
 
 /**
  * Send server count to http://discordbots.org.
@@ -12,8 +12,8 @@ module.exports = function discordBotsPw (client) {
     totalGuilds = { 'server_count': client.guilds.size, 'shard_id': client.shard.id, 'shard_count': client.shard.count }
   }
 
-  unirest.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-    .headers({ 'Authorization': client.config.botlist.BotsDiscordPw.token, 'Content-Type': 'application/json' })
+  snekfetch.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
+    .set('Authorization', client.config.botlist.BotsDiscordPw.token)
     .send(totalGuilds)
-    .end(() => { client.log('info', 'Server count sent to http://bots.discord.pw.') })
+    .then(client.log('info', 'Server count sent to http://bots.discord.pw.'))
 }

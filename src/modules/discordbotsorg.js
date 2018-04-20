@@ -1,9 +1,8 @@
-const unirest = require('unirest')
+const snekfetch = require('snekfetch')
 
 /**
  * Send server count to http://discordbots.org.
  * @param {any} client The Commando client.
- * @param {string} client The client of the application.
  */
 module.exports = function discordBotsOrg (client) {
   var totalGuilds
@@ -13,8 +12,8 @@ module.exports = function discordBotsOrg (client) {
     totalGuilds = { 'server_count': client.guilds.size, 'shard_id': client.shard.id, 'shard_count': client.shard.count }
   }
 
-  unirest.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-    .headers({ 'Authorization': client.config.botlist.DiscordBotsOrg.token, 'Content-Type': 'application/json' })
+  snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
+    .set('Authorization', client.config.botlist.DiscordBotsOrg.token)
     .send(totalGuilds)
-    .end(() => { client.log('info', 'Server count sent to http://discordbots.org.') })
+    .then(client.log('info', 'Server count sent to http://discordbots.org.'))
 }
