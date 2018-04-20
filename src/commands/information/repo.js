@@ -2,7 +2,6 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
 const snekfetch = require('snekfetch')
-const exec = require('child_process').execSync
 const moment = require('moment')
 require('moment-duration-format')
 
@@ -30,8 +29,9 @@ module.exports = class RepoCommand extends Command {
     let buildResult = ['Passing', 'Failing', 'Invalid']
     let buildResultColor = [0x39AA56, 0xDB4545, 0x9D9D9D]
 
-    let GitHub = await apiRequest('http://api.github.com/repositories/77184461', { 'User-Agent': 'AceBot' })
-    let TravisCI = await apiRequest('http://api.travis-ci.org/repositories/12117361.json', { 'User-Agent': 'AceBot' })
+    let GitHub = await apiRequest('http://api.github.com/repositories/77184461')
+    let Commits = await apiRequest('http://api.github.com/repositories/77184461/commits')
+    let TravisCI = await apiRequest('http://api.travis-ci.org/repositories/12117361.json')
 
     message.embed({
       author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
@@ -68,7 +68,7 @@ module.exports = class RepoCommand extends Command {
         },
         {
           'name': 'Recent Commits',
-          'value': exec(`git log --max-count=5 --format="[\`%h\`](http://github.com/${GitHub.full_name}/commit/%H) %s%n   - %aN, %ar"`).toString(), // eslint-disable-line no-useless-escape
+          'value': Commits.slice(0, 5).map(commit => `[\`${commit.sha.substr(0, 7)}\`](${commit.html_url}) ${commit.commit.message}\n   - ${commit.commit.author.name}, ${moment(commit.commit.author.date).fromNow()}`).join('\n'),
           'inline': true
         }
       ],
@@ -81,10 +81,9 @@ module.exports = class RepoCommand extends Command {
  * Fetch information from more than one source.
  * @author cat16
  * @param {string} url The URL to fetch from.
- * @param {any} headers The headers to set.
  * @return {Promise<any>}
  */
-let apiRequest = (url, headers) => {
+let apiRequest = url => {
   return new Promise((resolve, reject) => {
     snekfetch.get(url)
       .set('User-Agent', 'AceBot')
