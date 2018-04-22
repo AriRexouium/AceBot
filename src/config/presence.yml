@@ -14,5 +14,5 @@ games:
     activityType: 'LISTENING' # Listening to
     status: 'idle'
 
-  - activityName: '${client.options.commandPrefix}stats to view stats.'
+  - activityName: '${client.options.commandPrefix}${client.registry.commands.random().name}'
     status: 'dnd'

@@ -5,18 +5,18 @@ module.exports = async (client) => {
   var eventName = client.getFileName(__filename)
   await client.log('success', `Logged in as ${client.user.tag} (${client.user.id}).`, 'Discord', 'Login')
 
-  if (client.config.gameConfig.enabled === true) {
-    var games = client.config.gameConfig.games
-    if (client.config.gameConfig.rotate === false) {
+  if (client.config.presence.enabled === true) {
+    var games = client.config.presence.games
+    if (client.config.presence.rotate === false) {
       client.user.setPresence(await calcPresence(client, games[0]))
       setInterval(async () => {
         client.user.setPresence(await calcPresence(client, games[0]))
-      }, client.config.gameConfig.rotateTime)
+      }, client.config.presence.rotateTime)
     } else {
       client.user.setPresence(await calcPresence(client, games[Math.floor(Math.random() * games.length)]))
       setInterval(async () => {
         client.user.setPresence(await calcPresence(client, games[Math.floor(Math.random() * games.length)]))
-      }, client.config.gameConfig.rotateTime)
+      }, client.config.presence.rotateTime)
     }
   }
 
