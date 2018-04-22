@@ -180,35 +180,9 @@ events.forEach(event => {
 /* **************************************************************************************************** *\
 Load Commando Inhibitors
 \* **************************************************************************************************** */
-// User Blacklist
-client.dispatcher.addInhibitor(message => {
-  const blacklist = client.provider.get('global', 'userBlacklist', [])
-  if (!blacklist.includes(message.author.id)) return false
-  message.reply('you are blacklisted.')
-  return 'blacklist'
-})
-
-// Lockdown
-client.dispatcher.addInhibitor(message => {
-  // Check in the user is an Owner.
-  if (
-    client.provider.get('global', 'developer', []).includes(message.author.id) ||
-    client.provider.get('global', 'staff', []).includes(message.author.id) ||
-    client.isOwner(message.author.id)
-  ) return false
-  // Get lockdown status and reason for a possible lockdown.
-  const lockdown = client.provider.get('global', 'lockdown', false)
-  const reasonTemp = client.provider.get('global', 'lockdownReason', false)
-  var lockdownReason
-  // Return `None Specified.` if no reason is given for the lockdown.
-  if (reasonTemp === false) { lockdownReason = 'None Specified.' } else { lockdownReason = reasonTemp }
-  // Return lockdown status.
-  if (lockdown === false) {
-    return false
-  } else {
-    message.reply(`sorry, but the bot is currently on lockdown.\n**Reason:** ${lockdownReason}`)
-    return 'lockdown'
-  }
+listFiles('./src/inhibitors', 'js').forEach(inhibitor => {
+  client.dispatcher.addInhibitor(require(`./src/inhibitors/${inhibitor}`).bind(null, client))
+  delete require.cache[require.resolve(`./src/inhibitors/${inhibitor}`)]
 })
 
 /* **************************************************************************************************** *\
