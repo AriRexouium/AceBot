@@ -54,7 +54,7 @@
           "New MySQL support, you can now toggle between MySQL and SQLite.",
           "New profile system, users can now have a custom profile.",
           "Added lockdown system, you can now lockdown the bot with a provided reason.",
-          "Added tunnel ssystem, send and receive messages from any channel the bot has access to."
+          "Added tunnel system, send and receive messages from any channel the bot has access to."
         ],
         "changed": [
           "Contributors get their own file.",

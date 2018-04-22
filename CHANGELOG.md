@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-> Last Updated 2018/04/08 16:02:37
+> Last Updated 2018/04/22 18:26:74
 
 ## [Unreleased]
 
@@ -43,7 +43,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [3.4.0] - 2018-03-16
 ### Added
 - Added lockdown system, you can now lockdown the bot with a provided reason.
-- Added tunnel ssystem, send and receive messages from any channel the bot has access to.
+- Added tunnel system, send and receive messages from any channel the bot has access to.
 - Bot now sends a message when it joins a new guild.
 - New MySQL support, you can now toggle between MySQL and SQLite.
 - New dynamic config loading system.
