@@ -19,6 +19,9 @@ package-lock.json
 .npm/
 node_modules/
 
+# Temp
+temp/
+
 # Microsoft VS Code
 .vscode/
 
