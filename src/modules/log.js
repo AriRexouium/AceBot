@@ -16,7 +16,7 @@ var cases = {
 
 /**
  * The client's default logger.
- * @param {any} client The Commando client.
+ * @param {any} client The CommandoClient.
  * @param {string} type The type of log. (Ex: info)
  * @param {string} body The description/body of the log.
  * @param {string} parent The parent of the error. (Use '' to ignore value and default to cwd.)

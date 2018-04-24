@@ -1,6 +1,6 @@
 /**
  * Adds a nospace character to embed breaking text.
- * @param {any} client The Commando client.
+ * @param {any} client The CommandoClient.
  * @param {string} text The text to clean.
  * @return {string} The text after it was cleaned.
  */

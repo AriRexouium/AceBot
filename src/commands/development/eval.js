@@ -136,27 +136,25 @@ module.exports = class EvalCommand extends Command {
       evalTime = hrEnd
 
       // Evaluation Error
-      client.hastebin(error.stack, 'js').then(link => {
-        message.embed({
-          author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
-          footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
-          timestamp: new Date(),
-          description: `*Evaluated in ${evalTime[0] > 0 ? `${evalTime[0]}s ` : ''}${evalTime[1] / 1000000}ms.*`,
-          fields: [
-            {
-              'name': 'Evaluated',
-              'value': '```js\n' + client.cleanText(code) + '\n```',
-              'inline': false
-            },
-            {
-              'name': 'Exception',
-              'value': `[\`\`\`js\n${client.cleanText(error.name)}: ${client.cleanText(error.message)}\n\`\`\`](${link})`,
-              'inline': false
-            }
-          ],
-          color: 0xAA0000
-        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${client.cleanText(error)}\``) })
-      })
+      message.embed({
+        author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
+        footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
+        timestamp: new Date(),
+        description: `*Evaluated in ${evalTime[0] > 0 ? `${evalTime[0]}s ` : ''}${evalTime[1] / 1000000}ms.*`,
+        fields: [
+          {
+            'name': 'Evaluated',
+            'value': '```js\n' + client.cleanText(code) + '\n```',
+            'inline': false
+          },
+          {
+            'name': 'Exception',
+            'value': `[\`\`\`js\n${client.cleanText(error.name)}: ${client.cleanText(error.message)}\n\`\`\`](${await client.hastebin(error.stack, 'js')})`,
+            'inline': false
+          }
+        ],
+        color: 0xAA0000
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${client.cleanText(error)}\``) })
     }
   }
 }

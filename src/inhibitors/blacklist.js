@@ -1,6 +1,6 @@
 /**
  * Blocks users that are in the blacklist.
- * @param {any} client The command client.
+ * @param {any} client The CommandoClient.
  * @param {any} message The command sent by the user.
  */
 module.exports = function blacklist (client, message) {
