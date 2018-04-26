@@ -9,9 +9,13 @@ module.exports = class LookUpCommand extends Command {
       name: 'lookup',
       memberName: 'lookup',
       group: 'utility',
-      description: 'Gets an image from a website.',
+      description: 'Generates a screenshot of a website.',
       examples: [
         'lookup discordapp.com'
+      ],
+      clientPermissions: [
+        'EMBED_LINKS',
+        'ATTACH_FILES'
       ],
       throttling: {
         usages: 2,
@@ -20,7 +24,7 @@ module.exports = class LookUpCommand extends Command {
       args: [
         {
           key: 'url',
-          prompt: 'What site do you want to get?',
+          prompt: 'What website do you want to lookup?',
           type: 'string'
         }
       ]
@@ -44,19 +48,29 @@ module.exports = class LookUpCommand extends Command {
 
     setTimeout(() => {
       message.channel.startTyping()
+      var error = false
+      var filePath = `${path.join(process.cwd(), './temp/')}${name}.png`
       new Pageres({ delay: 3 })
         .src(args.url, ['1920x1080'], { crop: true, filename: name })
         .dest(path.join(process.cwd(), './temp'))
         .run()
-        .catch(() => { message.reply('there was an error getting that site.') })
+        .catch(() => { error = true })
         .then(async () => {
-          await message.embed({
-            description: `Screenshot from ${args.url}`,
-            files: [ `${path.join(process.cwd(), './temp/')}${name}.png` ],
-            color: clientColor
-          })
+          if (error) {
+            await message.reply('there was an error getting that website.')
+          } else {
+            await message.embed({
+              description: `Screenshot from ${args.url}`,
+              files: [ filePath ],
+              color: clientColor
+            })
+            if (await fs.existsSync(filePath)) {
+              try {
+                fs.unlinkSync(filePath)
+              } catch (error) {}
+            }
+          }
           message.channel.stopTyping()
-          fs.unlinkSync(`${path.join(process.cwd(), './temp/')}${name}.png`)
         })
     }, 0)
   }
