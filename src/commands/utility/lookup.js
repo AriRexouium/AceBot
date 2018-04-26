@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando')
 const Pageres = require('pageres')
-const { unlink } = require('fs')
+const fs = require('fs')
 const path = require('path')
 
 module.exports = class LookUpCommand extends Command {
@@ -43,6 +43,7 @@ module.exports = class LookUpCommand extends Command {
     }
 
     setTimeout(() => {
+      message.channel.startTyping()
       new Pageres({ delay: 3 })
         .src(args.url, ['1920x1080'], { crop: true, filename: name })
         .dest(path.join(process.cwd(), './temp'))
@@ -54,7 +55,8 @@ module.exports = class LookUpCommand extends Command {
             files: [ `${path.join(process.cwd(), './temp/')}${name}.png` ],
             color: clientColor
           })
-          unlink(`${path.join(process.cwd(), './temp/')}${name}.png`)
+          message.channel.stopTyping()
+          fs.unlinkSync(`${path.join(process.cwd(), './temp/')}${name}.png`)
         })
     }, 0)
   }
