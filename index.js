@@ -33,7 +33,7 @@ const client = new CommandoClient({
   commandPrefix: clientConfig.commandPrefix,
   commandEditableDuration: clientConfig.commandEditableDuration,
   nonCommandEditable: clientConfig.nonCommandEditable,
-  unknownCommandResponse: clientConfig.unknownCommandResponse,
+  unknownCommandResponse: false,
   invite: clientConfig.invite,
   owner: []
 })
