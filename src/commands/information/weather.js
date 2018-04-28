@@ -21,16 +21,22 @@ module.exports = class WeatherCommand extends Command {
         },
         {
           key: 'degree',
-          prompt: 'Please choose a degree. (IE: `F` || `C`)',
+          prompt: 'What degree would you like to use (fahrenheit, celsius)?',
           type: 'string',
           parse: value => value.toLowerCase(),
-          validate: value => ['f', 'c'].includes(value)
+          validate: value => ['f', 'fahrenheit', 'c', 'celsius'].includes(value.toLowerCase())
         }
       ]
     })
   }
 
   run (message, args) {
+    if (args.degree === 'fahrenheit') {
+      args.degree = 'f'
+    } else if (args.degree === 'celsius') {
+      args.degree = 'c'
+    }
+
     weather.find({ search: args.location, degreeType: args.degree }, (error, result) => {
       if (error) return message.say(error.message)
       if (result.length === 0) return message.reply('no location matched those search results.')
