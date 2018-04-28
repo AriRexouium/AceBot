@@ -32,14 +32,6 @@ module.exports = class LookUpCommand extends Command {
   }
 
   run (message, args) {
-    var clientColor
-    if (message.guild) {
-      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
-    } else {
-      clientColor = 0x7289DA
-    }
-
     var randText = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
     var name = ''
     for (var i = 0; i < 32; i++) {
@@ -62,7 +54,7 @@ module.exports = class LookUpCommand extends Command {
             await message.embed({
               description: `Screenshot from ${args.url}`,
               files: [ filePath ],
-              color: clientColor
+              color: this.client.getClientColor(message)
             })
             if (await fs.existsSync(filePath)) {
               try {

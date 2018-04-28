@@ -31,14 +31,6 @@ module.exports = class WeatherCommand extends Command {
   }
 
   run (message, args) {
-    var clientColor
-    if (message.guild) {
-      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
-    } else {
-      clientColor = 0x7289DA
-    }
-
     weather.find({ search: args.location, degreeType: args.degree }, (error, result) => {
       if (error) return message.say(error.message)
       if (result.length === 0) return message.reply('no location matched those search results.')
@@ -49,7 +41,7 @@ module.exports = class WeatherCommand extends Command {
         timestamp: new Date(),
         title: `${result.location.name} (${result.location.long}, ${result.location.lat})`,
         fields: [],
-        color: clientColor
+        color: this.client.getClientColor(message)
       }
       embed.fields.push({
         name: `Current - (${result.current.skytext})`,

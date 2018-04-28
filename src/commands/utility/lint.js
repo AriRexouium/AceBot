@@ -27,14 +27,6 @@ module.exports = class LintCommand extends Command {
   }
 
   async run (message, args) {
-    var clientColor
-    if (message.guild) {
-      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
-    } else {
-      clientColor = 0x7289DA
-    }
-
     var hrStart = await process.hrtime(this.hrStart)
     var lintResult = await standard.lintTextSync(`${args.code}\n`)
     var lintLatency = await process.hrtime(hrStart)
@@ -50,7 +42,7 @@ module.exports = class LintCommand extends Command {
       timestamp: new Date(),
       title: `*Linted in ${lintLatency[0] > 0 ? `${lintLatency[0]}s ` : ''}${lintLatency[1] / 1000000}ms.*`,
       description: messages ? messages.slice(0, 2000) : '✅ Lint Success!',
-      color: clientColor
+      color: this.client.getClientColor(message)
     })
   }
 }

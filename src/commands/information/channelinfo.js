@@ -32,14 +32,6 @@ module.exports = class ChannelInfoCommand extends Command {
   }
 
   run (message, args) {
-    var clientColor
-    if (message.guild) {
-      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
-    } else {
-      clientColor = 0x7289DA
-    }
-
     var channel = args.channel
     if (channel.type === 'voice') {
       var channelUsers
@@ -86,7 +78,7 @@ module.exports = class ChannelInfoCommand extends Command {
             'inline': true
           }
         ],
-        color: clientColor
+        color: this.client.getClientColor(message)
       })
     } else if (channel.type === 'voice') {
       message.embed({
@@ -112,7 +104,7 @@ module.exports = class ChannelInfoCommand extends Command {
             'inline': true
           }
         ],
-        color: clientColor
+        color: this.client.getClientColor(message)
       })
     } else {
       return message.reply('please choose a valid voice or text channel.')

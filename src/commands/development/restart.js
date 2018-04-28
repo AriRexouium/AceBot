@@ -31,14 +31,6 @@ module.exports = class RestartCommand extends Command {
   }
 
   async run (message) {
-    var clientColor
-    if (message.guild) {
-      clientColor = message.guild.members.get(this.client.user.id).displayHexColor
-      if (clientColor === '#000000') { clientColor = 0x7289DA } else { clientColor = Number(clientColor.replace('#', '0x')) }
-    } else {
-      clientColor = 0x7289DA
-    }
-
     if (this.client.shard) {
       await message.reply(`restarting ${pluralize('shard', this.client.shard.count, true)}, please wait.`)
       await this.client.shard.broadcastEval(`process.emit('message', 'shutdown')`)
@@ -52,7 +44,7 @@ module.exports = class RestartCommand extends Command {
           **Uptime:** ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
           **Since**: ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${moment.tz(moment.tz.guess()).format('z')}
         `),
-        color: clientColor
+        color: this.client.getClientColor(message)
       })
       await process.emit('message', 'shutdown')
     }

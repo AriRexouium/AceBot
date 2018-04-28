@@ -29,19 +29,6 @@ module.exports = class ServerInfoCommand extends Command {
     var guild = message.guild
     var ownerInfo = guild.owner.user
 
-    // Embed Color
-    var clientColor
-    if (message.guild) {
-      clientColor = guild.me.displayHexColor
-      if (clientColor === '#000000') {
-        clientColor = 0x7289DA
-      } else {
-        clientColor = Number(clientColor.replace('#', '0x'))
-      }
-    } else {
-      clientColor = 0x7289DA
-    }
-
     // Security
     var verificationLevel = [
       '**None**\n(Unrestricted)',
@@ -173,7 +160,7 @@ module.exports = class ServerInfoCommand extends Command {
           'inline': false
         }
       ],
-      color: clientColor
+      color: this.client.getClientColor(message)
     })
   }
 }
