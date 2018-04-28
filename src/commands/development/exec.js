@@ -49,9 +49,9 @@ module.exports = class ExecCommand extends Command {
 
     if (code.split(' ')[0] === '--silent' || code.split(' ')[0] === '-s') {
       try {
-        exec(code.substr(code.indexOf(' ') + 1))
+        await exec(code.substr(code.indexOf(' ') + 1))
       } catch (error) {
-        message.say({
+        await message.say({
           content: `${error.name}: ${error.message}`,
           code: 'js'
         })
