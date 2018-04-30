@@ -19,13 +19,15 @@ module.exports = (client, message) => {
 
     // Split prefix and get the invalid command used.
     var commandMessage
-    // Global/Guild Prefix
-    if (message.guild ? message.guild.commandPrefix : client.commandPrefix) {
-      commandMessage = message.content.split(message.guild ? message.guild.commandPrefix : this.client.commandPrefix)[1]
+    // Global Prefix
+    if (message.content.startsWith(client.commandPrefix)) {
+      commandMessage = message.content.split(client.commandPrefix)[1]
     // Mention Prefix
     } else if (message.content.startsWith(`<@${client.user.id}>`)) {
       commandMessage = message.content.split(`<@${client.user.id}>`)[1]
-      // Guild Prefix
+    // Guild Prefix
+    } else if (message.guild && message.guild.commandPrefix !== '') {
+      commandMessage = message.content.split(message.guild.commandPrefix)[1]
     }
 
     // Find the best result.
@@ -36,7 +38,7 @@ module.exports = (client, message) => {
     var replyMessage = {}
     replyMessage.content = oneLine`
       unknown command, use
-      ${message.anyUsage('help', message.guild ? message.guild.commandPrefix : null, client.user)}
+      ${message.anyUsage('help')}
       to view the list of all commands.
     `
 
