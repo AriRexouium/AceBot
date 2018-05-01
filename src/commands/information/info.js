@@ -71,7 +71,6 @@ module.exports = class InfoCommand extends Command {
       },
       timestamp: new Date(),
       fields: [
-        /* eslint-disable object-property-newline */
         {
           'name': 'Developer',
           'value': stripIndents`
@@ -91,27 +90,30 @@ module.exports = class InfoCommand extends Command {
           'inline': false
         },
         {
-          'name': 'Links', 'value': stripIndents`
-          Bot Invite: [Click Here!](${await this.client.generateInvite()})
-          Server Invite: [Click Here!](${this.client.options.invite})
-          Homepage: [Click Here!](${require(`${process.cwd()}/package.json`).homepage})
-          Repository: [Click Here!](${require(`${process.cwd()}/package.json`).homepageGithub})
-          Trello: [Click Here!](${require(`${process.cwd()}/package.json`).homepageTrello})
-        `, 'inline': false
+          'name': 'Links',
+          'value': stripIndents`
+           Bot Invite: [Click Here!](${await this.client.generateInvite()})
+            Server Invite: [Click Here!](${this.client.options.invite})
+            Homepage: [Click Here!](${require(`${process.cwd()}/package.json`).homepage})
+            Repository: [Click Here!](${require(`${process.cwd()}/package.json`).homepageGithub})
+            Trello: [Click Here!](${require(`${process.cwd()}/package.json`).homepageTrello})
+          `,
+          'inline': false
         },
         {
-          'name': 'Discord Stats', 'value': stripIndents`
-          ${this.client.shard ? `Shards: **${this.client.shard.count}**\n` : ''}Guilds: **${totalGuilds}**
-          Channels: **${totalChannels}**
-          Users: **${totalUsers}**
-        `, 'inline': false
+          'name': 'Discord Stats',
+          'value': stripIndents`
+            ${this.client.shard ? `Shards: **${this.client.shard.count}**\n` : ''}Guilds: **${totalGuilds}**
+            Channels: **${totalChannels}**
+            Users: **${totalUsers}**
+          `,
+          'inline': false
         },
         {
           'name': 'Special Thanks to the Following:',
           'value': contributorsList,
           'inline': false
         }
-        /* eslint-enable object-property-newline */
       ],
       color: 0x7289DA
     })
