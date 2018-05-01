@@ -2,6 +2,7 @@
  * Blocks all users when a lockdown is active.
  * @param {any} client The CommandoClient.
  * @param {any} message The command sent by the user.
+ * @return {string|boolean}
  */
 module.exports = function lockdown (client, message) {
   // Check in the user is an Owner.

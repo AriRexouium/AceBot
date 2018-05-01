@@ -6,7 +6,7 @@ const snekfetch = require('snekfetch')
  * @param {any} text The text to send to hastebin.
  * @param {string} syntax The text syntax. (Default is none.)
  * @param {boolean} secure Whether to return the URL as secured or not. (Defaults to true.)
- * @returns {Promise<string>}
+ * @return {Promise<string>}
  */
 module.exports = function hastebin (client, text, syntax = '', secure = true) {
   return new Promise((resolve, reject) => {

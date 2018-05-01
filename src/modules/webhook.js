@@ -2,6 +2,7 @@
  * Send message through config webhook.
  * @param {any} client The CommandoClient.
  * @param {string} text The content to send to the webhook.
+ * @return {Promise<any>}
  */
 module.exports = function webhook (client, text) {
   return new Promise(async (resolve, reject) => {

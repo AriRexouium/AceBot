@@ -78,7 +78,9 @@ module.exports = async (client) => {
 
 /**
  * Dynamic presence hander.
+ * @param {any} client The CommandoClient.
  * @param {object} game The object of the presence data.
+ * @return {object}
  */
 var calcPresence = (client, game) => {
   var presence = {}; presence.activity = {}

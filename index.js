@@ -66,7 +66,7 @@ Functions
  * Lists the files in a directory.
  * @param {string} dir The directory that you want to get a list of files from.
  * @param {string} filter The file type you want to get. IE: `js`
- * @return {array} Returns all the file names.
+ * @return {Array<string>} Returns all the file names.
  */
 var listFiles = (dir, filter) => {
   var files = fs.readdirSync(dir).filter(f => fs.statSync(path.join(dir, f)).isFile())
@@ -80,7 +80,7 @@ var listFiles = (dir, filter) => {
 /**
  * Lists the directories in a directory.
  * @param {string} dir The directory that you want to get a list of directories from.
- * @return {array} Returns all the folder names.
+ * @return {Array<string>} Returns all the folder names.
  */
 var listDirs = dir => {
   return fs.readdirSync(dir).filter(f => fs.statSync(path.join(dir, f)).isDirectory())
