@@ -44,7 +44,7 @@ module.exports = class UpdateCommand extends Command {
         split: true
       })
       // Check to see if Git returned an already up to date message.
-      if (gitPull.indexOf('Already up-to-date.') > -1 || gitPull.indexOf('Already up to date.') > -1) {
+      if (/Already up-to-date.|Already up to date./.test(gitPull)) {
         await message.say('**There was nothing to update!**')
       } else {
         /* **************************************************************************************************** *\
