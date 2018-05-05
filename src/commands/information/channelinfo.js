@@ -80,7 +80,7 @@ module.exports = class ChannelInfoCommand extends Command {
         ],
         color: this.client.getClientColor(message)
       })
-    } else if (channel.type === 'voice') {
+    } else if (channel.type === 'text') {
       message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
