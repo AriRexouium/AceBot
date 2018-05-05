@@ -45,7 +45,7 @@ module.exports = class ChannelInfoCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         title: channel.name,
-        description: `Since ${moment(channel.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')})`,
+        description: `Since ${moment(channel.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}`,
         fields: [
           {
             'name': 'Type',
@@ -86,7 +86,7 @@ module.exports = class ChannelInfoCommand extends Command {
         footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
         timestamp: new Date(),
         title: channel.name,
-        description: `Since ${moment(channel.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')})`,
+        description: `Since ${moment(channel.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}`,
         fields: [
           {
             'name': 'Type',
