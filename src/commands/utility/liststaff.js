@@ -7,7 +7,11 @@ module.exports = class ListStaffCommand extends Command {
       name: 'liststaff',
       memberName: 'liststaff',
       group: 'utility',
-      description: 'Show\'s all the bot staff.'
+      description: 'Show\'s all the bot staff.',
+      throttling: {
+        usages: 2,
+        duration: 10
+      }
     })
   }
 

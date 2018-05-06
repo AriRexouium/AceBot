@@ -10,6 +10,10 @@ module.exports = class SeekCommandCommand extends Command {
       memberName: 'seekcommand',
       group: 'utility',
       description: 'View a command in pages.',
+      throttling: {
+        usages: 2,
+        duration: 10
+      },
       args: [
         {
           key: 'command',

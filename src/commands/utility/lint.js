@@ -16,6 +16,10 @@ module.exports = class LintCommand extends Command {
       clientPermissions: [
         'EMBED_LINKS'
       ],
+      throttling: {
+        usages: 2,
+        duration: 10
+      },
       args: [
         {
           key: 'code',
