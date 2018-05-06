@@ -9,9 +9,6 @@ module.exports = class ViewCommandCommand extends Command {
       memberName: 'viewcommand',
       group: 'utility',
       description: 'View an entire command.',
-      clientPermissions: [
-        'ADD_REACTIONS'
-      ],
       throttling: {
         usages: 2,
         duration: 10
