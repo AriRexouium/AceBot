@@ -1,6 +1,7 @@
 // TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 const Discord = require('discord.js')
 const sudoClient = new Discord.Client()
 const util = require('util')
@@ -82,22 +83,22 @@ module.exports = class SudoCommand extends Command {
         fields: [
           {
             'name': 'Evaluated',
-            'value': '```js\n' + this.client.cleanText(code) + '\n```',
+            'value': '```js\n' + escapeMarkdown(code, true) + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```js\n' + this.client.cleanText(result.toString()) + '\n```'),
+            'value': ('```js\n' + escapeMarkdown(result.toString(), true) + '\n```'),
             'inline': false
           },
           {
             'name': 'Type',
-            'value': '```js\n' + this.client.cleanText(type) + '\n```',
+            'value': '```js\n' + escapeMarkdown(type, true) + '\n```',
             'inline': false
           }
         ],
         color: 0x00AA00
-      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${this.client.cleanText(error)}\``) })
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
       await sudoClient.destroy()
     } catch (error) {
       evalTime = await process.hrtime(hrStart)
@@ -112,17 +113,17 @@ module.exports = class SudoCommand extends Command {
           fields: [
             {
               'name': 'Evaluated',
-              'value': '```js\n' + this.client.cleanText(code) + '\n```',
+              'value': '```js\n' + escapeMarkdown(code, true) + '\n```',
               'inline': false
             },
             {
               'name': 'Exception',
-              'value': `[\`\`\`js\n${this.client.cleanText(error.name)}: ${this.client.cleanText(error.message)}\n\`\`\`](${link})`,
+              'value': `[\`\`\`js\n${escapeMarkdown(`${error.name}: ${error.message}`, true)}\n\`\`\`](${link})`,
               'inline': false
             }
           ],
           color: 0xAA0000
-        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${this.client.cleanText(error)}\``) })
+        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
       })
       await sudoClient.destroy()
     }

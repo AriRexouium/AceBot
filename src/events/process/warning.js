@@ -1,4 +1,5 @@
 const { stripIndents } = require('common-tags')
+const { escapeMarkdown } = require('discord.js')
 
 module.exports = (client, warning) => {
   var eventName = client.getFileName(__filename)
@@ -17,7 +18,7 @@ module.exports = (client, warning) => {
           footer: { text: eventName },
           timestamp: new Date(),
           title: `Process Warning${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
-          description: '```js\n' + client.cleanText(warning.stack) + '\n```',
+          description: '```js\n' + escapeMarkdown(warning.stack, true) + '\n```',
           color: 0xFFFF00
         }]
       })

@@ -1,6 +1,7 @@
 // TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 const exec = require('child_process').execSync
 const os = require('os')
 
@@ -41,7 +42,7 @@ module.exports = class ExecCommand extends Command {
   }
 
   async run (message, args) {
-    var client = this.client; var code = args.code
+    var code = args.code
     var platform = os.platform(); var syntax; var prefix
     if (platform === 'win32') { syntax = 'bat'; prefix = `${__dirname}>` } else
     if (platform === 'linux') { syntax = 'bash'; prefix = `${os.userInfo().username}@${os.hostname()}:~$ ` } else
@@ -75,17 +76,17 @@ module.exports = class ExecCommand extends Command {
         fields: [
           {
             'name': 'Executed',
-            'value': `\`\`\`${client.cleanText(syntax)}\n${client.cleanText(prefix)}${client.cleanText(code)}\n\`\`\``,
+            'value': '```' + escapeMarkdown(`${syntax}\n${prefix}${code}`, true) + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```' + client.cleanText(syntax) + '\n' + client.cleanText(result.toString()) + '\n```'),
+            'value': ('```' + escapeMarkdown(`${syntax}\n${result.toString()}`, true) + '\n```'),
             'inline': false
           }
         ],
         color: 0x00AA00
-      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${client.cleanText(error)}\``) })
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
     } catch (error) {
       execTime = await process.hrtime(hrStart)
 
@@ -99,17 +100,17 @@ module.exports = class ExecCommand extends Command {
           fields: [
             {
               'name': 'Executed',
-              'value': `\`\`\`${client.cleanText(syntax)}\n${client.cleanText(prefix)}${client.cleanText(code)}\n\`\`\``,
+              'value': `\`\`\`${escapeMarkdown(syntax, true)}\n${escapeMarkdown(prefix, true)}${escapeMarkdown(code, true)}\n\`\`\``,
               'inline': false
             },
             {
               'name': 'Exception',
-              'value': '[```' + syntax + '\n' + client.cleanText(error.message) + '\n```](' + link + ')',
+              'value': '[```' + escapeMarkdown(`${syntax}\n${error.message}`, true) + '\n```](' + link + ')',
               'inline': false
             }
           ],
           color: 0xAA0000
-        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${client.cleanText(error)}\``) })
+        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
       })
     }
   }

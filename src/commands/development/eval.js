@@ -1,6 +1,7 @@
 // TODO: Upload text over 2000(?) characters to hastebin.
 
 const { Command } = require('discord.js-commando')
+const { escapeMarkdown } = require('discord.js')
 const { oneLine } = require('common-tags')
 const util = require('util')
 
@@ -115,22 +116,22 @@ module.exports = class EvalCommand extends Command {
         fields: [
           {
             'name': 'Evaluated',
-            'value': '```js\n' + client.cleanText(code) + '\n```',
+            'value': '```js\n' + escapeMarkdown(code, true) + '\n```',
             'inline': false
           },
           {
             'name': 'Result',
-            'value': ('```js\n' + client.cleanText(result.toString()) + '\n```').replace(client.token, '[TOKEN]'),
+            'value': ('```js\n' + escapeMarkdown(result.toString(), true) + '\n```').replace(client.token, '[TOKEN]'),
             'inline': false
           },
           {
             'name': 'Type',
-            'value': '```js\n' + client.cleanText(type) + '\n```',
+            'value': '```js\n' + escapeMarkdown(type, true) + '\n```',
             'inline': false
           }
         ],
         color: 0x00AA00
-      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${client.cleanText(error)}\``) })
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
     } catch (error) {
       hrEnd = await process.hrtime(hrStart)
       evalTime = hrEnd
@@ -144,17 +145,17 @@ module.exports = class EvalCommand extends Command {
         fields: [
           {
             'name': 'Evaluated',
-            'value': '```js\n' + client.cleanText(code) + '\n```',
+            'value': '```js\n' + escapeMarkdown(code, true) + '\n```',
             'inline': false
           },
           {
             'name': 'Exception',
-            'value': `[\`\`\`js\n${client.cleanText(error.name)}: ${client.cleanText(error.message)}\n\`\`\`](${await client.hastebin(error.stack, 'js')})`,
+            'value': `[\`\`\`js\n${escapeMarkdown(`${error.name}: ${error.message}`, true)}\n\`\`\`](${await client.hastebin(error.stack, 'js')})`,
             'inline': false
           }
         ],
         color: 0xAA0000
-      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${client.cleanText(error)}\``) })
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
     }
   }
 }
