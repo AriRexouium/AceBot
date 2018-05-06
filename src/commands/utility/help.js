@@ -48,7 +48,6 @@ module.exports = class HelpCommand extends Command {
             ${commands[0].guildOnly ? ' (Usable only in servers)' : ''}
             ${commands[0].nsfw ? ' (NSFW)' : ''}
           `}
-
           **Format:** ${message.anyUsage(`${commands[0].name}${commands[0].format ? ` ${commands[0].format}` : ''}`)}
         `
         if (commands[0].aliases.length > 0) help += `\n**Aliases:** ${commands[0].aliases.join(', ')}`
@@ -62,16 +61,18 @@ module.exports = class HelpCommand extends Command {
         const messages = []
         try {
           messages.push(await message.direct(help))
-          if (message.channel.type !== 'dm') messages.push(await message.reply('I sent you a DM with information.'))
+          if (message.channel.type !== 'dm') messages.push(await message.reply('sent you a DM with information.'))
         } catch (err) {
-          messages.push(await message.reply('I was unable to send you the help DM. You probably have DMs disabled.'))
+          messages.push(await message.reply('unable to send you the help DM. You probably have DMs disabled.'))
         }
         return messages
+      } else if (commands.length > 15) {
+        return message.reply('multiple commands found. Please be more specific.')
       } else if (commands.length > 1) {
         return message.reply(disambiguation(commands, 'commands'))
       } else {
         return message.reply(
-          `I was unable to identify that command. Use ${message.usage(
+          `unable to identify command. Use ${message.usage(
             null, message.channel.type === 'dm' ? null : undefined, message.channel.type === 'dm' ? null : undefined
           )} to view the list of all commands.`
         )
@@ -81,29 +82,26 @@ module.exports = class HelpCommand extends Command {
       try {
         messages.push(await message.direct(stripIndents`
           ${oneLine`
-            To run a command in ${message.guild || 'any server'},
+            To run a command in ${message.guild ? message.guild.name : 'any server'},
             use ${Command.usage('command', message.guild ? message.guild.commandPrefix : null, this.client.user)}.
             For example, ${Command.usage('prefix', message.guild ? message.guild.commandPrefix : null, this.client.user)}.
           `}
           To run a command in this DM, simply use ${Command.usage('command', null, null)} with no prefix.
-
           Use ${this.usage('<command>', null, null)} to view detailed information about a specific command.
           Use ${this.usage('all', null, null)} to view a list of *all* commands, not just available ones.
-
           __**${showAll ? 'All commands' : `Available commands in ${message.guild || 'this DM'}`}**__
-
-          ${(showAll ? groups : groups.filter(group => group.commands.some(cmd => cmd.isUsable(message))))
-    .map(group => stripIndents`
-              __${group.name}__
-              ${(showAll ? group.commands : group.commands.filter(cmd => cmd.isUsable(message)))
-    .map(cmd => `**${cmd.name}:** ${cmd.description}${cmd.nsfw ? ' (NSFW)' : ''}`).join('\n')
-}
+          ${(showAll ? groups : groups.filter(grp => grp.commands.some(cmd => cmd.isUsable(message)))) /* eslint-disable indent */
+            .map(grp => stripIndents`
+              __${grp.name}__
+              ${(showAll ? grp.commands : grp.commands.filter(cmd => cmd.isUsable(message)))
+                .map(cmd => `**${cmd.name}:** ${cmd.description}${cmd.nsfw ? ' (NSFW)' : ''}`).join('\n')
+              }
             `).join('\n\n')
-}
-        `, { split: true }))
-        if (message.channel.type !== 'dm') messages.push(await message.reply('I sent you a DM with information.'))
+          }
+        `, { split: true })) /* eslint-enable indent */
+        if (message.channel.type !== 'dm') messages.push(await message.reply('sent you a DM with information.'))
       } catch (err) {
-        messages.push(await message.reply('I was unable to send you the help DM. You probably have DMs disabled.'))
+        messages.push(await message.reply('unable to send you the help DM. You probably have DMs disabled.'))
       }
       return messages
     }
