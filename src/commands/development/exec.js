@@ -86,7 +86,7 @@ module.exports = class ExecCommand extends Command {
           }
         ],
         color: 0x00AA00
-      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
+      }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error.toString(), true)}\``) })
     } catch (error) {
       execTime = await process.hrtime(hrStart)
 
@@ -110,7 +110,7 @@ module.exports = class ExecCommand extends Command {
             }
           ],
           color: 0xAA0000
-        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error, true)}\``) })
+        }).catch(error => { message.reply(`there was an error when sending a message:\n\`${escapeMarkdown(error.toString(), true)}\``) })
       })
     }
   }
