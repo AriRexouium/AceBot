@@ -31,7 +31,8 @@ module.exports = class SeekCommandCommand extends Command {
       return message.say(`There was an error getting that command: \`${error.name}: ${error.message}\``)
     }
 
-    const cmdArray = splitMessage(escapeMarkdown(data, true))
+    var cmdArray = splitMessage(escapeMarkdown(data, true), { maxLength: '1900' })
+    if (typeof cmdArray === 'string') { cmdArray = Array(cmdArray) }
     cmdArray.forEach((a, b) => { cmdArray[b] = '```js\n' + a + '\n```' })
     var page = 0
 
