@@ -36,10 +36,9 @@ module.exports = class SeekCommandCommand extends Command {
 
     var cmdArray = splitMessage(escapeMarkdown(data, true), { maxLength: '1900' })
     if (typeof cmdArray === 'string') { cmdArray = Array(cmdArray) }
-    cmdArray.forEach((a, b) => { cmdArray[b] = '```js\n' + a + '\n```' })
     var page = 0
 
-    var cmdMessage = await message.say(cmdArray[0])
+    var cmdMessage = await message.say({ content: cmdArray[0], code: 'js' })
     await cmdMessage.react('◀')
     await cmdMessage.react('❌')
     await cmdMessage.react('▶')
@@ -50,21 +49,21 @@ module.exports = class SeekCommandCommand extends Command {
       switch (emoji.emoji.name) {
         case '▶':
           if (cmdArray[page + 1] !== undefined) {
-            cmdMessage.edit(cmdArray[page + 1])
+            cmdMessage.edit({ content: cmdArray[page + 1], code: 'js' })
             page++
           }
           break
         case '◀':
           if (cmdArray[page - 1] !== undefined) {
-            cmdMessage.edit(cmdArray[page - 1])
+            cmdMessage.edit({ content: cmdArray[page - 1], code: 'js' })
             page--
           }
           break
         case '❌':
           collector.stop()
-          cmdMessage.react('✅')
           break
       }
     })
+    collector.on('end', () => { cmdMessage.react('✅') })
   }
 }
