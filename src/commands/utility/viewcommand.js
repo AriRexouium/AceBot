@@ -5,8 +5,8 @@ const path = require('path')
 module.exports = class ViewCommandCommand extends Command {
   constructor (client) {
     super(client, {
-      name: 'getcommand',
-      memberName: 'getcommand',
+      name: 'viewcommand',
+      memberName: 'viewcommand',
       group: 'utility',
       description: 'View an entire command.',
       clientPermissions: [
