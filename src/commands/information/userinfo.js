@@ -63,14 +63,12 @@ module.exports = class UserInfoCommand extends Command {
         userStatus = `Watching **${escapeMarkdown(user.presence.activity.name)}**`
       }
       if (user.presence.activity.url !== null) { userStatus = `[${userStatus}](${user.presence.activity.url})` }
-    } else {
-      userStatus = '*User is not doing anything at this time.*'
     }
 
     // Roles
     var userRoles
     if (args.user.roles.size > 1) {
-      userRoles = oneLineCommaListsAnd`${args.user.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => `**\`${role.name}\`**`)}`
+      userRoles = oneLineCommaListsAnd`${args.user.roles.array().sort((a, b) => a.comparePositionTo(b)).slice(1).reverse().map(role => `**\`${role.name}\`**`)}`
     } else {
       userRoles = 'N/A'
     }
@@ -114,7 +112,7 @@ module.exports = class UserInfoCommand extends Command {
           'inline': true
         },
         {
-          'name': `🔖 Roles - (${args.user.roles.size.toLocaleString() - 1})`,
+          'name': `🔖 Roles - (${args.user.roles.size > 0 ? args.user.roles.size.toLocaleString() - 1 : 0})`,
           'value': userRoles,
           'inline': false
         }
