@@ -1,6 +1,5 @@
 const { Command } = require('discord.js-commando')
 const fs = require('fs')
-const path = require('path')
 
 module.exports = class ViewCommandCommand extends Command {
   constructor (client) {
@@ -25,7 +24,7 @@ module.exports = class ViewCommandCommand extends Command {
 
   async run (message, args) {
     try {
-      var data = await fs.readFileSync(path.join(this.client.registry.commandsPath, `${args.command.groupID}/${args.command.name}.js`)).toString()
+      var data = await fs.readFileSync(this.client.registry.resolveCommandPath(args.command.groupID, args.command.name)).toString()
     } catch (error) {
       return message.say(`There was an error getting that command: \`${error.name}: ${error.message}\``)
     }
