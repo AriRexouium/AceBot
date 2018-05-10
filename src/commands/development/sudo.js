@@ -29,7 +29,8 @@ module.exports = class SudoCommand extends Command {
           type: 'string'
         }
       ],
-      guarded: true
+      guarded: true,
+      argsSingleQuotes: false
     })
   }
   hasPermission (message) {

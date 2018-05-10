@@ -26,7 +26,8 @@ module.exports = class ExecCommand extends Command {
           type: 'string'
         }
       ],
-      guarded: true
+      guarded: true,
+      argsSingleQuotes: false
     })
   }
 

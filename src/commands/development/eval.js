@@ -32,7 +32,8 @@ module.exports = class EvalCommand extends Command {
           type: 'string'
         }
       ],
-      guarded: true
+      guarded: true,
+      argsSingleQuotes: false
     })
     this.lastResult = null
   }
