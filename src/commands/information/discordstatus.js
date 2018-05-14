@@ -24,6 +24,7 @@ module.exports = class DiscordStatsCommand extends Command {
   }
 
   run (message) {
+    message.channel.startTyping()
     snekfetch.get('http://srhpyqt94yxb.statuspage.io/api/v2/summary.json')
       .set('User-Agent', 'AceBot')
       .then((body, error) => {
@@ -68,6 +69,7 @@ module.exports = class DiscordStatsCommand extends Command {
             color: 0x7289DA
           })
         }
+        message.channel.stopTyping()
       })
   }
 }

@@ -26,6 +26,7 @@ module.exports = class RepoCommand extends Command {
   }
 
   async run (message) {
+    message.channel.startTyping()
     let buildResult = ['Passing', 'Failing', 'Invalid']
     let buildResultColor = [0x39AA56, 0xDB4545, 0x9D9D9D]
 
@@ -74,6 +75,7 @@ module.exports = class RepoCommand extends Command {
       ],
       color: buildResultColor[TravisCI.last_build_result]
     })
+    message.channel.stopTyping()
   }
 }
 
