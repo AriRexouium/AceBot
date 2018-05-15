@@ -8,7 +8,7 @@ var cases = {
   'emergency': { content: chalk.red('Emergency'), type: 'warn' },
   'error': { content: chalk.red('Error'), type: 'error' },
   'info': { content: chalk.cyan('Info'), type: 'log' },
-  'notice': { content: chalk.yellow('Notice'), type: 'log' },
+  'notice': { content: chalk.yellow('Notice'), type: 'warn' },
   'success': { content: chalk.green('Success'), type: 'log' },
   'verbose': { content: chalk.magenta('Verbose'), type: 'log' },
   'warn': { content: chalk.yellow('Warn'), type: 'warn' }
@@ -23,26 +23,31 @@ var cases = {
  * @param {string} child The child of the error. (Supports `__filename`, also use '' to default to <anonymous>.)
  */
 module.exports = function logger (client, type, body, parent, child) {
-  if (!Object.keys(cases).includes(type)) throw new Error('Must be a valid log case.')
+  if (!Object.keys(cases).includes(type)) throw new TypeError('Must be a valid log case.')
   if (parent == null || parent === '') { parent = client.getFileName(process.cwd()) }
 
   try {
     require(child)
     delete require.cache[require.resolve(child)]
     child = client.getFileName(child)
-  } catch (err) {
+  } catch (e) {
     if (child == null || child === '') {
       child = '<anonymous>'
     }
   }
 
-  body = body.toString().split('\n')
-  var formatBody = ''
-  for (var i = 0; i < body.length; i++) {
-    i + 1 !== body.length ? formatBody += `│ ${body[i]}\n` : formatBody += `└ ${body[i]}`
+  body = body == null ? '' : body.toString().split('\n')
+  var formatBody = ''; var prefix = ''
+  if (body.length > 0) {
+    prefix = '┌─'
+    for (var i = 0; i < body.length; i++) {
+      i + 1 !== body.length ? formatBody += `│ ${body[i]}\n` : formatBody += `└ ${body[i]}`
+    }
+  } else {
+    prefix = '──'
   }
 
   var date = chalk.gray(moment().format(`YYYY-MM-DD|HH:mm:ss:SSSS`))
   var title = `${chalk.cyan(parent)}${chalk.gray('→')}${(chalk.cyan(child))}`
-  console[cases[type].type](`┌─[${date}]─[${title}]─[${cases[type].content}]\n${formatBody}`)
+  console[cases[type].type](`${prefix}[${date}]─[${title}]─[${cases[type].content}]\n${formatBody}`)
 }
