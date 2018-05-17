@@ -36,19 +36,6 @@ module.exports = class DisableCommand extends Command {
     })
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id) ||
-      message.member.hasPermission('MANAGE_GUILD')
-    ) {
-      return true
-    } else {
-      return 'Only users with `MANAGE_GUILD` or bot staff can use this command.'
-    }
-  }
-
   run (message, args) {
     if (!args.cmdOrGrp.isEnabledIn(message.guild, true)) {
       return message.reply(

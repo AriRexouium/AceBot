@@ -12,18 +12,6 @@ module.exports = class ListServersCommand extends Command {
     })
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id)
-    ) {
-      return true
-    } else {
-      return 'only bot staff can run this command.'
-    }
-  }
-
   run (message, args) {
     var guilds = this.client.guilds.array()
     var columnifyGuilds = []
