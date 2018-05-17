@@ -35,18 +35,6 @@ module.exports = class BlacklistCommand extends Command {
     })
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.provider.get('global', 'staff', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id)
-    ) {
-      return true
-    } else {
-      return 'only bot staff can run this command.'
-    }
-  }
-
   run (message, args) {
     var blacklist = this.client.provider.get('global', 'userBlacklist', [])
     if (args.query === 'add') {

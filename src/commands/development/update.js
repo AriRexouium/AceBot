@@ -18,17 +18,6 @@ module.exports = class UpdateCommand extends Command {
     })
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id)
-    ) {
-      return true
-    } else {
-      return 'only bot developers can run this command.'
-    }
-  }
-
   async run (message) {
     await message.say('**Checking for updates...**')
     try {

@@ -38,17 +38,6 @@ module.exports = class EvalCommand extends Command {
     this.lastResult = null
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id)
-    ) {
-      return true
-    } else {
-      return 'only bot developers can run this command.'
-    }
-  }
-
   async run (message, args) {
     /* eslint-disable no-unused-vars */
     const msg = message

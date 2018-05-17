@@ -19,17 +19,6 @@ module.exports = class RestartCommand extends Command {
     })
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id)
-    ) {
-      return true
-    } else {
-      return 'only bot developers can run this command.'
-    }
-  }
-
   async run (message) {
     if (this.client.shard) {
       await message.reply(`restarting ${pluralize('shard', this.client.shard.count, true)}, please wait.`)

@@ -31,17 +31,6 @@ module.exports = class ReloadCommand extends Command {
     })
   }
 
-  hasPermission (message) {
-    if (
-      this.client.provider.get('global', 'developer', []).includes(message.author.id) ||
-      this.client.isOwner(message.author.id)
-    ) {
-      return true
-    } else {
-      return 'only bot developers can run this command.'
-    }
-  }
-
   async run (message, args) {
     const { cmdOrGrp } = args
     const isCmd = Boolean(cmdOrGrp.groupID)

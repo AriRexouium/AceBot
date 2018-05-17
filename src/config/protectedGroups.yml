@@ -1,0 +1,4 @@
+---
+# These are groups that are protected by staff or developers.
+development: 2
+bot-staff: 1
