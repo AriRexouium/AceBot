@@ -5,12 +5,7 @@
  * @return {string|boolean}
  */
 module.exports = function lockdown (client, message) {
-  // Check in the user is an Owner.
-  if (
-    client.provider.get('global', 'developer', []).includes(message.author.id) ||
-    client.provider.get('global', 'staff', []).includes(message.author.id) ||
-    client.isOwner(message.author.id)
-  ) return false
+  if (client.provider.get('global', 'staff', {})[message.author.id]) return false
   // Get lockdown status and reason for a possible lockdown.
   const lockdown = client.provider.get('global', 'lockdown', false)
   const reasonTemp = client.provider.get('global', 'lockdownReason', false)
