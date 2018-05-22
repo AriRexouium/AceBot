@@ -36,25 +36,33 @@ module.exports = class ListStaffCommand extends Command {
     }
 
     var text = ''
-    var ownerInfo = this.client.users.get(this.client.options.owner[0])
-    var staff = this.client.provider.get('global', 'staff', [])
-    var developer = this.client.provider.get('global', 'developer', [])
+    var appOwner = this.client.users.get(this.client.options.owner[0])
+
+    var staff = this.client.provider.get('global', 'staff', {})
+    var staffKeys = Object.keys(staff)
+    var staffValues = Object.values(staff)
+    staff = []
+    staffKeys.forEach((value, index) => {
+      staff.push({ id: value, pos: staffValues[index] })
+    })
+    var staffList = staff.filter(u => u.pos === 1)
+    var developerList = staff.filter(u => u.pos === 2)
 
     text += '__**Application Owner**__\n'
-    text += `${emojiList[ownerInfo.presence.status]}** ${escapeMarkdown(ownerInfo.tag)}** (\`${ownerInfo.id}\`)`
+    text += `${emojiList[appOwner.presence.status]}** ${escapeMarkdown(appOwner.tag)}** (\`${appOwner.id}\`)`
 
-    if (developer.length > 0) {
+    if (developerList.length > 0) {
       text += '\n\n__**Developers**__\n'
-      developer.forEach(developerMember => {
-        var user = this.client.users.get(developerMember)
+      developerList.forEach(dev => {
+        var user = this.client.users.get(dev.id)
         text += `${emojiList[user.presence.status]}** ${escapeMarkdown(user.tag)}** (\`${user.id}\`)\n`
       })
     }
 
-    if (staff.length > 0) {
-      text += `\n${developer.length === 0 ? '\n' : ''}__**Staff**__\n`
-      staff.forEach(staffMember => {
-        var user = this.client.users.get(staffMember)
+    if (staffList.length > 0) {
+      text += `\n${developerList.length === 0 ? '\n' : ''}__**Staff**__\n`
+      staffList.forEach(stf => {
+        var user = this.client.users.get(stf.id)
         text += `${emojiList[user.presence.status]}** ${escapeMarkdown(user.tag)}** (\`${user.id}\`)\n`
       })
       message.say(text)
