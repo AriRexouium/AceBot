@@ -43,7 +43,7 @@ Load SQL Provider
 \* **************************************************************************************************** */
 if (sqlConfig.useMySQL === false) {
   sqlite.open(path.join(__dirname, './src/config/database.sqlite'))
-    .then((db) => {
+    .then(db => {
       client.setProvider(new SQLiteProvider(db))
     })
 } else {
@@ -54,7 +54,7 @@ if (sqlConfig.useMySQL === false) {
     password: sqlConfig.password,
     database: sqlConfig.database
   })
-    .then((db, error) => {
+    .then(db => {
       client.setProvider(new MySQLProvider(db))
     })
 }

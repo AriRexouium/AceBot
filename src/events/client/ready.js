@@ -1,7 +1,7 @@
 const pluralize = require('pluralize')
 const { oneLine } = require('common-tags')
 
-module.exports = async (client) => {
+module.exports = async client => {
   var eventName = client.getFileName(__filename)
   await client.log('success', `Logged in as ${client.user.tag} (${client.user.id}).`, 'Discord', 'Login')
 

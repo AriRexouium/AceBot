@@ -1,6 +1,6 @@
 const { oneLine } = require('common-tags')
 
-module.exports = (client) => {
+module.exports = client => {
   var eventName = client.getFileName(__filename)
   client.log('verbose', oneLine`
     ${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}
