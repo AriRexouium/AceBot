@@ -36,7 +36,7 @@ module.exports = class EnableCommand extends Command {
     })
   }
 
- run (message, args) {
+  run (message, args) {
     const group = args.cmdOrGrp.group
     if (args.cmdOrGrp.isEnabledIn(message.guild, true)) {
       return message.reply(
