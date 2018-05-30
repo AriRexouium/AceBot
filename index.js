@@ -203,8 +203,15 @@ if (process.argv.includes('--travis')) {
 }
 
 // Bot Stats
-const botStats = { clientMentions: 0, commandsUsed: 0, messagesReceived: 0, messagesSent: 0 }
-client.botStats = botStats
+class BotStats {
+  constructor () {
+    this.clientMentions = 0
+    this.commandsUsed = 0
+    this.messagesReceived = 0
+    this.messagesSent = 0
+  }
+}
+client.botStats = new BotStats()
 
 /* **************************************************************************************************** *\
 Login
