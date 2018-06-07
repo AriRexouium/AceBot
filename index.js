@@ -52,9 +52,13 @@ if (sqlConfig.useMySQL === false) {
     port: sqlConfig.port,
     user: sqlConfig.user,
     password: sqlConfig.password,
-    database: sqlConfig.database
+    database: sqlConfig.database,
+    connectTimeout: 20 * 1000
   })
     .then(db => {
+      ;['wait_timeout', 'interactive_timeout'].forEach(timeout => {
+        db.execute(`SET SESSION ${timeout}=86400`)
+      })
       client.setProvider(new MySQLProvider(db))
     })
 }
