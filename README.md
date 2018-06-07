@@ -15,7 +15,7 @@
 
 <!-- markdownlint-enable MD002 MD041 -->
 
-| Latest Version | Latest Build | Code Style |
+|                                                                                         Latest Version                                                                                        |                                                                 Latest Build                                                                 |                                                                           Code Style                                                                           |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | [![Latest Version](http://img.shields.io/github/package-json/v/Aceheliflyer/AceBot.svg?colorB=green&style=flat-square)](http://github.com/Aceheliflyer/AceBot/commit/master "Latest Version") | [![Travis CI](http://img.shields.io/travis/Aceheliflyer/AceBot.svg?style=flat-square)](http://travis-ci.org/Aceheliflyer/AceBot "Travis CI") | [![JavaScript Style Guide](http://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com "JavaScript Style Guide") |
 <!-- markdownlint-disable MD001 -->
