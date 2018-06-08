@@ -23,7 +23,7 @@ var cases = {
  * @param {string} child The child of the error. (Supports `__filename`, also use '' to default to <anonymous>.)
  */
 module.exports = function logger (client, type, body, parent, child) {
-  if (!Object.keys(cases).includes(type)) throw new TypeError('Must be a valid log case.')
+  if (!Object.keys(cases).includes(type.toLowerCase())) throw new TypeError('Must be a valid log case.')
   if (parent == null || parent === '') { parent = client.getFileName(process.cwd()) }
 
   try {
@@ -36,10 +36,11 @@ module.exports = function logger (client, type, body, parent, child) {
     }
   }
 
-  body = body == null ? '' : body.toString().split('\n')
+  body = body == null ? '' : body.toString()
   var formatBody = ''; var prefix = ''
   if (body.length > 0) {
     prefix = '┌─'
+    body = body.split('\n')
     for (var i = 0; i < body.length; i++) {
       i + 1 !== body.length ? formatBody += `│ ${body[i]}\n` : formatBody += `└ ${body[i]}`
     }
