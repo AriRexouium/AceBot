@@ -1,4 +1,7 @@
 ---
 # These are groups that are protected by staff or developers.
+# Developers = 2
+# Staff = 1
 development: 2
 bot-staff: 1
+tunnel: 1
