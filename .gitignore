@@ -2,22 +2,24 @@
 # Files
 # ==============================
 
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Configuration
+# NPM
 package-lock.json
-.env
+npm-debug.log
+
+# Yarn
+yarn.lock
+yarn-debug.log
+yarn-error.log
 
 # ==============================
 # Directories
 # ==============================
 
-# Node
-.npm/
+# Dependencies
 node_modules/
+
+# NPM
+.npm/
 
 # Temp
 temp/
@@ -27,3 +29,4 @@ temp/
 
 # Configuration
 *.sqlite
+src/config/
