@@ -46,7 +46,7 @@ module.exports = class PingCommand extends Command {
             },
             {
               'name': 'REST Latency',
-              'value': moment.duration(this.client.ping).format('s [s] S [ms]'),
+              'value': moment.duration(this.client.ping).format('s[s] S[ms]'),
               'inline': true
             },
             {
