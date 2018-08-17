@@ -1,5 +1,7 @@
 const { Command } = require('discord.js-commando')
-const { oneLine } = require('common-tags')
+const os = require('os')
+const moment = require('moment')
+require('moment-duration-format')
 
 module.exports = class PingCommand extends Command {
   constructor (client) {
@@ -7,7 +9,7 @@ module.exports = class PingCommand extends Command {
       name: 'ping',
       memberName: 'ping',
       group: 'information',
-      description: 'Checks the bot\'s latency to the server.',
+      description: 'Checks the bots latency to the server.',
       aliases: [
         'pong'
       ],
@@ -36,10 +38,28 @@ module.exports = class PingCommand extends Command {
           author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
-          description: (oneLine`
-          **REST Latency:** \`${pingMessage.createdTimestamp - message.createdTimestamp}ms\`
-          ${this.client.ping ? `**| Websocket Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
-          `),
+          fields: [
+            {
+              'name': 'REST Latency',
+              'value': moment.duration(pingMessage.createdTimestamp - message.createdTimestamp).format('s[s] S[ms]'),
+              'inline': true
+            },
+            {
+              'name': 'REST Latency',
+              'value': moment.duration(this.client.ping).format('s [s] S [ms]'),
+              'inline': true
+            },
+            {
+              'name': 'Client Uptime',
+              'value': moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              'inline': false
+            },
+            {
+              'name': 'System Uptime',
+              'value': moment.duration(os.uptime() * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              'inline': true
+            }
+          ],
           color: this.client.getClientColor(message)
         }
       })
@@ -57,10 +77,28 @@ module.exports = class PingCommand extends Command {
           author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
           footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
           timestamp: new Date(),
-          description: (oneLine`
-          **REST Latency:** \`${message.editedTimestamp - message.createdTimestamp}ms\`
-          ${this.client.ping ? `**| Websocket Latency:** \`${Math.round(this.client.ping)}ms\`` : ''}
-          `),
+          fields: [
+            {
+              'name': 'REST Latency',
+              'value': moment.duration(message.editedTimestamp - message.createdTimestamp).format('s[s] S[ms]'),
+              'inline': true
+            },
+            {
+              'name': 'REST Latency',
+              'value': moment.duration(this.client.ping).format('s[s] S[ms]'),
+              'inline': true
+            },
+            {
+              'name': 'Client Uptime',
+              'value': moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              'inline': false
+            },
+            {
+              'name': 'System Uptime',
+              'value': moment.duration(os.uptime() * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              'inline': true
+            }
+          ],
           color: this.client.getClientColor(message)
         }
       })
