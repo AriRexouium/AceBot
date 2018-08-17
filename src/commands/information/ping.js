@@ -45,7 +45,7 @@ module.exports = class PingCommand extends Command {
               'inline': true
             },
             {
-              'name': 'REST Latency',
+              'name': 'Websocket Latency',
               'value': moment.duration(this.client.ping).format('s[s] S[ms]'),
               'inline': true
             },
@@ -84,7 +84,7 @@ module.exports = class PingCommand extends Command {
               'inline': true
             },
             {
-              'name': 'REST Latency',
+              'name': 'Websocket Latency',
               'value': moment.duration(this.client.ping).format('s[s] S[ms]'),
               'inline': true
             },
