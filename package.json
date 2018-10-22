@@ -53,23 +53,23 @@
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
     "moment-timezone": "^0.5.21",
-    "mysql2": "^1.5.3",
+    "mysql2": "^1.6.1",
     "os-utils": "0.0.14",
     "pageres": "^4.5.1",
     "pluralize": "^7.0.0",
-    "raven": "^2.6.3",
+    "raven": "^2.6.4",
     "snekfetch": "^4.0.4",
-    "sqlite": "^2.9.2",
-    "standard": "^11.0.1",
+    "sqlite": "^3.0.0",
+    "standard": "^12.0.1",
     "url-regex": "^4.1.1",
     "weather-js": "^2.0.0"
   },
   "devDependencies": {
     "commitplease": "^3.2.0",
-    "husky": "^0.14.3",
-    "markdownlint": "^0.8.1",
-    "nodemon": "^1.17.5",
-    "snazzy": "^7.1.1"
+    "husky": "^1.1.2",
+    "markdownlint": "^0.11.0",
+    "nodemon": "^1.18.4",
+    "snazzy": "^8.0.0"
   },
   "engines": {
     "node": ">=7.6.0"
