@@ -58,6 +58,7 @@
     "pageres": "^4.5.1",
     "pluralize": "^7.0.0",
     "raven": "^2.6.4",
+    "screenshot-desktop": "1.4.2",
     "snekfetch": "^4.0.4",
     "sqlite": "^3.0.0",
     "standard": "^12.0.1",
