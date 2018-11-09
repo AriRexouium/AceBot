@@ -14,14 +14,14 @@
     "start:shard": "node sharder.js",
     "start:dev": "nodemon index.js",
     "start:dev-shard": "nodemon sharder.js",
-    "install:dev": "npm i --only=dev",
-    "lint:all": "standard --verbose | snazzy && markdownlint *",
     "lint:js": "standard --verbose | snazzy",
     "lint:js-fix": "standard --verbose --fix | snazzy",
-    "lint:md": "markdownlint *",
+    "lint:md": "standard --verbose --plugin markdown '**/*.md' | snazzy",
+    "lint:md-fix": "standard --verbose --fix --plugin markdown '**/*.md' | snazzy",
+    "lint:all": "npm run lint:js && npm run lint:md && echo \u2713 Success!",
     "commitmsg": "commitplease .git/COMMIT_EDITMSG",
     "precommit": "npm run lint:js",
-    "prepush": "npm run lint:js"
+    "prepush": "npm run lint:all"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "discord.js": "github:hydrabolt/discord.js",
     "discord.js-commando": "github:gawdl3y/discord.js-commando",
     "discord.js-commando-mysqlprovider": "^0.1.0",
+    "eslint-plugin-markdown": "^1.0.0-rc.0",
     "get-age": "^1.0.1",
     "is-hex": "^1.1.3",
     "js-yaml": "^3.12.0",
@@ -68,7 +69,6 @@
   "devDependencies": {
     "commitplease": "^3.2.0",
     "husky": "^1.1.2",
-    "markdownlint": "^0.11.0",
     "nodemon": "^1.18.4",
     "snazzy": "^8.0.0"
   },
