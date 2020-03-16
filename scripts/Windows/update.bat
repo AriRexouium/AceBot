@@ -7,7 +7,7 @@ cls
 echo.
 echo Updating the bot...
 cmd /c "git pull --all"
-IF /i "%errorlevel%" neq "0" (
+if /i "%errorlevel%" neq "0" (
   <nul set /p "=Failed to update the bot with exit code %errorlevel%.)"
   pause >nul
   exit
@@ -18,7 +18,7 @@ IF /i "%errorlevel%" neq "0" (
 :: Install Required Packages
 echo.
 echo Installing required Node Modules...
-cmd /c "npm i"
+cmd /c "npm install"
 if /i "%errorlevel%" neq "0" (
   <nul set /p "=Failed to update Node Modules with exit code %errorlevel%."
   pause >nul

@@ -12,7 +12,7 @@ fi
 
 # Update Node Modules
 echo Installing required Node Modules...
-if npm i
+if npm install
 then
     echo "Successfully updated Node Modules!"
     echo
