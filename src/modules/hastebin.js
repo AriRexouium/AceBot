@@ -17,7 +17,7 @@ module.exports = function hastebin (client, text, syntax = '', secure = true) {
         if (error) {
           return reject(error)
         } else {
-          return resolve(secure === true ? `https://hastebin.com/${data.body.key}${syntax ? `.${syntax}` : ``}` : `http://hastebin.com/${data.body.key}${syntax ? `.${syntax}` : ``}`)
+          return resolve(secure === true ? `https://hastebin.com/${data.body.key}${syntax ? `.${syntax}` : ''}` : `http://hastebin.com/${data.body.key}${syntax ? `.${syntax}` : ''}`)
         }
       })
   })

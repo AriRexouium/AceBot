@@ -5,11 +5,11 @@
  * @return {Promise<any>}
  */
 module.exports = function webhook (client, text) {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     var { WebhookClient } = require('discord.js')
     var hook = new WebhookClient(client.config.webhook.webhookID, client.config.webhook.webhookToken)
     try {
-      var message = await hook.send(text)
+      var message = hook.send(text)
       resolve(message)
     } catch (error) {
       reject(error)

@@ -41,29 +41,29 @@ module.exports = class DiscordStatsCommand extends Command {
             description: `**${body.status.description}**`,
             fields: [
               {
-                'name': body.components[0].name, // API
-                'value': `❯ **${body.components[0].status}**`,
-                'inline': true
+                name: body.components[0].name, // API
+                value: `❯ **${body.components[0].status}**`,
+                inline: true
               },
               {
-                'name': body.components[2].name, // Gateway
-                'value': `❯ **${body.components[2].status}**`,
-                'inline': true
+                name: body.components[2].name, // Gateway
+                value: `❯ **${body.components[2].status}**`,
+                inline: true
               },
               {
-                'name': body.components[6].name, // Media Proxy
-                'value': `❯ **${body.components[6].status}**`,
-                'inline': true
+                name: body.components[6].name, // Media Proxy
+                value: `❯ **${body.components[6].status}**`,
+                inline: true
               },
               {
-                'name': body.components[4].name, // CloudFlare
-                'value': `❯ **${body.components[4].status}**`,
-                'inline': true
+                name: body.components[4].name, // CloudFlare
+                value: `❯ **${body.components[4].status}**`,
+                inline: true
               },
               {
-                'name': body.components[8].name, // Voice
-                'value': `❯ **${body.components[8].status}**`,
-                'inline': true
+                name: body.components[8].name, // Voice
+                value: `❯ **${body.components[8].status}**`,
+                inline: true
               }
             ],
             color: 0x7289DA

@@ -82,39 +82,39 @@ module.exports = class UserInfoCommand extends Command {
       thumbnail: { url: user.displayAvatarURL() },
       fields: [
         {
-          'name': '📇 Identity',
-          'value': stripIndents`
+          name: '📇 Identity',
+          value: stripIndents`
           **Tag:** ${escapeMarkdown(user.tag)}
           **ID:** ${user.id}
           **Status:** ${user.presence.status}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': '🌐 Account Type',
-          'value': user.bot === true ? 'Bot' : 'User',
-          'inline': true
+          name: '🌐 Account Type',
+          value: user.bot === true ? 'Bot' : 'User',
+          inline: true
         },
         {
-          'name': `🔧 Account Created - (${moment(user.createdAt).fromNow()})`,
-          'value': stripIndents`
+          name: `🔧 Account Created - (${moment(user.createdAt).fromNow()})`,
+          value: stripIndents`
           **Date:** ${moment(user.createdAt).format('L')}
           **Time:** ${moment(user.createdAt).format('LTS')} ${moment.tz(moment.tz.guess()).format('z')}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `📥 Joined Guild - (${moment(args.user.joinedAt).fromNow()})`,
-          'value': stripIndents`
+          name: `📥 Joined Guild - (${moment(args.user.joinedAt).fromNow()})`,
+          value: stripIndents`
           **Date:** ${moment(args.user.joinedAt).format('L')}
           **Time:** ${moment(args.user.joinedAt).format('LTS')} ${moment.tz(moment.tz.guess()).format('z')}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `🔖 Roles - (${args.user.roles.size > 0 ? args.user.roles.size.toLocaleString() - 1 : 0})`,
-          'value': userRoles,
-          'inline': false
+          name: `🔖 Roles - (${args.user.roles.size > 0 ? args.user.roles.size.toLocaleString() - 1 : 0})`,
+          value: userRoles,
+          inline: false
         }
       ],
       color: userColor

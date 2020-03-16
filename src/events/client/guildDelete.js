@@ -25,26 +25,26 @@ module.exports = async (client, guild) => {
           thumbnail: { url: guild ? guild.iconURL() : client.user.displayAvatarURL() },
           fields: [
             {
-              'name': 'Guild',
-              'value': `${guild.name} \`(${guild.id})\``,
-              'inline': true
+              name: 'Guild',
+              value: `${guild.name} \`(${guild.id})\``,
+              inline: true
             },
             {
-              'name': 'Owner',
-              'value': stripIndents`
+              name: 'Owner',
+              value: stripIndents`
                 **Name:** ${escapeMarkdown(ownerInfo.tag)}
                 **ID:** ${ownerInfo.id}
                 **Status:** ${ownerInfo.presence.status}
               `,
-              'inline': true
+              inline: true
             },
             {
-              'name': `Members - (${guild.members.size.toLocaleString()})`,
-              'value': oneLine`
+              name: `Members - (${guild.members.size.toLocaleString()})`,
+              value: oneLine`
                 **Users:** ${await guild.members.filter(s => s.user.bot !== true).size.toLocaleString()}
                 | **Bots:** ${await guild.members.filter(s => s.user.bot !== false).size.toLocaleString()}
               `,
-              'inline': true
+              inline: true
             }
           ],
           color: 0x4D4DFF

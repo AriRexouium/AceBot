@@ -65,14 +65,14 @@ module.exports = class ExecCommand extends Command {
         description: `*Executed in ${execTime[0] > 0 ? `${execTime[0]}s ` : ''}${execTime[1] / 1000000}ms.*`,
         fields: [
           {
-            'name': 'Executed',
-            'value': '```' + escapeMarkdown(`${syntax}\n${prefix}${code}`, true) + '\n```',
-            'inline': false
+            name: 'Executed',
+            value: '```' + escapeMarkdown(`${syntax}\n${prefix}${code}`, true) + '\n```',
+            inline: false
           },
           {
-            'name': 'Result',
-            'value': ('```' + escapeMarkdown(`${syntax}\n${result.toString()}`, true) + '\n```'),
-            'inline': false
+            name: 'Result',
+            value: ('```' + escapeMarkdown(`${syntax}\n${result.toString()}`, true) + '\n```'),
+            inline: false
           }
         ],
         color: 0x00AA00
@@ -89,14 +89,14 @@ module.exports = class ExecCommand extends Command {
           description: `*Executed in ${execTime[0] > 0 ? `${execTime[0]}s ` : ''}${execTime[1] / 1000000}ms*`,
           fields: [
             {
-              'name': 'Executed',
-              'value': `\`\`\`${escapeMarkdown(syntax, true)}\n${escapeMarkdown(prefix, true)}${escapeMarkdown(code, true)}\n\`\`\``,
-              'inline': false
+              name: 'Executed',
+              value: `\`\`\`${escapeMarkdown(syntax, true)}\n${escapeMarkdown(prefix, true)}${escapeMarkdown(code, true)}\n\`\`\``,
+              inline: false
             },
             {
-              'name': 'Exception',
-              'value': '[```' + escapeMarkdown(`${syntax}\n${error.message}`, true) + '\n```](' + link + ')',
-              'inline': false
+              name: 'Exception',
+              value: '[```' + escapeMarkdown(`${syntax}\n${error.message}`, true) + '\n```](' + link + ')',
+              inline: false
             }
           ],
           color: 0xAA0000

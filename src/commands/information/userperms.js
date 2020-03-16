@@ -43,8 +43,8 @@ module.exports = class UserPermsCommand extends Command {
       description: '*This only takes role permissions into account.*',
       fields: [
         {
-          'name': 'General Permissions',
-          'value': stripIndents`\`\`\`diff
+          name: 'General Permissions',
+          value: stripIndents`\`\`\`diff
             ${args.user.permissions.has('ADMINISTRATOR')} Administrator *
             ${args.user.permissions.has('VIEW_AUDIT_LOG')} View Audit Log
             ${args.user.permissions.has('MANAGE_GUILD')} Manage Server *
@@ -59,11 +59,11 @@ module.exports = class UserPermsCommand extends Command {
             ${args.user.permissions.has('MANAGE_WEBHOOKS')} Manage Webhooks *
             ${args.user.permissions.has('VIEW_CHANNEL')} View Channels
           \`\`\``.replace(/true/g, '+').replace(/false/g, '-'),
-          'inline': true
+          inline: true
         },
         {
-          'name': 'Text Permissions',
-          'value': stripIndents`\`\`\`diff
+          name: 'Text Permissions',
+          value: stripIndents`\`\`\`diff
             ${args.user.permissions.has('SEND_MESSAGES')} Send Messages
             ${args.user.permissions.has('SEND_TTS_MESSAGES')} Send TTS Messages
             ${args.user.permissions.has('MANAGE_MESSAGES')} Manage Messages *
@@ -74,11 +74,11 @@ module.exports = class UserPermsCommand extends Command {
             ${args.user.permissions.has('USE_EXTERNAL_EMOJIS')} Use External Emojis
             ${args.user.permissions.has('ADD_REACTIONS')} Add Reactions
           \`\`\``.replace(/true/g, '+').replace(/false/g, '-'),
-          'inline': true
+          inline: true
         },
         {
-          'name': 'Voice Permissions',
-          'value': stripIndents`\`\`\`diff
+          name: 'Voice Permissions',
+          value: stripIndents`\`\`\`diff
             ${args.user.permissions.has('CONNECT')} Connect
             ${args.user.permissions.has('SPEAK')} Speak
             ${args.user.permissions.has('MUTE_MEMBERS')} Mute Members
@@ -86,7 +86,7 @@ module.exports = class UserPermsCommand extends Command {
             ${args.user.permissions.has('MOVE_MEMBERS')} Use Members
             ${args.user.permissions.has('USE_VAD')} Use Voice Activity
           \`\`\``.replace(/true/g, '+').replace(/false/g, '-'),
-          'inline': true
+          inline: true
         }
       ],
       color: userColor

@@ -43,18 +43,18 @@ module.exports = class InviteInfoCommand extends Command {
         thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
         fields: [
           {
-            'name': 'Inviter',
-            'value': invite.inviter === undefined ? 'N/A' : stripIndents`
+            name: 'Inviter',
+            value: invite.inviter === undefined ? 'N/A' : stripIndents`
               **Name:** ${escapeMarkdown(`${inviter.username}#${inviter.discriminator}`)}
               **ID:** ${inviter.id}
               **Status:** ${inviter.presence.status}
             `,
-            'inline': true
+            inline: true
           },
           {
-            'name': 'Members',
-            'value': invite.memberCount,
-            'inline': true
+            name: 'Members',
+            value: invite.memberCount,
+            inline: true
           }
         ],
         color: this.client.getClientColor(message)

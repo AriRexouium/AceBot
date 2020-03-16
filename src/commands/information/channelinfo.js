@@ -48,34 +48,34 @@ module.exports = class ChannelInfoCommand extends Command {
         description: `Since ${moment(channel.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}`,
         fields: [
           {
-            'name': 'Type',
-            'value': channel.type,
-            'inline': true
+            name: 'Type',
+            value: channel.type,
+            inline: true
           },
           {
-            'name': 'ID',
-            'value': channel.id,
-            'inline': true
+            name: 'ID',
+            value: channel.id,
+            inline: true
           },
           {
-            'name': 'Position',
-            'value': channel.rawPosition,
-            'inline': true
+            name: 'Position',
+            value: channel.rawPosition,
+            inline: true
           },
           {
-            'name': 'Bitrate',
-            'value': `${channel.bitrate}kbps`,
-            'inline': true
+            name: 'Bitrate',
+            value: `${channel.bitrate}kbps`,
+            inline: true
           },
           {
-            'name': 'User Count',
-            'value': `${channel.members.size.toLocaleString()}/${channel.userLimit === 0 ? 'Infinity' : channel.userLimit}`,
-            'inline': true
+            name: 'User Count',
+            value: `${channel.members.size.toLocaleString()}/${channel.userLimit === 0 ? 'Infinity' : channel.userLimit}`,
+            inline: true
           },
           {
-            'name': 'Users',
-            'value': channelUsers,
-            'inline': true
+            name: 'Users',
+            value: channelUsers,
+            inline: true
           }
         ],
         color: this.client.getClientColor(message)
@@ -89,19 +89,19 @@ module.exports = class ChannelInfoCommand extends Command {
         description: `Since ${moment(channel.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}`,
         fields: [
           {
-            'name': 'Type',
-            'value': channel.type,
-            'inline': true
+            name: 'Type',
+            value: channel.type,
+            inline: true
           },
           {
-            'name': 'ID',
-            'value': channel.id,
-            'inline': true
+            name: 'ID',
+            value: channel.id,
+            inline: true
           },
           {
-            'name': 'Position',
-            'value': channel.rawPosition,
-            'inline': true
+            name: 'Position',
+            value: channel.rawPosition,
+            inline: true
           }
         ],
         color: this.client.getClientColor(message)

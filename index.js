@@ -159,7 +159,7 @@ Load All Events
 \* **************************************************************************************************** */
 var events = []
 // You will have to manually add event emitters here because apparently you can use `[event.type]on( //etc )`.
-let eventEmitters = { client, process }
+const eventEmitters = { client, process }
 
 listDirs('./src/events').forEach(directory => {
   events.push({

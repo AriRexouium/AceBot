@@ -27,7 +27,7 @@ module.exports = class EmojisCommand extends Command {
     if (!message.guild.emojis.length > 0) {
       // Static Emojis
       var staticEmojis = message.guild.emojis.filter(emoji => emoji.animated === false)
-      let staticEmojiCount = staticEmojis.size.toLocaleString()
+      const staticEmojiCount = staticEmojis.size.toLocaleString()
       if (staticEmojis.size > 1) {
         staticEmojis = oneLineCommaListsAnd`${staticEmojis.map(emoji => `\`:${emoji.name}:\``)}`
       } else {
@@ -36,7 +36,7 @@ module.exports = class EmojisCommand extends Command {
 
       // Animated Emojis
       var animatedEmojis = message.guild.emojis.filter(emoji => emoji.animated === true)
-      let animatedEmojiCount = animatedEmojis.size.toLocaleString()
+      const animatedEmojiCount = animatedEmojis.size.toLocaleString()
       if (animatedEmojis.size > 1) {
         animatedEmojis = oneLineCommaListsAnd`${animatedEmojis.map(emoji => `\`:${emoji.name}:\``)}`
       } else {
@@ -49,14 +49,14 @@ module.exports = class EmojisCommand extends Command {
         timestamp: new Date(),
         fields: [
           {
-            'name': `Regular Emojis - (${staticEmojiCount})`,
-            'value': staticEmojis,
-            'inline': true
+            name: `Regular Emojis - (${staticEmojiCount})`,
+            value: staticEmojis,
+            inline: true
           },
           {
-            'name': `Animated - (${animatedEmojiCount})`,
-            'value': animatedEmojis,
-            'inline': true
+            name: `Animated - (${animatedEmojiCount})`,
+            value: animatedEmojis,
+            inline: true
           }
         ],
         color: this.client.getClientColor(message)

@@ -73,19 +73,19 @@ module.exports = class SudoCommand extends Command {
         description: `*Evaluated in ${evalTime[0] > 0 ? `${evalTime[0]}s ` : ''}${evalTime[1] / 1000000}ms.*`,
         fields: [
           {
-            'name': 'Evaluated',
-            'value': '```js\n' + escapeMarkdown(code, true) + '\n```',
-            'inline': false
+            name: 'Evaluated',
+            value: '```js\n' + escapeMarkdown(code, true) + '\n```',
+            inline: false
           },
           {
-            'name': 'Result',
-            'value': ('```js\n' + escapeMarkdown(result.toString(), true) + '\n```'),
-            'inline': false
+            name: 'Result',
+            value: ('```js\n' + escapeMarkdown(result.toString(), true) + '\n```'),
+            inline: false
           },
           {
-            'name': 'Type',
-            'value': '```js\n' + escapeMarkdown(type, true) + '\n```',
-            'inline': false
+            name: 'Type',
+            value: '```js\n' + escapeMarkdown(type, true) + '\n```',
+            inline: false
           }
         ],
         color: 0x00AA00
@@ -103,14 +103,14 @@ module.exports = class SudoCommand extends Command {
           description: `*Evaluated in ${evalTime[0] > 0 ? `${evalTime[0]}s ` : ''}${evalTime[1] / 1000000}ms.*`,
           fields: [
             {
-              'name': 'Evaluated',
-              'value': '```js\n' + escapeMarkdown(code, true) + '\n```',
-              'inline': false
+              name: 'Evaluated',
+              value: '```js\n' + escapeMarkdown(code, true) + '\n```',
+              inline: false
             },
             {
-              'name': 'Exception',
-              'value': `[\`\`\`js\n${escapeMarkdown(`${error.name}: ${error.message}`, true)}\n\`\`\`](${link})`,
-              'inline': false
+              name: 'Exception',
+              value: `[\`\`\`js\n${escapeMarkdown(`${error.name}: ${error.message}`, true)}\n\`\`\`](${link})`,
+              inline: false
             }
           ],
           color: 0xAA0000

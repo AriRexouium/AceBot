@@ -69,7 +69,7 @@ module.exports = async client => {
 
   // Assign application owner as owner of the bot by default.
   client.fetchApplication().then(app => {
-    let appOwner = client.options.owner.indexOf(app.owner.id) > -1
+    const appOwner = client.options.owner.indexOf(app.owner.id) > -1
     if (appOwner === false) {
       client.options.owner.push(app.owner.id)
     }

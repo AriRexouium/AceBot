@@ -52,16 +52,16 @@ module.exports = class StatsCommand extends Command {
         thumbnail: { url: this.client.user.displayAvatarURL() },
         fields: [
           {
-            'name': '🕑 Uptime',
-            'value': stripIndents`
+            name: '🕑 Uptime',
+            value: stripIndents`
             ${moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]')}
             *(since ${moment().subtract(this.client.uptime, 'ms').format('L LTS')} ${moment.tz(moment.tz.guess()).format('z')})*
             `,
-            'inline': false
+            inline: false
           },
           {
-            'name': '✉ Messages',
-            'value': !this.client.shard
+            name: '✉ Messages',
+            value: !this.client.shard
               ? stripIndents`
               Sent: **${this.client.botStats.messagesSent}**
               Received: **${this.client.botStats.messagesReceived}**
@@ -74,11 +74,11 @@ module.exports = class StatsCommand extends Command {
               Commands: **${this.client.botStats.commandsUsed}** [${stats.totalCommandsUsed}]
               Bot Mentions: **${this.client.botStats.clientMentions}** [${stats.totalClientMentions}]
               `,
-            'inline': true
+            inline: true
           },
           {
-            'name': '🌐 Global Stats',
-            'value': !this.client.shard
+            name: '🌐 Global Stats',
+            value: !this.client.shard
               ? stripIndents`
               Guilds: **${this.client.guilds.size.toLocaleString()}**
               Channels: **${this.client.channels.size.toLocaleString()}**
@@ -92,25 +92,25 @@ module.exports = class StatsCommand extends Command {
               Users: **${this.client.users.size.toLocaleString()}** [${stats.totalUsers}]
               Emojis: **${this.client.emojis.size.toLocaleString()}** [${stats.totalEmojis}]
               `,
-            'inline': true
+            inline: true
           },
           {
-            'name': '💾 System',
-            'value': stripIndents`
+            name: '💾 System',
+            value: stripIndents`
               OS: **${os.platform()}** (${process.arch})
               CPU Usage (%): **${cpuUsage.toFixed(2).replace('.', '')}**
               Node Version: **${process.version}**
             `,
-            'inline': true
+            inline: true
           },
           {
-            'name': '💾 Memory (MB)',
-            'value': stripIndents`
+            name: '💾 Memory (MB)',
+            value: stripIndents`
               Used: **${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}**
               Available: **${os.freemem().toFixed(2)}**
               Total: **${os.totalmem().toFixed(2)}**
             `,
-            'inline': true
+            inline: true
           }
         ],
         color: this.client.getClientColor(message)

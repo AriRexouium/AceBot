@@ -79,85 +79,85 @@ module.exports = class ServerInfoCommand extends Command {
       thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {
-          'name': '🔧 Owner',
-          'value': stripIndents`
+          name: '🔧 Owner',
+          value: stripIndents`
             **Tag:** ${escapeMarkdown(ownerInfo.tag)}
             **ID:** ${ownerInfo.id}
             **Status:** ${ownerInfo.presence.status}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `🕐 Created - (${moment(guild.createdAt).fromNow()})`,
-          'value': stripIndents`
+          name: `🕐 Created - (${moment(guild.createdAt).fromNow()})`,
+          value: stripIndents`
           **Date:** ${moment(guild.createdAt).format('L')}
           **Time:** ${moment(guild.createdAt).format('LTS')} ${moment.tz(moment.tz.guess()).format('z')}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `📋 Members - (${guild.members.size.toLocaleString()})`,
-          'value': stripIndents`
+          name: `📋 Members - (${guild.members.size.toLocaleString()})`,
+          value: stripIndents`
             **Online:** ${guild.members.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${guild.members.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
             **Idle:** ${guild.members.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${guild.members.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `🕵 Users - (${userFilter.size.toLocaleString()})`,
-          'value': stripIndents`
+          name: `🕵 Users - (${userFilter.size.toLocaleString()})`,
+          value: stripIndents`
             **Online:** ${userFilter.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${userFilter.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
             **Idle:** ${userFilter.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${userFilter.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `🤖 Bots - (${botFilter.size.toLocaleString()})`,
-          'value': stripIndents`
+          name: `🤖 Bots - (${botFilter.size.toLocaleString()})`,
+          value: stripIndents`
             **Online:** ${botFilter.filter(s => s.user.presence.status === 'online').size.toLocaleString()} | **Offline:** ${botFilter.filter(s => s.user.presence.status === 'offline').size.toLocaleString()}
             **Idle:** ${botFilter.filter(s => s.user.presence.status === 'idle').size.toLocaleString()} | **DND:** ${botFilter.filter(s => s.user.presence.status === 'dnd').size.toLocaleString()}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': `⌨ Channels - (${guild.channels.size.toLocaleString()})`,
-          'value': stripIndents`
+          name: `⌨ Channels - (${guild.channels.size.toLocaleString()})`,
+          value: stripIndents`
             **Category:** ${guild.channels.filter(c => c.type === 'category').size.toLocaleString()}
             **Text:** ${guild.channels.filter(c => c.type === 'text').size.toLocaleString()}
             **Voice:** ${guild.channels.filter(c => c.type === 'voice').size.toLocaleString()}
           `,
-          'inline': true
+          inline: true
         },
         {
-          'name': '💤 AFK Channel',
-          'value': guild.afkChannelID !== null
+          name: '💤 AFK Channel',
+          value: guild.afkChannelID !== null
             ? stripIndents`
             **Name:** ${guild.afkChannel.name}
             **ID:** ${guild.afkChannel.id}
             **Timeout:** ${guild.afkTimeout} seconds
           `
             : 'N/A',
-          'inline': true
+          inline: true
         },
         {
-          'name': '⚙ Features',
-          'value': features.size > 0 ? features.join('\n') : 'N/A',
-          'inline': true
+          name: '⚙ Features',
+          value: features.size > 0 ? features.join('\n') : 'N/A',
+          inline: true
         },
         {
-          'name': '⚖ Verification Level',
-          'value': verificationLevel[guild.verificationLevel],
-          'inline': true
+          name: '⚖ Verification Level',
+          value: verificationLevel[guild.verificationLevel],
+          inline: true
         },
         {
-          'name': '📰 Explicit Content Filter',
-          'value': explicitContentFilter[guild.explicitContentFilter],
-          'inline': true
+          name: '📰 Explicit Content Filter',
+          value: explicitContentFilter[guild.explicitContentFilter],
+          inline: true
         },
         {
-          'name': `🔖 Roles - (${guild.roles.size.toLocaleString()})`,
-          'value': guildRoles,
-          'inline': false
+          name: `🔖 Roles - (${guild.roles.size.toLocaleString()})`,
+          value: guildRoles,
+          inline: false
         }
       ],
       color: this.client.getClientColor(message)

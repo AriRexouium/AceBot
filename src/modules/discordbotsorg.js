@@ -9,9 +9,9 @@ module.exports = function discordBotsOrg (client) {
   return new Promise((resolve, reject) => {
     var totalGuilds
     if (!client.shard) {
-      totalGuilds = { 'server_count': client.guilds.size }
+      totalGuilds = { server_count: client.guilds.size }
     } else {
-      totalGuilds = { 'server_count': client.guilds.size, 'shard_id': client.shard.id, 'shard_count': client.shard.count }
+      totalGuilds = { server_count: client.guilds.size, shard_id: client.shard.id, shard_count: client.shard.count }
     }
 
     snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)

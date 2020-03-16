@@ -40,24 +40,24 @@ module.exports = class PingCommand extends Command {
           timestamp: new Date(),
           fields: [
             {
-              'name': 'REST Latency',
-              'value': moment.duration(pingMessage.createdTimestamp - message.createdTimestamp).format('s[s] S[ms]'),
-              'inline': true
+              name: 'REST Latency',
+              value: moment.duration(pingMessage.createdTimestamp - message.createdTimestamp).format('s[s] S[ms]'),
+              inline: true
             },
             {
-              'name': 'Websocket Latency',
-              'value': moment.duration(this.client.ping).format('s[s] S[ms]'),
-              'inline': true
+              name: 'Websocket Latency',
+              value: moment.duration(this.client.ping).format('s[s] S[ms]'),
+              inline: true
             },
             {
-              'name': 'Client Uptime',
-              'value': moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
-              'inline': false
+              name: 'Client Uptime',
+              value: moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              inline: false
             },
             {
-              'name': 'System Uptime',
-              'value': moment.duration(os.uptime() * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
-              'inline': true
+              name: 'System Uptime',
+              value: moment.duration(os.uptime() * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              inline: true
             }
           ],
           color: this.client.getClientColor(message)
@@ -79,24 +79,24 @@ module.exports = class PingCommand extends Command {
           timestamp: new Date(),
           fields: [
             {
-              'name': 'REST Latency',
-              'value': moment.duration(message.editedTimestamp - message.createdTimestamp).format('s[s] S[ms]'),
-              'inline': true
+              name: 'REST Latency',
+              value: moment.duration(message.editedTimestamp - message.createdTimestamp).format('s[s] S[ms]'),
+              inline: true
             },
             {
-              'name': 'Websocket Latency',
-              'value': moment.duration(this.client.ping).format('s[s] S[ms]'),
-              'inline': true
+              name: 'Websocket Latency',
+              value: moment.duration(this.client.ping).format('s[s] S[ms]'),
+              inline: true
             },
             {
-              'name': 'Client Uptime',
-              'value': moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
-              'inline': false
+              name: 'Client Uptime',
+              value: moment.duration(this.client.uptime).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              inline: false
             },
             {
-              'name': 'System Uptime',
-              'value': moment.duration(os.uptime() * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
-              'inline': true
+              name: 'System Uptime',
+              value: moment.duration(os.uptime() * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min,] s [sec, and] S [ms]'),
+              inline: true
             }
           ],
           color: this.client.getClientColor(message)

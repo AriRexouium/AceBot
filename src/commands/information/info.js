@@ -30,7 +30,7 @@ module.exports = class InfoCommand extends Command {
     var contributorsList = ''
     this.client.config.contributors.forEach(contributor => {
       try {
-        let contribTemp = this.client.users.get(contributor.id).tag
+        const contribTemp = this.client.users.get(contributor.id).tag
         if (contributor.github) {
           contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github})** - ${contributor.info}`
         } else {
@@ -72,47 +72,47 @@ module.exports = class InfoCommand extends Command {
       timestamp: new Date(),
       fields: [
         {
-          'name': 'Developer',
-          'value': stripIndents`
+          name: 'Developer',
+          value: stripIndents`
             Discord: **${escapeMarkdown(dev)}**
             GitHub: [@Aceheliflyer](http://github.com/Aceheliflyer)
           `,
-          'inline': false
+          inline: false
         },
         {
-          'name': 'Developed In',
-          'value': stripIndents`
+          name: 'Developed In',
+          value: stripIndents`
             Language: **JavaScript** (NodeJS)
             Library: **discord.js** (v${require('discord.js/package.json').version})
             Framework: **discord.js-commando** (v${require('discord.js-commando/package.json').version})
             Bot Version: **${require(`${process.cwd()}/package.json`).version}**
           `,
-          'inline': false
+          inline: false
         },
         {
-          'name': 'Links',
-          'value': stripIndents`
+          name: 'Links',
+          value: stripIndents`
            Bot Invite: [Click Here!](${await this.client.generateInvite()})
             Server Invite: [Click Here!](${this.client.options.invite})
             Homepage: [Click Here!](${require(`${process.cwd()}/package.json`).homepage})
             Repository: [Click Here!](${require(`${process.cwd()}/package.json`).homepageGithub})
             Trello: [Click Here!](${require(`${process.cwd()}/package.json`).homepageTrello})
           `,
-          'inline': false
+          inline: false
         },
         {
-          'name': 'Discord Stats',
-          'value': stripIndents`
+          name: 'Discord Stats',
+          value: stripIndents`
             ${this.client.shard ? `Shards: **${this.client.shard.count}**\n` : ''}Guilds: **${totalGuilds}**
             Channels: **${totalChannels}**
             Users: **${totalUsers}**
           `,
-          'inline': false
+          inline: false
         },
         {
-          'name': 'Special Thanks to the Following:',
-          'value': contributorsList,
-          'inline': false
+          name: 'Special Thanks to the Following:',
+          value: contributorsList,
+          inline: false
         }
       ],
       color: 0x7289DA

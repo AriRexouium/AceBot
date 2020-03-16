@@ -48,7 +48,7 @@ module.exports = class UpdateCommand extends Command {
           split: true
         })
         // Let the user know they need to restart the bot.
-        await message.say(`**Successfully updated everything! Awaiting next restart.**`)
+        await message.say('**Successfully updated everything! Awaiting next restart.**')
       }
     } catch (error) {
       // Error Message

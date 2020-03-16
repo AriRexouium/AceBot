@@ -60,7 +60,7 @@ module.exports = class LoadCommand extends Command {
           }
         `)
       } catch (err) {
-        this.client.emit('warn', `Error when broadcasting command load to other shards`)
+        this.client.emit('warn', 'Error when broadcasting command load to other shards')
         this.client.emit('error', err)
         await message.reply(`loaded \`${command.name}\` command, but failed to load on other shards.`)
         return null

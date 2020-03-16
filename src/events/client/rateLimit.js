@@ -21,24 +21,24 @@ module.exports = (client, rateLimitInfo) => {
           title: `Rate Limit Hit${client.shard ? ` | Shard ID: ${client.shard.id}` : ''}`,
           fields: [
             {
-              'name': 'Limit',
-              'value': rateLimitInfo.limit,
-              'inline': true
+              name: 'Limit',
+              value: rateLimitInfo.limit,
+              inline: true
             },
             {
-              'name': 'Timeout',
-              'value': `${rateLimitInfo.timeout}ms.`,
-              'inline': true
+              name: 'Timeout',
+              value: `${rateLimitInfo.timeout}ms.`,
+              inline: true
             },
             {
-              'name': 'Method',
-              'value': rateLimitInfo.method,
-              'inline': true
+              name: 'Method',
+              value: rateLimitInfo.method,
+              inline: true
             },
             {
-              'name': 'Path',
-              'value': `\`${rateLimitInfo.path}\``,
-              'inline': true
+              name: 'Path',
+              value: `\`${rateLimitInfo.path}\``,
+              inline: true
             }
           ],
           color: 0xFFFF00

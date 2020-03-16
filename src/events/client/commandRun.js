@@ -30,30 +30,30 @@ module.exports = (client, command, promise, message, args, fromPattern) => {
           thumbnail: { url: message.author.displayAvatarURL() },
           fields: [
             {
-              'name': 'Command',
-              'value': stripIndents`
+              name: 'Command',
+              value: stripIndents`
                 **Name:** ${message.command.memberName}
                 **Group ID:** ${message.command.groupID}
                 ${message.argString ? `**Args:** ${escapeMarkdown(message.argString)}` : ''}
               `,
-              'inline': true
+              inline: true
             },
             {
-              'name': 'User',
-              'value': stripIndents`
+              name: 'User',
+              value: stripIndents`
                 **Tag:** ${escapeMarkdown(message.author.tag)}
                 **ID:** ${message.author.id}
                 **Status:** ${message.author.presence.status}
               `,
-              'inline': true
+              inline: true
             },
             {
-              'name': 'Location',
-              'value': stripIndents`
+              name: 'Location',
+              value: stripIndents`
                 ${message.guild ? `**Guild:** ${escapeMarkdown(message.guild.name)} \`(${message.guild.id})\`` : ''}
                 **Channel:** ${message.guild ? `${message.channel.name} \`(${message.channel.id})\`` : 'DMs'}
               `,
-              'inline': true
+              inline: true
             }
           ],
           color: 0x00FFFF

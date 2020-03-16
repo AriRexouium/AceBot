@@ -44,7 +44,7 @@ module.exports = class ReloadCommand extends Command {
           }
         `)
       } catch (err) {
-        this.client.emit('warn', `Error when broadcasting command reload to other shards`)
+        this.client.emit('warn', 'Error when broadcasting command reload to other shards')
         this.client.emit('error', err)
         if (isCmd) {
           await message.reply(`reloaded \`${cmdOrGrp.name}\` command, but failed to reload on other shards.`)

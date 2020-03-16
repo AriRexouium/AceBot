@@ -53,7 +53,7 @@ module.exports = class LookUpCommand extends Command {
           } else {
             await message.embed({
               description: `Screenshot from ${args.url}`,
-              files: [ filePath ],
+              files: [filePath],
               color: this.client.getClientColor(message)
             })
             if (await fs.existsSync(filePath)) {

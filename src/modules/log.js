@@ -2,16 +2,16 @@ const moment = require('moment')
 const chalk = require('chalk')
 
 var cases = {
-  'alert': { content: chalk.red('Alert'), type: 'warn' },
-  'critical': { content: chalk.red('Critical'), type: 'warn' },
-  'debug': { content: chalk.magenta('Debug'), type: 'log' },
-  'emergency': { content: chalk.red('Emergency'), type: 'warn' },
-  'error': { content: chalk.red('Error'), type: 'error' },
-  'info': { content: chalk.cyan('Info'), type: 'log' },
-  'notice': { content: chalk.yellow('Notice'), type: 'warn' },
-  'success': { content: chalk.green('Success'), type: 'log' },
-  'verbose': { content: chalk.magenta('Verbose'), type: 'log' },
-  'warn': { content: chalk.yellow('Warn'), type: 'warn' }
+  alert: { content: chalk.red('Alert'), type: 'warn' },
+  critical: { content: chalk.red('Critical'), type: 'warn' },
+  debug: { content: chalk.magenta('Debug'), type: 'log' },
+  emergency: { content: chalk.red('Emergency'), type: 'warn' },
+  error: { content: chalk.red('Error'), type: 'error' },
+  info: { content: chalk.cyan('Info'), type: 'log' },
+  notice: { content: chalk.yellow('Notice'), type: 'warn' },
+  success: { content: chalk.green('Success'), type: 'log' },
+  verbose: { content: chalk.magenta('Verbose'), type: 'log' },
+  warn: { content: chalk.yellow('Warn'), type: 'warn' }
 }
 
 /**
@@ -48,7 +48,7 @@ module.exports = function logger (client, type, body, parent, child) {
     prefix = '──'
   }
 
-  var date = chalk.gray(moment().format(`YYYY-MM-DD|HH:mm:ss:SSSS`))
+  var date = chalk.gray(moment().format('YYYY-MM-DD|HH:mm:ss:SSSS'))
   var title = `${chalk.cyan(parent)}${chalk.gray('→')}${(chalk.cyan(child))}`
   console[cases[type].type](`${prefix}[${date}]─[${title}]─[${cases[type].content}]\n${formatBody}`)
 }

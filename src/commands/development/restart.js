@@ -22,7 +22,7 @@ module.exports = class RestartCommand extends Command {
   async run (message) {
     if (this.client.shard) {
       await message.reply(`restarting ${pluralize('shard', this.client.shard.count, true)}, please wait.`)
-      await this.client.shard.broadcastEval(`process.emit('message', 'shutdown')`)
+      await this.client.shard.broadcastEval('process.emit(\'message\', \'shutdown\')')
     } else {
       await message.embed({
         author: { name: this.client.user.tag, icon_url: this.client.user.displayAvatarURL() },
