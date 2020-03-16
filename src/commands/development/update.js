@@ -40,7 +40,7 @@ module.exports = class UpdateCommand extends Command {
         NPM
         \* **************************************************************************************************** */
         // Install Node Dependencies
-        var npmUpdate = exec('npm install').toString()
+        var npmUpdate = exec('npm ci').toString()
         // Send NPM result.
         await message.say({
           content: npmUpdate,

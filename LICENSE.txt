@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2016—2018 Jarrett Aiken <aceheliflyer@gmail.com> (https://aceheliflyer.org)
+Copyright (c) 2016—2020 Jarrett Aiken <aceheliflyer@gmail.com> (https://achl.fr)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

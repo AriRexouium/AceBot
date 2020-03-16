@@ -76,7 +76,7 @@ module.exports = class ServerInfoCommand extends Command {
       timestamp: new Date(),
       title: `${guild.name} - ${guildRegion}`,
       description: `**ID:** ${guild.id}`,
-      thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
+      thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'https://cdn.discordapp.com/embed/avatars/0.png' },
       fields: [
         {
           name: '🔧 Owner',

@@ -40,7 +40,7 @@ module.exports = class StyleSheetCommand extends Command {
         duration: 10
       },
       format: '[Test/Testing/Testing123]', // Usage format string of the command.
-      args: [ // Go here for argument help: http://discord.js.org/#/docs/commando/master/class/Argument
+      args: [ // Go here for argument help: https://discord.js.org/#/docs/commando/master/class/Argument
         {
           key: 'message',
           label: 'text',

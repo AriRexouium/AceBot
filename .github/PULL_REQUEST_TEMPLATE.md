@@ -1,4 +1,3 @@
-<!-- markdownlint-disable -->
 <!-- Filling out this template is required. -->
 
 ### What is the purpose of this pull request?
@@ -10,5 +9,5 @@
 
 ### Check List
 
-- [ ] package.json follows [Semantic Versioning](http://semver.org)
-- [ ] Follows [Code Style](http://standardjs.com)
+- [ ] package.json follows [Semantic Versioning](https://semver.org)
+- [ ] Follows [Code Style](https://standardjs.com)

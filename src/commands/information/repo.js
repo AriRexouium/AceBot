@@ -30,16 +30,16 @@ module.exports = class RepoCommand extends Command {
     const buildResult = ['Passing', 'Failing', 'Invalid']
     const buildResultColor = [0x39AA56, 0xDB4545, 0x9D9D9D]
 
-    const GitHub = await apiRequest('http://api.github.com/repositories/77184461')
-    const Commits = await apiRequest('http://api.github.com/repositories/77184461/commits')
-    const TravisCI = await apiRequest('http://api.travis-ci.org/repositories/12117361.json')
+    const GitHub = await apiRequest('https://api.github.com/repositories/77184461')
+    const Commits = await apiRequest('https://api.github.com/repositories/77184461/commits')
+    const TravisCI = await apiRequest('https://api.travis-ci.org/repositories/12117361.json')
 
     message.embed({
       author: { name: message.client.user.tag, icon_url: message.client.user.displayAvatarURL() },
       footer: { text: message.author.tag, icon_url: message.author.displayAvatarURL() },
       timestamp: new Date(),
       title: GitHub.full_name,
-      url: `http://github.com/${GitHub.full_name}`,
+      url: `https://github.com/${GitHub.full_name}`,
       description: GitHub.license.name,
       fields: [
         {
@@ -54,7 +54,7 @@ module.exports = class RepoCommand extends Command {
         {
           name: 'Build Status',
           value: stripIndents`
-            Build [#${TravisCI.last_build_number}](http://travis-ci.org/${TravisCI.slug}/builds/${TravisCI.last_build_id}) ❯ ${buildResult[TravisCI.last_build_result]}
+            Build [#${TravisCI.last_build_number}](https://travis-ci.org/${TravisCI.slug}/builds/${TravisCI.last_build_id}) ❯ ${buildResult[TravisCI.last_build_result]}
             Ran for ${moment.duration(TravisCI.last_build_duration * 1000).format('y [yr,] M [mo,] w [wk,] d [day,] h [hr,] m [min, and] s [sec]')}
           `,
           inline: true

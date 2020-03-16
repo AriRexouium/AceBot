@@ -46,14 +46,14 @@ module.exports = async client => {
   /* ************************************************** */
 
   /* Bot List */
-  // http://discordbots.org
+  // https://discordbots.org
   if (client.config.botlist.DiscordBotsOrg.enabled === true) {
     try { client.discordbotsorg() } catch (error) { client.log('error', error) }
     setInterval(() => {
       try { client.discordbotsorg() } catch (error) { client.log('error', error) }
     }, client.config.botlist.DiscordBotsOrg.refreshRate)
   }
-  // http://bots.discord.pw
+  // https://bots.discord.pw
   if (client.config.botlist.BotsDiscordPw.enabled === true) {
     try { client.botsdiscordpw() } catch (error) { client.log('error', error) }
     setInterval(() => {

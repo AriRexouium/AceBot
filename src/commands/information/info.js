@@ -32,13 +32,13 @@ module.exports = class InfoCommand extends Command {
       try {
         const contribTemp = this.client.users.get(contributor.id).tag
         if (contributor.github) {
-          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](http://github.com/${contributor.github})** - ${contributor.info}`
+          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contribTemp)}](https://github.com/${contributor.github})** - ${contributor.info}`
         } else {
           contributorsList = `${contributorsList}\n**${escapeMarkdown(contribTemp)}** - ${contributor.info}`
         }
       } catch (e) {
         if (contributor.github) {
-          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contributor.name)}](http://github.com/${contributor.github})** - ${contributor.info}`
+          contributorsList = `${contributorsList}\n**[${escapeMarkdown(contributor.name)}](https://github.com/${contributor.github})** - ${contributor.info}`
         } else {
           contributorsList = `${contributorsList}\n**${escapeMarkdown(contributor.name)}** - ${contributor.info}`
         }
@@ -75,7 +75,7 @@ module.exports = class InfoCommand extends Command {
           name: 'Developer',
           value: stripIndents`
             Discord: **${escapeMarkdown(dev)}**
-            GitHub: [@Aceheliflyer](http://github.com/Aceheliflyer)
+            GitHub: [@Aceheliflyer](https://github.com/Aceheliflyer)
           `,
           inline: false
         },

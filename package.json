@@ -5,7 +5,7 @@
   "author": {
     "name": "Aceheliflyer",
     "email": "aceheliflyer@gmail.com",
-    "url": "https://aceheliflyer.org"
+    "url": "https://achl.fr"
   },
   "license": "MIT",
   "main": "index.js",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+http://github.com/Aceheliflyer/AceBot.git"
+    "url": "git+https://github.com/Aceheliflyer/AceBot.git"
   },
   "keywords": [
     "discord",
@@ -34,18 +34,18 @@
     "discord.js-commando"
   ],
   "bugs": {
-    "url": "http://github.com/Aceheliflyer/AceBot/issues"
+    "url": "https://github.com/Aceheliflyer/AceBot/issues"
   },
-  "homepage": "http://aceheliflyer.org/AceBot",
-  "homepageGithub": "http://github.com/Aceheliflyer/AceBot#readme",
-  "homepageTrello": "http://trello.com/b/YU3307Hi",
+  "homepage": "https://achl.fr/AceBot",
+  "homepageGithub": "https://github.com/Aceheliflyer/AceBot#readme",
+  "homepageTrello": "https://trello.com/b/YU3307Hi",
   "dependencies": {
     "chalk": "^3.0.0",
     "columnify": "^1.5.4",
     "common-tags": "^1.8.0",
     "didyoumean": "^1.2.1",
-    "discord.js": "github:hydrabolt/discord.js",
-    "discord.js-commando": "github:gawdl3y/discord.js-commando",
+    "discord.js": "github:discordjs/discord.js",
+    "discord.js-commando": "github:discordjs/Commando",
     "discord.js-commando-mysqlprovider": "^0.1.0",
     "eslint-plugin-markdown": "^1.0.2",
     "get-age": "^1.0.1",

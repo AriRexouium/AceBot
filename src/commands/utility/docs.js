@@ -1,6 +1,6 @@
 /*
   A modified import of WeebDev's docs command from their Commando bot.
-  http://github.com/WeebDev/Commando/blob/master/commands/docs/docs.js
+  https://github.com/WeebDev/Commando/blob/master/commands/docs/docs.js
 
   All credits go to original creators.
   If you want this removed please let me know and i'll remove it immediately.
@@ -59,8 +59,8 @@ module.exports = class DocsCommand extends Command {
     if (this.docs[version]) return this.docs[version]
 
     const link = version === 'commando'
-      ? 'http://raw.githubusercontent.com/Gawdl3y/discord.js-commando/docs/master.json'
-      : `http://raw.githubusercontent.com/hydrabolt/discord.js/docs/${version}.json`
+      ? 'https://raw.githubusercontent.com/Gawdl3y/discord.js-commando/docs/master.json'
+      : `https://raw.githubusercontent.com/hydrabolt/discord.js/docs/${version}.json`
 
     const { text } = await request.get(link)
     const json = JSON.parse(text)
@@ -132,8 +132,8 @@ module.exports = class DocsCommand extends Command {
 
   getLink (version) {
     return version === 'commando'
-      ? 'http://discord.js.org/#/docs/commando/master/'
-      : `http://discord.js.org/#/docs/main/${version}/`
+      ? 'https://discord.js.org/#/docs/commando/master/'
+      : `https://discord.js.org/#/docs/main/${version}/`
   }
 
   makeLink (main, member, version) {
@@ -308,7 +308,7 @@ module.exports = class DocsCommand extends Command {
       events: this.formatEvent
     }[member.category].call(this, main, member, version) : this.formatMain(main, version)
 
-    const icon = 'http://discord.js.org/static/favicon.ico'
+    const icon = 'https://discord.js.org/static/favicon.ico'
     embed.url = this.getLink(version)
     embed.author = {
       name: version === 'commando' ? 'Commando Docs' : `Discord.js Docs (${version})`,

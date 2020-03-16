@@ -18,13 +18,13 @@ module.exports = class SetTimeZoneCommand extends Command {
       args: [
         {
           key: 'timezone',
-          prompt: 'Please choose a time zone.\n*Here is a list of valid time zones -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*',
+          prompt: 'Please choose a time zone.\n*Here is a list of valid time zones -> <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*',
           type: 'string',
           validate: value => {
             if (moment.tz.names().includes(value)) {
               return true
             } else {
-              return 'that is not a valid time zone.\n*Here is a list of valid time zones -> <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*'
+              return 'that is not a valid time zone.\n*Here is a list of valid time zones -> <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>*'
             }
           }
         }

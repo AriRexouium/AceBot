@@ -3,7 +3,7 @@
   This script automatically updates `AUTHORS.md` based on Git commit history.
 
   Based on ShellScript version by feross:
-  http://github.com/standard/standard/blob/a5994268773a1c12d9e1e23c786ed8f7e90d41e5/bin/update-authors.sh#L4-L24
+  https://github.com/standard/standard/blob/a5994268773a1c12d9e1e23c786ed8f7e90d41e5/bin/update-authors.sh#L4-L24
 */
 process.chdir(__dirname)
 const { stripIndents } = require('common-tags')

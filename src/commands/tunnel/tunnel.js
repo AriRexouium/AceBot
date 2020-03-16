@@ -1,5 +1,5 @@
 /*
-  Inspired From -> http://github.com/Twentysix26/26-Cogs/blob/a8c83790ae4eed543e7c47b871a0d711a9578ca3/rift/rift.py
+  Inspired From -> https://github.com/Twentysix26/26-Cogs/blob/a8c83790ae4eed543e7c47b871a0d711a9578ca3/rift/rift.py
 */
 
 const { Command } = require('discord.js-commando')

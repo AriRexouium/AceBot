@@ -40,7 +40,7 @@ module.exports = class InviteInfoCommand extends Command {
         timestamp: new Date(),
         title: guild.name,
         description: `Since ${moment(guild.createdAt).format('llll')} ${moment.tz(moment.tz.guess()).format('z')}`,
-        thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'http://cdn.discordapp.com/embed/avatars/0.png' },
+        thumbnail: { url: guild.iconURL() !== null ? guild.iconURL() : 'https://cdn.discordapp.com/embed/avatars/0.png' },
         fields: [
           {
             name: 'Inviter',

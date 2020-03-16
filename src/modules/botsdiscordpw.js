@@ -1,7 +1,7 @@
 const snekfetch = require('snekfetch')
 
 /**
- * Send server count to http://discordbots.org.
+ * Send server count to https://discordbots.org.
  * @param {any} client The CommandoClient.
  * @return {Promise<any>}
  */
