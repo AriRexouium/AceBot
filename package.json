@@ -15,13 +15,7 @@
     "start:dev": "nodemon index.js",
     "start:dev-shard": "nodemon sharder.js",
     "lint:js": "standard --verbose | snazzy",
-    "lint:js-fix": "standard --verbose --fix | snazzy",
-    "lint:md": "standard --verbose --plugin markdown '**/*.md' | snazzy",
-    "lint:md-fix": "standard --verbose --fix --plugin markdown '**/*.md' | snazzy",
-    "lint:all": "npm run lint:js && npm run lint:md && echo ✓ Success!",
-    "commitmsg": "commitplease .git/COMMIT_EDITMSG",
-    "precommit": "npm run lint:js",
-    "prepush": "npm run lint:all"
+    "lint:js-fix": "standard --verbose --fix | snazzy"
   },
   "repository": {
     "type": "git",
@@ -67,41 +61,8 @@
     "weather-js": "^2.0.0"
   },
   "devDependencies": {
-    "commitplease": "^3.2.0",
     "husky": "^4.2.3",
     "nodemon": "^2.0.2",
     "snazzy": "^8.0.0"
-  },
-  "commitplease": {
-    "style": "jquery",
-    "component": true,
-    "components": [
-      "Assets",
-      "Botlist",
-      "ClientEvents",
-      "Commands",
-      "Comments",
-      "Config",
-      "Core",
-      "Docs",
-      "Events",
-      "Feature",
-      "Fix",
-      "Index",
-      "Lint",
-      "Modules",
-      "Package",
-      "Packages",
-      "ProcessEvents",
-      "Release",
-      "Sentry",
-      "Support",
-      "Travis"
-    ],
-    "limits": {
-      "firstLine": "72",
-      "otherLine": "80"
-    },
-    "nohook": true
   }
 }
